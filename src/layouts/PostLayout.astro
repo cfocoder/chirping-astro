@@ -59,11 +59,13 @@ const articleClass = SITE.boxedArticles
   ? 'border-base-300 bg-base-100 rounded-md border px-5 py-8 sm:px-8 sm:py-10'
   : 'px-1 py-6 sm:px-2 sm:py-8';
 
-// Use hero image for OG if available, otherwise use the generated OG image.
+// Use hero image for OG if available, otherwise fallback to the generated OG image
+// (unless Auto-OG is disabled globally or skipped in CI).
 const ogSlug = postSlug(post);
 const ogPrefix = locale === SITE.defaultLocale ? '' : `${locale}/`;
 const generatedOgPath = `/og/${ogPrefix}${ogSlug}.png`;
-const ogImage = heroSrc ?? (SITE.autoOgImage ? generatedOgPath : undefined);
+const skipAutoOg = !SITE.autoOgImage || import.meta.env.CI_SKIP_AUTO_OG_IMAGE === 'true';
+const ogImage = heroSrc ?? (skipAutoOg ? undefined : generatedOgPath);
 
 const seo = buildSeo({
   title: post.data.title,

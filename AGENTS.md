@@ -1,6 +1,8 @@
+<!-- markdownlint-disable-file -->
+
 # Agents.md — Chirping Astro
 
-> Agentic development guide for the `kannansuresh/chirping-astro` repository.  
+> Agentic development guide for the `kannansuresh/chirping-astro` repository.
 > This file documents project conventions, architecture, key files, and
 > task-specific guidance for AI agents working on this codebase.
 
@@ -129,6 +131,8 @@ SITE.defaultLocale    // ★ The locale served at the URL root (no prefix).
 SITE.locales          // ★ Full list of enabled locales, e.g. ['en', 'fr', 'de'].
                       //   Every locale here must have: route files, content folders, i18n strings.
 SITE.postsPerPage     // Listing page size (default 8)
+SITE.isoDates         // Display ISO 8601 date format if true, otherwise locale-aware
+SITE.showFeaturedImages // Site-wide default for displaying featured images
 SITE.multilingual     // false hides language switcher + hreflang
 SITE.autoOgImage      // false disables Satori OG generation
 SITE.showPrivacyPolicy // false removes footer privacy link
@@ -192,7 +196,7 @@ src/content/posts/en/my-post.md      → /en/posts/my-post    ← now prefixed
 
 ### The No-Prefix Invariant
 
-> **The default locale always occupies the URL root — never a prefixed path.**  
+> **The default locale always occupies the URL root — never a prefixed path.**
 > This is enforced by `prefixDefaultLocale: false` in `astro.config.mjs` and
 > by `localePrefix()` in `src/i18n/utils.ts` returning `''` for
 > `SITE.defaultLocale`. It cannot be overridden per-page or per-route.
@@ -399,7 +403,7 @@ bun run pagefind       # Re-run Pagefind only (after astro build)
 > was missed before committing. Both must agree — `format:check` is what CI
 > enforces.
 
-> ⚠️ **Pagefind search does not work in `bun run dev`.**  
+> ⚠️ **Pagefind search does not work in `bun run dev`.**
 > Always run `bun run build` then `bun run preview` to test search.
 
 ---
@@ -700,4 +704,4 @@ conventions:
 
 ---
 
-*This file was last updated on 2026-05-04.*
+*This file was last updated on 2026-05-05.*

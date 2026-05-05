@@ -1,3 +1,5 @@
+import type { SiteConfig, NavItem, SocialLink, GiscusConfig } from './types/config';
+
 /**
  * Global site + theme configuration.
  * Edit values here to rebrand the theme. All values are typed and consumed
@@ -6,111 +8,6 @@
 
 export const locales = ['en', 'fr'] as const;
 export type Locale = (typeof locales)[number];
-
-export interface SiteConfig {
-  /** Public URL of the deployed site, no trailing slash. */
-  url: string;
-  /** Default site title used as homepage <title> and meta. */
-  title: string;
-  /** Site tagline / description. */
-  description: string;
-  /** Author/handle shown in footer + meta. */
-  author: {
-    name: string;
-    url?: string;
-    avatar?: string;
-    bio?: string;
-  };
-  /** Default OG image relative to /public. */
-  defaultOgImage: string;
-  /** Default locale. EN, served at root with no prefix. */
-  defaultLocale: Locale;
-  /** Supported locales. */
-  locales: readonly Locale[];
-  /** Number of posts per page on listings. */
-  postsPerPage: number;
-  /** Display ISO 8601 date format if true, otherwise locale-aware. */
-  isoDates: boolean;
-  /**
-   * Site-wide default for whether posts should display their featured
-   * image (in cards on listings, and as a hero on the post page).
-   * Each post may override via the `showFeaturedImage` frontmatter flag.
-   */
-  showFeaturedImages: boolean;
-  /**
-   * Wrap the article body of posts and pages (e.g. About) in a bordered,
-   * card-like container. When `false`, content sits directly on the page
-   * background — the Chirpy default.
-   */
-  boxedArticles: boolean;
-  /**
-   * Control horizontal listing card height behavior on desktop.
-   * `false` keeps a fixed Chirpy-like card height for image cards.
-   * `true` allows cards to grow when title/description content is longer.
-   */
-  dynamicPostCardHeight: boolean;
-  /**
-   * Show the language switcher in the top bar and link to translated
-   * pages. Set to `false` for single-language sites — the switcher is
-   * hidden and `<link rel="alternate" hreflang>` is omitted.
-   * Routes under non-default locale prefixes still build; remove their
-   * source pages and content folders if you don't want them at all.
-   */
-  multilingual: boolean;
-  /**
-   * Automatically generate Open Graph images for posts that don't have
-   * a `heroImage`. Uses Satori + Resvg to produce a themed 1200×630 PNG
-   * at build time. Set to `false` to disable and fall back to
-   * `defaultOgImage` for all posts without a hero.
-   */
-  autoOgImage: boolean;
-  /**
-   * Show a link to the Privacy Policy page in the footer. Set to `false`
-   * to hide it. The privacy policy pages still build; remove them from
-   * `src/content/pages/<locale>/privacy.md` if you don't want them at all.
-   */
-  showPrivacyPolicy: boolean;
-}
-
-export interface NavItem {
-  /** Unique key matching i18n.ts entries. */
-  key: string;
-  /** Path WITHOUT leading locale prefix. The renderer adds it. */
-  href: string;
-  /** Optional icon name (e.g. "home", "tags"). */
-  icon?: string;
-}
-
-export interface SocialLink {
-  label: string;
-  href: string;
-  icon: string;
-}
-
-export interface GiscusConfig {
-  /** Master switch. */
-  enabled: boolean;
-  /** GitHub repo (e.g. `user/repo`). */
-  repo: string;
-  /** Repo ID (from giscus.app). */
-  repoId: string;
-  /** Discussion category. */
-  category: string;
-  /** Category ID. */
-  categoryId: string;
-  /** Discussion mapping strategy. */
-  mapping: 'pathname' | 'url' | 'title' | 'og:title' | 'specific' | 'number';
-  /** Strict matching. */
-  strict: '0' | '1';
-  /** Enable reactions on the main post. */
-  reactionsEnabled: '0' | '1';
-  /** Emit metadata events. */
-  emitMetadata: '0' | '1';
-  /** Comment input position. */
-  inputPosition: 'top' | 'bottom';
-  /** Lazy load. */
-  loading: 'lazy' | 'eager';
-}
 
 /**
  * Author + social handles. Filled in from env vars (see `.env.example`)
@@ -124,7 +21,6 @@ const GITHUB_HANDLE = import.meta.env.PUBLIC_GITHUB_HANDLE ?? '';
 const GITHUB_REPO = import.meta.env.PUBLIC_GITHUB_REPO ?? 'chirping-astro';
 const TWITTER_HANDLE = import.meta.env.PUBLIC_TWITTER_HANDLE ?? '';
 const CONTACT_EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL ?? '';
-const AUTO_OG_DISABLED_IN_CI = (import.meta.env.CI_SKIP_AUTO_OG_IMAGE ?? 'false') === 'true';
 
 /**
  * Public GitHub coordinates of the deployed source. Used by the footer's
@@ -139,29 +35,53 @@ export const REPO = {
 } as const;
 
 export const SITE: SiteConfig = {
-  // `||` (not `??`) so an explicitly empty `SITE_URL=` in `.env` also
-  // falls back to the default. Astro requires `site` to be a valid URL.
-  url: import.meta.env.SITE_URL || 'https://chirping-astro.example.com',
+  // ==========================================
+  // ✅ SAFE TO EDIT (Content & Presentation)
+  // ==========================================
+
+  /** Default site title used as homepage <title> and meta. */
   title: 'Chirping Astro',
+  /** Site tagline / description. */
   description:
     'A modern, multilingual Astro v6 theme inspired by Chirpy — built with Tailwind v4, daisyUI, MDX, Pagefind, and Giscus.',
+  /** Author/handle shown in footer + meta. */
   author: {
     name: 'Chirping Astro',
     url: GITHUB_HANDLE ? `https://github.com/${GITHUB_HANDLE}` : undefined,
     avatar: '/images/avatar.svg',
     bio: 'A text-focused Astro V6 theme.',
   },
+  /** Default OG image relative to /public. */
   defaultOgImage: '/images/og-default.svg',
-  defaultLocale: 'en',
-  locales: locales,
+  /** Number of posts per page on listings. */
   postsPerPage: 8,
+  /** Display ISO 8601 date format if true, otherwise locale-aware. */
   isoDates: false,
+  /** Site-wide default for whether posts should display their featured image. */
   showFeaturedImages: true,
+  /** Wrap the article body of posts and pages in a bordered, card-like container. */
   boxedArticles: false,
+  /** Allow listing cards to grow when title/description content is longer. */
   dynamicPostCardHeight: false,
-  multilingual: true,
-  autoOgImage: !AUTO_OG_DISABLED_IN_CI,
+  /** Automatically generate Open Graph images for posts that don't have a `heroImage`. */
+  autoOgImage: true,
+  /** Show a link to the Privacy Policy page in the footer. */
   showPrivacyPolicy: true,
+
+  // ==========================================
+  // ❗ CAN BREAK THINGS (EDIT WITH CAUTION)
+  // ==========================================
+
+  /** Public URL of the deployed site, no trailing slash. Breaks SEO/RSS if incorrect. */
+  // `||` (not `??`) so an explicitly empty `SITE_URL=` in `.env` also
+  // falls back to the default. Astro requires `site` to be a valid URL.
+  url: import.meta.env.SITE_URL || 'https://chirping-astro.example.com',
+  /** Supported locales. Changing this requires adding/removing locale folders, content, and i18n entries. */
+  locales: locales,
+  /** Default locale. Changing this is a breaking, atomic, multi-file operation. */
+  defaultLocale: 'en',
+  /** Show the language switcher and link to translated pages. */
+  multilingual: true,
 };
 
 export const NAV: readonly NavItem[] = [

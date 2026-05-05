@@ -89,18 +89,6 @@ When **disabled**:
 - Posts without `heroImage` fall back to `SITE.defaultOgImage`
   (typically `/images/og-default.svg`).
 
-### CI note (pull requests)
-
-The PR checks workflow enables a CI-only optimization flag:
-
-```env
-CI_SKIP_AUTO_OG_IMAGE=true
-```
-
-When this flag is set, OG image generation is skipped during PR builds
-to reduce CI time. Production/deploy builds should leave it unset (or
-`false`) so full OG output is generated.
-
 ## Customising the design
 
 The OG image template lives in `src/utils/og-image.ts`. It exports a
