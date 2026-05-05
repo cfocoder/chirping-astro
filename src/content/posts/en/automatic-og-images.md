@@ -87,7 +87,7 @@ When **disabled**:
 
 - No OG images are generated (the `/og/` route produces zero pages).
 - Posts without `heroImage` fall back to `SITE.defaultOgImage`
-  (typically `/images/og-default.svg`).
+  (typically via `SITE.defaultOgImage`).
 
 ## Customising the design
 
@@ -182,7 +182,7 @@ URL:
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const avatar = readFileSync(join(process.cwd(), 'public/images/avatar.svg'));
+const avatar = readFileSync(join(process.cwd(), 'src/assets/images/site/avatar.svg'));
 const avatarDataUrl = `data:image/svg+xml;base64,${avatar.toString('base64')}`;
 ```
 

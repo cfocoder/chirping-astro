@@ -87,7 +87,7 @@ Quand **désactivé** :
 
 - Aucune image OG n'est générée (la route `/og/` ne produit aucune page).
 - Les articles sans `heroImage` utilisent `SITE.defaultOgImage`
-  (typiquement `/images/og-default.svg`).
+  (typiquement via `SITE.defaultOgImage`).
 
 ## Personnaliser le design
 

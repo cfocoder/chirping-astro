@@ -215,7 +215,7 @@ import type { Locale } from '../config';
 
 export function buildSeo(entry: CollectionEntry<'posts'>, locale: Locale) {
   const canonical = entry.data.canonicalURL ?? defaultCanonical(entry, locale);
-  const ogImage = entry.data.heroImage ?? '/images/og-default.svg';
+  const ogImage = entry.data.heroImage ?? ogDefaultImg.src;
   const lang = entry.data.lang ?? locale;
   return { canonical, ogImage, lang };
 }
