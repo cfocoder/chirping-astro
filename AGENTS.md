@@ -369,6 +369,17 @@ bun run preview     # manually test /, /posts/…, /en/posts/…, /fr/ language 
 - Do not add Google Fonts `<link>` tags or direct `@fontsource/...css` imports
   in CSS when this architecture is in use.
 
+### SVG optimization
+
+- SVG optimization is enabled in `astro.config.mjs` via
+  `experimental.svgOptimizer = svgoOptimizer({ multipass: true })`.
+- In Astro 6.2.x this remains an **experimental flag**. The new API replaces
+  the old `experimental.svgo` flag but is not yet a stable top-level config key.
+- This optimization primarily applies to imported SVGs used as **components**.
+  URL-served SVG assets can still benefit from one-time source-file minification.
+- Keep settings conservative unless there is a verified need; aggressive SVGO
+  changes can alter rendering or responsive behavior.
+
 ### Custom CSS tokens
 
 | Token | Default | Purpose |
@@ -545,6 +556,7 @@ Edit the keydown handler at the bottom of `src/components/islands/SearchButton.a
 | **Alert classes need safelisting** | `remark-alert` emits classes at build-time HTML generation. Keep `@source inline(...)` safelist entries in `src/styles/global.css` aligned with supported alert variants. |
 | **Five places for theme names** | Renaming `chirpy-light`/`chirpy-dark` requires updating all five locations atomically. |
 | **Fonts are config-driven** | Keep font definitions in `astro.config.mjs` + `<Font />` tags in `BaseLayout.astro`; avoid ad-hoc `<link>` tags or CSS `@import` font files. |
+| **SVG optimizer is still experimental in Astro 6.2** | Keep it under `experimental.svgOptimizer`; do not move it to a top-level `svgOptimizer` key unless Astro docs explicitly promote it. |
 | **hreflang only for existing translations** | Don't manually add hreflang tags — they are generated automatically from `translationKey` pairs. |
 | **`draft: true` posts** | Excluded from prod builds, RSS, and sitemap, but visible in `bun run dev`. |
 | **GitHub Pages needs `BASE_PATH`** | Set to `/<repo-name>` for project Pages; leave empty for root/custom domain. |
@@ -562,6 +574,7 @@ Edit the keydown handler at the bottom of `src/components/islands/SearchButton.a
 | New locale routes 404 in dev | Restart `bun run dev` after adding files under `src/pages/<locale>/`. |
 | `astro check` fails on `astro:content` | Run `bun run dev` or `bun run build` once to generate `.astro/types.d.ts`. |
 | Custom fonts not loading after provider changes | Keep fonts on `fontProviders.local()` when network/TLS blocks third-party font metadata endpoints; verify `<Font cssVariable="..." />` tags still exist in `BaseLayout.astro`. |
+| SVG optimizer placement is being questioned | In Astro 6.2.x the correct config remains `experimental.svgOptimizer`, not a top-level key. Re-check Astro docs before moving it. |
 | Math rendered as raw `$…$` | Add `math: true` to frontmatter and rebuild. |
 | Stacked alert blocks touch each other | Keep `.prose-chirpy div[role='alert'] + div[role='alert']` spacing rule in `src/styles/global.css`. |
 | `pubDate: Required` build error | A post is missing `pubDate` in frontmatter — error message names the file. |
