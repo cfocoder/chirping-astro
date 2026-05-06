@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, fontProviders, svgoOptimizer } from 'astro/config';
 import process from 'node:process';
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -219,6 +219,12 @@ export default defineConfig({
 
   experimental: {
     contentIntellisense: true,
+    // Astro 6.2.x still exposes SVG optimization as an experimental flag.
+    // The 6.2 change renamed the old `experimental.svgo` flag to the new
+    // `experimental.svgOptimizer` API; it is not a stable top-level config yet.
+    svgOptimizer: svgoOptimizer({
+      multipass: true,
+    }),
   },
 
   fonts: [
