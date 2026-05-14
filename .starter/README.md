@@ -44,8 +44,8 @@ Create a new `.md` or `.mdx` file in `src/content/posts/en/`:
 
 ```markdown
 ---
-title: "My First Post"
-description: "A short summary of this post."
+title: 'My First Post'
+description: 'A short summary of this post.'
 pubDate: 2026-01-01
 tags: [hello, world]
 categories: [General]
