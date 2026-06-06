@@ -49,6 +49,48 @@ For a new subject, the input should not be one random article. Ideally, it shoul
 
 Then the goal is not to ask, “What is this about?” The goal is to ask questions that force NotebookLM to surface the models, tensions, and tests of understanding inside the material.
 
+## The method as a diagram
+
+The theme does not have native Mermaid rendering wired into Markdown, but it does support raw HTML blocks through its `ashtml` remark plugin. That means I can still embed a Mermaid diagram by rendering it client-side inside the post.
+
+```ashtml
+<figure class="not-prose my-8 rounded-2xl border border-base-content/10 bg-base-200/50 p-4 shadow-sm">
+  <pre class="mermaid">
+flowchart TD
+    A[Curate serious sources] --> B[Upload to NotebookLM]
+    B --> C{Ask structural questions}
+    C --> D[Extract expert mental models]
+    C --> E[Map expert disagreements]
+    C --> F[Generate deep-understanding questions]
+    D --> G[Build a personal metamodel]
+    E --> G
+    F --> H[Answer first, then request critique]
+    H --> I[Expose gaps and revise]
+    I --> G
+    G --> J[Create study guide, briefing, or audio overview]
+
+    classDef source fill:#172554,stroke:#facc15,color:#fff;
+    classDef question fill:#1e3a8a,stroke:#facc15,color:#fff;
+    classDef output fill:#0f766e,stroke:#facc15,color:#fff;
+    class A,B source;
+    class C,D,E,F,H,I question;
+    class G,J output;
+  </pre>
+  <figcaption class="mt-3 text-center text-sm italic text-base-content/60">
+    The workflow: move from source collection to structural questions, then use feedback loops to build a durable mental model.
+  </figcaption>
+</figure>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'loose',
+    theme: document.documentElement.dataset.theme === 'chirpy-dark' ? 'dark' : 'default',
+    flowchart: { curve: 'basis' }
+  });
+</script>
+```
+
 ## Question 1: What mental models do experts use?
 
 Facts are easy to collect and easy to forget. Mental models are more valuable because they tell you how experts simplify reality, make decisions, and notice trade-offs.
