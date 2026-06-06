@@ -6,12 +6,13 @@
   "license": "MIT",
   "private": false,
   "engines": {
-    "bun": ">=1.1.0"
+    "bun": ">=1.1.0",
+    "node": ">=22.12.0"
   },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && bun run pagefind",
+    "build": "astro build && npx pagefind --site dist --output-subdir _pagefind",
     "preview": "astro preview",
     "serve": "bun run build && bun preview",
     "astro": "astro",
@@ -44,7 +45,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.39.4",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "5.2.8",
     "@fontsource/lato": "5.2.7",
@@ -57,7 +58,7 @@
     "@typescript-eslint/eslint-plugin": "^8.60.1",
     "@typescript-eslint/parser": "^8.60.1",
     "daisyui": "^5.5.20",
-    "eslint": "^10.4.1",
+    "eslint": "^9.39.4",
     "eslint-plugin-astro": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "husky": "^9.1.7",

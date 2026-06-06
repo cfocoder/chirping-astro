@@ -126,7 +126,7 @@ export default defineConfig({
   // `localizedPath()` in `src/i18n/utils.ts` so they pick up this value
   // automatically (via `import.meta.env.BASE_URL`).
   base: process.env.BASE_PATH ?? '/',
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   build: {
     format: 'directory',
   },

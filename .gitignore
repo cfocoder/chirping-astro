@@ -30,6 +30,7 @@ pnpm-debug.log*
 Thumbs.db
 
 # bun
+bun.lock
 bun.lockb
 .bun-cache/
 
@@ -38,3 +39,6 @@ pagefind/
 
 # misc
 *.log
+
+# Local migration backups
+.migration-backups/

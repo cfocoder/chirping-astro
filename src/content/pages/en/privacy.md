@@ -1,120 +1,50 @@
 ---
-title: Privacy Policy
-description: How this site collects, uses, and protects personal data.
+title: Privacy
+description: "Privacy information for CFOCoder, a static personal blog hosted on Cloudflare Pages."
 translationKey: privacy
+showInNav: false
 ---
 
-This Privacy Policy explains how **[SITE_NAME]** ("we", "us", or "our")
-collects, uses, and protects information when you visit **[SITE_URL]**.
+This page explains how **CFOCoder** handles privacy.
 
-> Replace values in [BRACKETS] to customize this policy for your site.
-> This template is informational and not legal advice.
+CFOCoder is a personal technical blog by **Héctor Sánchez**. The site is currently published as a static website: pages are generated ahead of time and served as files, instead of running on WordPress for each visit.
 
-## 1. Who we are
+## What this site collects
 
-- Website owner: **[OWNER_NAME / LEGAL_ENTITY]**
-- Contact email: **[CONTACT_EMAIL]**
-- Effective date: **[EFFECTIVE_DATE]**
-- Last updated: **[LAST_UPDATED_DATE]**
+This site does not ask you to create an account, log in, or submit personal information.
 
-## 2. Information we collect
+Like most websites, the hosting and delivery infrastructure may process basic technical information needed to serve the site, such as:
 
-Depending on how you use this site, we may process:
+- IP address
+- browser and device information
+- requested URL
+- timestamp
+- basic security and performance logs
 
-- Usage data: pages viewed, referrer, browser, device type, and approximate
-  region.
-- Technical data: IP address, user agent, and performance/error logs.
-- Information you provide directly: email or message content when you contact us.
-- Comment data (if enabled): profile and comment metadata handled by
-  **[COMMENT_PROVIDER, e.g., Giscus/GitHub]**.
+These logs are handled by the hosting/CDN provider and are mainly used for security, reliability, abuse prevention, and troubleshooting.
 
-## 3. How we use information
+## Cookies and local storage
 
-We use data to:
+The site may use browser storage for basic preferences, such as the selected light/dark theme.
 
-- Operate and secure the site.
-- Understand traffic and improve content.
-- Respond to support or contact requests.
-- Prevent abuse, fraud, and malicious activity.
-- Comply with legal obligations.
+The search feature is powered by Pagefind. It runs locally in your browser against a static search index and does not require a server-side search database.
 
-## 4. Cookies and similar technologies
+## Analytics
 
-This site may use cookies or local storage for:
+At the moment, this Astro version of the site does not include a dedicated analytics tracking script in the source code.
 
-- Essential functionality (for example, saving theme preference).
-- Analytics (if enabled).
-- Third-party embeds or comment systems.
+If analytics is enabled in the future, it should be used only to understand aggregate traffic and improve the content of the blog. If Matomo or a similar privacy-friendly analytics tool is added, this page should be updated with the relevant opt-out information.
 
-You can control cookies through your browser settings. If your region requires
-consent banners, add one and configure it to your legal requirements.
+## Third-party services
 
-## 5. Analytics and third-party services
+The site may rely on third-party infrastructure or services, including:
 
-We may use third-party processors that collect information under their own
-privacy terms:
+- Cloudflare Pages / Cloudflare CDN for hosting and delivery
+- GitHub for source-code hosting and deployment workflow
+- Browser-loaded assets required by the theme or static site build
 
-- Hosting/CDN: **[HOSTING_PROVIDER]**
-- Analytics: **[ANALYTICS_PROVIDER or "Not used"]**
-- Comments: **[COMMENT_PROVIDER or "Not used"]**
-- Email/newsletter: **[EMAIL_PROVIDER or "Not used"]**
+If comments, embeds, newsletters, or external analytics are enabled later, this page should be updated accordingly.
 
-Please review each provider's privacy policy before using related features.
+## Contact
 
-## 6. Legal basis (EEA/UK, if applicable)
-
-If GDPR or UK GDPR applies, we process data based on one or more of:
-
-- Consent
-- Legitimate interests
-- Contract performance
-- Legal obligation
-
-Specify the legal basis in your data inventory for each processing activity.
-
-## 7. Data retention
-
-We retain data only as long as needed for the purposes above, including
-security and legal compliance.
-
-- Analytics data retention: **[RETENTION_PERIOD]**
-- Contact messages retention: **[RETENTION_PERIOD]**
-- Server logs retention: **[RETENTION_PERIOD]**
-
-## 8. International transfers
-
-If your providers process data outside your country, data transfer safeguards
-may apply (for example, Standard Contractual Clauses).
-
-## 9. Your privacy rights
-
-Depending on your location, you may have rights to access, correct, delete,
-restrict, or object to processing of your personal data.
-
-To make a request, contact: **[PRIVACY_CONTACT_EMAIL]**
-
-If you are in the EEA/UK, you may also lodge a complaint with your local data
-protection authority.
-
-## 10. Children's privacy
-
-This site is not directed to children under **[MINIMUM_AGE, e.g., 13 or 16]**.
-We do not knowingly collect personal data from children.
-
-## 11. Security
-
-We use reasonable technical and organizational safeguards, but no method of
-transmission or storage is 100% secure.
-
-## 12. Changes to this policy
-
-We may update this Privacy Policy from time to time. Changes are effective when
-posted on this page with an updated "Last updated" date.
-
-## 13. Contact
-
-For privacy questions, contact:
-
-- Name: **[PRIVACY_CONTACT_NAME]**
-- Email: **[PRIVACY_CONTACT_EMAIL]**
-- Address (optional): **[POSTAL_ADDRESS]**
+For privacy-related questions about this site, contact Héctor Sánchez through the public contact channels linked from the blog.

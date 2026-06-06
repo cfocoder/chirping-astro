@@ -1,0 +1,38 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PostList from '~/components/PostList.astro';
+import Pagination from '~/components/Pagination.astro';
+import { SITE } from '~/config';
+import { localizedPath, useTranslations } from '~/i18n/utils';
+import { getPosts } from '~/utils/posts';
+
+export function getStaticPaths() {
+  return SITE.locales.map((l) => ({
+    params: { locale: l === SITE.defaultLocale ? undefined : l },
+    props: { locale: l },
+  }));
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const posts = await getPosts(locale);
+const pageSize = SITE.postsPerPage;
+const lastPage = Math.max(1, Math.ceil(posts.length / pageSize));
+const currentPage = 1;
+const pagePosts = posts.slice(0, pageSize);
+
+const hrefForPage = (n: number) => localizedPath(n === 1 ? '/posts/' : `/page/${n}/`, locale);
+---
+
+<BaseLayout title={t('list.allPosts')} description={SITE.description} pathWithoutLocale="/posts/">
+  <header class="mb-6">
+    <h1 class="text-3xl font-bold tracking-tight">{t('list.allPosts')}</h1>
+  </header>
+  <PostList posts={pagePosts} locale={locale} />
+  <Pagination
+    currentPage={currentPage}
+    lastPage={lastPage}
+    hrefForPage={hrefForPage}
+    locale={locale}
+  />
+</BaseLayout>
