@@ -5,7 +5,7 @@ pubDate: 2022-12-09
 heroImage: '/images/2023/08/azurevm.png'
 heroImageAlt: 'azurevm'
 categories: ['Cloud']
-tags: []
+tags: ['Python', 'Data Science']
 toc: true
 ---
 

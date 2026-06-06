@@ -5,7 +5,7 @@ pubDate: 2025-03-27
 heroImage: '/images/2025/03/ollama_logo.png'
 heroImageAlt: 'ollama logo'
 categories: ['Linux']
-tags: []
+tags: ['Ollama', 'LLM Apps']
 toc: true
 ---
 

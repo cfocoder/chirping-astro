@@ -5,7 +5,7 @@ pubDate: 2025-11-02
 heroImage: '/images/2025/11/Docling.png'
 heroImageAlt: 'Docling'
 categories: ['AI']
-tags: []
+tags: ['Docling', 'Document AI']
 toc: true
 ---
 

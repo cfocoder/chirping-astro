@@ -5,7 +5,7 @@ pubDate: 2026-01-14
 heroImage: '/images/2026/01/time_series.png'
 heroImageAlt: 'time series'
 categories: ['Data Science']
-tags: []
+tags: ['Time Series', 'Forecasting']
 toc: true
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2026-03-10
 heroImage: '/images/2026/03/apache_hive_reduced.png'
 heroImageAlt: 'apache hive reduced'
 categories: ['Hadoop']
-tags: []
+tags: ['Hadoop', 'Data Engineering']
 toc: true
 ---
 

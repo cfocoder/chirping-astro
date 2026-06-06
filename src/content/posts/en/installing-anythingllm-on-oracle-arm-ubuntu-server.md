@@ -5,7 +5,7 @@ pubDate: 2025-08-18
 heroImage: '/images/2025/08/anythingllm_logo.jpg'
 heroImageAlt: 'anythingllm logo'
 categories: ['AI']
-tags: []
+tags: ['AnythingLLM', 'LLM Apps']
 toc: true
 ---
 

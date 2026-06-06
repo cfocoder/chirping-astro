@@ -5,7 +5,7 @@ pubDate: 2025-05-07
 heroImage: '/images/2025/05/snowflake_logo.png'
 heroImageAlt: 'snowflake logo'
 categories: ['Cloud']
-tags: []
+tags: ['Snowflake', 'SQL']
 toc: true
 ---
 

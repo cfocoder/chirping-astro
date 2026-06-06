@@ -5,7 +5,7 @@ pubDate: 2025-12-15
 heroImage: '/images/2025/12/cloudflare_tunnels_blog.png'
 heroImageAlt: 'cloudflare tunnels blog'
 categories: ['Cloud']
-tags: []
+tags: ['Cloudflare', 'Tunnels']
 toc: true
 ---
 

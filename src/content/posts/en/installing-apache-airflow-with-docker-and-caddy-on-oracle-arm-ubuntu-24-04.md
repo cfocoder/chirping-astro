@@ -5,7 +5,7 @@ pubDate: 2025-04-13
 heroImage: '/images/2025/04/airflow_logo.png'
 heroImageAlt: 'airflow logo'
 categories: ['Linux']
-tags: []
+tags: ['Airflow', 'Data Orchestration']
 toc: true
 ---
 

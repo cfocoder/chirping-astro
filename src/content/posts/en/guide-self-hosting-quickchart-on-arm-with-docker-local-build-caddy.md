@@ -5,7 +5,7 @@ pubDate: 2025-03-22
 heroImage: '/images/2025/03/quickchart.png'
 heroImageAlt: 'quickchart'
 categories: ['Data Science']
-tags: []
+tags: ['QuickChart', 'Charts']
 toc: true
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2025-11-16
 heroImage: '/images/2025/11/ubuntu_apps3.png'
 heroImageAlt: 'ubuntu apps3'
 categories: ['Linux']
-tags: []
+tags: ['Ubuntu', 'Linux']
 toc: true
 ---
 

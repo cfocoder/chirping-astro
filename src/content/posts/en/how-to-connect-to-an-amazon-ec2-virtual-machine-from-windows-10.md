@@ -5,7 +5,7 @@ pubDate: 2022-10-21
 heroImage: '/images/2023/08/amazon_ec2_logo.jpg'
 heroImageAlt: 'amazon ec2 logo'
 categories: ['Cloud']
-tags: []
+tags: ['AWS', 'Cloud']
 toc: true
 ---
 

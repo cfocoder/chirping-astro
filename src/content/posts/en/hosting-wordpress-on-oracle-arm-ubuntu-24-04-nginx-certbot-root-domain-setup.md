@@ -5,7 +5,7 @@ pubDate: 2025-03-28
 heroImage: '/images/2025/03/wordpress_logo.png'
 heroImageAlt: 'wordpress logo'
 categories: ['Blog']
-tags: []
+tags: ['WordPress', 'Astro']
 toc: true
 ---
 

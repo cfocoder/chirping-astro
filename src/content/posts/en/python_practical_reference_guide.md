@@ -5,7 +5,7 @@ pubDate: 2024-01-07
 heroImage: '/images/2024/01/python1.png'
 heroImageAlt: 'python1'
 categories: ['Python']
-tags: []
+tags: ['Python', 'Data Science']
 toc: true
 ---
 

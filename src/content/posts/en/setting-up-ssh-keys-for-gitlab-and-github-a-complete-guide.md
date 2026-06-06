@@ -5,7 +5,7 @@ pubDate: 2025-06-13
 heroImage: '/images/2025/06/gitlab_github.png'
 heroImageAlt: 'gitlab github'
 categories: ['Linux']
-tags: []
+tags: ['SSH', 'Linux']
 toc: true
 ---
 

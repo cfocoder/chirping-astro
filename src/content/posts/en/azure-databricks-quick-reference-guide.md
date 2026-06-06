@@ -5,7 +5,7 @@ pubDate: 2024-02-24
 heroImage: '/images/2024/02/og-databricks-1030x541-1.png'
 heroImageAlt: 'og databricks 1030×541'
 categories: ['Data Science']
-tags: []
+tags: ['Databricks', 'Data Engineering']
 toc: true
 ---
 

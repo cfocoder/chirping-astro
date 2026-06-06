@@ -3,7 +3,7 @@ title: 'Cloud Services Comparison (AWS vs Google vs Azure)'
 description: 'This is a quick reference guide to compare the basic cloud services among the 3 top competitors, Microsoft Azure, Google Cloud Services, and Amazon AWS. This compilation was made based on two articles published by Microsoft, and the prices I was able to get in their...'
 pubDate: 2022-10-24
 categories: ['Cloud']
-tags: []
+tags: ['Cloud', 'Comparison']
 toc: true
 ---
 

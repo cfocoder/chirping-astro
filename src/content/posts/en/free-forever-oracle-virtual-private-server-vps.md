@@ -5,7 +5,7 @@ pubDate: 2025-03-17
 heroImage: '/images/2025/03/oracle_logo.png'
 heroImageAlt: 'oracle logo'
 categories: ['Linux']
-tags: []
+tags: ['Linux', 'Self-Hosting']
 toc: true
 ---
 

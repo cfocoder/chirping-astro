@@ -5,7 +5,7 @@ pubDate: 2022-10-19
 heroImage: '/images/2023/08/ubuntu-logo14-e1666232702975.png'
 heroImageAlt: 'ubuntu logo14 e1666232702975'
 categories: ['Linux']
-tags: []
+tags: ['Ubuntu', 'Linux']
 toc: true
 ---
 

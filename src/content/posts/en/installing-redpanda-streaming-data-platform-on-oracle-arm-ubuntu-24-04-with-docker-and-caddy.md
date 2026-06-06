@@ -5,7 +5,7 @@ pubDate: 2025-04-14
 heroImage: '/images/2025/04/redpanda_logo.png'
 heroImageAlt: 'redpanda logo'
 categories: ['Linux']
-tags: []
+tags: ['Redpanda', 'Streaming']
 toc: true
 ---
 

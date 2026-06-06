@@ -5,7 +5,7 @@ pubDate: 2025-04-06
 heroImage: '/images/2025/04/oracle_ubuntu_docker.png'
 heroImageAlt: 'oracle ubuntu docker'
 categories: ['Linux']
-tags: []
+tags: ['Docker', 'Containers']
 toc: true
 ---
 

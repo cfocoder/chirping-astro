@@ -5,7 +5,7 @@ pubDate: 2025-04-08
 heroImage: '/images/2025/04/chroma_logo.png'
 heroImageAlt: 'chroma logo'
 categories: ['Linux']
-tags: []
+tags: ['ChromaDB', 'Vector Databases']
 toc: true
 ---
 

@@ -3,7 +3,7 @@ title: 'A SysAdmin’s Complete Guide: From Crisis to Clean Server – The Ultim
 description: 'Updated with advanced techniques and lessons learned from multiple real-world storage crises'
 pubDate: 2025-07-03
 categories: ['Linux']
-tags: []
+tags: ['Linux', 'Self-Hosting']
 toc: true
 ---
 

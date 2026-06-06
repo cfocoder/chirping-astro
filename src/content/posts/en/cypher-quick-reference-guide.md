@@ -5,7 +5,7 @@ pubDate: 2025-12-28
 heroImage: '/images/2025/12/cypher2.png'
 heroImageAlt: 'cypher2'
 categories: ['Data Science']
-tags: []
+tags: ['Cypher', 'Graph Databases']
 toc: true
 ---
 

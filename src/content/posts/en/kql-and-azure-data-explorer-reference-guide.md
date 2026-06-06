@@ -5,7 +5,7 @@ pubDate: 2023-12-16
 heroImage: '/images/2023/12/kusto2.jpg'
 heroImageAlt: 'kusto2'
 categories: ['SQL']
-tags: []
+tags: ['KQL', 'Azure Data Explorer']
 toc: true
 ---
 

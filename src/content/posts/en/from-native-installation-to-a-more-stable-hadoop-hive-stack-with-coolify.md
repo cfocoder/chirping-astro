@@ -5,7 +5,7 @@ pubDate: 2026-04-11
 heroImage: '/images/2026/04/hadoop_hive_coolify.png'
 heroImageAlt: 'hadoop hive coolify'
 categories: ['Hadoop']
-tags: []
+tags: ['Hadoop', 'Data Engineering']
 toc: true
 ---
 

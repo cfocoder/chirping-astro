@@ -5,7 +5,7 @@ pubDate: 2025-04-08
 heroImage: '/images/2025/04/openwebui_logo.png'
 heroImageAlt: 'openwebui logo'
 categories: ['Linux']
-tags: []
+tags: ['Open WebUI', 'LLM Apps']
 toc: true
 ---
 

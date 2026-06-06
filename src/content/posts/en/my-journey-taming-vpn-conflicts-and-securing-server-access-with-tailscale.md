@@ -5,7 +5,7 @@ pubDate: 2025-04-15
 heroImage: '/images/2025/04/talscale_ssh-1.png'
 heroImageAlt: 'talscale ssh'
 categories: ['Linux']
-tags: []
+tags: ['Tailscale', 'Networking']
 toc: true
 ---
 

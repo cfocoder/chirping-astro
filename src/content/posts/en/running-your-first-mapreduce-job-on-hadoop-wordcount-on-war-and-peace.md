@@ -5,7 +5,7 @@ pubDate: 2026-03-01
 heroImage: '/images/2026/03/map_reduce_war_peace21_compressed.png'
 heroImageAlt: 'map reduce war peace21 compressed'
 categories: ['Hadoop']
-tags: []
+tags: ['Hadoop', 'Data Engineering']
 toc: true
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2022-12-12
 heroImage: '/images/2023/08/network-g1bb733f8a_1280.jpg'
 heroImageAlt: 'network g1bb733f8a 1280'
 categories: ['Linux']
-tags: []
+tags: ['Networking', 'Linux']
 toc: true
 ---
 

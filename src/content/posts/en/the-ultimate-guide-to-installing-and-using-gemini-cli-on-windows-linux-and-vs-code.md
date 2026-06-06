@@ -5,7 +5,7 @@ pubDate: 2025-06-28
 heroImage: '/images/2025/06/gemini_cli_logo2.png'
 heroImageAlt: 'gemini cli logo2'
 categories: ['AI']
-tags: []
+tags: ['Gemini CLI', 'AI Coding']
 toc: true
 ---
 

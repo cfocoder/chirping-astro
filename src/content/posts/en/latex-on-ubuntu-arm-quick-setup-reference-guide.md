@@ -5,7 +5,7 @@ pubDate: 2025-10-12
 heroImage: '/images/2025/10/LatEx.png'
 heroImageAlt: 'LatEx'
 categories: ['Data Science']
-tags: []
+tags: ['LaTeX', 'Ubuntu']
 toc: true
 ---
 

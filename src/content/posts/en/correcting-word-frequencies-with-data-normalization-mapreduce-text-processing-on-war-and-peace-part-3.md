@@ -5,7 +5,7 @@ pubDate: 2026-03-08
 heroImage: '/images/2026/03/war_and_peace_normalized_hadoop.png'
 heroImageAlt: 'war and peace normalized hadoop'
 categories: ['Hadoop']
-tags: []
+tags: ['Hadoop', 'Data Engineering']
 toc: true
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2026-03-18
 heroImage: '/images/2026/03/hive_sql_queries.png'
 heroImageAlt: 'hive sql queries'
 categories: ['Hadoop']
-tags: []
+tags: ['Hadoop', 'Data Engineering']
 toc: true
 ---
 

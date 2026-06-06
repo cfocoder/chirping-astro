@@ -5,7 +5,7 @@ pubDate: 2025-04-05
 heroImage: '/images/2025/04/wordpress_caddy-2.png'
 heroImageAlt: 'wordpress caddy'
 categories: ['Linux']
-tags: []
+tags: ['WordPress', 'Astro']
 toc: true
 ---
 

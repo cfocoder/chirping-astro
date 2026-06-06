@@ -5,7 +5,7 @@ pubDate: 2025-11-05
 heroImage: '/images/2025/11/mcpo_coolify.png'
 heroImageAlt: 'mcpo coolify'
 categories: ['AI']
-tags: []
+tags: ['MCP', 'AI Tools']
 toc: true
 ---
 

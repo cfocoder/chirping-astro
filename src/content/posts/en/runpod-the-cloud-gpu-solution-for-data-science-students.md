@@ -5,7 +5,7 @@ pubDate: 2025-11-29
 heroImage: '/images/2025/11/runpod_logo.png'
 heroImageAlt: 'runpod logo'
 categories: ['AI']
-tags: []
+tags: ['RunPod', 'GPU']
 toc: true
 ---
 

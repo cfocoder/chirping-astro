@@ -5,7 +5,7 @@ pubDate: 2025-12-20
 heroImage: '/images/2025/12/tailscale_mesh.png'
 heroImageAlt: 'tailscale mesh'
 categories: ['Cloud']
-tags: []
+tags: ['Tailscale', 'Networking']
 toc: true
 ---
 

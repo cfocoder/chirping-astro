@@ -5,7 +5,7 @@ pubDate: 2025-06-23
 heroImage: '/images/2025/06/portainer_logo.png'
 heroImageAlt: 'portainer logo'
 categories: ['Linux']
-tags: []
+tags: ['Portainer', 'Docker']
 toc: true
 ---
 

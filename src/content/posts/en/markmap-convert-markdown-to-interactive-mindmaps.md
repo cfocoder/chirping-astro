@@ -5,7 +5,7 @@ pubDate: 2025-11-09
 heroImage: '/images/2025/11/MarkMap.png'
 heroImageAlt: 'MarkMap'
 categories: ['Data Science']
-tags: []
+tags: ['Markdown', 'Visualization']
 toc: true
 ---
 

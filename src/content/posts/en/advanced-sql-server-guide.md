@@ -5,7 +5,7 @@ pubDate: 2023-05-22
 heroImage: '/images/2023/08/SQL.jpg'
 heroImageAlt: 'SQL'
 categories: ['SQL']
-tags: []
+tags: ['SQL Server', 'SQL']
 toc: true
 ---
 

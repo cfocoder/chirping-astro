@@ -5,7 +5,7 @@ pubDate: 2026-01-12
 heroImage: '/images/2026/01/DBT_Ibis_compressed.png'
 heroImageAlt: 'DBT Ibis compressed'
 categories: ['Data Science']
-tags: []
+tags: ['dbt', 'Analytics Engineering']
 toc: true
 ---
 

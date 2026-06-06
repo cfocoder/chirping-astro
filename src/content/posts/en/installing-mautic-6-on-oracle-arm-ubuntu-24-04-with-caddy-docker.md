@@ -5,7 +5,7 @@ pubDate: 2025-04-19
 heroImage: '/images/2025/04/mautic_logo.png'
 heroImageAlt: 'mautic logo'
 categories: ['Linux']
-tags: []
+tags: ['Mautic', 'Marketing Automation']
 toc: true
 ---
 

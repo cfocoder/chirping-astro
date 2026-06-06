@@ -5,7 +5,7 @@ pubDate: 2025-07-08
 heroImage: '/images/2025/07/COPY_Command_Logo.png'
 heroImageAlt: 'COPY Command Logo'
 categories: ['Data Science', 'Python', 'SQL']
-tags: []
+tags: ['DuckDB', 'Data Engineering']
 toc: true
 ---
 

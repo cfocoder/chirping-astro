@@ -5,7 +5,7 @@ pubDate: 2025-03-26
 heroImage: '/images/2025/03/Odoo_logo2.png'
 heroImageAlt: 'Odoo logo2'
 categories: ['Cloud']
-tags: []
+tags: ['Odoo', 'Self-Hosting']
 toc: true
 ---
 

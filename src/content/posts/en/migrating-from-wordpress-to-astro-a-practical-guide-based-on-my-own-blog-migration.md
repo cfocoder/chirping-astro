@@ -5,7 +5,7 @@ pubDate: 2026-06-06
 heroImage: '/images/2026/06/wordpress-to-astro-migration.jpg'
 heroImageAlt: 'WordPress to Astro static blog migration'
 categories: ['Blog']
-tags: ['Astro', 'WordPress', 'Static Site', 'Cloudflare Pages']
+tags: ['WordPress', 'Astro']
 toc: true
 ---
 

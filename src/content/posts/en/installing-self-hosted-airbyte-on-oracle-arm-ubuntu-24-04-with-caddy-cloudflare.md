@@ -5,7 +5,7 @@ pubDate: 2025-04-08
 heroImage: '/images/2025/04/airbyte_logo.png'
 heroImageAlt: 'airbyte logo'
 categories: ['Linux']
-tags: []
+tags: ['Airbyte', 'Data Integration']
 toc: true
 ---
 

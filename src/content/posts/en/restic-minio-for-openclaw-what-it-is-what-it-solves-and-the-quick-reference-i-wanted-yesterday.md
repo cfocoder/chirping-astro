@@ -5,7 +5,7 @@ pubDate: 2026-03-16
 heroImage: '/images/2026/03/restic_minio.png'
 heroImageAlt: 'restic minio'
 categories: ['Linux']
-tags: []
+tags: ['MinIO', 'Object Storage']
 toc: true
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2025-04-08
 heroImage: '/images/2025/04/airflow_airbyte_n8n.png'
 heroImageAlt: 'airflow airbyte n8n'
 categories: ['Cloud']
-tags: []
+tags: ['Airflow', 'Data Orchestration']
 toc: true
 ---
 

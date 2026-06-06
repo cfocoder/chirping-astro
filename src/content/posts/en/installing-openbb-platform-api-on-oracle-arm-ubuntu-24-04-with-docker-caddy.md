@@ -5,7 +5,7 @@ pubDate: 2025-03-20
 heroImage: '/images/2025/03/openbb_logo.png'
 heroImageAlt: 'openbb logo'
 categories: ['Data Science']
-tags: []
+tags: ['Caddy', 'Reverse Proxy']
 toc: true
 ---
 

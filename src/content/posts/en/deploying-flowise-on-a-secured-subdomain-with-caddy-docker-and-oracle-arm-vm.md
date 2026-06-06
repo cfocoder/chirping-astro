@@ -5,7 +5,7 @@ pubDate: 2025-05-19
 heroImage: '/images/2025/05/flowise_logo.png'
 heroImageAlt: 'flowise logo'
 categories: ['Cloud']
-tags: []
+tags: ['Flowise', 'LLM Apps']
 toc: true
 ---
 

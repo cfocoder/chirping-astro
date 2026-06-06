@@ -5,7 +5,7 @@ pubDate: 2024-09-06
 heroImage: '/images/2024/09/data_science.jpg'
 heroImageAlt: 'data science'
 categories: ['Data Science']
-tags: []
+tags: ['Data Science', 'Python']
 toc: true
 ---
 

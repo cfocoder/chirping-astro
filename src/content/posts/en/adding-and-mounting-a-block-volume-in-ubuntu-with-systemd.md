@@ -5,7 +5,7 @@ pubDate: 2025-03-21
 heroImage: '/images/2025/03/hard_drive.jpg'
 heroImageAlt: 'hard drive'
 categories: ['Linux']
-tags: []
+tags: ['Storage', 'Ubuntu']
 toc: true
 ---
 

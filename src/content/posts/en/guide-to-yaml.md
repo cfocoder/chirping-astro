@@ -5,7 +5,7 @@ pubDate: 2022-09-30
 heroImage: '/images/2023/08/YAML.png'
 heroImageAlt: 'YAML'
 categories: ['Cloud']
-tags: []
+tags: ['YAML', 'Configuration']
 toc: true
 ---
 

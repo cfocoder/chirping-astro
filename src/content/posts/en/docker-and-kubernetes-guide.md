@@ -5,7 +5,7 @@ pubDate: 2022-10-01
 heroImage: '/images/2023/08/Docker.jpg'
 heroImageAlt: 'Docker'
 categories: ['Cloud']
-tags: []
+tags: ['Docker', 'Containers']
 toc: true
 ---
 

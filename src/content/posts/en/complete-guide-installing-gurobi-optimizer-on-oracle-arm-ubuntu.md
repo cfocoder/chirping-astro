@@ -5,7 +5,7 @@ pubDate: 2025-10-14
 heroImage: '/images/2025/10/Gurobi_Installation.png'
 heroImageAlt: 'Gurobi Installation'
 categories: ['Optimization']
-tags: []
+tags: ['Gurobi', 'Optimization']
 toc: true
 ---
 

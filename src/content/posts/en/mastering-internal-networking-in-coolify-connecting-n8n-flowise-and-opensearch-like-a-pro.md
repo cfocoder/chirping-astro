@@ -1,9 +1,9 @@
 ---
-title: "Mastering Internal Networking in Coolify: Connecting n8n, Flowise, and OpenSearch Like a Pro"
-description: "If you run a self-hosted stack on Coolify (v4), you likely have powerful AI tools like n8n, Flowise, LangFlow, and OpenSearch running side-by-side. But there is a catch: out of the box, Coolify assigns them long, random container names like n8n-cs0gs0kogswgsgwk...."
+title: 'Mastering Internal Networking in Coolify: Connecting n8n, Flowise, and OpenSearch Like a Pro'
+description: 'If you run a self-hosted stack on Coolify (v4), you likely have powerful AI tools like n8n, Flowise, LangFlow, and OpenSearch running side-by-side. But there is a catch: out of the box, Coolify assigns them long, random container names like n8n-cs0gs0kogswgsgwk....'
 pubDate: 2025-11-22
-categories: ["AI"]
-tags: []
+categories: ['AI']
+tags: ['Flowise', 'LLM Apps']
 toc: true
 ---
 
@@ -19,7 +19,7 @@ We want to move from fragile, random names to clean, permanent internal URLs. Th
 
 ### Method A: For “Docker Image” Deployments
 
-*Use this for apps installed via the Coolify UI (e.g., Docling).*
+_Use this for apps installed via the Coolify UI (e.g., Docling)._
 
 - Go to the app Configuration.
 
@@ -29,11 +29,11 @@ We want to move from fragile, random names to clean, permanent internal URLs. Th
 
 - Click Save and Redeploy.
 
-*Result: Reachable at `http://docling:5001`.*
+_Result: Reachable at `http://docling:5001`._
 
 ### Method B: For “Docker Compose” Deployments
 
-*Use this for Stacks or apps where you have the “Edit Compose File” button (e.g., n8n, LangFlow).*
+_Use this for Stacks or apps where you have the “Edit Compose File” button (e.g., n8n, LangFlow)._
 
 - Click Edit Compose File.
 
@@ -41,7 +41,7 @@ We want to move from fragile, random names to clean, permanent internal URLs. Th
 
 - Add the hostname property:
 
-```yaml
+````yaml
 services:
   n8n:
     image: docker.n8n.io/n8nio/n8n:latest
@@ -63,7 +63,7 @@ If `curl` is missing, use `wget`.
 
 ```bash
 wget -qO- http://flowise:3000
-```
+````
 
 ### Option B: Using curl (Cleanest Output)
 
@@ -101,29 +101,29 @@ wget --no-check-certificate -qO- https://opensearch:9200
 curl -k -v https://opensearch:9200
 ```
 
-*(The `-k` flag stands for “insecure” / skip certificate check).*
+_(The `-k` flag stands for “insecure” / skip certificate check)._
 
 ## Part 4: Troubleshooting Guide
 
 Interpret your terminal results to find the root cause:
 
-| Output | Meaning | Verdict |
-|---|---|---|
-| HTML / JSON | Server replied with data. | ✅ Success |
-| 404 Not Found | Server is reachable, but path / is empty. | ✅ Success (Network works!) |
-| 401 Unauthorized | Server is reachable, needs password. | ✅ Success (Network works!) |
-| Bad Address | Hostname doesn’t exist. | ❌ DNS/Network Error |
-| Connection Refused | Hostname exists, port is wrong/closed. | ❌ Port Error |
-| Empty Reply / Reset | You used HTTP on an HTTPS service. | ❌ Protocol Error |
+| Output              | Meaning                                   | Verdict                     |
+| ------------------- | ----------------------------------------- | --------------------------- |
+| HTML / JSON         | Server replied with data.                 | ✅ Success                  |
+| 404 Not Found       | Server is reachable, but path / is empty. | ✅ Success (Network works!) |
+| 401 Unauthorized    | Server is reachable, needs password.      | ✅ Success (Network works!) |
+| Bad Address         | Hostname doesn’t exist.                   | ❌ DNS/Network Error        |
+| Connection Refused  | Hostname exists, port is wrong/closed.    | ❌ Port Error               |
+| Empty Reply / Reset | You used HTTP on an HTTPS service.        | ❌ Protocol Error           |
 
 ## Summary Cheat Sheet
 
-| Application | Internal Port | Protocol | Connection URL |
-|---|---|---|---|
-| Flowise | 3000 | HTTP | http://flowise:3000 |
-| n8n | 5678 | HTTP | http://n8n:5678 |
-| Docling | 5001 | HTTP | http://docling:5001 |
-| LangFlow | 7860 | HTTP | http://langflow:7860 |
-| OpenSearch | 9200 | HTTPS | https://opensearch:9200 |
+| Application | Internal Port | Protocol | Connection URL          |
+| ----------- | ------------- | -------- | ----------------------- |
+| Flowise     | 3000          | HTTP     | http://flowise:3000     |
+| n8n         | 5678          | HTTP     | http://n8n:5678         |
+| Docling     | 5001          | HTTP     | http://docling:5001     |
+| LangFlow    | 7860          | HTTP     | http://langflow:7860    |
+| OpenSearch  | 9200          | HTTPS    | https://opensearch:9200 |
 
 **Pro Tip:** When configuring nodes in n8n or LangFlow to talk to OpenSearch, always look for the **“Ignore SSL”** or **“Allow Insecure”** toggle and turn it ON.

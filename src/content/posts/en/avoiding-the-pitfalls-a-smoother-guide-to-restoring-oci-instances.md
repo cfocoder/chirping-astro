@@ -5,7 +5,7 @@ pubDate: 2025-03-29
 heroImage: '/images/2025/03/reinstallingimage.jpeg'
 heroImageAlt: 'reinstallingimage'
 categories: ['Linux']
-tags: []
+tags: ['Linux', 'Self-Hosting']
 toc: true
 ---
 

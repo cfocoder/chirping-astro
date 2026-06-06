@@ -5,7 +5,7 @@ pubDate: 2025-05-18
 heroImage: '/images/2025/05/supabase_logo.png'
 heroImageAlt: 'supabase logo'
 categories: ['Cloud']
-tags: []
+tags: ['Supabase', 'Self-Hosting']
 toc: true
 ---
 

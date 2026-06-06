@@ -5,7 +5,7 @@ pubDate: 2025-07-07
 heroImage: '/images/2025/07/ducklake_logo.png'
 heroImageAlt: 'ducklake logo'
 categories: ['Data Science', 'SQL']
-tags: []
+tags: ['DuckLake', 'Data Engineering']
 toc: true
 ---
 

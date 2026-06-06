@@ -5,7 +5,7 @@ pubDate: 2025-10-19
 heroImage: '/images/2025/10/pm2.png'
 heroImageAlt: 'pm2'
 categories: ['Linux']
-tags: []
+tags: ['PM2', 'Node.js']
 toc: true
 ---
 

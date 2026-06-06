@@ -5,7 +5,7 @@ pubDate: 2025-11-11
 heroImage: '/images/2025/11/databricks_vscode.png'
 heroImageAlt: 'databricks vscode'
 categories: ['Data Science']
-tags: []
+tags: ['Databricks', 'Data Engineering']
 toc: true
 ---
 

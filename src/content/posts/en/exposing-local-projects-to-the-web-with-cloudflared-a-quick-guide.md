@@ -5,7 +5,7 @@ pubDate: 2025-09-12
 heroImage: '/images/2025/09/cloudflared_logo.png'
 heroImageAlt: 'cloudflared logo'
 categories: ['Linux']
-tags: []
+tags: ['Cloudflare', 'Tunnels']
 toc: true
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2024-09-05
 heroImage: '/images/2024/09/git_logo.png'
 heroImageAlt: 'git logo'
 categories: ['Data Science']
-tags: []
+tags: ['Git', 'Developer Tools']
 toc: true
 ---
 

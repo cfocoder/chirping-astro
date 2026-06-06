@@ -5,7 +5,7 @@ pubDate: 2025-04-18
 heroImage: '/images/2025/04/minio_logo-1.png'
 heroImageAlt: 'minio logo'
 categories: ['Cloud']
-tags: []
+tags: ['MinIO', 'Object Storage']
 toc: true
 ---
 

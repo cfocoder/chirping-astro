@@ -5,7 +5,7 @@ pubDate: 2026-03-24
 heroImage: '/images/2026/03/hive_dbeaver.png'
 heroImageAlt: 'hive dbeaver'
 categories: ['Hadoop']
-tags: []
+tags: ['Hadoop', 'Data Engineering']
 toc: true
 ---
 

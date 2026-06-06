@@ -5,7 +5,7 @@ pubDate: 2026-02-15
 heroImage: '/images/2026/02/runpod1.jpg'
 heroImageAlt: 'runpod1'
 categories: ['AI']
-tags: []
+tags: ['RunPod', 'GPU']
 toc: true
 ---
 

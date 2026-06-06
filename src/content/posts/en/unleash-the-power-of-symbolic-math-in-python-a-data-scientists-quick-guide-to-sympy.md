@@ -5,7 +5,7 @@ pubDate: 2025-06-13
 heroImage: '/images/2025/06/Sympy_Logo.png'
 heroImageAlt: 'Sympy Logo'
 categories: ['Data Science']
-tags: []
+tags: ['SymPy', 'Python']
 toc: true
 ---
 

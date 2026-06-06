@@ -5,7 +5,7 @@ pubDate: 2025-03-30
 heroImage: '/images/2025/03/qdrant_logo.png'
 heroImageAlt: 'qdrant logo'
 categories: ['Linux']
-tags: []
+tags: ['Qdrant', 'Vector Databases']
 toc: true
 ---
 

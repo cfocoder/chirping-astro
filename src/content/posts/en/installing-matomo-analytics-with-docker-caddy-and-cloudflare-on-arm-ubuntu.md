@@ -5,7 +5,7 @@ pubDate: 2025-04-07
 heroImage: '/images/2025/04/matomo_logo.png'
 heroImageAlt: 'matomo logo'
 categories: ['Linux']
-tags: []
+tags: ['Matomo', 'Analytics']
 toc: true
 ---
 

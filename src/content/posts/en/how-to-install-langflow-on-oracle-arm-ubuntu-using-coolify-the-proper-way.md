@@ -5,7 +5,7 @@ pubDate: 2025-11-21
 heroImage: '/images/2025/11/Langflow_Logo.png'
 heroImageAlt: 'Langflow Logo'
 categories: ['AI']
-tags: []
+tags: ['Langflow', 'LLM Apps']
 toc: true
 ---
 

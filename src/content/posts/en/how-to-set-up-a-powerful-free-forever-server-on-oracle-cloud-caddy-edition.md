@@ -5,7 +5,7 @@ pubDate: 2025-07-03
 heroImage: '/images/2025/07/oracle2.png'
 heroImageAlt: 'oracle2'
 categories: ['Linux']
-tags: []
+tags: ['Caddy', 'Reverse Proxy']
 toc: true
 ---
 

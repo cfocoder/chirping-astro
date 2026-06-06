@@ -5,7 +5,7 @@ pubDate: 2025-04-18
 heroImage: '/images/2025/04/nextcloud_logo.png'
 heroImageAlt: 'nextcloud logo'
 categories: ['Cloud']
-tags: []
+tags: ['Nextcloud', 'Self-Hosting']
 toc: true
 ---
 

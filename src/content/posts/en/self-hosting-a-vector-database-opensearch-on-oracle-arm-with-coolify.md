@@ -5,7 +5,7 @@ pubDate: 2025-11-21
 heroImage: '/images/2025/11/opensearch_logo1.png'
 heroImageAlt: 'opensearch logo1'
 categories: ['AI']
-tags: []
+tags: ['OpenSearch', 'Vector Databases']
 toc: true
 ---
 

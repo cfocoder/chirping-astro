@@ -1,9 +1,9 @@
 ---
-title: "Conquering “Permission Denied”: A Quick Guide to Ubuntu File Permissions"
-description: "Ever been in the middle of setting up a new project, run a command, and then BAM! You’re hit with the dreaded Permission denied (os error 13)? It’s a common stumbling block, especially when dealing with directories that might have been created by root or another user."
+title: 'Conquering “Permission Denied”: A Quick Guide to Ubuntu File Permissions'
+description: 'Ever been in the middle of setting up a new project, run a command, and then BAM! You’re hit with the dreaded Permission denied (os error 13)? It’s a common stumbling block, especially when dealing with directories that might have been created by root or another user.'
 pubDate: 2025-06-15
-categories: ["Linux"]
-tags: []
+categories: ['Linux']
+tags: ['Linux Permissions', 'Ubuntu']
 toc: true
 ---
 

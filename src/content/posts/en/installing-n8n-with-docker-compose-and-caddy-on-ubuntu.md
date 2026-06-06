@@ -5,7 +5,7 @@ pubDate: 2025-03-21
 heroImage: '/images/2025/03/n8n_logo.jpg'
 heroImageAlt: 'n8n logo'
 categories: ['Linux']
-tags: []
+tags: ['n8n', 'Automation']
 toc: true
 ---
 

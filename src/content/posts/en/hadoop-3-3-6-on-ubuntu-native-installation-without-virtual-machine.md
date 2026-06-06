@@ -5,7 +5,7 @@ pubDate: 2026-02-23
 heroImage: '/images/2026/02/hadoop.jpg'
 heroImageAlt: 'hadoop'
 categories: ['Hadoop']
-tags: []
+tags: ['Hadoop', 'Data Engineering']
 toc: true
 ---
 

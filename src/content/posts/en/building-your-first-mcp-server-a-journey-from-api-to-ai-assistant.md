@@ -5,7 +5,7 @@ pubDate: 2025-08-17
 heroImage: '/images/2025/08/mcp.jpg'
 heroImageAlt: 'mcp'
 categories: ['AI']
-tags: []
+tags: ['MCP', 'AI Tools']
 toc: true
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2025-12-23
 heroImage: '/images/2025/12/cloud_powered_dictation.png'
 heroImageAlt: 'cloud powered dictation'
 categories: ['Cloud', 'Linux']
-tags: []
+tags: ['AI Coding', 'Developer Tools']
 toc: true
 ---
 

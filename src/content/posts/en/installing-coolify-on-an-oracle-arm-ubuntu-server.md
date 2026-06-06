@@ -5,7 +5,7 @@ pubDate: 2025-11-02
 heroImage: '/images/2025/11/Coolify.png'
 heroImageAlt: 'Coolify'
 categories: ['Linux']
-tags: []
+tags: ['Coolify', 'Self-Hosting']
 toc: true
 ---
 

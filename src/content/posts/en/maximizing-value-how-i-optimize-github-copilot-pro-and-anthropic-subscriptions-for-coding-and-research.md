@@ -5,7 +5,7 @@ pubDate: 2026-01-20
 heroImage: '/images/2026/01/optimization_of_llms.png'
 heroImageAlt: 'optimization of llms'
 categories: ['AI']
-tags: []
+tags: ['AI Coding', 'Developer Tools']
 toc: true
 ---
 

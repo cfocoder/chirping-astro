@@ -5,7 +5,7 @@ pubDate: 2025-06-20
 heroImage: '/images/2025/06/mountainduck_logo.png'
 heroImageAlt: 'mountainduck logo'
 categories: ['Linux']
-tags: []
+tags: ['Mountain Duck', 'Tailscale']
 toc: true
 ---
 
