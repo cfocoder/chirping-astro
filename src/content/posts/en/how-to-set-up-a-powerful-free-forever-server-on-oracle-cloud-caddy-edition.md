@@ -300,7 +300,7 @@ Source: 0.0.0.0/0
 
 ![](/images/2025/07/image-17.png)
 
-![Oracle Security List Configuration](https://cfocoder.com/wp-content/uploads/2025/03/security_list-1024x289.png)
+![Oracle Security List Configuration](/images/2025/03/security_list.png)
 
 ## Step 2B: Setup a Static Public IP Address
 
@@ -565,7 +565,7 @@ sudo ufw status
 
 You should see output showing UFW is active with ports 22, 80, and 443 allowed.
 
-![UFW Status](https://cfocoder.com/wp-content/uploads/2025/03/ufw.png)
+![UFW Status](/images/2025/03/ufw.png)
 
 ### If You Get Locked Out
 
