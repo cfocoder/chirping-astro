@@ -1,9 +1,15 @@
 ---
 title: About Me
-description: "About Héctor Sánchez: accountant, financial analyst, analytics engineer, and Data Science learner behind CFOCoder."
+description: 'About Héctor Sánchez: accountant, financial analyst, analytics engineer, and Data Science learner behind CFOCoder.'
 translationKey: about
 showInNav: true
 ---
+
+<img
+  src="/images/site/hector-facebook-2023.jpg"
+  alt="Héctor Sánchez"
+  class="mx-auto mb-8 h-48 w-48 rounded-full object-cover shadow-lg"
+/>
 
 Welcome! I’m **Héctor Sánchez**. By profession, I’m a Public Accountant with over 30 years of experience in auditing, accounting, financial analysis and lately as analytics engineer.
 

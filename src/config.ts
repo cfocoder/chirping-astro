@@ -1,5 +1,4 @@
 import process from 'node:process';
-import avatarImg from './assets/images/site/avatar.svg';
 import ogDefaultImg from './assets/images/site/og-default.svg';
 import type { SiteConfig, NavItem, SocialLink, GiscusConfig } from './types/config';
 
@@ -11,7 +10,7 @@ import type { SiteConfig, NavItem, SocialLink, GiscusConfig } from './types/conf
 
 // Export imported site images for use in components
 export const SITE_IMAGES = {
-  avatar: avatarImg,
+  avatar: '/images/site/hector-facebook-2023.jpg',
   ogDefault: ogDefaultImg,
 } as const;
 
@@ -52,13 +51,12 @@ export const SITE: SiteConfig = {
   /** Default site title used as homepage <title> and meta. */
   title: 'CFOCoder',
   /** Site tagline / description. */
-  description:
-    'Data Science applied in Finance',
+  description: 'Data Science applied in Finance',
   /** Author/handle shown in footer + meta. */
   author: {
     name: 'Héctor Sánchez',
     url: GITHUB_HANDLE ? `https://github.com/${GITHUB_HANDLE}` : undefined,
-    avatar: avatarImg,
+    avatar: '/images/site/hector-facebook-2023.jpg',
     bio: 'Public Accountant with over 30 years of experience as accountant and financial analyst, and with diplomas in Corporate Finance and a Masters in Data Science',
   },
   /** Default OG image. */
