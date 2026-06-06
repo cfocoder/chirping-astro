@@ -1,13 +1,15 @@
 ---
-title: "Installing AnythingLLM on Oracle ARM Ubuntu Server"
-description: "A comprehensive guide for self-hosting AnythingLLM with Docker, Caddy, and Ollama"
+title: 'Installing AnythingLLM on Oracle ARM Ubuntu Server'
+description: 'A comprehensive guide for self-hosting AnythingLLM with Docker, Caddy, and Ollama'
 pubDate: 2025-08-18
-categories: ["AI"]
+heroImage: '/images/2025/08/anythingllm_logo.jpg'
+heroImageAlt: 'anythingllm logo'
+categories: ['AI']
 tags: []
 toc: true
 ---
 
-*A comprehensive guide for self-hosting AnythingLLM with Docker, Caddy, and Ollama*
+_A comprehensive guide for self-hosting AnythingLLM with Docker, Caddy, and Ollama_
 
 ## 🤖 What is AnythingLLM?
 
@@ -169,7 +171,7 @@ Add this configuration block:
 ```text
 anythingllm.yourdomain.com {
     log
-    
+
     # Security headers
     header {
         X-Content-Type-Options "nosniff"
@@ -178,17 +180,17 @@ anythingllm.yourdomain.com {
         Strict-Transport-Security "max-age=31536000;"
         -Server
     }
-    
+
     # Handle agent invocations with WebSocket support
     handle /api/agent-invocation/* {
         reverse_proxy 127.0.0.1:3003 {
             header_up Host {host}
             header_up X-Real-IP {remote_host}
-            
+
             # WebSocket support
             header_up Connection {>Connection}
             header_up Upgrade {>Upgrade}
-            
+
             # Extended timeout for agent tasks
             transport http {
                 dial_timeout 30s
@@ -196,7 +198,7 @@ anythingllm.yourdomain.com {
             }
         }
     }
-    
+
     # Handle file uploads with larger body size
     handle /api/v1/document/* {
         request_body {
@@ -205,27 +207,27 @@ anythingllm.yourdomain.com {
         reverse_proxy 127.0.0.1:3003 {
             header_up Host {host}
             header_up X-Real-IP {remote_host}
-            
+
             transport http {
                 dial_timeout 30s
                 response_header_timeout 5m
             }
         }
     }
-    
+
     # Handle all other requests
     handle {
         reverse_proxy 127.0.0.1:3003 {
             header_up Host {host}
             header_up X-Real-IP {remote_host}
-            
+
             # Health check
             health_uri /api/ping
             health_interval 30s
             health_timeout 10s
         }
     }
-    
+
     # Enable compression
     encode zstd gzip
 }
@@ -311,18 +313,18 @@ services:
     image: mintplexlabs/anythingllm:latest
     container_name: anythingllm
     ports:
-      - "127.0.0.1:3003:3001"
+      - '127.0.0.1:3003:3001'
     restart: unless-stopped
     cap_add:
       - SYS_ADMIN
     networks:
-      - aichat_network  # Replace with your actual network name
+      - aichat_network # Replace with your actual network name
     volumes:
       - /var/www/html/anythingllm/storage:/app/server/storage
     environment:
       - STORAGE_DIR=/app/server/storage
       - LLM_PROVIDER=ollama
-      - OLLAMA_BASE_PATH=http://172.18.0.2:11434  # Replace with your Ollama IP
+      - OLLAMA_BASE_PATH=http://172.18.0.2:11434 # Replace with your Ollama IP
       - OLLAMA_MODEL_PREF=llama3.1:8b
       - OLLAMA_MODEL_TOKEN_LIMIT=131072
       - EMBEDDING_ENGINE=ollama
@@ -341,7 +343,7 @@ services:
 
 networks:
   aichat_network:
-    external: true  # Replace with your actual network name
+    external: true # Replace with your actual network name
 ```
 
 **Deploy with docker-compose:**
@@ -511,7 +513,7 @@ AnythingLLM requires a **two-tier permission approach** for optimal functional
 ```bash
 # These should be owned by your user for easy editing:
 # - docker-compose.yml
-# - .env 
+# - .env
 # - INSTALLATION_GUIDE.md
 # - Any custom configuration files
 

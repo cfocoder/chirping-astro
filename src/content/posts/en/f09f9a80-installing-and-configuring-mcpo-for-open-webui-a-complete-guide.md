@@ -1,8 +1,10 @@
 ---
-title: "🚀 Installing and Configuring MCPO for Open WebUI: A Complete Guide"
-description: "Today I successfully set up MCPO (MCP-to-OpenAPI) to work seamlessly with Open WebUI, providing access to powerful external APIs through the Model Context Protocol. This post documents the entire process, scripts, and configuration needed for a smooth installation."
+title: '🚀 Installing and Configuring MCPO for Open WebUI: A Complete Guide'
+description: 'Today I successfully set up MCPO (MCP-to-OpenAPI) to work seamlessly with Open WebUI, providing access to powerful external APIs through the Model Context Protocol. This post documents the entire process, scripts, and configuration needed for a smooth installation.'
 pubDate: 2025-08-22
-categories: ["AI"]
+heroImage: '/images/2025/08/mcpo.png'
+heroImageAlt: 'mcpo'
+categories: ['AI']
 tags: []
 toc: true
 ---
@@ -124,7 +126,7 @@ The `mcpo.sh` script is a game-changer for managing the MCPO installation. Her
 
 ```text
 ./mcpo.sh start          # Start all MCPO services
-./mcpo.sh stop           # Stop all services gracefully  
+./mcpo.sh stop           # Stop all services gracefully
 ./mcpo.sh restart        # Restart services (stop + start)
 ./mcpo.sh status         # Check running status
 ./mcpo.sh logs           # View recent logs
@@ -372,4 +374,4 @@ The key to success is starting simple, testing thoroughly, and leveraging the ex
 
 Happy building! 🚀
 
-*Tags: #MCPO #OpenWebUI #MCP #Docker #AI #Installation #Tutorial*
+_Tags: #MCPO #OpenWebUI #MCP #Docker #AI #Installation #Tutorial_

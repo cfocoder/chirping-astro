@@ -1,8 +1,10 @@
 ---
-title: "Installing Nextcloud on Oracle ARM Ubuntu 24.04 with Docker and Caddy"
-description: "In today’s data-driven world, managing files, collaborating securely, and maintaining control over your digital assets is paramount. Nextcloud is a powerful, open-source, self-hosted productivity platform that allows you to do just that. Think of it as your own private..."
+title: 'Installing Nextcloud on Oracle ARM Ubuntu 24.04 with Docker and Caddy'
+description: 'In today’s data-driven world, managing files, collaborating securely, and maintaining control over your digital assets is paramount. Nextcloud is a powerful, open-source, self-hosted productivity platform that allows you to do just that. Think of it as your own private...'
 pubDate: 2025-04-18
-categories: ["Cloud"]
+heroImage: '/images/2025/04/nextcloud_logo.png'
+heroImageAlt: 'nextcloud logo'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -304,9 +306,9 @@ Log in to Nextcloud as the admin user you created.
 
 ## Troubleshooting Notes
 
-- Permission Errors during Setup: If you hit database permission errors (permission denied for table oc_migrations), it usually means the database volume (/var/www/html/nextcloud_data/db) wasn’t completely empty when the db container started. Stop the stack (docker compose down), thoroughly delete the contents of that host directory (sudo rm -rf /var/www/html/nextcloud_data/db/*), and start again (docker compose up -d). You might also need to clear the /var/www/html/nextcloud_lsi_config directory again.
+- Permission Errors during Setup: If you hit database permission errors (permission denied for table oc_migrations), it usually means the database volume (/var/www/html/nextcloud_data/db) wasn’t completely empty when the db container started. Stop the stack (docker compose down), thoroughly delete the contents of that host directory (sudo rm -rf /var/www/html/nextcloud_data/db/\*), and start again (docker compose up -d). You might also need to clear the /var/www/html/nextcloud_lsi_config directory again.
 
-- “User Files Exist” Error: If the setup complains files already exist for the admin user, stop the stack (docker compose down), delete the contents of the Nextcloud data directory (sudo rm -rf /var/www/html/nextcloud_lsi_data/*), and start again (docker compose up -d).
+- “User Files Exist” Error: If the setup complains files already exist for the admin user, stop the stack (docker compose down), delete the contents of the Nextcloud data directory (sudo rm -rf /var/www/html/nextcloud_lsi_data/\*), and start again (docker compose up -d).
 
 - Blank Page / Errors: Always clear your browser cache aggressively or use an Incognito window when testing changes. Check Caddy logs (journalctl -u caddy -f) and Nextcloud container logs (docker compose logs -f nextcloud) for clues.
 

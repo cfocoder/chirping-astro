@@ -1,8 +1,10 @@
 ---
-title: "Apache Hive 3.1.3 on Ubuntu: Native Installation on Top of Hadoop 3.3.6"
-description: "In Part 1 of this series, I installed Hadoop 3.3.6 natively on Ubuntu 24.04 and configured HDFS in pseudo-distributed mode. In Part 2, I configured YARN and ran the canonical WordCount job on War and Peace. In Part 3, I improved the text processing pipeline by..."
+title: 'Apache Hive 3.1.3 on Ubuntu: Native Installation on Top of Hadoop 3.3.6'
+description: 'In Part 1 of this series, I installed Hadoop 3.3.6 natively on Ubuntu 24.04 and configured HDFS in pseudo-distributed mode. In Part 2, I configured YARN and ran the canonical WordCount job on War and Peace. In Part 3, I improved the text processing pipeline by...'
 pubDate: 2026-03-10
-categories: ["Hadoop"]
+heroImage: '/images/2026/03/apache_hive_reduced.png'
+heroImageAlt: 'apache hive reduced'
+categories: ['Hadoop']
 tags: []
 toc: true
 ---
@@ -47,14 +49,14 @@ This installation was not done on a blank machine. It was done on top of an alre
 
 ### Base Environment
 
-| Component | Version / Value |
-|---|---|
-| OS | Ubuntu 24.04 LTS |
-| Machine | Dell Vostro |
-| Hadoop | 3.3.6 |
-| Hadoop home | /home/hectorsa/hadoop-3.3.6 |
-| Shell | Zsh |
-| Java used by Hadoop | OpenJDK 11 |
+| Component           | Version / Value             |
+| ------------------- | --------------------------- |
+| OS                  | Ubuntu 24.04 LTS            |
+| Machine             | Dell Vostro                 |
+| Hadoop              | 3.3.6                       |
+| Hadoop home         | /home/hectorsa/hadoop-3.3.6 |
+| Shell               | Zsh                         |
+| Java used by Hadoop | OpenJDK 11                  |
 
 Before touching Hive, I verified that Hadoop was already healthy.
 
@@ -161,36 +163,36 @@ So I created `hive-site.xml` with the following essential properties:
 
 ```xml
 
-  
+
     javax.jdo.option.ConnectionURL
     jdbc:derby:;databaseName=/home/hectorsa/metastore_db;create=true
     Derby metastore for local academic install
-  
 
-  
+
+
     javax.jdo.option.ConnectionDriverName
     org.apache.derby.jdbc.EmbeddedDriver
-  
 
-  
+
+
     hive.metastore.warehouse.dir
     /user/hive/warehouse
-  
 
-  
+
+
     hive.server2.thrift.port
     10000
-  
 
-  
+
+
     hive.server2.thrift.bind.host
     localhost
-  
 
-  
+
+
     hive.metastore.schema.verification
     false
-  
+
 
 ```
 

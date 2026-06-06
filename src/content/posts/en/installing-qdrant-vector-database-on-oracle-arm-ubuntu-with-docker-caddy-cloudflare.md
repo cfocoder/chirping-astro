@@ -1,8 +1,10 @@
 ---
-title: "Installing Qdrant Vector Database on Oracle ARM Ubuntu with Docker, Caddy & Cloudflare"
-description: "This guide details how to install the Qdrant vector database on an Oracle Cloud Infrastructure (OCI) ARM Ampere VM running Ubuntu 24.04. We’ll use Docker Compose for easy management, Caddy as a secure reverse proxy with automatic SSL, and store Qdrant’s data on a..."
+title: 'Installing Qdrant Vector Database on Oracle ARM Ubuntu with Docker, Caddy & Cloudflare'
+description: 'This guide details how to install the Qdrant vector database on an Oracle Cloud Infrastructure (OCI) ARM Ampere VM running Ubuntu 24.04. We’ll use Docker Compose for easy management, Caddy as a secure reverse proxy with automatic SSL, and store Qdrant’s data on a...'
 pubDate: 2025-03-30
-categories: ["Linux"]
+heroImage: '/images/2025/03/qdrant_logo.png'
+heroImageAlt: 'qdrant logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -74,7 +76,7 @@ cd ~/qdrant
 sudo mkdir -p /var/www/html/qdrant/storage
 
 # Create a directory to store snapshots loaded through Python code
-sudo mkdir -p /var/www/html/qdrant_snapshots 
+sudo mkdir -p /var/www/html/qdrant_snapshots
 ```
 
 ## Step 2: Create the Docker Compose File
@@ -97,8 +99,8 @@ services:
     ports:
       # IMPORTANT: Expose ports ONLY to the host machine (localhost)
       # Caddy will handle external access.
-      - "127.0.0.1:6333:6333" # REST API & Web UI port
-      - "127.0.0.1:6334:6334" # gRPC port
+      - '127.0.0.1:6333:6333' # REST API & Web UI port
+      - '127.0.0.1:6334:6334' # gRPC port
     volumes:
       # Mount persistent storage from the block volume
       - /var/www/html/qdrant/storage:/qdrant/storage
@@ -106,7 +108,7 @@ services:
       - /var/www/html/qdrant_snapshots:/qdrant/snapshots # Map host snapshot dir to container path
     environment:
       # --- Secure the API! Generate a strong key and paste it below ---
-      QDRANT__SERVICE__API_KEY: "YOUR_VERY_STRONG_SECRET_KEY_HERE"
+      QDRANT__SERVICE__API_KEY: 'YOUR_VERY_STRONG_SECRET_KEY_HERE'
       # You can optionally add a read-only key too:
       # QDRANT__SERVICE__READ_ONLY_API_KEY: "YOUR_READ_ONLY_KEY_HERE"
 
@@ -123,7 +125,7 @@ networks:
 
 - volumes: Maps the directory we created on the block volume (/var/www/html/qdrant/storage) to Qdrant’s internal storage path (/qdrant/storage). This ensures your vector data persists if the container restarts.
 
-- environment.QDRANT__SERVICE__API_KEY: Crucial for security. This enables Qdrant’s built-in API key authentication. Generate a strong key (e.g., using openssl rand -hex 32) and replace the placeholder.
+- environment.QDRANT**SERVICE**API_KEY: Crucial for security. This enables Qdrant’s built-in API key authentication. Generate a strong key (e.g., using openssl rand -hex 32) and replace the placeholder.
 
 Save and close the file (Ctrl+X, Y, Enter).
 
@@ -216,7 +218,7 @@ yourdomain.com {
 
 - Why client_ip Didn’t Work (Initially): We tried using Caddy’s client_ip matcher, which is supposed to resolve the real IP using trusted_proxies. However, in this route block structure, the matcher (@block_dashboard_access) seemed to be evaluated before the request context was fully updated by the trusted_proxies setting defined later within the specific reverse_proxy handler. This resulted in the matcher still seeing the Cloudflare IP.
 
-- The header CF-Connecting-IP Solution: To bypass this timing/context issue, we directly check the value of the CF-Connecting-IP header. This header is reliably added by Cloudflare and contains the visitor’s original IP. The @block_dashboard_access matcher now checks the path (/dashboard/*) and ensures the CF-Connecting-IP header value is NOT one of the explicitly allowed IPs.
+- The header CF-Connecting-IP Solution: To bypass this timing/context issue, we directly check the value of the CF-Connecting-IP header. This header is reliably added by Cloudflare and contains the visitor’s original IP. The @block_dashboard_access matcher now checks the path (/dashboard/\*) and ensures the CF-Connecting-IP header value is NOT one of the explicitly allowed IPs.
 
 - route and handle: The route block allows conditional request handling.
 
@@ -327,3 +329,4 @@ You have successfully installed Qdrant on your Oracle ARM Ubuntu server using Do
 - All Qdrant API endpoints require a valid API key for interaction.
 
 This layered approach provides robust security for your vector database deployment. Remember to keep your API keys secure and configure your client applications accordingly.
+```

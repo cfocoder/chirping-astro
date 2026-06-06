@@ -1,8 +1,10 @@
 ---
-title: "From Native Installation to a More Stable Hadoop + Hive Stack with Coolify"
-description: "Part 7 in the Hadoop and Hive Tutorial Series"
+title: 'From Native Installation to a More Stable Hadoop + Hive Stack with Coolify'
+description: 'Part 7 in the Hadoop and Hive Tutorial Series'
 pubDate: 2026-04-11
-categories: ["Hadoop"]
+heroImage: '/images/2026/04/hadoop_hive_coolify.png'
+heroImageAlt: 'hadoop hive coolify'
+categories: ['Hadoop']
 tags: []
 toc: true
 ---
@@ -831,76 +833,76 @@ services:
         echo "--------------- HDFS NODES READY ---------------"
         EOF
         chmod +x /scripts/start-hdfs.sh
-        cat > /scripts/populate-hdfs.sh  /etc/hadoop/mapred-site.xml 
-        
-        
-          
+        cat > /scripts/populate-hdfs.sh  /etc/hadoop/mapred-site.xml
+
+
+
             mapreduce.framework.name
             yarn
-          
-          
+
+
             yarn.app.mapreduce.am.env
             HADOOP_MAPRED_HOME=/opt/hadoop
-          
-          
+
+
             mapreduce.map.env
             HADOOP_MAPRED_HOME=/opt/hadoop
-          
-          
+
+
             mapreduce.reduce.env
             HADOOP_MAPRED_HOME=/opt/hadoop
-          
-        
+
+
         EOF
         mkdir -p /var/hive/conf
-        cat > /var/hive/conf/hive-site.xml 
-        
-        
-          
+        cat > /var/hive/conf/hive-site.xml
+
+
+
             javax.jdo.option.ConnectionURL
             {{HIVE_METASTORE_DB_URL}}
-          
-          
+
+
             javax.jdo.option.ConnectionDriverName
             {{HIVE_METASTORE_DB_DRIVER}}
-          
-          
+
+
             javax.jdo.option.ConnectionUserName
             {{HIVE_METASTORE_DB_USER}}
-          
-          
+
+
             javax.jdo.option.ConnectionPassword
             {{HIVE_METASTORE_DB_PASSWORD}}
-          
-          
+
+
             hive.server2.authentication
             NONE
-          
-          
+
+
             hive.server2.thrift.port
             10000
-          
-          
+
+
             datanucleus.autoCreateTables
             False
-          
-          
+
+
             hive.metastore.schema.verification
             false
-          
-          
+
+
             hive.server2.enable.doAs
             false
-          
-          
+
+
             hive.exec.scratchdir
             /tmp/hive
-          
-          
+
+
             hive.metastore.warehouse.dir
             /user/hive/warehouse
-          
-        
+
+
         EOF
         exec /entrypoint.sh
     depends_on:

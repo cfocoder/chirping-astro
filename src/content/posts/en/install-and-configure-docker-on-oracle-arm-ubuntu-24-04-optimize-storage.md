@@ -1,8 +1,10 @@
 ---
-title: "Install and Configure Docker on Oracle ARM (Ubuntu 24.04) – Optimize Storage!"
-description: "Oracle Cloud Infrastructure (OCI) offers powerful and cost-effective ARM Ampere A1 instances. Running Ubuntu 24.04 LTS (“Noble Numbat”) on these instances is a popular choice. If you’re planning to use Docker, this guide will walk you through the official installation..."
+title: 'Install and Configure Docker on Oracle ARM (Ubuntu 24.04) – Optimize Storage!'
+description: 'Oracle Cloud Infrastructure (OCI) offers powerful and cost-effective ARM Ampere A1 instances. Running Ubuntu 24.04 LTS (“Noble Numbat”) on these instances is a popular choice. If you’re planning to use Docker, this guide will walk you through the official installation...'
 pubDate: 2025-04-06
-categories: ["Linux"]
+heroImage: '/images/2025/04/oracle_ubuntu_docker.png'
+heroImageAlt: 'oracle ubuntu docker'
+categories: ['Linux']
 tags: []
 toc: true
 ---

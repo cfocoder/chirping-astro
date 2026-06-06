@@ -1,8 +1,10 @@
 ---
-title: "Installing Odoo 18 with Docker Compose and Caddy on Ubuntu 24.04 (Oracle ARM) – The Easy Way (After Hitting a Snag!)"
-description: "Odoo is a fantastic suite of open-source business apps, covering CRM, ERP, accounting, inventory, and more. Running it yourself gives you full control, and Docker makes the deployment process much smoother. This guide walks you through installing Odoo 18 Community..."
+title: 'Installing Odoo 18 with Docker Compose and Caddy on Ubuntu 24.04 (Oracle ARM) – The Easy Way (After Hitting a Snag!)'
+description: 'Odoo is a fantastic suite of open-source business apps, covering CRM, ERP, accounting, inventory, and more. Running it yourself gives you full control, and Docker makes the deployment process much smoother. This guide walks you through installing Odoo 18 Community...'
 pubDate: 2025-03-26
-categories: ["Cloud"]
+heroImage: '/images/2025/03/Odoo_logo2.png'
+heroImageAlt: 'Odoo logo2'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -118,7 +120,7 @@ services:
       - db
     ports:
       # IMPORTANT: Expose only to localhost (127.0.0.1). Caddy will handle external access.
-      - "127.0.0.1:8069:8069"
+      - '127.0.0.1:8069:8069'
       # - "127.0.0.1:8072:8072" # Optional debug/longpolling port
     environment:
       - HOST=db
@@ -136,7 +138,7 @@ services:
       - ./config/odoo.conf:/etc/odoo/odoo.conf
     restart: unless-stopped
     # Optional: Command to explicitly load the config file
-    command: ["--config", "/etc/odoo/odoo.conf"]
+    command: ['--config', '/etc/odoo/odoo.conf']
     networks:
       - odoo-network
 
@@ -225,7 +227,7 @@ Add the following block (adjusting alongside your existing site blocks):
 
 odoo.yourdomain.com {
     # Log requests for this site (optional)
-    log 
+    log
 
     # Enable compression
     encode zstd gzip

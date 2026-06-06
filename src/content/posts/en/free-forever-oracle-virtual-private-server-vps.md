@@ -1,8 +1,10 @@
 ---
-title: "Free Forever Oracle Virtual Private Server"
-description: "I recently discovered a super cool offer from Oracle, to setup a free-forever Virtual Machine instance with an ARM processor, 4 OCPUs, 24 GB of RAM memory and 200 GB of storage. So this guide is to remind myself what settings I have to use to create a virtual machine..."
+title: 'Free Forever Oracle Virtual Private Server'
+description: 'I recently discovered a super cool offer from Oracle, to setup a free-forever Virtual Machine instance with an ARM processor, 4 OCPUs, 24 GB of RAM memory and 200 GB of storage. So this guide is to remind myself what settings I have to use to create a virtual machine...'
 pubDate: 2025-03-17
-categories: ["Linux"]
+heroImage: '/images/2025/03/oracle_logo.png'
+heroImageAlt: 'oracle logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -25,7 +27,7 @@ I recently discovered a [super cool offer from Oracle](https://docs.oracle.com/e
 
 - 5.2 Install NGINX
 
-5.2.1 Install NGINX
+  5.2.1 Install NGINX
 
 - 5.2.2 Start and Enable NGINX
 
@@ -51,7 +53,7 @@ I recently discovered a [super cool offer from Oracle](https://docs.oracle.com/e
 
 - 5.2.12 AppArmor
 
-5.2.12.1 Create AppArmor Main Profile
+  5.2.12.1 Create AppArmor Main Profile
 
 - 5.2.12.2 Create Local Directory
 
@@ -63,7 +65,7 @@ I recently discovered a [super cool offer from Oracle](https://docs.oracle.com/e
 
 - 5.3 Install Certbot
 
-5.3.1 Install Certbot
+  5.3.1 Install Certbot
 
 - 5.3.2 Obtain and Install the Certificate:
 
@@ -89,7 +91,7 @@ I recently discovered a [super cool offer from Oracle](https://docs.oracle.com/e
 
 - 5.9 Install Anaconda
 
-5.9.1 Download the Latest Anaconda Installer
+  5.9.1 Download the Latest Anaconda Installer
 
 - 5.9.2 Verify the Installer’s Integrity (Crucial!)
 
@@ -121,7 +123,7 @@ Select Ubuntu 24.04 (or the latest LTS version at the time of writing). Using 
 
 Public IP Address: Create a Reserved Public IP Address during the VM creation process. This is much easier and less error-prone than assigning one later.
 
-- Security List:This is absolutely critical. Oracle Cloud has a built-in firewall (the Security List) that must be configured to allow traffic. 
+- Security List:This is absolutely critical. Oracle Cloud has a built-in firewall (the Security List) that must be configured to allow traffic.
 
 Create a new Security List (or use the default, but modify it). It’s generally better to create a new one specifically for your web server.
 
@@ -248,7 +250,7 @@ ssh -i ~/.ssh/mykey.key ubuntu@123.45.67.89
 
 ## 4.- Create a User
 
-Now we need to to create a user so we can connect to the VM from the Oracle’s Instance Console in case  we have problems to connect to it with our keys. 
+Now we need to to create a user so we can connect to the VM from the Oracle’s Instance Console in case we have problems to connect to it with our keys.
 
 ```bash
 sudo adduser user_name
@@ -455,7 +457,7 @@ We’ll create separate configuration files for each domain/subdomain. This make
 sudo nano /etc/nginx/sites-available/mxcfo.com
 ```
 
-Paste the following into the configuration file: 
+Paste the following into the configuration file:
 
 ```text
 server {
@@ -478,7 +480,7 @@ server {
 sudo nano /etc/nginx/sites-available/openbb.mxcfo.com
 ```
 
-Paste the following configuration (note the placeholder return 503;):  
+Paste the following configuration (note the placeholder return 503;):
 
 ```text
 server {
@@ -647,11 +649,11 @@ If there is no NGINX profile, execute this line:
 sudo nano /etc/apparmor.d/usr.sbin.nginx
 ```
 
-This will open the file in a nano session, then paste this: 
+This will open the file in a nano session, then paste this:
 
 ```text
 # AppArmor profile for Nginx (Corrected)
-#include 
+#include
 
 /usr/sbin/nginx {
     # Include necessary abstractions
@@ -818,7 +820,7 @@ In summary, the initial rules are a starting point. You’ll almost certainly ne
 
 #### 5.12.2.5 Reload AppArmor
 
-*Crucially*, we reload the entire apparmor service, *not* just the individual profile with apparmor_parser. This ensures that all changes, including the new local/ include file, are correctly loaded.  Restart Nginx abd check  AppArmor status
+_Crucially_, we reload the entire apparmor service, *not* just the individual profile with apparmor_parser. This ensures that all changes, including the new local/ include file, are correctly loaded.  Restart Nginx abd check AppArmor status
 
 ```bash
 sudo systemctl reload apparmor
@@ -962,7 +964,7 @@ Previous Failed Startup: If Nginx failed to start cleanly (due to a configurati
 
 - Identify the Master Process: Always use ps aux | grep nginx to identify the master Nginx process. This is the process you should kill. Killing the master process will automatically terminate the worker processes.
 
-- Use kill  (Preferred): The most direct way is to use kill with the process ID (PID) of the master process:ps aux | grep nginx # Find the master process PID sudo kill  # Replace  with the actual PIDcontent_copydownloadUse code with caution.Bash
+- Use kill  (Preferred): The most direct way is to use kill with the process ID (PID) of the master process:ps aux | grep nginx # Find the master process PID sudo kill # Replace with the actual PIDcontent_copydownloadUse code with caution.Bash
 
 - Use pkill nginx (Less Precise): pkill nginx sends a signal to all processes whose name matches “nginx”. This is less precise than using the PID, but it can be convenient. By default, pkill sends SIGTERM (signal 15), which is a graceful shutdown request.
 
@@ -1037,7 +1039,7 @@ In the navigation menu, under Compute, click Custom Images.
 
 ## 5.5 Export Custom Image
 
-Exporting a custom image to an external cloud blob storage to save money,  is a common and perfectly reasonable strategy to manage costs and increase portability. Here’s a breakdown of how you can do it, the considerations involved, and some popular options, assuming your VM uses a boot volume (most Oracle VMs do)
+Exporting a custom image to an external cloud blob storage to save money, is a common and perfectly reasonable strategy to manage costs and increase portability. Here’s a breakdown of how you can do it, the considerations involved, and some popular options, assuming your VM uses a boot volume (most Oracle VMs do)
 
 **Key Concepts and Steps**
 
@@ -1094,13 +1096,13 @@ Go to Object Storage > Object Storage.
 **oci CLI:** The Oracle Cloud Infrastructure Command Line Interface (oci) is the best option for reliable downloads, especially for large images. You’ll need to install and configure the CLI (see Oracle’s documentation). The command would look something like this (replace with your actual PAR URL):
 
 ```text
-oci os object get --bucket-name  --name  --file  --source-uri 
+oci os object get --bucket-name  --name  --file  --source-uri
 ```
 
 **curl or wget:** You can use standard command-line tools like curl or wget with the PAR URL:
 
 ```bash
-curl -O   # or wget 
+curl -O   # or wget
 ```
 
 - This is less robust than the oci CLI, especially for very large files and unreliable connections.
@@ -1154,7 +1156,7 @@ gsutil cp -s nearline  gs:////
 **Example (Backblaze B2 CLI):**
 
 ```text
-b2 upload-file   
+b2 upload-file
 ```
 
 **5. Import (If Needed):**
@@ -1198,18 +1200,18 @@ sudo apt install tmux -y
 
 Here we have some basic key commands to start working with **tmux**:
 
-| Action | Command |
-|---|---|
-| Start a new session | tmux |
-| Create a new session | tmux new -s session_name |
-| Disconnect from a session | Ctrl + B followed by D |
-| List active sessions | tmux ls |
+| Action                         | Command                     |
+| ------------------------------ | --------------------------- |
+| Start a new session            | tmux                        |
+| Create a new session           | tmux new -s session_name    |
+| Disconnect from a session      | Ctrl + B followed by D      |
+| List active sessions           | tmux ls                     |
 | Reconnect to an active session | tmux attach -t session_name |
-| Close a session from within | exit |
+| Close a session from within    | exit                        |
 
 ## 5.7 Install curl and wget
 
-Basic and essential tools to download files and make HTTP requests. 
+Basic and essential tools to download files and make HTTP requests.
 
 ```bash
 sudo apt update
@@ -1228,7 +1230,7 @@ sudo apt install python3-pip -y
 
 1. **System-Level `pip3`:** Installing `pip3` at the system level (with `sudo apt install python3-pip`) is *generally* recommended. It provides a system-wide `pip3` command that can be useful for managing system-level Python packages (though you’ll mostly be working within your environment). It doesn’t *directly* affect the virtual environment, but it’s a good practice for a clean system.
 
-2. **Install pipx and uv: ** 
+2. **Install pipx and uv: **
 
 pipx handles creating an isolated environment for uv automatically.
 

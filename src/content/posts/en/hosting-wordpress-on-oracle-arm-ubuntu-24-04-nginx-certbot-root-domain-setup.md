@@ -1,8 +1,10 @@
 ---
-title: "Hosting WordPress on Oracle ARM Ubuntu 24.04: Nginx, Certbot & Root Domain Setup"
-description: "So you’ve snagged one of Oracle Cloud’s awesome “Always Free” Ampere A1 (ARM) Compute instances running Ubuntu 24.04 LTS. Fantastic! Now, you want to host a WordPress blog on your main domain (like yourdomain.com) and keep the door open for future web apps on subdomains..."
+title: 'Hosting WordPress on Oracle ARM Ubuntu 24.04: Nginx, Certbot & Root Domain Setup'
+description: 'So you’ve snagged one of Oracle Cloud’s awesome “Always Free” Ampere A1 (ARM) Compute instances running Ubuntu 24.04 LTS. Fantastic! Now, you want to host a WordPress blog on your main domain (like yourdomain.com) and keep the door open for future web apps on subdomains...'
 pubDate: 2025-03-28
-categories: ["Blog"]
+heroImage: '/images/2025/03/wordpress_logo.png'
+heroImageAlt: 'wordpress logo'
+categories: ['Blog']
 tags: []
 toc: true
 ---
@@ -76,7 +78,7 @@ sudo systemctl enable nginx
 # sudo systemctl status nginx # Check it's active (running)
 ```
 
-*At this point, visiting your VM’s public IP in a browser should show the default Nginx welcome page.*
+_At this point, visiting your VM’s public IP in a browser should show the default Nginx welcome page._
 
 4. **Install PHP-FPM and Extensions:** WordPress needs PHP and several common extensions. Ubuntu 24.04 typically uses PHP 8.3.
 
@@ -117,7 +119,7 @@ FLUSH PRIVILEGES;
 EXIT;
 ```
 
-*Remember the database name (wordpress_db), username (wp_user), and the password you set!*
+_Remember the database name (wordpress_db), username (wp_user), and the password you set!_
 
 2. **Create Web Root Directory:** We’ll use /var/www/yourdomain.com for better organization, especially with future subdomains. Replace yourdomain.com with your actual domain.
 
@@ -181,7 +183,7 @@ sudo rm /etc/nginx/sites-enabled/default
 sudo nano /etc/nginx/sites-available/yourdomain.com
 ```
 
-*Paste the following configuration. ***Crucially, replace yourdomain.com and www.yourdomain.com with your actual domain(s). Also, double-check the fastcgi_pass line*** – the PHP socket path might be php8.3-fpm.sock or similar; verify with ls /run/php/.*
+\*Paste the following configuration. ***Crucially, replace yourdomain.com and www.yourdomain.com with your actual domain(s). Also, double-check the fastcgi_pass line*** – the PHP socket path might be php8.3-fpm.sock or similar; verify with ls /run/php/.\*
 
 ```text
 server {
@@ -190,9 +192,9 @@ server {
 
     # ---- CHANGE THESE ----
     server_name yourdomain.com www.yourdomain.com;
-    
+
     client_max_body_size 512M;
-    
+
     root /var/www/yourdomain.com;
     # ----------------------
 
@@ -236,7 +238,7 @@ server {
 }
 ```
 
-*Save and close the file.*
+_Save and close the file._
 
 3. **Enable the New Site:** Create a symbolic link.
 
@@ -250,7 +252,7 @@ sudo ln -s /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/
 sudo nginx -t
 ```
 
-*If you see syntax is ok and test is successful, proceed. Otherwise, re-edit the config file to fix typos.*
+_If you see syntax is ok and test is successful, proceed. Otherwise, re-edit the config file to fix typos._
 
 5. **Reload Nginx:** Apply the new configuration.
 
@@ -343,13 +345,13 @@ Nginx itself has a limit on the size of the client request body, which includes 
 sudo nano /etc/nginx/sites-available/your_site_config_file
 ```
 
-*(Or sudo nano /etc/nginx/nginx.conf if you want to set it globally)*
+_(Or sudo nano /etc/nginx/nginx.conf if you want to set it globally)_
 
 **Add/Modify client_max_body_size:** Find the http { … } block (in nginx.conf) or the server { … } block for your site. Add or modify the client_max_body_size directive within one of those blocks. Set it to the *same value* or slightly *larger* than your PHP post_max_size and upload_max_filesize.
 
 Example (inside the http or server block):
 
-```yaml
+````yaml
 server {
     listen 80;
     server_name cfocoder.com www.cfocoder.com;
@@ -388,7 +390,7 @@ sudo snap install core; sudo snap refresh core
 sudo apt remove certbot # Remove any old system package versions
 sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot # Make command accessible
-```
+````
 
 2. **Obtain and Install Certificate:** Run Certbot with the Nginx plugin, specifying all domain variations you want covered.
 
@@ -397,7 +399,7 @@ sudo ln -s /snap/bin/certbot /usr/bin/certbot # Make command accessible
 sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 ```
 
-*Follow the prompts:*
+_Follow the prompts:_
 
 - Enter your email for renewal notices.
 
@@ -407,7 +409,7 @@ sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 
 - Select option 2 (Redirect): This automatically redirects all HTTP traffic to HTTPS – highly recommended!
 
-*Certbot will automatically configure Nginx for SSL and reload it.*
+_Certbot will automatically configure Nginx for SSL and reload it._
 
 3. **Update Firewall for HTTPS:** Allow HTTPS traffic and remove the HTTP-only rule.
 
@@ -423,7 +425,7 @@ sudo ufw status # Verify 'Nginx Full' is allowed
 sudo certbot renew --dry-run
 ```
 
-*This should complete without errors.*
+_This should complete without errors._
 
 5. **Test HTTPS:** Visit https://yourdomain.com. You should see the padlock! Log back into WordPress if needed, and go to Settings -> General in the dashboard to ensure both “WordPress Address (URL)” and “Site Address (URL)” start with https://.
 
@@ -453,7 +455,7 @@ Add a DNS A record for app1 pointing to your VM’s IP.
 
 ## Phase 8: Troubleshooting
 
-It is possible that after the initial setup, especially after adding the site to Cloudflare, that we experiment some issues,  so here are some troubleshooting steps to apply after the initial setup, in case we get issues getting the WordPress admin area working correctly
+It is possible that after the initial setup, especially after adding the site to Cloudflare, that we experiment some issues, so here are some troubleshooting steps to apply after the initial setup, in case we get issues getting the WordPress admin area working correctly
 
 **1. Cloudflare Configuration**
 

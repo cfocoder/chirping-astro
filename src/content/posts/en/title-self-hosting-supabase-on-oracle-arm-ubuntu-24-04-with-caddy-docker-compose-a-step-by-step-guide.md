@@ -1,8 +1,10 @@
 ---
-title: "Title: Self-Hosting Supabase on Oracle ARM (Ubuntu 24.04) with Caddy & Docker Compose: A Step-by-Step Guide"
-description: "So, you’ve got a powerful Oracle Cloud ARM VM running Ubuntu 24.04, complete with SSL, Docker, and a Caddy reverse proxy neatly managing your subdomains. Your blog is humming along on the main domain, and now you want to add the awesome open-source Firebase alternative,..."
+title: 'Title: Self-Hosting Supabase on Oracle ARM (Ubuntu 24.04) with Caddy & Docker Compose: A Step-by-Step Guide'
+description: 'So, you’ve got a powerful Oracle Cloud ARM VM running Ubuntu 24.04, complete with SSL, Docker, and a Caddy reverse proxy neatly managing your subdomains. Your blog is humming along on the main domain, and now you want to add the awesome open-source Firebase alternative,...'
 pubDate: 2025-05-18
-categories: ["Cloud"]
+heroImage: '/images/2025/05/supabase_logo.png'
+heroImageAlt: 'supabase logo'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -104,7 +106,7 @@ cd docker
 - We then move into the docker subdirectory where the docker-compose.yml resides.
 
 2. **Initialize Environment Files:**
-Supabase uses .env files for configuration.
+   Supabase uses .env files for configuration.
 
 ```bash
 cp .env.example .env
@@ -113,7 +115,7 @@ cp .env.example .env
 ```
 
 3. **Configure Secrets and URLs in .env:**
-This is the most critical step for security and functionality! Open /var/www/html/supabase_config/docker/.env for editing:
+   This is the most critical step for security and functionality! Open /var/www/html/supabase_config/docker/.env for editing:
 
 ```text
 nano .env
@@ -177,7 +179,7 @@ Payload:
   "ref": "yourproject-service",
   "role": "service_role",
   "iat": 1716081000, // Use same iat as ANON_KEY
-  "exp": 2031781000  // Use same exp as ANON_KEY
+  "exp": 2031781000 // Use same exp as ANON_KEY
 }
 ```
 
@@ -251,7 +253,7 @@ SMTP_ADMIN_EMAIL=your_admin_email@example.com
 Save and close the .env file.
 
 4. **Modify docker-compose.yml:**
-Open /var/www/html/supabase_config/docker/docker-compose.yml for a couple of tweaks.
+   Open /var/www/html/supabase_config/docker/docker-compose.yml for a couple of tweaks.
 
 ```text
 nano docker-compose.yml
@@ -264,7 +266,7 @@ services:
   kong:
     # ...
     ports:
-      - "127.0.0.1:${KONG_HTTP_PORT}:8000/tcp" # Changed from default
+      - '127.0.0.1:${KONG_HTTP_PORT}:8000/tcp' # Changed from default
       # - "127.0.0.1:${KONG_HTTPS_PORT}:8443/tcp" # Commented out, Caddy handles SSL
     # ...
 ```
@@ -272,22 +274,22 @@ services:
 - Realtime Service DB_ENC_KEY: Ensure it uses the variable from .env.
 
 ```yaml
-  realtime:
+realtime:
+  # ...
+  environment:
     # ...
-    environment:
-      # ...
-      DB_ENC_KEY: ${DB_ENC_KEY} # Changed from 'supabaserealtime'
-      # ...
+    DB_ENC_KEY: ${DB_ENC_KEY} # Changed from 'supabaserealtime'
+    # ...
 ```
 
 - Analytics Service Port (Optional): Bind to localhost.
 
 ```yaml
-  analytics:
-    # ...
-    ports:
-      - "127.0.0.1:4000:4000" # Changed from default
-    # ...
+analytics:
+  # ...
+  ports:
+    - '127.0.0.1:4000:4000' # Changed from default
+  # ...
 ```
 
 - Data Persistence Check: Confirm that volumes like db: -> – ./volumes/db/data:/var/lib/postgresql/data:Z and storage: -> – ./volumes/storage:/var/lib/storage:z are present. These relative paths mean data will be stored in /var/www/html/supabase_config/docker/volumes/, which is on our block volume. Perfect!
@@ -295,7 +297,7 @@ services:
 Save and close the docker-compose.yml file.
 
 5. **Pull Docker Images and Start Supabase:**
-Still in /var/www/html/supabase_config/docker/:
+   Still in /var/www/html/supabase_config/docker/:
 
 ```bash
 sudo docker-compose down -v # Recommended for a clean slate if you ran before
@@ -335,11 +337,11 @@ supabase.yourdomain.com {
         header_up Host {host} # Still useful
     }
 
-    log 
+    log
 }
 ```
 
-*Note: Caddy’s validator might warn about X-Forwarded-For and X-Forwarded-Proto being unnecessary as Caddy sets them by default. You can remove those lines if desired.*
+_Note: Caddy’s validator might warn about X-Forwarded-For and X-Forwarded-Proto being unnecessary as Caddy sets them by default. You can remove those lines if desired._
 
 2. **Format and Validate Caddyfile (Good Practice):**
 
@@ -365,7 +367,7 @@ sudo docker ps
 All Supabase containers (e.g., supabase-kong, supabase-db, realtime-dev.supabase-realtime, supabase-studio, etc.) should be Up and ideally show (healthy). It might take a minute or two for all healthchecks to pass.
 
 2. **Check Specific Logs if Issues Arise:**
-If docker compose logs -f  gives no such service (we saw this intermittently), use the container ID:
+   If docker compose logs -f  gives no such service (we saw this intermittently), use the container ID:
 
 ```bash
 sudo docker logs  -f --tail 50

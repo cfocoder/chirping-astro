@@ -1,8 +1,10 @@
 ---
-title: "Installing RedPanda Streaming Data Platform on Oracle ARM Ubuntu 24.04 with Docker and Caddy"
-description: "Environment: Oracle Cloud ARM VM, Ubuntu 24.04, Docker, Caddy (non-Docker), Cloudflare"
+title: 'Installing RedPanda Streaming Data Platform on Oracle ARM Ubuntu 24.04 with Docker and Caddy'
+description: 'Environment: Oracle Cloud ARM VM, Ubuntu 24.04, Docker, Caddy (non-Docker), Cloudflare'
 pubDate: 2025-04-14
-categories: ["Linux"]
+heroImage: '/images/2025/04/redpanda_logo.png'
+heroImageAlt: 'redpanda logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -110,8 +112,8 @@ services:
     command:
       - redpanda
       - start
-      - --smp 1             # Adjust based on available CPU cores if needed
-      - --memory 1G         # Adjust based on available RAM
+      - --smp 1 # Adjust based on available CPU cores if needed
+      - --memory 1G # Adjust based on available RAM
       - --reserve-memory 0M
       - --node-id 0
       - --check=false
@@ -119,9 +121,9 @@ services:
       - --kafka-addr INTERNAL://0.0.0.0:9092 # Kafka listener for internal Docker network
       # --- Advertised Addresses ---
       - --advertise-kafka-addr INTERNAL://redpanda:9092 # Advertise Kafka internally
-      - --advertise-rpc-addr redpanda:33145           # Advertise RPC internally
+      - --advertise-rpc-addr redpanda:33145 # Advertise RPC internally
       # --- Seeds ---
-      - --seeds redpanda:33145                # Required for single-node when empty_seed_starts_cluster=false
+      - --seeds redpanda:33145 # Required for single-node when empty_seed_starts_cluster=false
       # --- SASL settings ---
       - --set redpanda.enable_sasl=true
       - --set redpanda.sasl_mechanisms=SCRAM-SHA-256
@@ -131,7 +133,7 @@ services:
       - --set redpanda.empty_seed_starts_cluster=false # Safer setting
     ports:
       # Expose Admin API only to localhost for rpk commands from host (optional)
-      - "127.0.0.1:9644:9644"
+      - '127.0.0.1:9644:9644'
     volumes:
       - /var/www/html/redpanda/data:/var/lib/redpanda/data # Map data dir to block volume
     networks:
@@ -145,17 +147,17 @@ services:
       - redpanda
     ports:
       # Map HOST port 8081 to CONTAINER port 8080 (Avoids potential conflicts on host 8080)
-      - "127.0.0.1:8081:8080"
+      - '127.0.0.1:8081:8080'
     environment:
       # Console connects to broker via internal Docker network name
-      KAFKA_BROKERS: "redpanda:9092"
+      KAFKA_BROKERS: 'redpanda:9092'
       # --- SASL Configuration for Console ---
-      KAFKA_SASL_ENABLED: "true"
-      KAFKA_SASL_MECHANISM: "SCRAM-SHA-256"
-      KAFKA_SASL_USERNAME: "rp_admin"
+      KAFKA_SASL_ENABLED: 'true'
+      KAFKA_SASL_MECHANISM: 'SCRAM-SHA-256'
+      KAFKA_SASL_USERNAME: 'rp_admin'
       # --- Password Hardcoded ---
       # SECURITY NOTE: Password is hardcoded here. Ensure this file is protected.
-      KAFKA_SASL_PASSWORD: "YOUR_STRONG_PASSWORD_HERE" # Replace with your actual password!
+      KAFKA_SASL_PASSWORD: 'YOUR_STRONG_PASSWORD_HERE' # Replace with your actual password!
     networks:
       - redpanda_net
     restart: unless-stopped

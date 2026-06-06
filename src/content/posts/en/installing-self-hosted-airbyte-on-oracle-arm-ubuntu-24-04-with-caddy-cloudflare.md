@@ -1,8 +1,10 @@
 ---
-title: "Installing Self-Hosted Airbyte on Oracle ARM Ubuntu 24.04 with Caddy & Cloudflare"
-description: "Airbyte is a powerful open-source data integration platform, allowing you to sync data between various sources and destinations. Self-hosting Airbyte gives you full control over your data pipelines. This guide walks through installing Airbyte on an Oracle Cloud ARM..."
+title: 'Installing Self-Hosted Airbyte on Oracle ARM Ubuntu 24.04 with Caddy & Cloudflare'
+description: 'Airbyte is a powerful open-source data integration platform, allowing you to sync data between various sources and destinations. Self-hosting Airbyte gives you full control over your data pipelines. This guide walks through installing Airbyte on an Oracle Cloud ARM...'
 pubDate: 2025-04-08
-categories: ["Linux"]
+heroImage: '/images/2025/04/airbyte_logo.png'
+heroImageAlt: 'airbyte logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -107,7 +109,7 @@ abctl --help
 
 Now, we’ll use abctl to install Airbyte. A common issue is that Airbyte defaults to port 8000, which might already be in use by another application proxied by Caddy. We encountered this and resolved it by specifying a different host port using the –port flag. We’ll use 8001.
 
-*Note: You might need sudo depending on your Docker permissions setup.*
+_Note: You might need sudo depending on your Docker permissions setup._
 
 ```bash
 # Create data directories (even if unused later due to Docker Root Dir, good practice)
@@ -150,7 +152,7 @@ Add a new block for the Airbyte subdomain *before* or *after* your existing 
 ```text
 airbyte.yourdomain.com {
     # Optional: Enable logging for this subdomain
-    log 
+    log
 
     # Enable compression
     encode gzip zstd
@@ -257,7 +259,7 @@ If it’s stopped (e.g., Exited), start it first:
 
 ```bash
 # Replace  with the actual name (e.g., airbyte-abctl-control-plane)
-sudo docker start 
+sudo docker start
 # Wait 30 seconds or so for it to initialize before proceeding.
 ```
 
@@ -301,19 +303,19 @@ sudo docker ps | grep kind
 
 ```bash
 # Replace  with the actual name found above
-sudo docker stop 
+sudo docker stop
 ```
 
 - To Start Airbyte Environment:
 
 ```bash
 # Replace  with the actual name found above
-sudo docker start 
+sudo docker start
 ```
 
 *Wait a minute or two after starting the container for all the internal Kubernetes pods (Airbyte services) to initialize.* You can monitor their status with kubectl get pods -n airbyte-abctl -w.
 
-3. **Updating abctl (The Tool Itself)** 
+3. **Updating abctl (The Tool Itself)**
 
 Occasionally, you might want to update the abctl command-line tool itself. Re-run the original installation script:
 
@@ -380,7 +382,7 @@ sudo KUBECONFIG=${ABCTL_KUBECONFIG} kubectl get pods -n airbyte-abctl
 sudo KUBECONFIG=${ABCTL_KUBECONFIG} kubectl logs  -n airbyte-abctl -f
 ```
 
-*(You need to include sudo KUBECONFIG=\${ABCTL_KUBECONFIG} before every kubectl command intended for the Airbyte cluster).*
+_(You need to include sudo KUBECONFIG=\${ABCTL_KUBECONFIG} before every kubectl command intended for the Airbyte cluster)._
 
 **Tip: Create a Shell Alias (Recommended):** Typing the sudo KUBECONFIG=… prefix constantly is tedious. You can create a shell alias for convenience.
 

@@ -1,8 +1,10 @@
 ---
-title: "Adding and Mounting a Block Volume in Ubuntu (with systemd)"
-description: "This guide explains how to add a new block storage volume (like an additional hard drive or a cloud-provided block storage device) to an Ubuntu system, format it, and mount it permanently. We’ll cover the steps for modern Ubuntu systems that use systemd, including the..."
+title: 'Adding and Mounting a Block Volume in Ubuntu (with systemd)'
+description: 'This guide explains how to add a new block storage volume (like an additional hard drive or a cloud-provided block storage device) to an Ubuntu system, format it, and mount it permanently. We’ll cover the steps for modern Ubuntu systems that use systemd, including the...'
 pubDate: 2025-03-21
-categories: ["Linux"]
+heroImage: '/images/2025/03/hard_drive.jpg'
+heroImageAlt: 'hard drive'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -55,7 +57,7 @@ This guide explains how to add a new block storage volume (like an additional ha
 
 Use the lsblk command to list all block devices:`lsblk`
 
-- 
+-
 
 ```text
 lsblk
@@ -105,7 +107,7 @@ You should now see a partition, likely named /dev/sdb1 (or similar, depending 
 
 Create the ext4 filesystem on the new partition:
 
-- 
+-
 
 ```text
 sudo mkfs.ext4 /dev/sdb1  # Replace /dev/sdb1 with the *correct* partition name!

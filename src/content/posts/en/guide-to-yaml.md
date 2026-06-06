@@ -1,8 +1,10 @@
 ---
-title: "Guide to YAML"
-description: "YAML is a data serialization language, which is very easy for a human to understand and is widely used in the configuration files of different applications."
+title: 'Guide to YAML'
+description: 'YAML is a data serialization language, which is very easy for a human to understand and is widely used in the configuration files of different applications.'
 pubDate: 2022-09-30
-categories: ["Cloud"]
+heroImage: '/images/2023/08/YAML.png'
+heroImageAlt: 'YAML'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -24,11 +26,11 @@ firstname: Hector
 lastname: Sanchez
 pets:
   - Dog:
-    - Candy
-    - Daisy
+      - Candy
+      - Daisy
   - Cat:
-    - Micho
-    - Bruce
+      - Micho
+      - Bruce
 myDate: !!timestamp 2022-02-02
 locations: [guadalajara, zapopan, ocotlan]
 

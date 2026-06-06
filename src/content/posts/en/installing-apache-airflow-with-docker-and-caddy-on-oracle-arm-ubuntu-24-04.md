@@ -1,8 +1,10 @@
 ---
-title: "Installing Apache Airflow with Docker and Caddy on Oracle ARM (Ubuntu 24.04)"
-description: "Running data pipelines often requires a robust orchestrator like Apache Airflow. Setting it up on modern ARM-based cloud infrastructure, such as Oracle Cloud’s Ampere A1 instances, can be efficient and cost-effective. This guide walks you through installing Apache..."
+title: 'Installing Apache Airflow with Docker and Caddy on Oracle ARM (Ubuntu 24.04)'
+description: 'Running data pipelines often requires a robust orchestrator like Apache Airflow. Setting it up on modern ARM-based cloud infrastructure, such as Oracle Cloud’s Ampere A1 instances, can be efficient and cost-effective. This guide walks you through installing Apache...'
 pubDate: 2025-04-13
-categories: ["Linux"]
+heroImage: '/images/2025/04/airflow_logo.png'
+heroImageAlt: 'airflow logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -86,7 +88,7 @@ Airflow provides an official docker-compose.yaml file. We’ll download it and
 
 - Navigate to the config directory:
 
-- 
+-
 
 ```bash
 cd /mnt/blockvolume/airflow/config
@@ -102,7 +104,7 @@ curl -LfO 'https://airflow.apache.org/docs/apache-airflow/stable/docker-compose.
 
 **(Security Note:** Hardcoding secrets like passwords and keys directly in this file is convenient for consistency but less secure than using a separate .env file, especially if this file might be shared or version-controlled. Ensure this file remains private on your server.)
 
-```bash
+````bash
 # /mnt/blockvolume/airflow/config/docker-compose.yaml
 # --- Airflow with LocalExecutor, data on block volume ---
 # --- ALL Config values HARDCODED ---
@@ -158,7 +160,7 @@ services:
     restart: always
 
   airflow-webserver:
-    
+
 
 - YOUR_GENERATED_WEBSERVER_SECRET_KEY: This key secures user sessions in the Airflow UI. Generate it on your server:
 
@@ -180,7 +182,7 @@ cd /mnt/blockvolume/airflow/config
 
 # Run the initialization
 docker compose run --rm airflow-init
-```
+````
 
 Watch the output for success messages regarding DB connection, initialization, and user creation.
 

@@ -1,8 +1,10 @@
 ---
-title: "Maximizing Value: How I Optimize GitHub Copilot Pro and Anthropic Subscriptions for Coding and Research"
-description: "As a data scientist and developer, I rely on advanced LLMs (Large Language Models) like Claude Opus, Sonnet, GPT-4.1, and GPT-4o for both architectural planning and daily coding. But I quickly learned that the same model behaves differently depending on the platform—and..."
+title: 'Maximizing Value: How I Optimize GitHub Copilot Pro and Anthropic Subscriptions for Coding and Research'
+description: 'As a data scientist and developer, I rely on advanced LLMs (Large Language Models) like Claude Opus, Sonnet, GPT-4.1, and GPT-4o for both architectural planning and daily coding. But I quickly learned that the same model behaves differently depending on the platform—and...'
 pubDate: 2026-01-20
-categories: ["AI"]
+heroImage: '/images/2026/01/optimization_of_llms.png'
+heroImageAlt: 'optimization of llms'
+categories: ['AI']
 tags: []
 toc: true
 ---

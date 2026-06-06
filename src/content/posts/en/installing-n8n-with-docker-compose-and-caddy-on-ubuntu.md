@@ -1,8 +1,10 @@
 ---
-title: "Installing n8n with Docker Compose and Caddy on Ubuntu"
-description: "Workflow automation tools are incredibly powerful, and n8n is a fantastic open-source, self-hostable option. It allows you to connect various apps and services to automate tasks visually."
+title: 'Installing n8n with Docker Compose and Caddy on Ubuntu'
+description: 'Workflow automation tools are incredibly powerful, and n8n is a fantastic open-source, self-hostable option. It allows you to connect various apps and services to automate tasks visually.'
 pubDate: 2025-03-21
-categories: ["Linux"]
+heroImage: '/images/2025/03/n8n_logo.jpg'
+heroImageAlt: 'n8n logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -134,7 +136,7 @@ services:
     ports:
       # Map n8n's internal port 5678 ONLY to the host's localhost interface.
       # Caddy (running on the host) will connect to this.
-      - "127.0.0.1:5678:5678"
+      - '127.0.0.1:5678:5678'
 
 # Note: We do NOT define Docker networks here, as Caddy runs on the host,
 # not in a container sharing a Docker network with n8n.
@@ -144,7 +146,7 @@ services:
 
 5. Save the file (Ctrl+X, then Y, then Enter in nano).
 
-- 
+-
 
 ## Step 4: Configure Caddy Reverse Proxy
 

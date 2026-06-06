@@ -1,13 +1,15 @@
 ---
-title: "RunPod: The Cloud GPU Solution for Data Science Students"
-description: "Is your laptop struggling to train Machine Learning models? Discover how RunPod can democratize your access to high-performance GPUs."
+title: 'RunPod: The Cloud GPU Solution for Data Science Students'
+description: 'Is your laptop struggling to train Machine Learning models? Discover how RunPod can democratize your access to high-performance GPUs.'
 pubDate: 2025-11-29
-categories: ["AI"]
+heroImage: '/images/2025/11/runpod_logo.png'
+heroImageAlt: 'runpod logo'
+categories: ['AI']
 tags: []
 toc: true
 ---
 
-*Is your laptop struggling to train Machine Learning models? Discover how RunPod can democratize your access to high-performance GPUs.*
+_Is your laptop struggling to train Machine Learning models? Discover how RunPod can democratize your access to high-performance GPUs._
 
 ## What is RunPod?
 
@@ -27,11 +29,11 @@ With over 500,000 developers using the platform, RunPod has become a popular cho
 
 If you’re pursuing a Master’s in Data Science (like me), you probably face these limitations:
 
-| My Current Equipment | Limitation |
-|---|---|
-| Intel i5-7200U + Intel HD 620 | No dedicated GPU for CUDA |
-| 16 GB RAM | Insufficient for large models |
-| 1 TB HDD | Slow for massive datasets |
+| My Current Equipment          | Limitation                    |
+| ----------------------------- | ----------------------------- |
+| Intel i5-7200U + Intel HD 620 | No dedicated GPU for CUDA     |
+| 16 GB RAM                     | Insufficient for large models |
+| 1 TB HDD                      | Slow for massive datasets     |
 
 RunPod solves these problems by offering:
 
@@ -69,11 +71,11 @@ Over 50 pre-configured templates for common use cases:
 
 ### 4. Cloud Types
 
-| Community Cloud | Secure Cloud |
-|---|---|
-| 20-30% cheaper | Certified data centers |
-| GPUs from verified providers | Higher guaranteed uptime |
-| Ideal for experiments | For production and sensitive data |
+| Community Cloud              | Secure Cloud                      |
+| ---------------------------- | --------------------------------- |
+| 20-30% cheaper               | Certified data centers            |
+| GPUs from verified providers | Higher guaranteed uptime          |
+| Ideal for experiments        | For production and sensitive data |
 
 ## The RunPod Hub: Your Starting Point
 
@@ -83,14 +85,14 @@ The **RunPod Hub** is a central marketplace where you can find pre-built resou
 
 These are ready-to-deploy serverless workers that you can use immediately without managing infrastructure. Popular options include:
 
-| Repo | Description | Stars |
-|---|---|---|
-| Axolotl Fine-Tuning | Fine-tune LLMs with LoRA, QLoRA, DPO using Hugging Face models | 10,869 |
-| ComfyUI | Generate images with FLUX.1-dev (fp8) | 605 |
-| vLLM | Deploy OpenAI-compatible blazing-fast LLM endpoints | 385 |
-| Faster Whisper | Process audio with transcription, translation | 125 |
-| Automatic1111 Stable Diffusion | Generate images via API | 94 |
-| Infinity Embedding | High-throughput text embedding & reranker | 41 |
+| Repo                           | Description                                                    | Stars  |
+| ------------------------------ | -------------------------------------------------------------- | ------ |
+| Axolotl Fine-Tuning            | Fine-tune LLMs with LoRA, QLoRA, DPO using Hugging Face models | 10,869 |
+| ComfyUI                        | Generate images with FLUX.1-dev (fp8)                          | 605    |
+| vLLM                           | Deploy OpenAI-compatible blazing-fast LLM endpoints            | 385    |
+| Faster Whisper                 | Process audio with transcription, translation                  | 125    |
+| Automatic1111 Stable Diffusion | Generate images via API                                        | 94     |
+| Infinity Embedding             | High-throughput text embedding & reranker                      | 41     |
 
 You can also add your own repos to the Hub by clicking “Add your repo” and following the setup wizard.
 
@@ -235,25 +237,25 @@ When you click **Deploy** in the Pods section, you’re presented with a power
 
 ### Featured GPUs (Current Pricing)
 
-| GPU | VRAM | RAM | vCPUs | On-Demand | Spot Price |
-|---|---|---|---|---|---|
-| RTX 5090 | 32 GB | 92 GB | 12 | \$0.89/hr | \$0.76/hr |
-| A40 | 48 GB | 48 GB | 9 | \$0.40/hr | \$0.20/hr |
-| H200 SXM | 141 GB | 188 GB | 12 | \$3.59/hr | \$3.05/hr |
-| B200 | 180 GB | 180 GB | 24 | \$5.19/hr | \$4.41/hr |
+| GPU      | VRAM   | RAM    | vCPUs | On-Demand | Spot Price |
+| -------- | ------ | ------ | ----- | --------- | ---------- |
+| RTX 5090 | 32 GB  | 92 GB  | 12    | \$0.89/hr | \$0.76/hr  |
+| A40      | 48 GB  | 48 GB  | 9     | \$0.40/hr | \$0.20/hr  |
+| H200 SXM | 141 GB | 188 GB | 12    | \$3.59/hr | \$3.05/hr  |
+| B200     | 180 GB | 180 GB | 24    | \$5.19/hr | \$4.41/hr  |
 
 ### NVIDIA Latest Gen Options
 
-| GPU | VRAM | On-Demand | Availability |
-|---|---|---|---|
-| RTX 2000 Ada | 16 GB | \$0.24/hr | Low |
-| RTX 4000 Ada | 20 GB | \$0.26/hr | Low |
-| RTX 4090 | 24 GB | \$0.59/hr | High |
-| L4 | 24 GB | \$0.39/hr | Medium |
-| L40 | 48 GB | \$0.99/hr | Low |
-| L40S | 48 GB | \$0.86/hr | Medium |
-| H100 PCIe | 80 GB | \$2.39/hr | – |
-| H100 SXM | 80 GB | \$2.69/hr | High |
+| GPU          | VRAM  | On-Demand | Availability |
+| ------------ | ----- | --------- | ------------ |
+| RTX 2000 Ada | 16 GB | \$0.24/hr | Low          |
+| RTX 4000 Ada | 20 GB | \$0.26/hr | Low          |
+| RTX 4090     | 24 GB | \$0.59/hr | High         |
+| L4           | 24 GB | \$0.39/hr | Medium       |
+| L40          | 48 GB | \$0.99/hr | Low          |
+| L40S         | 48 GB | \$0.86/hr | Medium       |
+| H100 PCIe    | 80 GB | \$2.39/hr | –            |
+| H100 SXM     | 80 GB | \$2.69/hr | High         |
 
 ## Serverless: Auto-scaling GPU Endpoints
 
@@ -269,14 +271,14 @@ The Serverless section lets you deploy AI models that scale automatically based 
 
 ### Ready-to-Deploy Repos
 
-| Worker | Description |
-|---|---|
-| Axolotl Fine-Tuning | Train LLMs with LoRA, QLoRA, DPO |
-| ComfyUI | Image generation with FLUX |
-| vLLM | High-performance LLM inference |
-| Faster Whisper | Audio transcription and translation |
-| Automatic1111 | Stable Diffusion API |
-| Infinity Embedding | Text embeddings at scale |
+| Worker              | Description                         |
+| ------------------- | ----------------------------------- |
+| Axolotl Fine-Tuning | Train LLMs with LoRA, QLoRA, DPO    |
+| ComfyUI             | Image generation with FLUX          |
+| vLLM                | High-performance LLM inference      |
+| Faster Whisper      | Audio transcription and translation |
+| Automatic1111       | Stable Diffusion API                |
+| Infinity Embedding  | Text embeddings at scale            |
 
 ### Worker Types
 
@@ -371,15 +373,15 @@ This is perfect for students who want to experiment with LLM customization witho
 
 ## Reference Pricing (November 2025)
 
-| GPU | VRAM | Price/Hour (On-Demand) |
-|---|---|---|
-| RTX 4090 | 24 GB | \$0.34 |
-| A40 | 48 GB | ~\$0.50 |
-| A100 PCIe | 80 GB | ~\$1.49 |
-| H100 PCIe | 80 GB | ~\$1.99 |
-| H200 | 141 GB | ~\$3.59 |
+| GPU       | VRAM   | Price/Hour (On-Demand) |
+| --------- | ------ | ---------------------- |
+| RTX 4090  | 24 GB  | \$0.34                 |
+| A40       | 48 GB  | ~\$0.50                |
+| A100 PCIe | 80 GB  | ~\$1.49                |
+| H100 PCIe | 80 GB  | ~\$1.99                |
+| H200      | 141 GB | ~\$3.59                |
 
-*Prices may vary based on availability and region.*
+_Prices may vary based on availability and region._
 
 ## Quick Guide: Your First Pod on RunPod
 
@@ -516,14 +518,14 @@ For advanced automation, RunPod exposes a complete GraphQL API to manage all you
 
 ## RunPod vs. Alternatives
 
-| Feature | RunPod | Google Colab | AWS EC2 |
-|---|---|---|---|
-| Billing | Per second | Monthly quota | Per hour |
-| Setup | ~30 seconds | Instant | Minutes |
-| Root access | ✅ Yes | ❌ No | ✅ Yes |
-| Available GPUs | 30+ types | T4/A100 (limited) | Extensive |
-| Learning curve | Low | Very low | High |
-| Relative price | Affordable | Free (limited) | Expensive |
+| Feature        | RunPod      | Google Colab      | AWS EC2   |
+| -------------- | ----------- | ----------------- | --------- |
+| Billing        | Per second  | Monthly quota     | Per hour  |
+| Setup          | ~30 seconds | Instant           | Minutes   |
+| Root access    | ✅ Yes      | ❌ No             | ✅ Yes    |
+| Available GPUs | 30+ types   | T4/A100 (limited) | Extensive |
+| Learning curve | Low         | Very low          | High      |
+| Relative price | Affordable  | Free (limited)    | Expensive |
 
 ## RunPod vs. AWS EC2: A Detailed Comparison
 
@@ -531,35 +533,35 @@ AWS EC2 is the industry giant, but how does it compare to RunPod for GPU workloa
 
 ### Complexity & Setup Time
 
-| Aspect | RunPod | AWS EC2 |
-|---|---|---|
-| Time to deploy | ~30 seconds | Minutes to hours |
-| Learning curve | Low (Docker-first) | High (IAM, VPCs, Security Groups) |
-| Setup requirements | Sign up → Deploy | Configure VPC, IAM roles, security groups, key pairs |
-| Pre-built templates | 50+ AI-ready templates | DIY configuration |
-| SSH access | One-click | Manual setup required |
+| Aspect              | RunPod                 | AWS EC2                                              |
+| ------------------- | ---------------------- | ---------------------------------------------------- |
+| Time to deploy      | ~30 seconds            | Minutes to hours                                     |
+| Learning curve      | Low (Docker-first)     | High (IAM, VPCs, Security Groups)                    |
+| Setup requirements  | Sign up → Deploy       | Configure VPC, IAM roles, security groups, key pairs |
+| Pre-built templates | 50+ AI-ready templates | DIY configuration                                    |
+| SSH access          | One-click              | Manual setup required                                |
 
 **The reality**: AWS requires you to understand IAM roles, VPCs, Security Groups, and instance types before you can even launch a GPU. RunPod? Sign up, click deploy, you’re running.
 
 ### Pricing Comparison
 
-| GPU | RunPod (On-Demand) | AWS EC2 (On-Demand) | Savings |
-|---|---|---|---|
-| A100 80GB | ~\$1.49/hr | ~\$32.77/hr (p4d.24xlarge*) | ~95% |
-| H100 | ~\$2.69/hr | ~\$98.32/hr (p5.48xlarge*) | ~97% |
-| A10G | ~\$0.40/hr | ~\$1.21/hr (g5.xlarge) | ~67% |
+| GPU       | RunPod (On-Demand) | AWS EC2 (On-Demand)          | Savings |
+| --------- | ------------------ | ---------------------------- | ------- |
+| A100 80GB | ~\$1.49/hr         | ~\$32.77/hr (p4d.24xlarge\*) | ~95%    |
+| H100      | ~\$2.69/hr         | ~\$98.32/hr (p5.48xlarge\*)  | ~97%    |
+| A10G      | ~\$0.40/hr         | ~\$1.21/hr (g5.xlarge)       | ~67%    |
 
-*AWS P-series instances come with multiple GPUs and more resources, making direct comparison tricky—but per-GPU, RunPod is significantly cheaper.
+\*AWS P-series instances come with multiple GPUs and more resources, making direct comparison tricky—but per-GPU, RunPod is significantly cheaper.
 
 ### Billing Model
 
-| Feature | RunPod | AWS EC2 |
-|---|---|---|
-| Billing granularity | Per second | Per second (varies by service) |
-| Data egress fees | None | Yes (significant costs) |
-| Minimum billing | None | Varies |
-| Idle shutdown | Built-in auto-stop | Manual setup required |
-| Pricing transparency | Simple, GPU-focused | Complex, multi-layered |
+| Feature              | RunPod              | AWS EC2                        |
+| -------------------- | ------------------- | ------------------------------ |
+| Billing granularity  | Per second          | Per second (varies by service) |
+| Data egress fees     | None                | Yes (significant costs)        |
+| Minimum billing      | None                | Varies                         |
+| Idle shutdown        | Built-in auto-stop  | Manual setup required          |
+| Pricing transparency | Simple, GPU-focused | Complex, multi-layered         |
 
 **The hidden AWS cost**: Data egress fees. Moving data out of AWS can add 10-20% to your bill. RunPod has zero egress fees.
 
@@ -603,25 +605,25 @@ AWS is built for enterprises with cloud teams. RunPod is built for people who ju
 
 **DeepInfra** is a **serverless inference API platform**. You don’t get a machine—you get an API endpoint to run models that are already deployed.
 
-| Aspect | RunPod | DeepInfra |
-|---|---|---|
-| What you get | A full GPU machine | An API endpoint |
-| Primary use | Training & custom workloads | Inference (running pre-trained models) |
-| Control level | Full root access | API only |
-| Pricing model | Per hour/second of GPU time | Per token or per inference request |
-| Custom models | Deploy anything | Limited to supported models |
-| Setup | Deploy a pod, SSH in | Get API key, make HTTP requests |
+| Aspect        | RunPod                      | DeepInfra                              |
+| ------------- | --------------------------- | -------------------------------------- |
+| What you get  | A full GPU machine          | An API endpoint                        |
+| Primary use   | Training & custom workloads | Inference (running pre-trained models) |
+| Control level | Full root access            | API only                               |
+| Pricing model | Per hour/second of GPU time | Per token or per inference request     |
+| Custom models | Deploy anything             | Limited to supported models            |
+| Setup         | Deploy a pod, SSH in        | Get API key, make HTTP requests        |
 
 ### DeepInfra Pricing Examples
 
 DeepInfra charges **per token** for language models:
 
-| Model | Input (per 1M tokens) | Output (per 1M tokens) |
-|---|---|---|
-| Llama 3.1 8B | \$0.03 | \$0.05 |
-| Llama 3.1 70B | \$0.35 | \$0.40 |
-| Mixtral 8x7B | \$0.24 | \$0.24 |
-| Whisper (audio) | ~\$0.01/min | – |
+| Model           | Input (per 1M tokens) | Output (per 1M tokens) |
+| --------------- | --------------------- | ---------------------- |
+| Llama 3.1 8B    | \$0.03                | \$0.05                 |
+| Llama 3.1 70B   | \$0.35                | \$0.40                 |
+| Mixtral 8x7B    | \$0.24                | \$0.24                 |
+| Whisper (audio) | ~\$0.01/min           | –                      |
 
 For dedicated GPU hosting on DeepInfra:
 
@@ -689,16 +691,16 @@ trainer.train()  # Actually training on your GPU
 
 ### The Key Insight
 
-| If you need to… | Use |
-|---|---|
-| Train a model from scratch | RunPod |
-| Fine-tune a pre-trained model | RunPod |
-| Run Stable Diffusion interactively | RunPod |
-| Call Llama 3 API for a chatbot | DeepInfra |
-| Build an app that needs LLM responses | DeepInfra |
-| Process thousands of prompts via API | DeepInfra |
-| Run Jupyter notebooks with GPU | RunPod |
-| Deploy a production inference API | Either (RunPod Serverless or DeepInfra) |
+| If you need to…                       | Use                                     |
+| ------------------------------------- | --------------------------------------- |
+| Train a model from scratch            | RunPod                                  |
+| Fine-tune a pre-trained model         | RunPod                                  |
+| Run Stable Diffusion interactively    | RunPod                                  |
+| Call Llama 3 API for a chatbot        | DeepInfra                               |
+| Build an app that needs LLM responses | DeepInfra                               |
+| Process thousands of prompts via API  | DeepInfra                               |
+| Run Jupyter notebooks with GPU        | RunPod                                  |
+| Deploy a production inference API     | Either (RunPod Serverless or DeepInfra) |
 
 ### Cost Comparison: A Practical Example
 
@@ -726,17 +728,17 @@ trainer.train()  # Actually training on your GPU
 
 ## Summary: Choosing the Right Platform
 
-| Your Situation | Best Choice |
-|---|---|
-| Student learning ML, need to train models | RunPod |
-| Building a chatbot app | DeepInfra |
-| Fine-tuning LLMs on custom data | RunPod |
-| Enterprise with existing AWS infrastructure | AWS EC2 |
-| Running Stable Diffusion interactively | RunPod |
-| Prototyping with pre-trained model APIs | DeepInfra |
-| Need JupyterLab with GPU | RunPod |
-| High-volume inference API | DeepInfra or RunPod Serverless |
-| Limited budget, maximum flexibility | RunPod |
+| Your Situation                              | Best Choice                    |
+| ------------------------------------------- | ------------------------------ |
+| Student learning ML, need to train models   | RunPod                         |
+| Building a chatbot app                      | DeepInfra                      |
+| Fine-tuning LLMs on custom data             | RunPod                         |
+| Enterprise with existing AWS infrastructure | AWS EC2                        |
+| Running Stable Diffusion interactively      | RunPod                         |
+| Prototyping with pre-trained model APIs     | DeepInfra                      |
+| Need JupyterLab with GPU                    | RunPod                         |
+| High-volume inference API                   | DeepInfra or RunPod Serverless |
+| Limited budget, maximum flexibility         | RunPod                         |
 
 ## Conclusion
 
@@ -754,4 +756,4 @@ RunPod democratizes access to high-performance GPUs for students and developers 
 
 - 🐙 RunPod GitHub
 
-*Last updated: November 2025*
+_Last updated: November 2025_

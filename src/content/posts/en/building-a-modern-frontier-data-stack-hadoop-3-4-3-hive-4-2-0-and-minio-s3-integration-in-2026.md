@@ -1,8 +1,10 @@
 ---
-title: "Building a Modern Frontier Data Stack: Hadoop 3.4.3, Hive 4.2.0, and MinIO S3 Integration in 2026"
-description: "A few days ago, I published posts about how to install Hadoop 3.3.6 natively on Ubuntu. At that time, I thought it was the state of the art. But things in the Big Data world move fast."
+title: 'Building a Modern Frontier Data Stack: Hadoop 3.4.3, Hive 4.2.0, and MinIO S3 Integration in 2026'
+description: 'A few days ago, I published posts about how to install Hadoop 3.3.6 natively on Ubuntu. At that time, I thought it was the state of the art. But things in the Big Data world move fast.'
 pubDate: 2026-03-12
-categories: ["Hadoop"]
+heroImage: '/images/2026/03/hadoop_hive.jpg'
+heroImageAlt: 'hadoop hive'
+categories: ['Hadoop']
 tags: []
 toc: true
 ---
@@ -110,10 +112,10 @@ This file is the heart of Hadoop’s configuration. Here we tell it where HDFS l
 
 ```xml
 
-    
+
         fs.defaultFS
         hdfs://localhost:9010
-    
+
 
 ```
 
@@ -574,20 +576,20 @@ And if something doesn’t work — if you find a port is occupied, or classpath
 
 A quick reference table to access the main services. Keep this handy so you don’t have to search through logs or remember port numbers.
 
-| Service | URL/Endpoint | Port | Purpose |
-|---|---|---|---|
-| Hadoop NameNode Web UI | http://localhost:9870 | 9870 | Monitor HDFS, file system status, job tracking |
-| Hadoop HDFS | hdfs://localhost:9010 | 9010 | HDFS NameNode (configured port) |
-| Hadoop Secondary NameNode | http://localhost:9868 | 9868 | Backup NameNode monitoring |
-| YARN ResourceManager | http://localhost:8088 | 8088 | Monitor running jobs, cluster resources |
-| YARN NodeManager | http://localhost:8042 | 8042 | Individual node resource status |
-| Hive Server 2 | jdbc:hive2://localhost:10000 | 10000 | JDBC connection for SQL queries |
-| Beeline (Hive CLI) | localhost:10000 | 10000 | Interactive Hive query shell |
-| MinIO Console | http://localhost:9001 | 9001 | MinIO web interface (if running) |
-| MinIO S3 API | http://localhost:9000 | 9000 | S3-compatible API endpoint |
-| Java Version Check | java -version | N/A | Verify Java 21 installation |
-| Hadoop Version Check | hadoop version | N/A | Verify Hadoop 3.4.3 installation |
-| Hive Version Check | beeline --version | N/A | Verify Hive 4.2.0 installation |
+| Service                   | URL/Endpoint                 | Port  | Purpose                                        |
+| ------------------------- | ---------------------------- | ----- | ---------------------------------------------- |
+| Hadoop NameNode Web UI    | http://localhost:9870        | 9870  | Monitor HDFS, file system status, job tracking |
+| Hadoop HDFS               | hdfs://localhost:9010        | 9010  | HDFS NameNode (configured port)                |
+| Hadoop Secondary NameNode | http://localhost:9868        | 9868  | Backup NameNode monitoring                     |
+| YARN ResourceManager      | http://localhost:8088        | 8088  | Monitor running jobs, cluster resources        |
+| YARN NodeManager          | http://localhost:8042        | 8042  | Individual node resource status                |
+| Hive Server 2             | jdbc:hive2://localhost:10000 | 10000 | JDBC connection for SQL queries                |
+| Beeline (Hive CLI)        | localhost:10000              | 10000 | Interactive Hive query shell                   |
+| MinIO Console             | http://localhost:9001        | 9001  | MinIO web interface (if running)               |
+| MinIO S3 API              | http://localhost:9000        | 9000  | S3-compatible API endpoint                     |
+| Java Version Check        | java -version                | N/A   | Verify Java 21 installation                    |
+| Hadoop Version Check      | hadoop version               | N/A   | Verify Hadoop 3.4.3 installation               |
+| Hive Version Check        | beeline --version            | N/A   | Verify Hive 4.2.0 installation                 |
 
 ### Quick connectivity tests
 

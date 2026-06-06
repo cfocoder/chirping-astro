@@ -1,8 +1,10 @@
 ---
-title: "Running Your First MapReduce Job on Hadoop: WordCount on War and Peace"
-description: "In Part 1 of this series we installed Hadoop 3.3.6 natively on Ubuntu 24.04 and got HDFS running in pseudo-distributed mode. That gave us a working distributed file system, but Hadoop is much more than storage — its true power lies in processing large datasets in..."
+title: 'Running Your First MapReduce Job on Hadoop: WordCount on War and Peace'
+description: 'In Part 1 of this series we installed Hadoop 3.3.6 natively on Ubuntu 24.04 and got HDFS running in pseudo-distributed mode. That gave us a working distributed file system, but Hadoop is much more than storage — its true power lies in processing large datasets in...'
 pubDate: 2026-03-01
-categories: ["Hadoop"]
+heroImage: '/images/2026/03/map_reduce_war_peace21_compressed.png'
+heroImageAlt: 'map reduce war peace21 compressed'
+categories: ['Hadoop']
 tags: []
 toc: true
 ---
@@ -25,10 +27,10 @@ When you read files from HDFS, you only need the NameNode and DataNode processes
 
 That component is **YARN** (Yet Another Resource Negotiator), introduced in Hadoop 2. It consists of two daemons:
 
-| Daemon | Role |
-|---|---|
+| Daemon          | Role                                                    |
+| --------------- | ------------------------------------------------------- |
 | ResourceManager | Master — accepts jobs, allocates resources cluster-wide |
-| NodeManager | Worker — manages containers on each individual node |
+| NodeManager     | Worker — manages containers on each individual node     |
 
 On a single-node setup both run on the same machine. Before we can run any MapReduce program, YARN must be properly configured and running.
 
@@ -36,13 +38,13 @@ On a single-node setup both run on the same machine. Before we can run any MapRe
 
 All steps were executed on:
 
-| Component | Version / Value |
-|---|---|
-| OS | Ubuntu 24.04 LTS |
-| Java | OpenJDK 21.0.10 |
-| Hadoop | 3.3.6 |
-| Hadoop home | ~/hadoop-3.3.6 |
-| Shell | Zsh (also works with Bash) |
+| Component   | Version / Value            |
+| ----------- | -------------------------- |
+| OS          | Ubuntu 24.04 LTS           |
+| Java        | OpenJDK 21.0.10            |
+| Hadoop      | 3.3.6                      |
+| Hadoop home | ~/hadoop-3.3.6             |
+| Shell       | Zsh (also works with Bash) |
 
 **Prerequisites:** You must have Hadoop installed and HDFS running as described in [Part 1](https://cfocoder.com/hadoop-3-3-6-on-ubuntu-native-installation-without-virtual-machine/). Verify with `hdfs dfsadmin -report` before continuing.
 
@@ -52,14 +54,14 @@ YARN needs two properties to work in single-node mode. Open `~/hadoop-3.3.6/etc
 
 ```xml
 
-    
+
         yarn.nodemanager.aux-services
         mapreduce_shuffle
-    
-    
+
+
         yarn.nodemanager.env-whitelist
         JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ,HADOOP_MAPRED_HOME
-    
+
 
 ```
 
@@ -75,35 +77,35 @@ Open `~/hadoop-3.3.6/etc/hadoop/mapred-site.xml` and add the following (replac
 
 ```xml
 
-    
-    
+
+
         mapreduce.framework.name
         yarn
-    
 
-    
-    
+
+
+
         mapreduce.application.classpath
         $HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*
-    
 
-    
-    
+
+
+
         yarn.app.mapreduce.am.env
         HADOOP_MAPRED_HOME=/home/YOUR_USER/hadoop-3.3.6
-    
 
-    
-    
+
+
+
         mapreduce.map.env
         HADOOP_MAPRED_HOME=/home/YOUR_USER/hadoop-3.3.6
-    
 
-    
-    
+
+
+
         mapreduce.reduce.env
         HADOOP_MAPRED_HOME=/home/YOUR_USER/hadoop-3.3.6
-    
+
 
 ```
 
@@ -356,15 +358,15 @@ The full run took about **30 seconds** on a 2-core Intel i5-7200U laptop with 
 
 **Key counters from the job summary:**
 
-| Counter | Value | Meaning |
-|---|---|---|
-| Map input records | 63,845 | Lines in the input file |
-| Map output records | 562,488 | Total tokens (words) emitted by the Mapper |
-| Combine output records | 41,621 | Unique tokens after local combining |
-| Reduce input groups | 41,621 | Unique words sent to the Reducer |
-| Reduce output records | 41,621 | Unique words in the final output |
-| Bytes read (HDFS) | 3,202,442 | Input file size + split metadata |
-| Bytes written (HDFS) | 462,958 | Output file size |
+| Counter                | Value     | Meaning                                    |
+| ---------------------- | --------- | ------------------------------------------ |
+| Map input records      | 63,845    | Lines in the input file                    |
+| Map output records     | 562,488   | Total tokens (words) emitted by the Mapper |
+| Combine output records | 41,621    | Unique tokens after local combining        |
+| Reduce input groups    | 41,621    | Unique words sent to the Reducer           |
+| Reduce output records  | 41,621    | Unique words in the final output           |
+| Bytes read (HDFS)      | 3,202,442 | Input file size + split metadata           |
+| Bytes written (HDFS)   | 462,958   | Output file size                           |
 
 ## Step 9 — Retrieve and Analyze the Results
 
@@ -404,13 +406,13 @@ grep -i "^s" /tmp/wordcount_results.txt | wc -l
 
 ### 2. Top 5 most frequent words
 
-| Rank | Word | Count |
-|---|---|---|
-| 1 | the | 31,550 |
-| 2 | and | 20,498 |
-| 3 | to | 16,252 |
-| 4 | of | 14,746 |
-| 5 | a | 9,984 |
+| Rank | Word | Count  |
+| ---- | ---- | ------ |
+| 1    | the  | 31,550 |
+| 2    | and  | 20,498 |
+| 3    | to   | 16,252 |
+| 4    | of   | 14,746 |
+| 5    | a    | 9,984  |
 
 No surprises here — these are the most common English function words (determiners, conjunctions, prepositions). They dominate any sufficiently large English corpus.
 

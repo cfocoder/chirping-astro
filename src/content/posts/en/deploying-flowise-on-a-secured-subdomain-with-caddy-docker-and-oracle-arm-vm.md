@@ -1,8 +1,10 @@
 ---
-title: "Deploying Flowise on a Secured Subdomain with Caddy, Docker, and Oracle ARM VM"
-description: "Introduction: Empowering Analysts and Automating with Flowise & n8n"
+title: 'Deploying Flowise on a Secured Subdomain with Caddy, Docker, and Oracle ARM VM'
+description: 'Introduction: Empowering Analysts and Automating with Flowise & n8n'
 pubDate: 2025-05-19
-categories: ["Cloud"]
+heroImage: '/images/2025/05/flowise_logo.png'
+heroImageAlt: 'flowise logo'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -112,7 +114,7 @@ openssl rand -hex 32
 ```
 
 3. **Generate FLOWISE_SECRET_KEY_OVERWRITE:**
-This key is used by Flowise to encrypt sensitive data it stores (like API keys for third-party services you use in your flows).
+   This key is used by Flowise to encrypt sensitive data it stores (like API keys for third-party services you use in your flows).
 
 ```text
 openssl rand -base64 48
@@ -141,19 +143,19 @@ services:
     container_name: flowise
     restart: unless-stopped
     ports:
-      - "127.0.0.1:3002:3000" # Host port 3002 (or your chosen free port) -> Container port 3000
+      - '127.0.0.1:3002:3000' # Host port 3002 (or your chosen free port) -> Container port 3000
     volumes:
       - /var/www/html/flowise_data:/root/.flowise # Persist Flowise data
     environment:
       # --- BASIC AUTHENTICATION (for UI access) ---
-      FLOWISE_USERNAME: "your_flowise_admin_username"   # Replace with your chosen username
-      FLOWISE_PASSWORD: "YourGeneratedStrongPassword!"  # Replace with your generated password
+      FLOWISE_USERNAME: 'your_flowise_admin_username' # Replace with your chosen username
+      FLOWISE_PASSWORD: 'YourGeneratedStrongPassword!' # Replace with your generated password
 
       # --- API KEY (for programmatic access) ---
-      API_KEY: "YourGeneratedHexAPIKey"                  # Replace with your generated API_KEY
+      API_KEY: 'YourGeneratedHexAPIKey' # Replace with your generated API_KEY
 
       # --- RECOMMENDED FOR SECURITY ---
-      FLOWISE_SECRET_KEY_OVERWRITE: "YourGeneratedBase64SecretKey" # Replace with your generated FLOWISE_SECRET_KEY_OVERWRITE
+      FLOWISE_SECRET_KEY_OVERWRITE: 'YourGeneratedBase64SecretKey' # Replace with your generated FLOWISE_SECRET_KEY_OVERWRITE
 
       # --- OPTIONAL ---
       # DEBUG: "true"
@@ -168,7 +170,7 @@ networks:
 
 Save and close the file (Ctrl+X, then Y, then Enter in nano).
 
-*Note on ports*: 127.0.0.1:3002:3000 means Flowise will only be accessible on port 3002 from the VM itself (localhost). Caddy will handle public access.*
+_Note on ports_: 127.0.0.1:3002:3000 means Flowise will only be accessible on port 3002 from the VM itself (localhost). Caddy will handle public access.\*
 
 ## Step 5: Configure Caddy
 
@@ -186,7 +188,7 @@ Add a new block for Flowise. Ensure the reverse_proxy port matches the host po
 flowise.yourdomain.com {
     encode gzip zstd
 
-    log 
+    log
 
     # Reverse proxy to the Flowise Docker container
     # Make sure 127.0.0.1:3002 matches the host port in your docker-compose.yml

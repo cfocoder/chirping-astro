@@ -1,8 +1,10 @@
 ---
-title: "The Ultimate Guide to Installing and Using Gemini CLI on Windows, Linux, and VS Code"
-description: "In the fast-paced world of software development, efficiency is everything. What if you could bring the power of a cutting-edge AI directly into your terminal, ready to answer questions, explain code, and generate commands without ever leaving your command line? That’s..."
+title: 'The Ultimate Guide to Installing and Using Gemini CLI on Windows, Linux, and VS Code'
+description: 'In the fast-paced world of software development, efficiency is everything. What if you could bring the power of a cutting-edge AI directly into your terminal, ready to answer questions, explain code, and generate commands without ever leaving your command line? That’s...'
 pubDate: 2025-06-28
-categories: ["AI"]
+heroImage: '/images/2025/06/gemini_cli_logo2.png'
+heroImageAlt: 'gemini cli logo2'
+categories: ['AI']
 tags: []
 toc: true
 ---

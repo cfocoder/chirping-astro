@@ -1,8 +1,10 @@
 ---
-title: "A Step-by-Step Guide to Installing Portainer with Docker and Caddy on an ARM Server"
-description: "Managing a server with multiple Docker applications can quickly become a juggling act of docker ps, docker logs, and docker-compose commands. While powerful, the command line isn’t always the most efficient way to get a high-level view of your services."
+title: 'A Step-by-Step Guide to Installing Portainer with Docker and Caddy on an ARM Server'
+description: 'Managing a server with multiple Docker applications can quickly become a juggling act of docker ps, docker logs, and docker-compose commands. While powerful, the command line isn’t always the most efficient way to get a high-level view of your services.'
 pubDate: 2025-06-23
-categories: ["Linux"]
+heroImage: '/images/2025/06/portainer_logo.png'
+heroImageAlt: 'portainer logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -116,15 +118,15 @@ services:
     image: portainer/portainer-ce:latest
     container_name: portainer
     restart: unless-stopped
-    
+
     ports:
       # Expose Portainer's UI on port 9000. Caddy will connect to this.
-      - "9000:9000"
+      - '9000:9000'
 
     volumes:
       # This gives Portainer the ability to manage Docker itself.
       - /var/run/docker.sock:/var/run/docker.sock
-      
+
       # This persists all of Portainer's data (users, settings, etc.)
       # in a 'data' sub-directory right here.
       - ./data:/data

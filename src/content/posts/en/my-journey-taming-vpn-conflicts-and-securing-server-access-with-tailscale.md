@@ -1,8 +1,10 @@
 ---
-title: "My Journey: Taming VPN Conflicts and Securing Server Access with Tailscale"
-description: "Ever found yourself constantly connecting and disconnecting your regular VPN just to SSH into your own server? I certainly did. It was a daily annoyance: fire up the privacy VPN (like ProtonVPN in my case) for general browsing, then disconnect it because my server,..."
+title: 'My Journey: Taming VPN Conflicts and Securing Server Access with Tailscale'
+description: 'Ever found yourself constantly connecting and disconnecting your regular VPN just to SSH into your own server? I certainly did. It was a daily annoyance: fire up the privacy VPN (like ProtonVPN in my case) for general browsing, then disconnect it because my server,...'
 pubDate: 2025-04-15
-categories: ["Linux"]
+heroImage: '/images/2025/04/talscale_ssh-1.png'
+heroImageAlt: 'talscale ssh'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -13,7 +15,7 @@ There had to be a better way. I’d heard about Tailscale potentially replacing 
 
 ## The Core Problem: Changing IPs vs. Static Firewall Rules
 
-My Ubuntu server was configured with ufw (Uncomplicated Firewall). For security, I wanted to restrict SSH access (port 22). The “easy” way is ufw allow from  to any port 22, but what happens when I’m travelling, at a coffee shop, or using my commercial VPN? My public IP changes constantly, making static IP rules a nightmare to maintain or completely insecure if left wide open (ALLOW Anywhere). Using my commercial VPN meant my server saw connection attempts from random VPN server IPs, which were promptly blocked by the firewall.
+My Ubuntu server was configured with ufw (Uncomplicated Firewall). For security, I wanted to restrict SSH access (port 22). The “easy” way is ufw allow from to any port 22, but what happens when I’m travelling, at a coffee shop, or using my commercial VPN? My public IP changes constantly, making static IP rules a nightmare to maintain or completely insecure if left wide open (ALLOW Anywhere). Using my commercial VPN meant my server saw connection attempts from random VPN server IPs, which were promptly blocked by the firewall.
 
 ## Enter Tailscale: A Private Network Overlay
 
@@ -69,7 +71,7 @@ Success! My laptop now intelligently sent traffic destined for my Tailscale netw
 
 Now that I had a reliable, secure way to connect via Tailscale, it was time to harden my server’s firewall. My previous ufw rules were too permissive:
 
-```text
+````text
 # Old Dangerous Rules (Example)
 Status: active
 
@@ -81,7 +83,7 @@ To                         Action      From
 
 ```text
 sudo ufw allow in on tailscale0 to any port 22 proto tcp
-```
+````
 
 - (My output showed these rules were already added during the initial setup, which was great.)
 

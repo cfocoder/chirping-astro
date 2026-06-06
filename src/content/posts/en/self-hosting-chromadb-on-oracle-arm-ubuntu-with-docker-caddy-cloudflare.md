@@ -1,8 +1,10 @@
 ---
-title: "Self-Hosting ChromaDB on Oracle ARM Ubuntu with Docker, Caddy & Cloudflare"
-description: "ChromaDB is a powerful open-source embedding database, essential for building AI applications involving semantic search, retrieval-augmented generation (RAG), and more. While Chroma offers a managed service, self-hosting provides greater control, privacy, and potentially..."
+title: 'Self-Hosting ChromaDB on Oracle ARM Ubuntu with Docker, Caddy & Cloudflare'
+description: 'ChromaDB is a powerful open-source embedding database, essential for building AI applications involving semantic search, retrieval-augmented generation (RAG), and more. While Chroma offers a managed service, self-hosting provides greater control, privacy, and potentially...'
 pubDate: 2025-04-08
-categories: ["Linux"]
+heroImage: '/images/2025/04/chroma_logo.png'
+heroImageAlt: 'chroma logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -82,7 +84,7 @@ echo "Your ChromaDB API Token: $CHROMA_TOKEN"
 ```
 
 2. **Create Directories:**
-We’ll place the Docker Compose file and ChromaDB’s data on the mounted block volume for persistence and space.
+   We’ll place the Docker Compose file and ChromaDB’s data on the mounted block volume for persistence and space.
 
 ```bash
 # Directory for Docker Compose configuration
@@ -116,7 +118,7 @@ services:
       - /var/www/html/chromadb_data:/chroma/chroma
     ports:
       # IMPORTANT: Bind only to localhost. Caddy will handle external access.
-      - "127.0.0.1:8000:8000"
+      - '127.0.0.1:8000:8000'
     environment:
       # Enable persistence mode
       - IS_PERSISTENT=TRUE
@@ -216,7 +218,7 @@ sudo nano /etc/caddy/Caddyfile
 # ----- ChromaDB Configuration -----
 chromadb.yourdomain.com {
     # Optional: Enable access logging
-    log 
+    log
 
     # Handle the root path specifically: return a blank 200 OK page
     # Prevents the default 404 error when visiting the base URL in a browser.
@@ -274,7 +276,7 @@ curl https://chromadb.yourdomain.com/api/v2/version
 
 Here’s how to connect and interact with your self-hosted ChromaDB instance using the official Python client. Make sure you have it installed (pip install chromadb-client).
 
-```python
+````python
 import chromadb
 from chromadb.config import Settings
 import traceback
@@ -288,7 +290,7 @@ Here are some common examples using curl and default tenant/database:
 ```bash
 curl -H "X-Chroma-Token: YOUR_STRONG_SECRET_TOKEN_HERE" \
   "https://chromadb.yourdomain.com/api/v2/tenants/default_tenant/databases/default_database/collections"
-```
+````
 
 **Create Collection:**
 
@@ -300,7 +302,7 @@ curl -X POST \
   "https://chromadb.yourdomain.com/api/v2/tenants/default_tenant/databases/default_database/collections"
 ```
 
-*(You’ll need the UUID returned by this command for subsequent operations on this specific collection)*
+_(You’ll need the UUID returned by this command for subsequent operations on this specific collection)_
 
 **Add Records (replace {COLLECTION_UUID}):**
 

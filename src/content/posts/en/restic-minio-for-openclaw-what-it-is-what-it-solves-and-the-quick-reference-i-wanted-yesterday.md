@@ -1,8 +1,10 @@
 ---
-title: "Restic + MinIO for OpenClaw: What It Is, What It Solves, and the Quick Reference I Wanted Yesterday"
-description: "Yesterday I spent part of the day optimizing my OpenClaw setup and cleaning up the way I protect its operational state."
+title: 'Restic + MinIO for OpenClaw: What It Is, What It Solves, and the Quick Reference I Wanted Yesterday'
+description: 'Yesterday I spent part of the day optimizing my OpenClaw setup and cleaning up the way I protect its operational state.'
 pubDate: 2026-03-16
-categories: ["Linux"]
+heroImage: '/images/2026/03/restic_minio.png'
+heroImageAlt: 'restic minio'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -115,7 +117,7 @@ For OpenClaw, that meant including:
 
 - ~/.openclaw/identity/
 
-- ~/.openclaw/agents/*/agent/
+- ~/.openclaw/agents/\*/agent/
 
 - ~/.openclaw/scripts/
 
@@ -725,4 +727,4 @@ Not because it is flashy, but because it solves the real problem cleanly.
 
 - MinIO documentation: https://min.io/docs/
 
-*Installation validated from my OpenClaw maintenance work completed on March 15, 2026, including a real backup and a successful restore test to a temporary directory.*
+_Installation validated from my OpenClaw maintenance work completed on March 15, 2026, including a real backup and a successful restore test to a temporary directory._

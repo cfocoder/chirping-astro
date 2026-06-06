@@ -1,8 +1,10 @@
 ---
-title: "The Self-Hosted Power Trio: Integrating Airflow, Airbyte, and n8n for Ultimate Data & Automation"
-description: "In today’s data-driven world, moving information, processing it, and acting upon insights are critical. But stitching together these processes can be complex. Thankfully, a powerful trio of open-source tools, when used together, can create incredibly robust and flexible..."
+title: 'The Self-Hosted Power Trio: Integrating Airflow, Airbyte, and n8n for Ultimate Data & Automation'
+description: 'In today’s data-driven world, moving information, processing it, and acting upon insights are critical. But stitching together these processes can be complex. Thankfully, a powerful trio of open-source tools, when used together, can create incredibly robust and flexible...'
 pubDate: 2025-04-08
-categories: ["Cloud"]
+heroImage: '/images/2025/04/airflow_airbyte_n8n.png'
+heroImageAlt: 'airflow airbyte n8n'
+categories: ['Cloud']
 tags: []
 toc: true
 ---

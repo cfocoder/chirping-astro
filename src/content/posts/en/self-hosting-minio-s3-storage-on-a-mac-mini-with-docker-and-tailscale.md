@@ -1,8 +1,10 @@
 ---
-title: "Self-Hosting MinIO S3 Storage on a Mac Mini with Docker and Tailscale"
-description: "Want your own private, S3-compatible object storage accessible securely from anywhere? Running MinIO on an always-on Mac Mini combined with Docker and Tailscale is a fantastic solution. This post walks you through setting it up, including navigating a common hurdle when..."
+title: 'Self-Hosting MinIO S3 Storage on a Mac Mini with Docker and Tailscale'
+description: 'Want your own private, S3-compatible object storage accessible securely from anywhere? Running MinIO on an always-on Mac Mini combined with Docker and Tailscale is a fantastic solution. This post walks you through setting it up, including navigating a common hurdle when...'
 pubDate: 2025-04-18
-categories: ["Cloud"]
+heroImage: '/images/2025/04/minio_logo-1.png'
+heroImageAlt: 'minio logo'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -108,21 +110,21 @@ services:
     container_name: minio-server
     ports:
       # Replace HOST_API_PORT if 9000 is taken on your Mac Mini
-      - ":9000" # e.g., "9000:9000"
+      - ':9000' # e.g., "9000:9000"
       # Replace HOST_CONSOLE_PORT if 9091 is taken on your Mac Mini
-      - ":9090" # e.g., "9091:9090"
+      - ':9090' # e.g., "9091:9090"
     volumes:
       # CRITICAL: Use the DIRECT path to your external drive folder.
       # Replace  and !
       - /Volumes//:/data
     environment:
       # CHANGE THESE! Use strong credentials. Consider .env file or Docker secrets.
-      MINIO_ROOT_USER: 
-      MINIO_ROOT_PASSWORD: 
+      MINIO_ROOT_USER:
+      MINIO_ROOT_PASSWORD:
     # Tells MinIO where the data volume is and where the console should listen inside the container
     command: server /data --console-address ":9090"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
       interval: 30s
       timeout: 20s
       retries: 3

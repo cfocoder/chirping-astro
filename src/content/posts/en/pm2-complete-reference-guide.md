@@ -1,8 +1,10 @@
 ---
-title: "PM2: Complete Reference Guide"
-description: "PM2 is a production-grade process manager that helps you keep applications running continuously. While it was originally designed for Node.js applications, PM2 can manage any type of application or script including Python, Ruby, PHP, Bash scripts, and binary executables."
+title: 'PM2: Complete Reference Guide'
+description: 'PM2 is a production-grade process manager that helps you keep applications running continuously. While it was originally designed for Node.js applications, PM2 can manage any type of application or script including Python, Ruby, PHP, Bash scripts, and binary executables.'
 pubDate: 2025-10-19
-categories: ["Linux"]
+heroImage: '/images/2025/10/pm2.png'
+heroImageAlt: 'pm2'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -554,34 +556,34 @@ pm2 kill
 
 ### PM2 vs Other Process Managers
 
-| Feature | PM2 | systemd | supervisor | forever |
-|---|---|---|---|---|
-| Multi-language | ✅ | ✅ | ✅ | ❌ (Node only) |
-| Clustering | ✅ | ❌ | ❌ | ❌ |
-| Easy monitoring | ✅ | ❌ | ⚠️ | ⚠️ |
-| Log management | ✅ | ✅ | ✅ | ⚠️ |
-| Cross-platform | ✅ | ❌ (Linux only) | ✅ | ✅ |
-| Zero-downtime reload | ✅ | ❌ | ❌ | ❌ |
+| Feature              | PM2 | systemd         | supervisor | forever        |
+| -------------------- | --- | --------------- | ---------- | -------------- |
+| Multi-language       | ✅  | ✅              | ✅         | ❌ (Node only) |
+| Clustering           | ✅  | ❌              | ❌         | ❌             |
+| Easy monitoring      | ✅  | ❌              | ⚠️         | ⚠️             |
+| Log management       | ✅  | ✅              | ✅         | ⚠️             |
+| Cross-platform       | ✅  | ❌ (Linux only) | ✅         | ✅             |
+| Zero-downtime reload | ✅  | ❌              | ❌         | ❌             |
 
 ### PM2 vs Serverless Functions vs Cron Jobs
 
 While PM2, serverless functions (AWS Lambda, Azure Functions), and cron jobs might seem similar at first glance, they serve fundamentally different purposes:
 
-| Aspect | PM2 | Serverless Functions | Cron Jobs |
-|---|---|---|---|
-| Primary Purpose | Keep processes running 24/7 | Run code on-demand/events | Schedule periodic tasks |
-| Execution Model | Continuously running | Triggered, then stops | Runs once per schedule |
-| Use Case | Web servers, APIs, workers | Event-driven, sporadic workloads | Backups, cleanup, reports |
-| Process State | Always running | Scales to zero when idle | Starts and exits each run |
-| Restart Behavior | Auto-restart on crash | N/A (stateless) | Reruns on next schedule |
-| Scaling | Manual (fixed instances) | Automatic, infinite | Single execution per schedule |
-| Infrastructure | Your server required | Fully managed, serverless | Your server required |
-| Billing Model | Server uptime costs | Pay per invocation/execution time | Server uptime costs |
-| Cold Start | No (always warm) | Yes (can have delays) | Each execution starts fresh |
-| Duration Limits | Unlimited | Limited (typically 15 min max) | Unlimited |
-| Persistent Connections | ✅ WebSockets, long-polling | ❌ Stateless | ❌ Starts fresh each time |
-| Memory/State | Can maintain in-memory state | Stateless between invocations | No state between runs |
-| Best For | 24/7 services, consistent traffic | Unpredictable/sporadic events | Scheduled batch jobs |
+| Aspect                 | PM2                               | Serverless Functions              | Cron Jobs                     |
+| ---------------------- | --------------------------------- | --------------------------------- | ----------------------------- |
+| Primary Purpose        | Keep processes running 24/7       | Run code on-demand/events         | Schedule periodic tasks       |
+| Execution Model        | Continuously running              | Triggered, then stops             | Runs once per schedule        |
+| Use Case               | Web servers, APIs, workers        | Event-driven, sporadic workloads  | Backups, cleanup, reports     |
+| Process State          | Always running                    | Scales to zero when idle          | Starts and exits each run     |
+| Restart Behavior       | Auto-restart on crash             | N/A (stateless)                   | Reruns on next schedule       |
+| Scaling                | Manual (fixed instances)          | Automatic, infinite               | Single execution per schedule |
+| Infrastructure         | Your server required              | Fully managed, serverless         | Your server required          |
+| Billing Model          | Server uptime costs               | Pay per invocation/execution time | Server uptime costs           |
+| Cold Start             | No (always warm)                  | Yes (can have delays)             | Each execution starts fresh   |
+| Duration Limits        | Unlimited                         | Limited (typically 15 min max)    | Unlimited                     |
+| Persistent Connections | ✅ WebSockets, long-polling       | ❌ Stateless                      | ❌ Starts fresh each time     |
+| Memory/State           | Can maintain in-memory state      | Stateless between invocations     | No state between runs         |
+| Best For               | 24/7 services, consistent traffic | Unpredictable/sporadic events     | Scheduled batch jobs          |
 
 ### When to Use Each
 
@@ -665,14 +667,14 @@ pm2 start script.sh --interpreter bash
 
 # Manage
 pm2 list
-pm2 stop 
-pm2 restart 
-pm2 delete 
+pm2 stop
+pm2 restart
+pm2 delete
 
 # Monitor
 pm2 monit
 pm2 logs
-pm2 show 
+pm2 show
 
 # Persist
 pm2 save

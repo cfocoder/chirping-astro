@@ -1,8 +1,10 @@
 ---
-title: "Install WordPress with Caddy & Auto-SSL on Oracle ARM Ubuntu 24.04 (Multi-Site Ready!)"
-description: "Setting up a WordPress blog or website on an efficient Oracle Cloud ARM instance is a great way to get performance on a budget. Combining it with the modern Caddy web server provides automatic HTTPS, simple configuration, and an excellent foundation for hosting multiple..."
+title: 'Install WordPress with Caddy & Auto-SSL on Oracle ARM Ubuntu 24.04 (Multi-Site Ready!)'
+description: 'Setting up a WordPress blog or website on an efficient Oracle Cloud ARM instance is a great way to get performance on a budget. Combining it with the modern Caddy web server provides automatic HTTPS, simple configuration, and an excellent foundation for hosting multiple...'
 pubDate: 2025-04-05
-categories: ["Linux"]
+heroImage: '/images/2025/04/wordpress_caddy-2.png'
+heroImageAlt: 'wordpress caddy'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -67,7 +69,7 @@ sudo apt install -y curl wget unzip ufw # Essential tools + firewall
 
 This guide assumes you already attached your block volume and mounted it. In our case, lsblk showed the volume partition (e.g., /dev/sdb1) mounted at /mnt/myvolume. This directory will be our main web root for all applications.
 
-*(Optional: If you hadn’t mounted it, you would format it (e.g., sudo mkfs.ext4 /dev/sdb1), create the mount point (sudo mkdir /mnt/myvolume), mount it (sudo mount /dev/sdb1 /mnt/myvolume), and add it to /etc/fstab for persistence.)*
+_(Optional: If you hadn’t mounted it, you would format it (e.g., sudo mkfs.ext4 /dev/sdb1), create the mount point (sudo mkdir /mnt/myvolume), mount it (sudo mount /dev/sdb1 /mnt/myvolume), and add it to /etc/fstab for persistence.)_
 
 Confirm the mount point:
 
@@ -211,11 +213,11 @@ define( 'DB_COLLATE', '' );
 ```
 
 2. **Add Security Keys:** Go to the official WordPress salt generator: [https://api.wordpress.org/secret-key/1.1/salt/](https://www.google.com/url?sa=E&q=https%3A%2F%2Fapi.wordpress.org%2Fsecret-key%2F1.1%2Fsalt%2F)
-Copy the entire block of generated keys and paste it over the placeholder keys in wp-config.php.
+   Copy the entire block of generated keys and paste it over the placeholder keys in wp-config.php.
 
 3. Save and close the file (Ctrl+X, Y, Enter).
 
-- 
+-
 
 **Set Correct File Permissions:** This is crucial for WordPress updates, uploads, and security. Caddy runs as caddy, PHP-FPM often as www-data.
 
@@ -451,3 +453,4 @@ The Caddyfile is structured for easy expansion:
 ### Conclusion
 
 You now have a WordPress site running efficiently on an Oracle ARM VM, served securely over HTTPS by Caddy. By using a dedicated block volume mounted at /mnt/myvolume and structuring the Caddyfile appropriately, you’re perfectly set up to add more web applications on subdomains in the future without major reconfiguration. Caddy’s simplicity and automatic HTTPS make managing multiple sites much easier. Happy blogging!
+```

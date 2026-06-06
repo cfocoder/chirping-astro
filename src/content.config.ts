@@ -41,7 +41,7 @@ const baseFrontmatter = ({ image }: SchemaContext) =>
     tags: z.array(z.string()).default([]),
     categories: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
-    heroImage: z.union([image(), z.string()]).optional(),
+    heroImage: z.union([z.string(), image()]).optional(),
     /** Optional alt-text for the hero/featured image. */
     heroImageAlt: z.string().optional(),
     /** Per-post override of SITE.showFeaturedImages (cards + hero). */

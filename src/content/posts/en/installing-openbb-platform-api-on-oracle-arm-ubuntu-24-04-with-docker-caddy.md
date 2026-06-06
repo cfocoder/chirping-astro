@@ -1,8 +1,10 @@
 ---
-title: "Installing OpenBB Platform API on Oracle ARM (Ubuntu 24.04) with Docker & Caddy"
-description: "OpenBB has evolved. While known for its powerful terminal and, previously, a self-hostable web application, the core of the self-hosted OpenBB Platform is now its robust set of API endpoints. This post will clarify what the current self-hosted OpenBB Platform offers, how..."
+title: 'Installing OpenBB Platform API on Oracle ARM (Ubuntu 24.04) with Docker & Caddy'
+description: 'OpenBB has evolved. While known for its powerful terminal and, previously, a self-hostable web application, the core of the self-hosted OpenBB Platform is now its robust set of API endpoints. This post will clarify what the current self-hosted OpenBB Platform offers, how...'
 pubDate: 2025-03-20
-categories: ["Data Science"]
+heroImage: '/images/2025/03/openbb_logo.png'
+heroImageAlt: 'openbb logo'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
@@ -152,7 +154,7 @@ git clone https://github.com/OpenBB-finance/OpenBB.git
 cd OpenBB
 ```
 
-*(You’ll need to be inside this OpenBB directory for the next step).*
+_(You’ll need to be inside this OpenBB directory for the next step)._
 
 ## Step 3: Build the OpenBB Docker Image
 
@@ -221,14 +223,14 @@ sudo apt install tmux -y
 
 Here we have some basic key commands to start working with **tmux**:
 
-| Action | Command |
-|---|---|
-| Start a new session | tmux |
-| Create a new session | tmux new -s session_name |
-| Disconnect from a session | Ctrl + B followed by D |
-| List active sessions | tmux ls |
+| Action                         | Command                     |
+| ------------------------------ | --------------------------- |
+| Start a new session            | tmux                        |
+| Create a new session           | tmux new -s session_name    |
+| Disconnect from a session      | Ctrl + B followed by D      |
+| List active sessions           | tmux ls                     |
 | Reconnect to an active session | tmux attach -t session_name |
-| Close a session from within | exit |
+| Close a session from within    | exit                        |
 
 - Start a new tmux session:
 
@@ -236,7 +238,7 @@ Here we have some basic key commands to start working with **tmux**:
 tmux new -s openbb
 ```
 
-*(You’ll now be inside a new terminal session managed by tmux).*
+_(You’ll now be inside a new terminal session managed by tmux)._
 
 2. **Run the Docker container interactively:** This command maps the necessary port *only* to localhost (for Caddy), mounts your persistent config directory, and uses flags for an interactive terminal (-it) and automatic cleanup on exit (–rm).
 

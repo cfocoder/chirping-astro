@@ -1,8 +1,10 @@
 ---
-title: "Building a Complete DuckLake Solution: From Local Development to Cloud Production"
-description: "DuckLake is revolutionizing the lakehouse architecture by combining the simplicity of DuckDB with the power of modern data lake formats. In this comprehensive guide, I’ll walk you through building a complete DuckLake solution in two parts: first creating a local..."
+title: 'Building a Complete DuckLake Solution: From Local Development to Cloud Production'
+description: 'DuckLake is revolutionizing the lakehouse architecture by combining the simplicity of DuckDB with the power of modern data lake formats. In this comprehensive guide, I’ll walk you through building a complete DuckLake solution in two parts: first creating a local...'
 pubDate: 2025-07-07
-categories: ["Data Science", "SQL"]
+heroImage: '/images/2025/07/ducklake_logo.png'
+heroImageAlt: 'ducklake logo'
+categories: ['Data Science', 'SQL']
 tags: []
 toc: true
 ---
@@ -57,7 +59,7 @@ Prerequisites: Setting Up DuckDB Secrets
 
 - Key Benefits and Learnings
 
-1. Seamless Integration
+  1. Seamless Integration
 
 - 2. Cost-Effective Storage
 
@@ -87,17 +89,17 @@ Our solution implements a modern lakehouse architecture with:
 
 ### Technology Stack Comparison
 
-| Component | Local Setup | Cloud Setup |
-|---|---|---|
-| Data Warehouse | SQLite (dwh.db) | MotherDuck |
-| Compute Engine | DuckDB | MotherDuck + DuckDB |
-| DuckLake Metadata | DuckDB | Supabase PostgreSQL |
-| Bronze Storage | Local CSV files | Cloudflare R2 |
-| Silver Storage | Local Parquet files | Cloudflare R2 |
-| Gold Storage | Local Parquet files | Cloudflare R2 |
-| Data Transformation | DuckDB SQL | Ibis Framework + DuckDB |
-| Secrets Management | Not required | DuckDB Persistent Secrets |
-| Authentication | Local files | MotherDuck token, R2 keys, Supabase credentials |
+| Component           | Local Setup         | Cloud Setup                                     |
+| ------------------- | ------------------- | ----------------------------------------------- |
+| Data Warehouse      | SQLite (dwh.db)     | MotherDuck                                      |
+| Compute Engine      | DuckDB              | MotherDuck + DuckDB                             |
+| DuckLake Metadata   | DuckDB              | Supabase PostgreSQL                             |
+| Bronze Storage      | Local CSV files     | Cloudflare R2                                   |
+| Silver Storage      | Local Parquet files | Cloudflare R2                                   |
+| Gold Storage        | Local Parquet files | Cloudflare R2                                   |
+| Data Transformation | DuckDB SQL          | Ibis Framework + DuckDB                         |
+| Secrets Management  | Not required        | DuckDB Persistent Secrets                       |
+| Authentication      | Local files         | MotherDuck token, R2 keys, Supabase credentials |
 
 ## Part 1: Local DuckLake Implementation
 
@@ -107,7 +109,7 @@ We start by creating a simple transactional database using SQLite to simulate a 
 
 ```sql
 -- 1_sqlite_commands.sql
-sqlite3 dwh.db  
+sqlite3 dwh.db
 
 CREATE TABLE transactions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -136,7 +138,7 @@ INSERT INTO transactions (transaction_date, customer_id, product_name, quantity,
 ('2024-01-21', 1014, 'Screen Protector', 3, 12.99, 38.97);
 
 SELECT * FROM transactions;
-.exit 
+.exit
 ```
 
 This creates our foundational transactional data that represents typical e-commerce sales data.
@@ -153,7 +155,7 @@ ATTACH 'dwh.db' AS sqlite_db (TYPE sqlite);
 USE sqlite_db;
 
 COPY (
-SELECT 
+SELECT
     product_name,
     SUM(total_amount) AS Sales
 FROM transactions
@@ -161,7 +163,7 @@ GROUP BY product_name
 ORDER BY Sales DESC
 ) TO 'silver/sales.parquet' (FORMAT PARQUET);
 
-.exit 
+.exit
 ```
 
 This transformation:
@@ -178,30 +180,30 @@ Finally, we create our DuckLake using the DuckLake extension:
 
 ```sql
 -- 3_duckdb_ducklake_commands.sql
-duckdb 
+duckdb
 
 INSTALL ducklake;
 LOAD ducklake;
 
-ATTACH 'ducklake:duckdb:ducklake.db' AS ducklake_db (DATA_PATH 'gold/'); 
+ATTACH 'ducklake:duckdb:ducklake.db' AS ducklake_db (DATA_PATH 'gold/');
 USE ducklake_db;
 
-CREATE TABLE customers AS 
+CREATE TABLE customers AS
 FROM 'bronze/customers.csv';
 
-CREATE TABLE inventory AS 
+CREATE TABLE inventory AS
 FROM 'bronze/inventory.csv';
 
-CREATE TABLE vendors AS 
+CREATE TABLE vendors AS
 FROM 'bronze/vendors.csv';
 
-CREATE TABLE sales AS 
+CREATE TABLE sales AS
 FROM 'silver/sales.parquet';
 
 SHOW TABLES;
 SELECT * FROM sales;
 
-.exit 
+.exit
 ```
 
 This creates our local DuckLake with:
@@ -253,7 +255,7 @@ CREATE PERSISTENT SECRET supabase_secret (
 );
 
 SELECT secret_string FROM duckdb_secrets();
-.exit 
+.exit
 ```
 
 **Important**: Make sure to set your MotherDuck token as an environment variable before proceeding.
@@ -263,7 +265,7 @@ SELECT secret_string FROM duckdb_secrets();
 We start by replicating our transactional data in MotherDuck:
 
 ```sql
-import duckdb 
+import duckdb
 import ibis
 from ibis import _
 
@@ -287,10 +289,10 @@ dw.sql("""
     USE micho_db;
 
     DROP TABLE IF EXISTS transactions;
-    
+
     -- Create a sequence for auto-incrementing IDs
     CREATE SEQUENCE IF NOT EXISTS transaction_id_seq;
-       
+
     CREATE TABLE IF NOT EXISTS transactions (
         id INTEGER DEFAULT nextval('transaction_id_seq') PRIMARY KEY,
         transaction_date TIMESTAMP,
@@ -332,7 +334,7 @@ print(f"Successfully inserted records with auto-generated IDs!")
 t = dw.sql("SELECT * FROM micho_db.main.transactions;")
 print(t)
 
-# Close MotherDuck connection  
+# Close MotherDuck connection
 dw.close()
 ```
 
@@ -369,7 +371,7 @@ We export our transformed data to Cloudflare R2 object storage:
 # Export the Pandas DataFrame to a Parquet file in the R2 bucket
 duckdb.sql("""
 INSTALL httpfs;
-LOAD httpfs;           
+LOAD httpfs;
 """)
 
 duckdb.sql("COPY (SELECT * FROM silver_transformed_df) TO 'r2://ducklake/silver/silver_transformed.parquet' (FORMAT 'parquet', OVERWRITE);")
@@ -399,15 +401,15 @@ con_lh.load_extension('httpfs')
 ### Step 7: Attaching to the DuckLake
 
 ```text
-# Attach to PostgreSQL DuckLake Database    
+# Attach to PostgreSQL DuckLake Database
 try:
-    con_lh.sql(""" 
+    con_lh.sql("""
             ATTACH 'ducklake:postgres:
-            host=your_supabase_host 
-            port=6543 
-            user=your_supabase_user 
-            password=your_supabase_password 
-            dbname=postgres' 
+            host=your_supabase_host
+            port=6543
+            user=your_supabase_user
+            password=your_supabase_password
+            dbname=postgres'
             AS ducklake1 (DATA_PATH 'r2://ducklake/gold/'); """
             )
     print("Attached to PostgreSQL DuckLake database successfully!")
@@ -425,7 +427,7 @@ Finally, we create our DuckLake tables from the data stored in R2:
 # Create customers table from bronze data
 try:
     con_lh.sql("""
-        CREATE TABLE customers AS 
+        CREATE TABLE customers AS
         SELECT * FROM 'r2://ducklake/bronze/customers.csv';
     """)
     print("Table customers created successfully from bronze folder!")
@@ -435,7 +437,7 @@ except Exception as e:
 # Create vendors table
 try:
     con_lh.sql("""
-        CREATE TABLE vendors AS 
+        CREATE TABLE vendors AS
         SELECT * FROM 'r2://ducklake/bronze/vendors.csv';
     """)
     print("Table vendors created successfully from bronze folder!")
@@ -445,7 +447,7 @@ except Exception as e:
 # Create inventory table
 try:
     con_lh.sql("""
-    CREATE TABLE inventory AS 
+    CREATE TABLE inventory AS
     SELECT * FROM 'r2://ducklake/bronze/inventory.csv';
 """)
     print("Table inventory created successfully from bronze folder!")
@@ -455,7 +457,7 @@ except Exception as e:
 # Create sales table from silver data
 try:
     con_lh.sql("""
-        CREATE TABLE sales AS 
+        CREATE TABLE sales AS
         SELECT * FROM 'r2://ducklake/silver/silver_transformed.parquet';
     """)
     print("Table sales created successfully from silver folder!")

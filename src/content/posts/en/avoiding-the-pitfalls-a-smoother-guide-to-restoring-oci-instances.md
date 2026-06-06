@@ -1,8 +1,10 @@
 ---
-title: "Avoiding the Pitfalls: A Smoother Guide to Restoring OCI Instances"
-description: "Restoring a virtual machine instance from a custom image or backup in Oracle Cloud Infrastructure (OCI) should be straightforward. You click a few buttons, and presto, your server is back, right? Well, as many of us discover, the reality can involve frustrating SSH..."
+title: 'Avoiding the Pitfalls: A Smoother Guide to Restoring OCI Instances'
+description: 'Restoring a virtual machine instance from a custom image or backup in Oracle Cloud Infrastructure (OCI) should be straightforward. You click a few buttons, and presto, your server is back, right? Well, as many of us discover, the reality can involve frustrating SSH...'
 pubDate: 2025-03-29
-categories: ["Linux"]
+heroImage: '/images/2025/03/reinstallingimage.jpeg'
+heroImageAlt: 'reinstallingimage'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -172,9 +174,9 @@ Ensure it’s uncommented (no leading #).
 
 - Ensure the mount point (/mnt/myvolume) and filesystem type (ext4) are correct.
 
-- Add _netdev option: For BOTH iSCSI and Paravirtualized volumes on OCI, it’s safest to add _netdev to the mount options. This prevents the system from trying to mount it before networking is fully ready. Change defaults to defaults,_netdev.
+- Add _netdev option: For BOTH iSCSI and Paravirtualized volumes on OCI, it’s safest to add _netdev to the mount options. This prevents the system from trying to mount it before networking is fully ready. Change defaults to defaults,\_netdev.
 
-- The final line should look like: UUID=”” /mnt/myvolume ext4 defaults,_netdev 0 2
+- The final line should look like: UUID=”” /mnt/myvolume ext4 defaults,\_netdev 0 2
 
 - Save and Close: Ctrl+X, Y, Enter.
 

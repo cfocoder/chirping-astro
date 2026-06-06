@@ -1,8 +1,10 @@
 ---
-title: "Cloud-Powered Dictation: Fast STT for Old Linux Hardware with Copilot & Claude"
-description: "I work daily with GitHub Copilot and Claude Code, and like many developers, I often think faster than I type. Speech‑to‑Text (STT) is an obvious productivity multiplier — but there’s a catch:"
+title: 'Cloud-Powered Dictation: Fast STT for Old Linux Hardware with Copilot & Claude'
+description: 'I work daily with GitHub Copilot and Claude Code, and like many developers, I often think faster than I type. Speech‑to‑Text (STT) is an obvious productivity multiplier — but there’s a catch:'
 pubDate: 2025-12-23
-categories: ["Cloud", "Linux"]
+heroImage: '/images/2025/12/cloud_powered_dictation.png'
+heroImageAlt: 'cloud powered dictation'
+categories: ['Cloud', 'Linux']
 tags: []
 toc: true
 ---

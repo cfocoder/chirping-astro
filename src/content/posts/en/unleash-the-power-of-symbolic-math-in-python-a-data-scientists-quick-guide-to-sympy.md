@@ -1,8 +1,10 @@
 ---
-title: "Unleash the Power of Symbolic Math in Python: A Data Scientist’s Quick Guide to SymPy"
-description: "As a Data Science Masters student, I’m constantly working with mathematical concepts. From the calculus behind gradient descent to the linear algebra that powers PCA, math is the bedrock of everything we do. Recently, while tackling some homework, I stumbled upon a..."
+title: 'Unleash the Power of Symbolic Math in Python: A Data Scientist’s Quick Guide to SymPy'
+description: 'As a Data Science Masters student, I’m constantly working with mathematical concepts. From the calculus behind gradient descent to the linear algebra that powers PCA, math is the bedrock of everything we do. Recently, while tackling some homework, I stumbled upon a...'
 pubDate: 2025-06-13
-categories: ["Data Science"]
+heroImage: '/images/2025/06/Sympy_Logo.png'
+heroImageAlt: 'Sympy Logo'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
@@ -51,7 +53,7 @@ First things first, let’s install it and import it. I like to use init_printi
 import sympy as sp
 
 # This makes the output look pretty
-sp.init_printing(use_unicode=True) 
+sp.init_printing(use_unicode=True)
 ```
 
 The most fundamental concept in SymPy is the **Symbol**. You must declare any symbolic variables you want to use.
@@ -126,7 +128,7 @@ This is incredibly useful for evaluating an expression at a certain point.
 expr = x**2 + 3*x + 5
 
 # Substitute x with a number
-result = expr.subs(x, 2) 
+result = expr.subs(x, 2)
 print(f"Expression evaluated at x=2: {result}") # Output: 15
 
 # Substitute x with another expression

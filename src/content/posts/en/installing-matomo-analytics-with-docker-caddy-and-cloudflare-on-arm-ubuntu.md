@@ -1,8 +1,10 @@
 ---
-title: "Installing Matomo Analytics with Docker, Caddy, and Cloudflare on ARM Ubuntu"
-description: "Matomo is a powerful, open-source alternative to Google Analytics that gives you full ownership of your website’s traffic data. This guide walks through installing Matomo on its own subdomain using Docker Compose, Caddy as a reverse proxy, storing data on a separate..."
+title: 'Installing Matomo Analytics with Docker, Caddy, and Cloudflare on ARM Ubuntu'
+description: 'Matomo is a powerful, open-source alternative to Google Analytics that gives you full ownership of your website’s traffic data. This guide walks through installing Matomo on its own subdomain using Docker Compose, Caddy as a reverse proxy, storing data on a separate...'
 pubDate: 2025-04-07
-categories: ["Linux"]
+heroImage: '/images/2025/04/matomo_logo.png'
+heroImageAlt: 'matomo logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -35,7 +37,7 @@ Our goal is to install Matomo on https://matomo.yourdomain.com.
 
 - Step 4: Cloudflare DNS Setting (Temporary)
 
-- Step 5:  Launch the Matomo Stack
+- Step 5: Launch the Matomo Stack
 
 - Step 6:  Matomo Web Installation
 
@@ -130,7 +132,7 @@ services:
       # --- CRITICAL FOR CADDY ON HOST ---
       # Map container port 80 to host port 8888 (only on localhost)
       # Caddy (running on host) will connect to localhost:8888
-      - "127.0.0.1:8888:80"
+      - '127.0.0.1:8888:80'
 
 networks:
   matomo-net:
@@ -251,7 +253,7 @@ Before starting Matomo for the first time, it’s crucial to allow Caddy to obta
 
 - Change its “Proxy status” from Proxied (Orange Cloud) to DNS Only (Grey Cloud).
 
-## Step 5:  Launch the Matomo Stack
+## Step 5: Launch the Matomo Stack
 
 Now, start the Docker containers:
 
@@ -373,7 +375,7 @@ This usually means Caddy cannot connect to the Matomo container.
 
 - Check Container Logs: sudo docker compose logs matomo (use the service name). Look for PHP or Apache errors.
 
-- Check Caddy Logs: journalctl -u caddy.service -n 100 –no-pager | grep ‘matomo.yourdomain.com.*localhost:8888’ Look for connection errors.
+- Check Caddy Logs: journalctl -u caddy.service -n 100 –no-pager | grep ‘matomo.yourdomain.com.\*localhost:8888’ Look for connection errors.
 
 - Caddy Validation/Reload Fails: Often due to log file permissions if not using default journal logging. Check journalctl -u caddy.service and consider using just log in the Caddyfile instead of log { output file … }.
 

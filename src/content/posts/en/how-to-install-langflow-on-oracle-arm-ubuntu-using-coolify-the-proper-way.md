@@ -1,8 +1,10 @@
 ---
-title: "How to Install Langflow on Oracle ARM (Ubuntu) using Coolify: The “Proper” Way"
-description: "Deploying AI tools like Langflow on self-hosted hardware (like the generous Oracle Cloud ARM Free Tier) gives you total control over your data and costs. While tools like Coolify make deployment easy, Langflow has a few quirks regarding data persistence and admin..."
+title: 'How to Install Langflow on Oracle ARM (Ubuntu) using Coolify: The “Proper” Way'
+description: 'Deploying AI tools like Langflow on self-hosted hardware (like the generous Oracle Cloud ARM Free Tier) gives you total control over your data and costs. While tools like Coolify make deployment easy, Langflow has a few quirks regarding data persistence and admin...'
 pubDate: 2025-11-21
-categories: ["AI"]
+heroImage: '/images/2025/11/Langflow_Logo.png'
+heroImageAlt: 'Langflow Logo'
+categories: ['AI']
 tags: []
 toc: true
 ---
@@ -51,10 +53,10 @@ By default, Docker containers are ephemeral—if you restart them, your data is 
 
 - Add the following two volumes:
 
-| Volume Name | Destination | Why? |
-|---|---|---|
-| (Auto-generated) | /app | Stores the database file (where we will force it to live). |
-| (Auto-generated) | /data | Standard storage for uploads, cache, and generic data. |
+| Volume Name      | Destination | Why?                                                       |
+| ---------------- | ----------- | ---------------------------------------------------------- |
+| (Auto-generated) | /app        | Stores the database file (where we will force it to live). |
+| (Auto-generated) | /data       | Standard storage for uploads, cache, and generic data.     |
 
 - Save the configuration.
 
@@ -64,11 +66,11 @@ We need to tell Langflow where to look for the database (our safe `/app` folder)
 
 Go to **Environment Variables** and add the following:
 
-| Variable Key | Value | Description |
-|---|---|---|
-| LANGFLOW_AUTO_LOGIN | False | Disables the default “Guest” mode. Essential for security. |
-| LANGFLOW_NEW_USER_IS_ACTIVE | True | Allows you to sign up and immediately log in without waiting for approval. |
-| LANGFLOW_DATABASE_URL | sqlite:////app/langflow.db | The Secret Sauce. Forces the DB to live in your safe storage volume. |
+| Variable Key                | Value                      | Description                                                                |
+| --------------------------- | -------------------------- | -------------------------------------------------------------------------- |
+| LANGFLOW_AUTO_LOGIN         | False                      | Disables the default “Guest” mode. Essential for security.                 |
+| LANGFLOW_NEW_USER_IS_ACTIVE | True                       | Allows you to sign up and immediately log in without waiting for approval. |
+| LANGFLOW_DATABASE_URL       | sqlite:////app/langflow.db | The Secret Sauce. Forces the DB to live in your safe storage volume.       |
 
 **Important:** For `LANGFLOW_DATABASE_URL`, ensure there are **four slashes** (`////`) after `sqlite:`.
 
@@ -84,7 +86,7 @@ Go to **Environment Variables** and add the following:
 
 - Create your user (e.g., myuser and your password).
 
-*Because we set `NEW_USER_IS_ACTIVE=True`, you will get in immediately.*
+_Because we set `NEW_USER_IS_ACTIVE=True`, you will get in immediately._
 
 ## Step 5: The “Admin Fix” (Promoting your User)
 
@@ -100,7 +102,7 @@ By default, signing up via the UI creates a “Standard User,” meaning you won
 python -c "import sqlite3; conn = sqlite3.connect('/app/langflow.db'); conn.execute(\"UPDATE user SET is_superuser=1 WHERE username='YOUR_USERNAME_HERE'\"); conn.commit(); print('✅ Success: User promoted to Superuser');"
 ```
 
-*(Replace `YOUR_USERNAME_HERE` with the username you just created).*
+_(Replace `YOUR_USERNAME_HERE` with the username you just created)._
 
 ### Verify Admin Status
 
@@ -120,7 +122,7 @@ python -c "import sqlite3; conn = sqlite3.connect('/app/langflow.db'); cursor = 
 
 ## Troubleshooting: “I already started without the Env Var!”
 
-If you started Langflow *before* setting the `LANGFLOW_DATABASE_URL` variable, your data is currently hidden inside a temporary system folder (`.venv/...`) and will be lost if you restart.
+If you started Langflow _before_ setting the `LANGFLOW_DATABASE_URL` variable, your data is currently hidden inside a temporary system folder (`.venv/...`) and will be lost if you restart.
 
 **Here is the command to rescue your data and move it to the safe zone:**
 

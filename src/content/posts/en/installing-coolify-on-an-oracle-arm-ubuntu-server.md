@@ -1,8 +1,10 @@
 ---
-title: "Installing Coolify on an Oracle ARM Ubuntu server"
-description: "Coolify is an open-source, self-hostable Platform-as-a-Service (PaaS)—think “Heroku/Vercel, but free on your own server”. Deploy applications, databases, and services with one click, automatic SSL, and Git integration, with zero monthly fees."
+title: 'Installing Coolify on an Oracle ARM Ubuntu server'
+description: 'Coolify is an open-source, self-hostable Platform-as-a-Service (PaaS)—think “Heroku/Vercel, but free on your own server”. Deploy applications, databases, and services with one click, automatic SSL, and Git integration, with zero monthly fees.'
 pubDate: 2025-11-02
-categories: ["Linux"]
+heroImage: '/images/2025/11/Coolify.png'
+heroImageAlt: 'Coolify'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -11,15 +13,15 @@ toc: true
 
 Coolify is an open-source, self-hostable Platform-as-a-Service (PaaS)—think **“Heroku/Vercel, but free on your own server”**. Deploy applications, databases, and services with one click, automatic SSL, and Git integration, with **zero monthly fees**.
 
-| Feature | Heroku/Vercel | Coolify on Your Server |
-|---|---|---|
-| One-click deployments | ✅ | ✅ |
-| Automatic SSL (Let’s Encrypt) | ✅ | ✅ |
-| Git integration | ✅ | ✅ |
-| Free database management | ❌ (\$) | ✅ |
-| Monthly cost | 💰 \$7-50+ | 💰 \$0 |
-| Data ownership | ❌ Provider | ✅ Your server |
-| Full customization | ❌ Limited | ✅ Complete |
+| Feature                       | Heroku/Vercel | Coolify on Your Server |
+| ----------------------------- | ------------- | ---------------------- |
+| One-click deployments         | ✅            | ✅                     |
+| Automatic SSL (Let’s Encrypt) | ✅            | ✅                     |
+| Git integration               | ✅            | ✅                     |
+| Free database management      | ❌ (\$)       | ✅                     |
+| Monthly cost                  | 💰 \$7-50+    | 💰 \$0                 |
+| Data ownership                | ❌ Provider   | ✅ Your server         |
+| Full customization            | ❌ Limited    | ✅ Complete            |
 
 **Trade-off**: You manage server infrastructure, but gain complete control and cost savings.
 
@@ -117,26 +119,26 @@ Update `/etc/docker/daemon.json` to include the `data-root` directive:
 
 ```json
 {
-    "data-root": "/mnt/myvolume/docker",
-    "log-driver": "json-file",
-    "log-opts": {
-      "max-size": "100m",
-      "max-file": "5"
+  "data-root": "/mnt/myvolume/docker",
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m",
+    "max-file": "5"
+  },
+  "features": {
+    "buildkit": true
+  },
+  "live-restore": true,
+  "default-address-pools": [
+    {
+      "base": "172.17.0.0/12",
+      "size": 20
     },
-    "features": {
-        "buildkit": true
-    },
-    "live-restore": true,
-    "default-address-pools": [
-        {
-            "base": "172.17.0.0/12",
-            "size": 20
-        },
-        {
-            "base": "192.168.0.0/16",
-            "size": 24
-        }
-    ]
+    {
+      "base": "192.168.0.0/16",
+      "size": 24
+    }
+  ]
 }
 ```
 
@@ -202,14 +204,14 @@ sudo ufw allow from 10.0.0.0/8 to any port 22 comment "Docker networks"
 
 In Oracle Cloud Console, add these Ingress Rules to your Security List:
 
-| Source CIDR | Protocol | Destination Port | Description |
-|---|---|---|---|
-| 0.0.0.0/0 | TCP | 22 | SSH |
-| 0.0.0.0/0 | TCP | 80 | HTTP |
-| 0.0.0.0/0 | TCP | 443 | HTTPS |
-| 0.0.0.0/0 | TCP | 6001 | Coolify Real-time |
-| 0.0.0.0/0 | TCP | 6002 | Coolify Terminal |
-| 0.0.0.0/0 | TCP | 8000 | Coolify Dashboard |
+| Source CIDR | Protocol | Destination Port | Description       |
+| ----------- | -------- | ---------------- | ----------------- |
+| 0.0.0.0/0   | TCP      | 22               | SSH               |
+| 0.0.0.0/0   | TCP      | 80               | HTTP              |
+| 0.0.0.0/0   | TCP      | 443              | HTTPS             |
+| 0.0.0.0/0   | TCP      | 6001             | Coolify Real-time |
+| 0.0.0.0/0   | TCP      | 6002             | Coolify Terminal  |
+| 0.0.0.0/0   | TCP      | 8000             | Coolify Dashboard |
 
 ## Step 6: Configure Custom Domain (Optional but Recommended)
 
@@ -421,7 +423,7 @@ sudo docker update --restart=always coolify-sentinel
 
 ```bash
 sudo lsof -i :8000
-sudo systemctl stop 
+sudo systemctl stop
 ```
 
 ## Environment Variables (.zshrc)

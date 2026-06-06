@@ -1,8 +1,10 @@
 ---
-title: "Complete Guide: Installing Gurobi Optimizer on Oracle ARM Ubuntu"
-description: "This guide will walk you through the complete process of installing Gurobi Optimizer with a Web License Service (WLS) license on an Oracle Cloud Infrastructure (OCI) server running Ubuntu on ARM64 architecture. It’s especially useful for graduate students in data science..."
+title: 'Complete Guide: Installing Gurobi Optimizer on Oracle ARM Ubuntu'
+description: 'This guide will walk you through the complete process of installing Gurobi Optimizer with a Web License Service (WLS) license on an Oracle Cloud Infrastructure (OCI) server running Ubuntu on ARM64 architecture. It’s especially useful for graduate students in data science...'
 pubDate: 2025-10-14
-categories: ["Optimization"]
+heroImage: '/images/2025/10/Gurobi_Installation.png'
+heroImageAlt: 'Gurobi Installation'
+categories: ['Optimization']
 tags: []
 toc: true
 ---
@@ -57,13 +59,13 @@ Required WLS License Data
 
 - 🚀 Step 1: System Verification and Preparation
 
-1.1 Verify System Version
+  1.1 Verify System Version
 
 - 1.2 Update the System
 
 - 🔧 Step 2: Download and Install Gurobi
 
-2.1 Create Installation Directory
+  2.1 Create Installation Directory
 
 - 2.2 Download Gurobi for ARM64
 
@@ -71,25 +73,25 @@ Required WLS License Data
 
 - 🌍 Step 3: Environment Variables Configuration
 
-3.1 Configure System Variables
+  3.1 Configure System Variables
 
 - 3.2 Load Variables in Current Session
 
 - 🐍 Step 4: Python Package Installation
 
-4.1 Using UV (Recommended)
+  4.1 Using UV (Recommended)
 
 - 4.2 Alternative: Using pip
 
 - 🔐 Step 5: WLS License Configuration
 
-5.1 Create License File
+  5.1 Create License File
 
 - 5.2 Configure License File Environment Variable
 
 - 🧪 Step 6: Installation Verification
 
-6.1 Complete Test Script
+  6.1 Complete Test Script
 
 - 6.2 Run the Tests
 
@@ -271,9 +273,9 @@ python -c "import gurobipy as gp; print('Gurobipy imported successfully')"
 
 ### 5.1 Create License File
 
-```bash
+````bash
 # Create gurobi.lic file in home directory
-cat > ~/gurobi.lic 
+cat > ~/gurobi.lic
 **Important:** Replace the placeholder values with your actual WLS credentials from your Gurobi account. Keep this file secure and never commit it to version control.
 
 **Note:** This file only needs to be created **once** on your system. It will be used by all your Python projects and environments automatically.
@@ -287,7 +289,7 @@ echo 'export GRB_LICENSE_FILE=/home/ubuntu/gurobi.lic' >> ~/.zshrc
 
 # Load in current session
 export GRB_LICENSE_FILE=/home/ubuntu/gurobi.lic
-```
+````
 
 ## 🧪 Step 6: Installation Verification
 
@@ -295,7 +297,7 @@ export GRB_LICENSE_FILE=/home/ubuntu/gurobi.lic
 
 Create a file called `test_gurobi.py`:
 
-```sql
+````sql
 #!/usr/bin/env python3
 """
 Test script to verify that Gurobi works correctly with WLS license
@@ -308,40 +310,40 @@ def test_gurobi_license():
     """Test connection with WLS license and solve a simple problem"""
     try:
         print("=== Gurobi Test with WLS License ===")
-        
+
         # Create a Gurobi environment
         print("1. Creating Gurobi environment...")
         env = gp.Env()
-        
+
         # Show license information
         print(f"2. Gurobi version: {gp.gurobi.version()}")
-        
+
         # Create a simple test model
         print("3. Creating simple optimization model...")
         model = gp.Model("wls_test", env=env)
-        
+
         # Create variables
         x = model.addVar(name="x")
         y = model.addVar(name="y")
-        
+
         # Set objective: maximize x + y
         model.setObjective(x + y, GRB.MAXIMIZE)
-        
+
         # Add constraints
         model.addConstr(2*x + 3*y = 0, "non_neg_x")
         model.addConstr(y >= 0, "non_neg_y")
-        
+
         # Solve the model
         print("4. Solving model...")
         model.optimize()
-        
+
         # Check solution status
         if model.status == GRB.OPTIMAL:
             print("✅ Success! Model solved correctly.")
             print(f"   Optimal value: {model.objVal:.4f}")
             print(f"   x = {x.x:.4f}")
             print(f"   y = {y.x:.4f}")
-            
+
             # Show additional license information
             try:
                 license_expiration = model.getAttr('LicenseExpiration')
@@ -351,10 +353,10 @@ def test_gurobi_license():
                     print(f"   License expires: {license_expiration}")
             except:
                 print("   License expiration information not available")
-                
+
         else:
             print(f"❌ Error: Model could not be solved. Status: {model.status}")
-            
+
     except Exception as e:
         print(f"❌ Error during test: {e}")
         print("\nPossible causes:")
@@ -362,23 +364,23 @@ def test_gurobi_license():
         print("- Network connectivity issues")
         print("- Incorrect WLS credentials")
         return False
-        
+
     return True
 
 def test_wls_connection():
     """Test WLS connection specifically using parameters"""
     try:
         print("\n=== Direct WLS Connection Test ===")
-        
+
         # Create empty environment and configure WLS parameters manually
         with gp.Env(empty=True) as env:
             env.setParam("LicenseID", 1234567)  # Replace with your License ID
             env.setParam("WLSAccessID", "your-access-id-here")  # Replace with your Access ID
             env.setParam("WLSSecret", "your-secret-here")  # Replace with your Secret
             env.start()
-            
+
             print("✅ WLS connection established successfully")
-            
+
             # Create a simple model to test
             with gp.Model(env=env) as model:
                 x = model.addVar()
@@ -405,7 +407,7 @@ Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (armlinux64 - "Ubuntu 24.04.3 L
    License: No expiration date
 
 🎉 Gurobi is working correctly!
-```
+````
 
 ## 📝 Final System Configuration
 
@@ -623,4 +625,4 @@ You have successfully completed the installation of Gurobi Optimizer on your Ora
 
 **Was this guide helpful?** Share it with other students and professionals working with cloud-based optimization. The data science community grows when we share knowledge!
 
-*This tutorial was created during the actual installation process on an Oracle Cloud Infrastructure server with ARM64 architecture, ensuring that all steps have been tested and verified.*
+_This tutorial was created during the actual installation process on an Oracle Cloud Infrastructure server with ARM64 architecture, ensuring that all steps have been tested and verified._

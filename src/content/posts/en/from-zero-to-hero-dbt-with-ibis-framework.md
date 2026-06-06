@@ -1,13 +1,15 @@
 ---
-title: "From Zero to Hero: dbt with Ibis Framework"
-description: "A complete guide from dbt fundamentals to Python-powered transformations"
+title: 'From Zero to Hero: dbt with Ibis Framework'
+description: 'A complete guide from dbt fundamentals to Python-powered transformations'
 pubDate: 2026-01-12
-categories: ["Data Science"]
+heroImage: '/images/2026/01/DBT_Ibis_compressed.png'
+heroImageAlt: 'DBT Ibis compressed'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
 
-*A complete guide from dbt fundamentals to Python-powered transformations*
+_A complete guide from dbt fundamentals to Python-powered transformations_
 
 ## Introduction
 
@@ -353,14 +355,14 @@ def model(stg_customers, stg_orders):
 
 ### Comparison: SQL vs Ibis
 
-| Feature | SQL | Ibis |
-|---|---|---|
-| Type Safety | None | Full Python typing |
-| Testing | Limited | pytest integration |
-| Reusability | Copy-paste or Jinja | Functions & classes |
-| Debugging | Hard | Python debugger |
-| IDE Support | Basic | Full autocomplete |
-| Multi-backend | Different syntax | Same code |
+| Feature       | SQL                 | Ibis                |
+| ------------- | ------------------- | ------------------- |
+| Type Safety   | None                | Full Python typing  |
+| Testing       | Limited             | pytest integration  |
+| Reusability   | Copy-paste or Jinja | Functions & classes |
+| Debugging     | Hard                | Python debugger     |
+| IDE Support   | Basic               | Full autocomplete   |
+| Multi-backend | Different syntax    | Same code           |
 
 ## Part 3: Implementing dbt with Ibis
 
@@ -419,21 +421,21 @@ my_project:
 **`dbt_project.yml`**:
 
 ```yaml
-name: "my_project"
-version: "1.0.0"
+name: 'my_project'
+version: '1.0.0'
 config-version: 2
 
-profile: "my_project"
+profile: 'my_project'
 
-model-paths: ["models"]
-seed-paths: ["seeds"]
-snapshot-paths: ["snapshots"]
-test-paths: ["tests"]
+model-paths: ['models']
+seed-paths: ['seeds']
+snapshot-paths: ['snapshots']
+test-paths: ['tests']
 
-target-path: "target"
+target-path: 'target'
 clean-targets:
-  - "target"
-  - "dbt_packages"
+  - 'target'
+  - 'dbt_packages'
 
 models:
   my_project:
@@ -844,7 +846,7 @@ def model(stg_orders):
 
 ### Conditional Logic with Case Statements
 
-```python
+````python
 from dbt_ibis import depends_on, ref
 import ibis
 
@@ -869,7 +871,7 @@ def add_fiscal_quarter(table, date_column):
             .else_("Q4")
             .end()
     )
-```
+````
 
 ```python
 # models/marts/orders_with_quarter.ibis
@@ -1065,15 +1067,15 @@ This guide took you from **zero to hero** – starting with dbt fundamentals a
 
 ### Quick Reference
 
-| Task | Command |
-|---|---|
-| Run all models | dbt-ibis run |
+| Task               | Command                          |
+| ------------------ | -------------------------------- |
+| Run all models     | dbt-ibis run                     |
 | Run specific model | dbt-ibis run --select model_name |
-| Run tests | dbt-ibis test |
-| Load seeds | dbt-ibis seed |
-| Run snapshots | dbt-ibis snapshot |
-| Generate docs | dbt-ibis docs generate |
-| Precompile only | dbt-ibis precompile |
+| Run tests          | dbt-ibis test                    |
+| Load seeds         | dbt-ibis seed                    |
+| Run snapshots      | dbt-ibis snapshot                |
+| Generate docs      | dbt-ibis docs generate           |
+| Precompile only    | dbt-ibis precompile              |
 
 ### Supported Backends
 
@@ -1091,4 +1093,4 @@ dbt-ibis supports: DuckDB, Snowflake, BigQuery, Postgres, Redshift, RisingWave, 
 
 - dbt-ibis Blog Post
 
-*Ready to transform your data pipeline? Start with the examples above, experiment locally with DuckDB, and watch your productivity soar.*
+_Ready to transform your data pipeline? Start with the examples above, experiment locally with DuckDB, and watch your productivity soar._

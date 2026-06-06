@@ -1,8 +1,10 @@
 ---
-title: "Setting Up SSH Keys for GitLab and GitHub: A Complete Guide"
-description: "As a developer, I prefer to use GitLab for my private projects and repositories due to its generous free tier for private repos, while using GitHub for public open-source projects where the community and visibility are unmatched. This dual-platform approach means I need..."
+title: 'Setting Up SSH Keys for GitLab and GitHub: A Complete Guide'
+description: 'As a developer, I prefer to use GitLab for my private projects and repositories due to its generous free tier for private repos, while using GitHub for public open-source projects where the community and visibility are unmatched. This dual-platform approach means I need...'
 pubDate: 2025-06-13
-categories: ["Linux"]
+heroImage: '/images/2025/06/gitlab_github.png'
+heroImageAlt: 'gitlab github'
+categories: ['Linux']
 tags: []
 toc: true
 ---

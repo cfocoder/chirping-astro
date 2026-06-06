@@ -1,8 +1,10 @@
 ---
-title: "Guide: Self-Hosting QuickChart on ARM with Docker (Local Build) & Caddy"
-description: "This guide provides step-by-step instructions to install a self-hosted QuickChart instance on an ARM-based server (like Oracle Cloud Ampere A1) running Ubuntu 24.04, using Docker Compose and Caddy."
+title: 'Guide: Self-Hosting QuickChart on ARM with Docker (Local Build) & Caddy'
+description: 'This guide provides step-by-step instructions to install a self-hosted QuickChart instance on an ARM-based server (like Oracle Cloud Ampere A1) running Ubuntu 24.04, using Docker Compose and Caddy.'
 pubDate: 2025-03-22
-categories: ["Data Science"]
+heroImage: '/images/2025/03/quickchart.png'
+heroImageAlt: 'quickchart'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
@@ -80,7 +82,7 @@ services:
   quickchart:
     # --- Build Configuration ---
     build:
-      context: .  # Build using the Dockerfile in the current directory (.)
+      context: . # Build using the Dockerfile in the current directory (.)
       # platform: linux/arm64 # Usually not needed, Docker detects host arch
     # --- End Build Configuration ---
 
@@ -88,7 +90,7 @@ services:
     ports:
       # Map container port 3000 to host port 3400 (localhost ONLY)
       # Caddy will connect to localhost:3400
-      - "127.0.0.1:3400:3000"
+      - '127.0.0.1:3400:3000'
     environment:
       # Port QuickChart listens on *inside* the container
       - PORT=3000

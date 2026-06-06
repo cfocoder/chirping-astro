@@ -1,8 +1,10 @@
 ---
-title: "Installing Mautic 6 on Oracle ARM Ubuntu 24.04 with Caddy & Docker"
-description: "Marketing automation is a powerful tool for businesses looking to nurture leads, engage customers, and streamline marketing efforts. Mautic stands out as a leading open-source marketing automation platform, offering a robust alternative to expensive proprietary solutions."
+title: 'Installing Mautic 6 on Oracle ARM Ubuntu 24.04 with Caddy & Docker'
+description: 'Marketing automation is a powerful tool for businesses looking to nurture leads, engage customers, and streamline marketing efforts. Mautic stands out as a leading open-source marketing automation platform, offering a robust alternative to expensive proprietary solutions.'
 pubDate: 2025-04-19
-categories: ["Linux"]
+heroImage: '/images/2025/04/mautic_logo.png'
+heroImageAlt: 'mautic logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -112,7 +114,7 @@ max_execution_time = 300
 date.timezone = YOUR_TIMEZONE ; e.g., America/New_York or UTC
 ```
 
-*(Replace YOUR_TIMEZONE with your actual timezone: timedatectl list-timezones)*
+_(Replace YOUR_TIMEZONE with your actual timezone: timedatectl list-timezones)_
 
 Save (Ctrl+X, Y, Enter) and restart PHP-FPM:
 
@@ -158,7 +160,7 @@ sleep 60
 sudo docker ps
 ```
 
-*Remember the DB User, Password, Name, and ***Port (3307)*** for the Mautic installer.*
+\*Remember the DB User, Password, Name, and ***Port (3307)*** for the Mautic installer.\*
 
 ## Step 4: Install Mautic (Composer)
 
@@ -286,7 +288,7 @@ sudo systemctl reload caddy
 sudo systemctl status caddy # Check it reloaded okay
 ```
 
-*Troubleshooting Note: If you get 403 errors on assets later, ensure the Caddy user (caddy) is part of the www-data group: sudo usermod -a -G www-data caddy and restart Caddy (sudo systemctl restart caddy).*
+_Troubleshooting Note: If you get 403 errors on assets later, ensure the Caddy user (caddy) is part of the www-data group: sudo usermod -a -G www-data caddy and restart Caddy (sudo systemctl restart caddy)._
 
 ## Step 6: Run Mautic Web Installer
 
@@ -334,7 +336,7 @@ Add the following line, specifying the Doctrine transport for the **email** me
 MAUTIC_MESSENGER_DSN_EMAIL=doctrine://default?auto_setup=true
 ```
 
-*(The auto_setup=true part allows Mautic to create the necessary database table automatically)*. Save and exit (Ctrl+X, Y, Enter).
+_(The auto_setup=true part allows Mautic to create the necessary database table automatically)_. Save and exit (Ctrl+X, Y, Enter).
 
 2. **Clear Mautic Cache:** Apply the configuration change so Mautic recognizes the new queue setting.
 
@@ -352,7 +354,7 @@ sudo crontab -u www-data -e
 
 (Choose nano if prompted).
 
-4. **Add Cron Job Lines:** Paste the following lines into the editor. Note the comments explaining each job. **Use the full path /usr/bin/php** (which should point to PHP  8.2 if you used update-alternatives) or specify the direct version path (e.g., /usr/bin/php8.2).
+4. **Add Cron Job Lines:** Paste the following lines into the editor. Note the comments explaining each job. **Use the full path /usr/bin/php** (which should point to PHP 8.2 if you used update-alternatives) or specify the direct version path (e.g., /usr/bin/php8.2).
 
 ```text
 # Mautic Cron Jobs v5/v6+ (Based on Official Documentation & Env Findings)

@@ -1,8 +1,10 @@
 ---
-title: "Exposing Local Projects to the Web with Cloudflared: A Quick Guide"
-description: "Ever needed to quickly share a local project with someone without deploying it? Cloudflared makes it incredibly easy to expose your local development server to the web temporarily. Whether you’re showing off a new feature, getting feedback on a design, or testing an API,..."
+title: 'Exposing Local Projects to the Web with Cloudflared: A Quick Guide'
+description: 'Ever needed to quickly share a local project with someone without deploying it? Cloudflared makes it incredibly easy to expose your local development server to the web temporarily. Whether you’re showing off a new feature, getting feedback on a design, or testing an API,...'
 pubDate: 2025-09-12
-categories: ["Linux"]
+heroImage: '/images/2025/09/cloudflared_logo.png'
+heroImageAlt: 'cloudflared logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -26,16 +28,16 @@ cloudflared --version
 
 ## 📋 Basic Commands Reference
 
-| Command | Description | Quick Example |
-|---|---|---|
-| cloudflared tunnel --url | Create temporary tunnel to local service | cloudflared tunnel --url http://localhost:8000 |
-| cloudflared tunnel login | Authenticate with Cloudflare account | cloudflared tunnel login |
-| cloudflared tunnel create | Create a named permanent tunnel | cloudflared tunnel create my-project |
-| cloudflared tunnel list | List all your tunnels | cloudflared tunnel list |
-| cloudflared tunnel run | Run a named tunnel | cloudflared tunnel run my-project |
-| cloudflared tunnel cleanup | Clean up tunnel connections | cloudflared tunnel cleanup my-project |
-| cloudflared --version | Check current version | cloudflared --version |
-| cloudflared update | Update to latest version | cloudflared update |
+| Command                    | Description                              | Quick Example                                  |
+| -------------------------- | ---------------------------------------- | ---------------------------------------------- |
+| cloudflared tunnel --url   | Create temporary tunnel to local service | cloudflared tunnel --url http://localhost:8000 |
+| cloudflared tunnel login   | Authenticate with Cloudflare account     | cloudflared tunnel login                       |
+| cloudflared tunnel create  | Create a named permanent tunnel          | cloudflared tunnel create my-project           |
+| cloudflared tunnel list    | List all your tunnels                    | cloudflared tunnel list                        |
+| cloudflared tunnel run     | Run a named tunnel                       | cloudflared tunnel run my-project              |
+| cloudflared tunnel cleanup | Clean up tunnel connections              | cloudflared tunnel cleanup my-project          |
+| cloudflared --version      | Check current version                    | cloudflared --version                          |
+| cloudflared update         | Update to latest version                 | cloudflared update                             |
 
 ## 🎯 Quick Start Examples
 
@@ -199,17 +201,17 @@ cloudflared tunnel run my-tunnel
 lsof -i :8000
 
 # Kill the process
-kill -9 
+kill -9
 ```
 
 ## 🧹 Cleanup Commands
 
-| Action | Command |
-|---|---|
-| Stop current tunnel | Ctrl + C |
-| Kill all cloudflared processes | pkill cloudflared |
-| Stop specific tunnel | cloudflared tunnel cleanup |
-| Check active processes | ps aux \| grep cloudflared |
+| Action                         | Command                    |
+| ------------------------------ | -------------------------- |
+| Stop current tunnel            | Ctrl + C                   |
+| Kill all cloudflared processes | pkill cloudflared          |
+| Stop specific tunnel           | cloudflared tunnel cleanup |
+| Check active processes         | ps aux \| grep cloudflared |
 
 ## 🎓 Pro Tips
 
@@ -231,8 +233,8 @@ kill -9
 
 - Cloudflare One Documentation
 
-*This guide is perfect for developers who need to quickly share local projects without the complexity of full deployments. Cloudflared makes secure, temporary exposure of local services incredibly simple and accessible.*
+_This guide is perfect for developers who need to quickly share local projects without the complexity of full deployments. Cloudflared makes secure, temporary exposure of local services incredibly simple and accessible._
 
-*Have you used Cloudflared for your projects? Share your experiences in the comments!*
+_Have you used Cloudflared for your projects? Share your experiences in the comments!_
 
 #cloudflared #webdevelopment #devops #cloudflare #localdevelopment

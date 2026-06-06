@@ -1,8 +1,10 @@
 ---
-title: "Setting Up Passwordless SSH Across All Machines in Your Tailscale Network"
-description: "If you have multiple machines connected through Tailscale, you’ve probably found yourself typing SSH passwords repeatedly when jumping between systems. In this guide, I’ll show you how to set up passwordless SSH authentication across all your Tailscale machines, creating..."
+title: 'Setting Up Passwordless SSH Across All Machines in Your Tailscale Network'
+description: 'If you have multiple machines connected through Tailscale, you’ve probably found yourself typing SSH passwords repeatedly when jumping between systems. In this guide, I’ll show you how to set up passwordless SSH authentication across all your Tailscale machines, creating...'
 pubDate: 2025-12-20
-categories: ["Cloud"]
+heroImage: '/images/2025/12/tailscale_mesh.png'
+heroImageAlt: 'tailscale mesh'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -174,7 +176,7 @@ Instead of typing `ssh user@100.x.x.x`, create aliases like `ssh laptop`.
 
 ### On Linux/macOS
 
-```bash
+````bash
 # Create/edit ~/.ssh/config
 cat > ~/.ssh/config **Important:** The `IdentitiesOnly yes` option prevents the “Too many authentication failures” error when you have multiple SSH keys.
 
@@ -190,7 +192,7 @@ ssh macmini "uptime"
 
 # Test from one machine to another and then to a third
 ssh laptop1 'ssh server1 "echo Connected through laptop1 to server1"'
-```
+````
 
 If everything works, you should connect without any password prompts!
 
@@ -259,11 +261,11 @@ Use PasswordAuthentication no in /etc/ssh/sshd_config to disable password lo
 Once completed, you’ll have this connection matrix:
 
 | From ↓ / To → | laptop1 | laptop2 | server1 | macmini |
-|---|---|---|---|---|
-| laptop1 | – | ✅ | ✅ | ✅ |
-| laptop2 | ✅ | – | ✅ | ✅ |
-| server1 | ✅ | ✅ | – | ✅ |
-| macmini | ✅ | ✅ | ✅ | – |
+| ------------- | ------- | ------- | ------- | ------- |
+| laptop1       | –       | ✅      | ✅      | ✅      |
+| laptop2       | ✅      | –       | ✅      | ✅      |
+| server1       | ✅      | ✅      | –       | ✅      |
+| macmini       | ✅      | ✅      | ✅      | –       |
 
 ## Automation Script
 

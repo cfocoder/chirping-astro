@@ -1,8 +1,10 @@
 ---
-title: "Hadoop 3.3.6 on Ubuntu: Native Installation without Virtual Machine"
-description: "When I started working with Hadoop in a learning environment, the course guide indicated using Linux Mint in a virtual machine. However, I already had Ubuntu 24.04 installed natively on my Dell Vostro with 32 GB of RAM, and it seemed smarter to leverage it directly. In..."
+title: 'Hadoop 3.3.6 on Ubuntu: Native Installation without Virtual Machine'
+description: 'When I started working with Hadoop in a learning environment, the course guide indicated using Linux Mint in a virtual machine. However, I already had Ubuntu 24.04 installed natively on my Dell Vostro with 32 GB of RAM, and it seemed smarter to leverage it directly. In...'
 pubDate: 2026-02-23
-categories: ["Hadoop"]
+heroImage: '/images/2026/02/hadoop.jpg'
+heroImageAlt: 'hadoop'
+categories: ['Hadoop']
 tags: []
 toc: true
 ---
@@ -117,10 +119,10 @@ We define the default filesystem (HDFS) and what port the NameNode listens on:
 
 ```xml
 
-    
+
         fs.defaultFS
         hdfs://localhost:9000
-    
+
 
 ```
 
@@ -130,10 +132,10 @@ Since there’s only one node, replication must be `1`. In a real cluster with 
 
 ```xml
 
-    
+
         dfs.replication
         1
-    
+
 
 ```
 
@@ -143,14 +145,14 @@ This file is critical: without it, Hadoop runs MapReduce jobs in **local mode**
 
 ```xml
 
-    
+
         mapreduce.framework.name
         yarn
-    
-    
+
+
         mapreduce.application.classpath
         $HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*
-    
+
 
 ```
 
@@ -160,14 +162,14 @@ Enables the shuffle service, necessary for data to be transferred between the Ma
 
 ```xml
 
-    
+
         yarn.nodemanager.aux-services
         mapreduce_shuffle
-    
-    
+
+
         yarn.nodemanager.env-whitelist
         JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ,HADOOP_MAPRED_HOME
-    
+
 
 ```
 
@@ -301,4 +303,4 @@ stop-yarn.sh
 stop-dfs.sh
 ```
 
-*Installation verified on February 21, 2026 on Ubuntu 24.04 with Hadoop 3.3.6, Java 11, and Zsh.*
+_Installation verified on February 21, 2026 on Ubuntu 24.04 with Hadoop 3.3.6, Java 11, and Zsh._

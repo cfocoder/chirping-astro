@@ -1,8 +1,10 @@
 ---
-title: "How to Install Linux Ubuntu on Windows"
-description: "I recently learned how to install Ubuntu on my Windows 10 laptop, not as a virtual machine, but as part of my normal Windows installation, so I have the advantage of not wasting resources dedicated to Ubuntu on a virtual machine."
+title: 'How to Install Linux Ubuntu on Windows'
+description: 'I recently learned how to install Ubuntu on my Windows 10 laptop, not as a virtual machine, but as part of my normal Windows installation, so I have the advantage of not wasting resources dedicated to Ubuntu on a virtual machine.'
 pubDate: 2022-10-19
-categories: ["Linux"]
+heroImage: '/images/2023/08/ubuntu-logo14-e1666232702975.png'
+heroImageAlt: 'ubuntu logo14 e1666232702975'
+categories: ['Linux']
 tags: []
 toc: true
 ---

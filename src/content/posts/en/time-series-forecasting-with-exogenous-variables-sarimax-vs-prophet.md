@@ -1,8 +1,10 @@
 ---
-title: "Time Series Forecasting with Exogenous Variables: SARIMAX vs Prophet"
-description: "Last quarter, I needed to forecast SMS volume for budget planning. The catch? Our SMS volume directly depends on how many locations we operate—and that number is also growing. I couldn’t just extrapolate historical trends; I needed a model that accounts for this external..."
+title: 'Time Series Forecasting with Exogenous Variables: SARIMAX vs Prophet'
+description: 'Last quarter, I needed to forecast SMS volume for budget planning. The catch? Our SMS volume directly depends on how many locations we operate—and that number is also growing. I couldn’t just extrapolate historical trends; I needed a model that accounts for this external...'
 pubDate: 2026-01-14
-categories: ["Data Science"]
+heroImage: '/images/2026/01/time_series.png'
+heroImageAlt: 'time series'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
@@ -109,15 +111,15 @@ You don’t specify AR or MA orders. Prophet automatically detects trend changes
 
 Here’s my decision framework after using both:
 
-| Criteria | SARIMAX | Prophet |
-|---|---|---|
-| Data quality | Needs regular intervals, no gaps | Handles gaps and irregularities |
-| Seasonality | You specify the period (s=12) | Automatic detection |
-| Learning curve | Steeper (need ACF/PACF knowledge) | Gentler |
-| Interpretability | Statistical coefficients | Visual component plots |
-| Time to prototype | Slower | Faster |
-| Production maturity | Very mature | Good, actively maintained |
-| Model control | Full control over structure | Limited tuning options |
+| Criteria            | SARIMAX                           | Prophet                         |
+| ------------------- | --------------------------------- | ------------------------------- |
+| Data quality        | Needs regular intervals, no gaps  | Handles gaps and irregularities |
+| Seasonality         | You specify the period (s=12)     | Automatic detection             |
+| Learning curve      | Steeper (need ACF/PACF knowledge) | Gentler                         |
+| Interpretability    | Statistical coefficients          | Visual component plots          |
+| Time to prototype   | Slower                            | Faster                          |
+| Production maturity | Very mature                       | Good, actively maintained       |
+| Model control       | Full control over structure       | Limited tuning options          |
 
 **My rule of thumb**:
 
@@ -223,12 +225,12 @@ Before trusting any forecast, visualize how well the model fits historical data.
 
 **Understanding the metrics**:
 
-| Metric | What it measures | Interpretation |
-|---|---|---|
-| MAE | Average absolute error | “On average, predictions are off by X units” |
-| RMSE | Root mean squared error | Like MAE but penalizes large errors more heavily |
-| R² | Variance explained (0-1) | 0.85 = model explains 85% of the variation |
-| MAPE | Error as percentage | Useful for comparing across different scales |
+| Metric | What it measures         | Interpretation                                   |
+| ------ | ------------------------ | ------------------------------------------------ |
+| MAE    | Average absolute error   | “On average, predictions are off by X units”     |
+| RMSE   | Root mean squared error  | Like MAE but penalizes large errors more heavily |
+| R²     | Variance explained (0-1) | 0.85 = model explains 85% of the variation       |
+| MAPE   | Error as percentage      | Useful for comparing across different scales     |
 
 ```text
 predicted = results.get_prediction(start=0, end=len(y)-1, exog=X)

@@ -1,8 +1,10 @@
 ---
-title: "How to Set Up a Powerful, Free Forever Server on Oracle Cloud (Caddy Edition)"
-description: "Earlier in 2025, I signed up for Oracle’s “Free Forever” cloud offer. It was, and still is, one of the most generous free tiers available, especially for developers and hobbyists. I wrote a blog post to document my setup, and today I’m updating it with a more modern,..."
+title: 'How to Set Up a Powerful, Free Forever Server on Oracle Cloud (Caddy Edition)'
+description: 'Earlier in 2025, I signed up for Oracle’s “Free Forever” cloud offer. It was, and still is, one of the most generous free tiers available, especially for developers and hobbyists. I wrote a blog post to document my setup, and today I’m updating it with a more modern,...'
 pubDate: 2025-07-03
-categories: ["Linux"]
+heroImage: '/images/2025/07/oracle2.png'
+heroImageAlt: 'oracle2'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -153,12 +155,12 @@ Multiple Sites with Subdomains
 
 First, let’s be clear about how generous this offer is. When you consolidate the main resources for a single server, this is what you get, for free, forever:
 
-| Component / Purpose | “Always Free” Allocation | How It Benefits Your Server |
-|---|---|---|
-| Server CPU & RAM | 4 ARM OCPUs & 24 GB RAM | This is the core of your machine. It’s powerful enough to run multiple apps, a game server, or a complex web service. |
-| Primary Storage | 200 GB Block Storage (Total) | Your server’s “hard drive.” This is the combined total of boot volumes and block volumes. Typically: 50 GB boot + 150 GB block volume. |
-| Database | 2 Autonomous Databases | You get two dedicated, fully-managed Oracle databases. Offloading your database work to these frees up your server’s CPU and RAM. |
-| Networking | 1 Load Balancer & 10 TB/month Data Transfer | A stable public entry point for your services and a massive amount of free bandwidth. |
+| Component / Purpose | “Always Free” Allocation                    | How It Benefits Your Server                                                                                                            |
+| ------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Server CPU & RAM    | 4 ARM OCPUs & 24 GB RAM                     | This is the core of your machine. It’s powerful enough to run multiple apps, a game server, or a complex web service.                  |
+| Primary Storage     | 200 GB Block Storage (Total)                | Your server’s “hard drive.” This is the combined total of boot volumes and block volumes. Typically: 50 GB boot + 150 GB block volume. |
+| Database            | 2 Autonomous Databases                      | You get two dedicated, fully-managed Oracle databases. Offloading your database work to these frees up your server’s CPU and RAM.      |
+| Networking          | 1 Load Balancer & 10 TB/month Data Transfer | A stable public entry point for your services and a massive amount of free bandwidth.                                                  |
 
 ## Why Caddy Over NGINX?
 
@@ -811,14 +813,14 @@ sudo apt install tmux -y
 
 Basic tmux commands:
 
-| Action | Command |
-|---|---|
-| Start a new session | tmux |
-| Create a named session | tmux new -s session_name |
-| Detach from session | Ctrl + B then D |
-| List active sessions | tmux ls |
-| Reattach to session | tmux attach -t session_name |
-| Close session from within | exit |
+| Action                    | Command                     |
+| ------------------------- | --------------------------- |
+| Start a new session       | tmux                        |
+| Create a named session    | tmux new -s session_name    |
+| Detach from session       | Ctrl + B then D             |
+| List active sessions      | tmux ls                     |
+| Reattach to session       | tmux attach -t session_name |
+| Close session from within | exit                        |
 
 ### Install curl and wget
 
@@ -985,7 +987,7 @@ api.your-domain.com {
 ```text
 your-domain.com {
     encode gzip
-    
+
     header {
         # Enable HSTS
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -994,7 +996,7 @@ your-domain.com {
         X-Frame-Options "DENY"
         Referrer-Policy "strict-origin-when-cross-origin"
     }
-    
+
     root * /var/www/your-site
     file_server
 }
@@ -1011,7 +1013,7 @@ your-domain.com {
             window 1m
         }
     }
-    
+
     reverse_proxy localhost:3000
 }
 ```

@@ -1,8 +1,10 @@
 ---
-title: "Azure Databricks Quick Reference Guide"
-description: "Databricks is an analytics and data engineering platform that sits on top of Spark, an analytics engine for big data processing and machine learning. Spark uses in-memory processing using a distributed computer platform of clusters that work as if they were a single one."
+title: 'Azure Databricks Quick Reference Guide'
+description: 'Databricks is an analytics and data engineering platform that sits on top of Spark, an analytics engine for big data processing and machine learning. Spark uses in-memory processing using a distributed computer platform of clusters that work as if they were a single one.'
 pubDate: 2024-02-24
-categories: ["Data Science"]
+heroImage: '/images/2024/02/og-databricks-1030x541-1.png'
+heroImageAlt: 'og databricks 1030×541'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
@@ -45,9 +47,9 @@ Creating an Azure Key Vault
 
 - Accessing Data stored in an Azure Data Lake Storage (ADLS) Gen 2
 
-1.- Accessing Azure Data Lake Storage (ADLS) with the “abfss” protocol/driver
+  1.- Accessing Azure Data Lake Storage (ADLS) with the “abfss” protocol/driver
 
-1.1- Accessing ADLS with Access Keys
+  1.1- Accessing ADLS with Access Keys
 
 - 1.2.- Accessing ADLS with Shared Access Signature (SAS Token)
 
@@ -67,15 +69,15 @@ DBFS File Browser
 
 - Accessing data in ADLS2 through Unity Catalog
 
-1.- Giving access to the “Unity Catalog Access Connector” to the ADLS2
+  1.- Giving access to the “Unity Catalog Access Connector” to the ADLS2
 
 - 2.- Entering location of the ADLS2 in the Azure Databricks Workspace
 
 - Working with Delta Tables
 
-1.- CREATE a Delta Table
+  1.- CREATE a Delta Table
 
-1.1 – Create Delta Table with Spark SQL in Databricks
+  1.1 – Create Delta Table with Spark SQL in Databricks
 
 - 1.2 – Create Delta Table with Pyspark in Databricks
 
@@ -85,7 +87,7 @@ DBFS File Browser
 
 - 2.- READ a Delta Table
 
-2.1 – Read a Delta Table with Spark SQL in Databricks
+  2.1 – Read a Delta Table with Spark SQL in Databricks
 
 - 2.2 – Read a Delta Table with PySpark in Databricks
 
@@ -93,7 +95,7 @@ DBFS File Browser
 
 - 3.- UPDATE a Delta Table (Delete, Update, and Merge)
 
-3.1 – Delete a row from a Delta Table using Spark SQL in Databricks
+  3.1 – Delete a row from a Delta Table using Spark SQL in Databricks
 
 - 3.2 – Delete a row from a Delta Table using the Delta API
 
@@ -107,7 +109,7 @@ DBFS File Browser
 
 - 6.- Delta Table Optimization Utilities
 
-6.1 – Vacuum Utility
+  6.1 – Vacuum Utility
 
 - 6.2 – Reorg Utility
 
@@ -115,7 +117,7 @@ DBFS File Browser
 
 - Incremental Ingestion of Data in Databricks
 
-1.- COPY INTO Command
+  1.- COPY INTO Command
 
 - 2.- PySpark Structured Streaming API
 
@@ -123,27 +125,27 @@ DBFS File Browser
 
 - 4.- Delta Live Tables (DLT Pipelines)
 
-4.1- Create a Streaming Table with source files in a Volume
+  4.1- Create a Streaming Table with source files in a Volume
 
 - 4.2- Create a Streaming Table with data from another Streaming Table
 
 - 4.3- SCD Type 2 dimensions using CDC
 
-4.4- Create Materialized Table (Gold)
+  4.4- Create Materialized Table (Gold)
 
 ## Magic Commands
 
 There are 6 main types of “magic commands” which are little pieces of code that are placed on top of a Jupyter notebook cell before the Python or SQL code.
 
-- %sql         (for running SQL commands)
+- %sql (for running SQL commands)
 
-- % md       (for writing Markdown text)
+- % md (for writing Markdown text)
 
-- %fs           (for running Linux file system commands, such as “ls” for listing the content of a folder)
+- %fs (for running Linux file system commands, such as “ls” for listing the content of a folder)
 
-- %sh          (for using the shell)
+- %sh (for using the shell)
 
-- %run        (for executing a notebook from another notebook)
+- %run (for executing a notebook from another notebook)
 
 - %lsmagic (for listing all the magic commands available)
 
@@ -271,7 +273,7 @@ display(dbutils.fs.ls('dbfs:/databricks-datasets/'))
 display(dbutils.fs.ls('/databricks-datasets/'))
 ```
 
-But this is another file system qualifier like file:/, that allows us to access the local file system of the driver machine 
+But this is another file system qualifier like file:/, that allows us to access the local file system of the driver machine
 
 ```text
 display(dbutils.fs.ls('file:/'))
@@ -314,9 +316,9 @@ abfss://demo@###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net/test/circuits.csv
 This access gives full access to the storage with a superuser access level. We just need to set the Spark config by running this code in the first cell of the notebook, we can get the keys from the ADLS
 
 ```text
-# Set the spark config fs.azure.account.key 
+# Set the spark config fs.azure.account.key
 spark.conf.set(
-   'fs.azure.account.key.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net', 
+   'fs.azure.account.key.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net',
    '####_MY_KEY_#####')
 ```
 
@@ -328,21 +330,21 @@ We can get the SAS Token, by going first to a specific container in the ADLS, an
 
 ![](/images/2024/02/sas_token_adls.png)
 
-Then, similar to the case with Access Keys, we need to run this code in the first cell of the notebook. 
+Then, similar to the case with Access Keys, we need to run this code in the first cell of the notebook.
 
 ```text
 # Set the Spark config for SAS Token
 
 spark.conf.set(
-  'fs.azure.account.auth.type.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net', 
+  'fs.azure.account.auth.type.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net',
   'SAS')
 
 spark.conf.set(
-  'fs.azure.sas.token.provider.type.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net', 
+  'fs.azure.sas.token.provider.type.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net',
   'org.apache.hadoop.fs.azurebfs.sas.FixedSASTokenProvider')
 
 spark.conf.set(
-  'fs.azure.sas.fixed.token.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net', 
+  'fs.azure.sas.fixed.token.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net',
   '###_MY_SAS_TOKEN_###')
 ```
 
@@ -368,7 +370,7 @@ With the application registered, we take note of:
 
 - Directory / Tenant ID
 
-- Secret Value  (From the “Certificates & secrets” section). ** We need the Secret Value, not the Secret ID **
+- Secret Value (From the “Certificates & secrets” section). ** We need the Secret Value, not the Secret ID **
 
 We then create variables for each of these 3 values in the Jupyter notebook so we can use them later in the notebook in the config setup.
 
@@ -383,23 +385,23 @@ client_secret_value = '###_MY_CLIENT_SECRET_VALUE_###'
 # Set the Spark config with App/Client id, Directory/Tenant Id and Secret
 
 spark.conf.set(
-  "fs.azure.account.auth.type.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net", 
+  "fs.azure.account.auth.type.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net",
   "OAuth")
 
 spark.conf.set(
-   "fs.azure.account.oauth.provider.type.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net", 
+   "fs.azure.account.oauth.provider.type.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net",
    "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
 
 spark.conf.set(
-   "fs.azure.account.oauth2.client.id.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net", 
+   "fs.azure.account.oauth2.client.id.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net",
    client_id)
 
 spark.conf.set(
-   "fs.azure.account.oauth2.client.secret.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net", 
+   "fs.azure.account.oauth2.client.secret.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net",
    client_secret_value)
 
 spark.conf.set(
-   "fs.azure.account.oauth2.client.endpoint.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net", 
+   "fs.azure.account.oauth2.client.endpoint.###_STORAGE_ACCOUNT_NAME_###.dfs.core.windows.net",
    f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
 ```
 
@@ -486,13 +488,13 @@ So, to store data in ADLS2, data that we can control, we need to create a separa
 
 ### 1.- Giving access to the “Unity Catalog Access Connector” to the ADLS2
 
-From the Azure Portal, we go to the ADLS2 control panel and then we click on “Access Control IAM” and select the role of “Storage Blob Data Contributor”. After that, we select “Managed Identity” and search for the “unity-catalog-access-connector” and finally we click on “Review + assign”. 
+From the Azure Portal, we go to the ADLS2 control panel and then we click on “Access Control IAM” and select the role of “Storage Blob Data Contributor”. After that, we select “Managed Identity” and search for the “unity-catalog-access-connector” and finally we click on “Review + assign”.
 
 ![](/images/2024/04/unity_catalog_access_connector_adls2.jpg)
 
 ### 2.- Entering location of the ADLS2 in the Azure Databricks Workspace
 
-When the Databricks workspace was created, it automatically entered the credentials of the “unity catalog access connector”, this gives Databricks access to the Azure portal, and because in the previous step, we granted access to the connector to the ADLS2, this is now accessible from Databricks, so all we have to do is enter the location of the container and the storage account as in the screenshot below. When entering the details, it will ask for the storage credential, which is the one created automatically by Databricks. 
+When the Databricks workspace was created, it automatically entered the credentials of the “unity catalog access connector”, this gives Databricks access to the Azure portal, and because in the previous step, we granted access to the connector to the ADLS2, this is now accessible from Databricks, so all we have to do is enter the location of the container and the storage account as in the screenshot below. When entering the details, it will ask for the storage credential, which is the one created automatically by Databricks.
 
 The URL needs to be in this format: **abfss://{container_name}@{storage_account_name}.dfs.core.windows.net/**
 
@@ -527,7 +529,7 @@ df_pyspark.display()
 I first create the table using SQL, then I insert data into it with Python code. I use Pyspark to insert data into the table, given that the DaataFrame is a Python object
 
 ```sql
-%sql 
+%sql
 CREATE TABLE IF NOT EXISTS dev.demo_db.pets (
   animal STRING ,
   name STRING,
@@ -535,15 +537,15 @@ CREATE TABLE IF NOT EXISTS dev.demo_db.pets (
 )
 ```
 
-To create an external table, we just need to add the LOCATION at the end 
+To create an external table, we just need to add the LOCATION at the end
 
 ```sql
-%sql 
+%sql
 CREATE TABLE IF NOT EXISTS dev.demo_db.pets_ext (
   animal STRING ,
   name STRING,
   age INT
-) USING DELTA 
+) USING DELTA
 LOCATION 'abfss://dbfs-container2@testdatabricksadls2.dfs.core.windows.net/external2'
 ```
 
@@ -608,7 +610,7 @@ We first need to add the external location to Databricks, then we can use it to 
 #### 2.1 – Read a Delta Table with Spark SQL in Databricks
 
 ```sql
-SELECT 
+SELECT
 *
 FROM dev.demo_db.pets;
 ```
@@ -633,7 +635,7 @@ Update operations such as Delete, Update, or Merge are not possible from the PyS
 
 ```sql
 %sql
-DELETE 
+DELETE
 FROM dev.demo_db.pets
 WHERE name = 'Dumbo';
 ```
@@ -677,35 +679,35 @@ pets_dt.update(
 ### 4.- Time Travel Delta Tables
 
 ```text
-%sql 
+%sql
 DESCRIBE HISTORY dev.demo_db.people;
 ```
 
 ```text
-%sql 
+%sql
 -- Show the history of a delta file stored in a Volume (not a table yet)
 DESCRIBE HISTORY delta.`/Volumes/dev/demo_db/files/fire_calls_t
 ```
 
 ```sql
-%sql 
+%sql
 SELECT * FROM dev.demo_db.people VERSION AS OF 1
 ```
 
 ```sql
-%sql 
+%sql
 SELECT * FROM dev.demo_db.people TIMESTAMP AS OF '2024-04-06T21:57:25.000+00:00'
 ```
 
 ```text
-%sql 
+%sql
 RESTORE TABLE dev.demo_db.people TO VERSION AS OF 4
 ```
 
 ### 5.- Convert Parquet files to Delta
 
 ```text
-%sql 
+%sql
 CONVERT TO DELTA parquet.`/Volumes/dev/demo_db/files/fire_calls_tbl`
 PARTITIONED BY (Year INT)
 ```
@@ -719,7 +721,7 @@ It is used to purge old parquet partitions, the default minimum retention time a
 ```text
 SET spark.databricks.delta.retentionDurationCheck.enabled = false
 
-VACUUM dev.demo_db.fire_calls_tbl RETAIN 0 HOURS 
+VACUUM dev.demo_db.fire_calls_tbl RETAIN 0 HOURS
 ```
 
 #### 6.2 – Reorg Utility
@@ -752,7 +754,7 @@ Databrocks offers four methods of ingesting data:
 
 ### 1.- COPY INTO Command
 
-This command will always replace the data of the whole table, and it is the recommended method for data loading in bulk, as it copies the entire data at once and not row by row as in an INSERT statement. We can input different parameters like the header in the case of CSV files or “mergeShema” in case we ingest data from a file that has an extra column that wasn’t there in the original schema. 
+This command will always replace the data of the whole table, and it is the recommended method for data loading in bulk, as it copies the entire data at once and not row by row as in an INSERT statement. We can input different parameters like the header in the case of CSV files or “mergeShema” in case we ingest data from a file that has an extra column that wasn’t there in the original schema.
 
 In the FROM statement, we need to point directly to the file, so the COPY statement won’t work with a SELECT statement reading from another table or view.
 
@@ -762,7 +764,7 @@ If we want to be strict in the schema of the table, we can select the columns in
 COPY INTO dev.demo_db.invoices_raw
 FROM
 (
-SELECT 
+SELECT
         InvoiceNo::STRING
         ,StockCode::STRING
         ,Description::STRING
@@ -773,11 +775,11 @@ SELECT
         ,Country::STRING
 FROM "abfss://dbfs-container@testdatabricksadls2.dfs.core.windows.net/dataset_ch8/invoices"
 )
-FILEFORMAT = CSV 
+FILEFORMAT = CSV
 FORMAT_OPTIONS("header" = "true", "mergeSchema" = "true")
 ```
 
-If we want to let Databricks infer the schema from the structure of the file, we can implement  the “automatic schema evolution” in the COPY_OPTIONS and tell Databricks to infer the schema in the FORMAT_OPTIONS
+If we want to let Databricks infer the schema from the structure of the file, we can implement the “automatic schema evolution” in the COPY_OPTIONS and tell Databricks to infer the schema in the FORMAT_OPTIONS
 
 ```text
 COPY INTO dev.demo_db.invoices_raw
@@ -795,9 +797,9 @@ In the first example below, we are setting up the schema of the data in a variab
 
 ```python
 def ingest():
-  invoice_schema = """InvoiceNo int, StockCode string, Description string, Quantity int, 
+  invoice_schema = """InvoiceNo int, StockCode string, Description string, Quantity int,
                     InvoiceDate timestamp, UnitPrice double, CustomerID int, Country string"""
-                    
+
   source_df = (spark.readStream
                       .format("csv")
                       .option("header", "true")
@@ -807,7 +809,7 @@ def ingest():
 
   write_query = (source_df.writeStream
                           .format("delta")
-                          .option("checkpointLocation", f"{base_dir}/chekpoint/invoices") 
+                          .option("checkpointLocation", f"{base_dir}/chekpoint/invoices")
                           .outputMode("append")
                           .trigger(availableNow = True) # To run it as a single micro batch for available data
                           .toTable("dev.demo_db.invoices_raw")
@@ -835,12 +837,12 @@ def ingest():
                           .format("delta")
                           .option("checkpointLocation", f"{base_dir}/chekpoint/invoices")
                           .option("mergeSchema", "true") # Automatic Schema evoluition
-                          .outputMode("append")                          
+                          .outputMode("append")
                           .trigger(availableNow = True)
                           .toTable("dev.demo_db.invoices_raw") # Create table if not exists
   )
 
-ingest()  
+ingest()
 ```
 
 ### 3.- Databricks Autoloader
@@ -853,9 +855,9 @@ The key is the use of “cloudFiles” which is the Autoloader. The `spark.read
 def ingest():
   source_df = (spark.readStream
                       .format("cloudFiles")
-                      .option("cloudFiles.format", "csv")  
-                      .option("header", "true") 
-                      .option("timestampFormat","d-M-y H.m")                  
+                      .option("cloudFiles.format", "csv")
+                      .option("header", "true")
+                      .option("timestampFormat","d-M-y H.m")
                       .option("cloudFiles.schemaLocation", f"{base_dir}/chekpoint/invoices_schema")
                       .option("cloudFiles.inferColumnTypes", "true") # Infer Schema
                       .option("cloudFiles.schemaHints", "InvoiceNo string, CustomerID string")
@@ -866,12 +868,12 @@ def ingest():
                           .format("delta")
                           .option("checkpointLocation", f"{base_dir}/chekpoint/invoices")
                           .option("mergeSchema", "true")  # Automatic Schema Evolution
-                          .outputMode("append")                          
+                          .outputMode("append")
                           .trigger(availableNow = True)
                           .toTable("dev.demo_db.invoices_raw")
   )
 
-ingest() 
+ingest()
 ```
 
 ## 4.- Delta Live Tables (DLT Pipelines)
@@ -896,7 +898,7 @@ Any additional configurations can be provided as a “map”, which is nothing t
 
 ```sql
 CREATE OR REFRESH STREAMING TABLE customers_raw
-AS SELECT *, current_timestamp() AS load_time 
+AS SELECT *, current_timestamp() AS load_time
 FROM cloud_files('/Volumes/dev/demo_db/landing_zone/customers', 'csv', map("cloudFiles.inferColumnTypes", "true"))
 ```
 
@@ -910,10 +912,10 @@ The quality checks are performed through “expectations”, which are constrain
 CREATE OR REFRESH STREAMING TABLE invoices_cleaned
 (
   --expectations
-  CONSTRAINT valid_invoice_and_qty EXPECT (invoice_no IS NOT NULL AND quantity > 0) ON VIOLATION DROP ROW 
-  PARTITIONED BY (invoice_year, country) 
-) AS 
-SELECT 
+  CONSTRAINT valid_invoice_and_qty EXPECT (invoice_no IS NOT NULL AND quantity > 0) ON VIOLATION DROP ROW
+  PARTITIONED BY (invoice_year, country)
+) AS
+SELECT
 InvoiceNo AS invoice_no
 ,StockCode AS stock_code
 ,Description AS description
@@ -946,18 +948,18 @@ STORED AS SCD TYPE 2;
 
 A Materialized View is created as “LIVE TABLE”, which is not a streaming table but a materialized view with FULL Refresh (not incremental tables as in the previous steps), this is usually done for “Gold” final tables. Since this is a materialized view and not a streaming table, it is not necessary to use the STREAM function in the FROM statement.
 
-This table will be updated when we execute the pipeline 
+This table will be updated when we execute the pipeline
 
 ```sql
 CREATE OR REFRESH LIVE TABLE daily_sales_uk_2022;
-AS 
-SELECT 
+AS
+SELECT
 country
 ,invoice_year
 ,invoice_month
 ,invoice_date
 round(sum(quantity * price), 2) as total_sales
-FROM 
+FROM
 live.invoices
 WHERE invoice_year = 2022 AND country = 'United Kingdom'
 GROUP BY country, invoice_year, invoice_month, invoice_date

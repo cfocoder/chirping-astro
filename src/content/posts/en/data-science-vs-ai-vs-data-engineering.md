@@ -1,8 +1,10 @@
 ---
-title: "Unraveling the Differences: Data Science, AI, and Data Engineering"
-description: "I recently met with a group of colleagues from the accounting firm (KPMG), where I worked many years ago, and I found it hard to explain to them, what I do in the field of Data Science and what Artificial Intelligence is and is not, so after giving it a lot of thought, I..."
+title: 'Unraveling the Differences: Data Science, AI, and Data Engineering'
+description: 'I recently met with a group of colleagues from the accounting firm (KPMG), where I worked many years ago, and I found it hard to explain to them, what I do in the field of Data Science and what Artificial Intelligence is and is not, so after giving it a lot of thought, I...'
 pubDate: 2024-09-06
-categories: ["Data Science"]
+heroImage: '/images/2024/09/data_science.jpg'
+heroImageAlt: 'data science'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
@@ -23,7 +25,7 @@ I recently met with a group of colleagues from the accounting firm (KPMG), where
 
 - 6.- Foundational Layers
 
-6.1 Data Engineering
+  6.1 Data Engineering
 
 - 6.2 Mathematical Optimization
 

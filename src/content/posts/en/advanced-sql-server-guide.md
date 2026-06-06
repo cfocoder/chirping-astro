@@ -1,8 +1,10 @@
 ---
-title: "Advanced SQL Server Guide"
-description: "This is a short quick guide on advanced SQL Server topics, that I recently learned in this course from Udemy. The examples run in this post, use the AdventureWorks2019 sample database provided by Microsoft."
+title: 'Advanced SQL Server Guide'
+description: 'This is a short quick guide on advanced SQL Server topics, that I recently learned in this course from Udemy. The examples run in this post, use the AdventureWorks2019 sample database provided by Microsoft.'
 pubDate: 2023-05-22
-categories: ["SQL"]
+heroImage: '/images/2023/08/SQL.jpg'
+heroImageAlt: 'SQL'
+categories: ['SQL']
 tags: []
 toc: true
 ---
@@ -82,11 +84,11 @@ AdventureWorks2019.Sales.SalesOrderHeader
 **OVER()** can use arguments like **PARTITION BY** and **ORDER BY **to refine the level of aggregation at row level
 
 ```sql
-SELECT 
+SELECT
 SalesOrderID,
 ProductID,
 AvgPrice = AVG(UnitPrice) OVER(PARTITION BY SalesOrderID ORDER BY ProductID DESC)
-FROM 
+FROM
 Sales.SalesOrderDetail
 ```
 
@@ -103,13 +105,13 @@ Window functions also allow us to rank rows by using one of the 3 functions alon
 - DENSE_RANK(): Used when we want to rank the rows of a table with no gaps in the ranking numbering. Rows with the same value, also get the same ranking number, but it doesn’t skip the ranking numbering for the next row with a different value.
 
 ```sql
-SELECT 
+SELECT
 SalesOrderID,
 ProductID,
 Ranking1 = ROW_NUMBER() OVER(ORDER BY SalesOrderID),
 Ranking2 = RANK() OVER(ORDER BY SalesOrderID),
 Ranking3 = DENSE_RANK() OVER(ORDER BY SalesOrderID)
-FROM 
+FROM
 Sales.SalesOrderDetail
 ```
 
@@ -141,7 +143,7 @@ These subqueries, run once for every row in the table and return a scalar value 
 SELECT
 SalesOrderID,
 AverageValue = (SELECT AVG(ListPrice) FROM AdventureWorks2019.Production.Product)
-FROM 
+FROM
 AdventureWorks2019.Sales.SalesOrderHeader
 ```
 
@@ -156,7 +158,7 @@ A.OrderDate,
 A.TotalDue
 FROM
 AdventureWorks2019.Sales.SalesOrderHeader A
-WHERE EXISTS 
+WHERE EXISTS
 (
 	SELECT
 	1
@@ -172,7 +174,7 @@ They work similarly to the Pivot Tables in Excel. Pivot expands criteria from a 
 
 ### Example of Pivot
 
-This is the starting table called **#PivotExample**, in this case, we want to pivot the ProductCategoryName as  columns for each Category
+This is the starting table called **#PivotExample**, in this case, we want to pivot the ProductCategoryName as columns for each Category
 
 ![](/images/2023/08/pivot_example.jpg)
 
@@ -182,9 +184,9 @@ Below is the code to pivot the table above, the fields in the SELECT statement, 
 SELECT
 B.Bikes,
 B.Clothing,
-B.Components, 
+B.Components,
 B.Accessories
-FROM 
+FROM
 #PivotExample A
 
 PIVOT(
@@ -202,7 +204,7 @@ The end result of the Pivot Table is the following:
 To Unpivot the table above, we use the following code. The items in the SELECT statement (Categories and Total) correspond to the fields that are inside the UNPIVOT function, the first one is the name that would aggregate the values from the columns, and the second one, has the list with the name of the columns that would later become the Categories.
 
 ```sql
-SELECT 
+SELECT
 Categories = B.Categories,
 Total = B.Total
 FROM #UnpivotExample A
@@ -225,7 +227,7 @@ Useful for making nested queries easier to read, besides the fact that each laye
 
 In the example below, Step1 is referenced in Step2, and in the final SELECT, Step2 is referenced twice, once in the FROM statement (From Step2 A) and a second time in the ON statement to create a new column based on Step2
 
-```sql
+````sql
 WITH Step1 AS
 (
 SELECT
@@ -284,7 +286,7 @@ INTO #TempSales1
 FROM
 AdventureWorks2019.Sales.SalesOrderHeader
 GROUP BY SalesOrderID
-```
+````
 
 ### Create Temporary Tables with CREATE – INSERT INTO
 
@@ -317,10 +319,10 @@ GROUP BY SalesOrderID
 
 ### Update Tables with a conditional CASE statement
 
-```sql
+````sql
 UPDATE #SalesOrders
 SET
-TaxFreightBucket = 
+TaxFreightBucket =
   CASE
     WHEN TaxFreightPercent This is a way to update a table based on the values coming from another table:
 
@@ -330,7 +332,7 @@ SET ProductName = b.Name
 FROM AdventureWorks2019 A
 JOIN AdventureWorks2019.Production.Product B
 ON A.ProductID = B.ProductID
-```
+````
 
 ### Table Indexes
 
@@ -356,7 +358,7 @@ CREATE NONCLUSTERED INDEX Sales_idx2 ON #ProductsTable(ProductID)
 
 ### Variables
 
-We create variables with the DECLARE statement and the  “@” sign preceding the variable word and the type of value, followed by the SET statement and the initial value that we are assigning to the variable. Later when we call the variable, we can get the value of the variable by using the SELECT statement followed by the variable name, including the “@” sign.
+We create variables with the DECLARE statement and the “@” sign preceding the variable word and the type of value, followed by the SET statement and the initial value that we are assigning to the variable. Later when we call the variable, we can get the value of the variable by using the SELECT statement followed by the variable name, including the “@” sign.
 
 Variables can hold scalar values such as numbers, text, or dates.
 
@@ -369,9 +371,9 @@ SELECT @MyValue AS Header1
 
 ```sql
 DECLARE @AvgPrice MONEY
-SET @AvgPrice = 
+SET @AvgPrice =
 (
-SELECT 
+SELECT
 AvgPrice = SUM(TotalDue)
 FROM
 AdventureWorks2019.Sales.SalesOrderHeader
@@ -382,7 +384,7 @@ SELECT @AvgPrice AS AvgPrice
 
 ### Functions
 
-Functions are blocks of logic that can be re-used when they get called somewhere in the code. Functions may take arguments or not. 
+Functions are blocks of logic that can be re-used when they get called somewhere in the code. Functions may take arguments or not.
 
 Functions live in the function folder of the Database, so in the example below, we put the word “dbo” followed by a dot and the name of the function. We also need to specify the type of data it returns, in this case, “RETURNS INT”, and inside the chunk of code that is between BEGIN and END, we need to also specify the value that the function returns, in this case, the sum of the two variables
 
@@ -408,7 +410,7 @@ SELECT dbo.ufnMyFunction1(10, 20) AS Result
 
 Stored Procedures are database objects that provide the flexibility to execute single or multiple blocks of code that can do anything from database maintenance to running outputs of multiple select statements. Stored Procedures can use parameters like a function, and not necessarily have to return a value like functions.
 
-Procedures are stored inside the Programmability folder of the database. 
+Procedures are stored inside the Programmability folder of the database.
 
 They are created in a similar way to functions, but since they don’t have to return a value, we don’t include any RETURN statement.
 
@@ -417,7 +419,7 @@ CREATE PROCEDURE dbo.myProcedure1 (@Param1 VARCHAR(25), @Param2 VARCHAR(25))
 AS
 
 BEGIN
-	SELECT 
+	SELECT
 	SalesOrderID,
 	Parameter1 = @Param1,
 	Parameter2 = @Param2
@@ -469,7 +471,7 @@ This is useful to avoid repetitive pieces of code. New code is produced until th
 
 The way it works is by using SQL statements as strings in variables, then these pieces of strings are concatenated in between variables so that when the concatenation is put together, it forms a fully functional piece of SQL code
 
-The concatenation is made inside of a procedure, and the variable that holds the concatenated pieces of SQL code is executed in between parenthesis with the EXEC statement. Then we execute the procedure itself by calling it the EXEC statement 
+The concatenation is made inside of a procedure, and the variable that holds the concatenated pieces of SQL code is executed in between parenthesis with the EXEC statement. Then we execute the procedure itself by calling it the EXEC statement
 
 ```sql
 CREATE PROCEDURE dbo.DynamicAggregation1(@Aggregation VARCHAR(50))

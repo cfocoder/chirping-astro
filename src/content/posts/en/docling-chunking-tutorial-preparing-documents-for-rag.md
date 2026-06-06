@@ -1,8 +1,10 @@
 ---
-title: "Docling Chunking Tutorial: Preparing Documents for RAG"
-description: "Docling Chunkers: Overview and Comparison"
+title: 'Docling Chunking Tutorial: Preparing Documents for RAG'
+description: 'Docling Chunkers: Overview and Comparison'
 pubDate: 2025-11-02
-categories: ["AI"]
+heroImage: '/images/2025/11/Docling_Chunking.png'
+heroImageAlt: 'Docling Chunking'
+categories: ['AI']
 tags: []
 toc: true
 ---
@@ -35,7 +37,7 @@ toc: true
 
 - Section 6: Best Practices for Legal Documents
 
-6.1 Chunking Strategy Guidelines
+  6.1 Chunking Strategy Guidelines
 
 Chunk Size Selection:
 
@@ -51,7 +53,7 @@ Chunk Size Selection:
 
 - Section 8: Real-World RAG Integration Patterns
 
-8.1 Integration Example: ChromaDB
+  8.1 Integration Example: ChromaDB
 
 - 8.2 Integration Example: Pinecone
 
@@ -99,11 +101,11 @@ Docling provides several chunkers for splitting documents into semantically mean
 
 **Summary Table:**
 
-| Chunker | Structure-Aware | Sliding Window | Semantic Coherence | Use Case | Sophistication |
-|---|---|---|---|---|---|
-| BaseChunker | No | No | Low | Simple, unstructured docs | Basic |
-| HierarchicalChunker | Yes | No | High | Legal, academic, structured docs | Advanced |
-| HybridChunker | Yes | Yes | Very High | Large/complex docs, RAG | Most Advanced |
+| Chunker             | Structure-Aware | Sliding Window | Semantic Coherence | Use Case                         | Sophistication |
+| ------------------- | --------------- | -------------- | ------------------ | -------------------------------- | -------------- |
+| BaseChunker         | No              | No             | Low                | Simple, unstructured docs        | Basic          |
+| HierarchicalChunker | Yes             | No             | High               | Legal, academic, structured docs | Advanced       |
+| HybridChunker       | Yes             | Yes            | Very High          | Large/complex docs, RAG          | Most Advanced  |
 
 **Recommendation:**
 For most legal/fiscal documents, use `HierarchicalChunker` for semantic coherence. For very large or complex documents, or when you need strict chunk size control, use `HybridChunker`—it is the most sophisticated and advanced option.
@@ -239,18 +241,18 @@ print(f"✓ Chunker initialized with default parameters")
 if chunks:
     chunk_lengths = [len(chunk.text) for chunk in chunks]
     avg_length = sum(chunk_lengths) / len(chunk_lengths)
-    
+
     print(f"\n📊 Chunk Statistics:")
     print(f"  - Average chunk length: {avg_length:.0f} characters")
     print(f"  - Shortest chunk: {min(chunk_lengths)} characters")
     print(f"  - Longest chunk: {max(chunk_lengths)} characters")
-    
+
     # Show the first chunk
     print(f"\n📄 First Chunk Preview:")
     first_chunk = chunks[0]
     print(f"  - Text length: {len(first_chunk.text)} characters")
     print(f"  - Text preview: {first_chunk.text[:200]}...")
-    
+
     # Show chunk metadata
     if hasattr(first_chunk, 'meta'):
         print(f"\n🏷️  First Chunk Metadata:")
@@ -297,12 +299,12 @@ print(f"  - Difference: {abs(len(chunks) - len(custom_chunks))} chunks")
 if custom_chunks:
     custom_lengths = [len(chunk.text) for chunk in custom_chunks]
     avg_custom = sum(custom_lengths) / len(custom_lengths)
-    
+
     print(f"\n📐 Custom Chunk Statistics:")
     print(f"  - Average length: {avg_custom:.0f} characters")
     print(f"  - Shortest: {min(custom_lengths)} characters")
     print(f"  - Longest: {max(custom_lengths)} characters")
-    
+
     # Show a sample chunk
     print(f"\n📄 Sample Custom Chunk (chunk #5):")
     if len(custom_chunks) > 4:
@@ -329,22 +331,22 @@ for i, chunk in enumerate(custom_chunks[:3], 1):
     print(f"\n--- Chunk {i} ---")
     print(f"Text length: {len(chunk.text)} characters")
     print(f"Word count: {len(chunk.text.split())} words")
-    
+
     # Show metadata if available
     if hasattr(chunk, 'meta'):
         print(f"Metadata: {chunk.meta}")
-    
+
     # Show document location information if available
     if hasattr(chunk, 'dl_doc_hash'):
         print(f"Document hash: {chunk.dl_doc_hash}")
-    
+
     if hasattr(chunk, 'page'):
         print(f"Page number: {chunk.page}")
-    
+
     # Show text preview
     preview_length = min(150, len(chunk.text))
     print(f"Preview: {chunk.text[:preview_length]}...")
-    
+
     # Show path information (hierarchical structure)
     if hasattr(chunk, 'path'):
         print(f"Path: {chunk.path}")
@@ -379,17 +381,17 @@ for i, chunk in enumerate(custom_chunks):
             "document_name": pdf_path.name,
         }
     }
-    
+
     # Add optional metadata if available
     if hasattr(chunk, 'meta'):
         chunk_data["metadata"]["chunk_meta"] = str(chunk.meta)
-    
+
     if hasattr(chunk, 'page'):
         chunk_data["metadata"]["page"] = chunk.page
-    
+
     if hasattr(chunk, 'path'):
         chunk_data["metadata"]["path"] = str(chunk.path)
-    
+
     chunks_for_rag.append(chunk_data)
 
 print(f"\n✓ Prepared {len(chunks_for_rag)} chunks for RAG pipeline")
@@ -483,7 +485,7 @@ chunks = list(chunker.chunk(doc))
 
 Let’s compare different chunking strategies side-by-side to understand their impact on the final output.
 
-```json
+````json
 ### 7.1 Compare Multiple Chunking Strategies
 
 print("=" * 70)
@@ -508,13 +510,13 @@ for strategy in strategies:
         overlap_tokens=strategy["overlap"],
         tokenizer="text"
     )
-    
+
     strategy_chunks = list(chunker.chunk(doc))
-    
+
     # Calculate statistics
     chunk_lengths = [len(chunk.text) for chunk in strategy_chunks]
     avg_length = sum(chunk_lengths) / len(chunk_lengths) if chunk_lengths else 0
-    
+
     result = {
         "strategy": strategy["name"],
         "config": f"max:{strategy['max_tokens']}, min:{strategy['min_tokens']}, overlap:{strategy['overlap']}",
@@ -523,7 +525,7 @@ for strategy in strategies:
         "min_chars": min(chunk_lengths) if chunk_lengths else 0,
         "max_chars": max(chunk_lengths) if chunk_lengths else 0,
     }
-    
+
     comparison_results.append(result)
 
 # Display comparison table
@@ -559,7 +561,7 @@ results = collection.query(
     query_texts=["¿Cuáles son los derechos humanos en México?"],
     n_results=5
 )
-```
+````
 
 ### 8.2 Integration Example: Pinecone
 
@@ -685,12 +687,12 @@ response = query_engine.query("¿Cuáles son las garantías individuales?")
 
 ### Key Parameters:
 
-| Parameter | Purpose | Recommended Values |
-|---|---|---|
-| max_tokens | Maximum chunk size | 256-512 for general use, 512-1024 for legal |
-| min_tokens | Minimum chunk size | 32-64 (avoid tiny chunks) |
-| overlap_tokens | Context continuity | 32-64 for balance, 0 for efficiency |
-| tokenizer | Tokenization method | “text” for speed, default for accuracy |
+| Parameter      | Purpose             | Recommended Values                          |
+| -------------- | ------------------- | ------------------------------------------- |
+| max_tokens     | Maximum chunk size  | 256-512 for general use, 512-1024 for legal |
+| min_tokens     | Minimum chunk size  | 32-64 (avoid tiny chunks)                   |
+| overlap_tokens | Context continuity  | 32-64 for balance, 0 for efficiency         |
+| tokenizer      | Tokenization method | “text” for speed, default for accuracy      |
 
 ### Chunking Strategy Decision Tree:
 

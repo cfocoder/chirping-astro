@@ -1,8 +1,10 @@
 ---
-title: "Querying Apache Hive from DBeaver: Starting HiveServer2 and Connecting a Desktop SQL Client"
-description: "Part 6 in the Hadoop and Hive Tutorial Series"
+title: 'Querying Apache Hive from DBeaver: Starting HiveServer2 and Connecting a Desktop SQL Client'
+description: 'Part 6 in the Hadoop and Hive Tutorial Series'
 pubDate: 2026-03-24
-categories: ["Hadoop"]
+heroImage: '/images/2026/03/hive_dbeaver.png'
+heroImageAlt: 'hive dbeaver'
+categories: ['Hadoop']
 tags: []
 toc: true
 ---
@@ -55,18 +57,18 @@ At this stage, the Hadoop cluster and Hive installation already exist. What we a
 
 All steps below were validated on the following setup:
 
-| Component | Version / Value |
-|---|---|
-| OS | Ubuntu 24.04 LTS |
-| Hadoop | 3.3.6 |
-| Hive | 3.1.3 |
-| Hadoop home | ~/hadoop-3.3.6 |
-| Hive home | ~/apache-hive-3.1.3-bin |
-| Java for Hadoop | OpenJDK 11 |
-| Java for Hive | Temurin / JDK 8 |
-| SQL client | DBeaver |
-| HiveServer2 port | 10000 |
-| HiveServer2 web UI | 10002 |
+| Component          | Version / Value         |
+| ------------------ | ----------------------- |
+| OS                 | Ubuntu 24.04 LTS        |
+| Hadoop             | 3.3.6                   |
+| Hive               | 3.1.3                   |
+| Hadoop home        | ~/hadoop-3.3.6          |
+| Hive home          | ~/apache-hive-3.1.3-bin |
+| Java for Hadoop    | OpenJDK 11              |
+| Java for Hive      | Temurin / JDK 8         |
+| SQL client         | DBeaver                 |
+| HiveServer2 port   | 10000                   |
+| HiveServer2 web UI | 10002                   |
 
 In this local academic setup, Hive uses an embedded Derby metastore. That is acceptable for personal learning and single-user experimentation, but it is not the architecture you would use for a multi-user production environment.
 
@@ -415,12 +417,12 @@ In DBeaver:
 
 Use these values:
 
-| Field | Value |
-|---|---|
-| Host | localhost |
-| Port | 10000 |
-| Database | default |
-| Username | hectorsa |
+| Field    | Value         |
+| -------- | ------------- |
+| Host     | localhost     |
+| Port     | 10000         |
+| Database | default       |
+| Username | hectorsa      |
 | Password | (leave empty) |
 
 If DBeaver asks for the JDBC URL, use:
@@ -483,7 +485,7 @@ SHOW TABLES;
 If you already created the IMSS tables from the previous post, you can run:
 
 ```sql
-SELECT * 
+SELECT *
 FROM imss_trabajadores_tipo
 LIMIT 5;
 ```
@@ -698,4 +700,4 @@ At this point, the local stack is already useful for SQL exploration. A natural 
 
 - DBeaver Official Website
 
-*Validated on March 24, 2026 on Ubuntu 24.04 with Hadoop 3.3.6, Hive 3.1.3, HiveServer2, and DBeaver in a local single-node academic environment.*
+_Validated on March 24, 2026 on Ubuntu 24.04 with Hadoop 3.3.6, Hive 3.1.3, HiveServer2, and DBeaver in a local single-node academic environment._

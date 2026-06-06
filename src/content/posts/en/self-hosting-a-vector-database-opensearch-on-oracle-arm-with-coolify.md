@@ -1,8 +1,10 @@
 ---
-title: "Self-Hosting a Vector Database: OpenSearch on Oracle ARM with Coolify"
-description: "If you are building AI applications, RAG (Retrieval-Augmented Generation) pipelines, or just need a powerful search engine, you need a Vector Database. While services like Pinecone are great, they get expensive."
+title: 'Self-Hosting a Vector Database: OpenSearch on Oracle ARM with Coolify'
+description: 'If you are building AI applications, RAG (Retrieval-Augmented Generation) pipelines, or just need a powerful search engine, you need a Vector Database. While services like Pinecone are great, they get expensive.'
 pubDate: 2025-11-21
-categories: ["AI"]
+heroImage: '/images/2025/11/opensearch_logo1.png'
+heroImageAlt: 'opensearch logo1'
+categories: ['AI']
 tags: []
 toc: true
 ---
@@ -43,7 +45,7 @@ sudo sysctl -w vm.max_map_count=262144
 echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 ```
 
-*Note: You can verify this by running `sysctl vm.max_map_count`. If it returns `262144` or higher, you are safe.*
+_Note: You can verify this by running `sysctl vm.max_map_count`. If it returns `262144` or higher, you are safe._
 
 ## Step 2: Create the Resource in Coolify
 
@@ -70,7 +72,7 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       # Oracle ARM usually has 24GB RAM. We allocate 2GB heap here.
-      - "OPENSEARCH_JAVA_OPTS=-Xms2g -Xmx2g"
+      - 'OPENSEARCH_JAVA_OPTS=-Xms2g -Xmx2g'
       - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
       # DISABLE HTTP CLIENT AUTH (Fixes 504/SSL errors from Dashboard)
       - plugins.security.ssl.http.clientauth_mode=NONE

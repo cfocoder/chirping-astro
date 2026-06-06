@@ -1,8 +1,10 @@
 ---
-title: "Converting the Mexican Constitution PDF to Markdown with Docling"
-description: "This tutorial demonstrates how to use Docling to convert PDF documents to Markdown, JSON, and other formats. We’ll use the Mexican Constitution (Constitución Política de los Estados Unidos Mexicanos – CPEUM) as our practical case study."
+title: 'Converting the Mexican Constitution PDF to Markdown with Docling'
+description: 'This tutorial demonstrates how to use Docling to convert PDF documents to Markdown, JSON, and other formats. We’ll use the Mexican Constitution (Constitución Política de los Estados Unidos Mexicanos – CPEUM) as our practical case study.'
 pubDate: 2025-11-02
-categories: ["AI"]
+heroImage: '/images/2025/11/Docling.png'
+heroImageAlt: 'Docling'
+categories: ['AI']
 tags: []
 toc: true
 ---
@@ -59,7 +61,7 @@ Stage 1: PDF → DoclingDocument Object
 
 - Section 3: Exporting to Multiple Formats
 
-Understanding export_to_* vs save_as_* Methods
+Understanding export*to*_ vs save*as*_ Methods
 
 - Section 4: Advanced Configuration – Custom PDF Pipeline Options
 
@@ -223,7 +225,7 @@ print(f"✓ Number of pages: {len(result.pages)}")
 # Show conversion timings if available
 if result.timings:
     total_time = sum(
-        timing.duration if hasattr(timing, 'duration') else 0 
+        timing.duration if hasattr(timing, 'duration') else 0
         for timing in result.timings.values()
     )
     print(f"✓ Total conversion time: {total_time:.2f} seconds")
@@ -247,11 +249,11 @@ print(f"  - File name: {doc.origin.filename}")
 
 Now let’s explore how to export the converted document to different formats. Docling supports multiple serialization formats:
 
-### Understanding export_to_* vs save_as_* Methods
+### Understanding export*to*_ vs save*as*_ Methods
 
-- export_to_* methods (e.g., export_to_markdown(), export_to_dict(), export_to_html()): Return the converted content as a Python object/string for in-memory manipulation before saving or processing further.
+- export*to*\* methods (e.g., export_to_markdown(), export_to_dict(), export_to_html()): Return the converted content as a Python object/string for in-memory manipulation before saving or processing further.
 
-- save_as_* methods (e.g., save_as_markdown(), save_as_json()): Directly write the converted content to a file in one operation—convenient for direct file output.
+- save*as*\* methods (e.g., save_as_markdown(), save_as_json()): Directly write the converted content to a file in one operation—convenient for direct file output.
 
 In the examples below, we’ll use `export_to_*` to get the content, then save it using standard file I/O for better control.
 
@@ -467,7 +469,7 @@ if source_files:
     print(f"\n✓ Found {len(source_files)} documents to process:")
     for f in source_files:
         print(f"  - {Path(f).name}")
-    
+
     # For demonstration, we'll just show the concept
     print("\n✓ Using convert_all() for batch processing:")
     print("""
@@ -476,7 +478,7 @@ if source_files:
         source=source_files,
         raises_on_error=False  # Continue even if one file fails
     )
-    
+
     for result in results:
         if result.status == ConversionStatus.SUCCESS:
             print(f"✓ {result.input.file.name}")
@@ -488,16 +490,16 @@ else:
     print("\n✓ Batch processing concept:")
     print("""
     from docling.document_converter import DocumentConverter
-    
+
     # Initialize converter
     converter = DocumentConverter()
-    
+
     # Prepare list of files
     files = ["doc1.pdf", "doc2.docx", "doc3.xlsx"]
-    
+
     # Convert all at once
     results = converter.convert_all(files, raises_on_error=False)
-    
+
     # Process results
     for result in results:
         doc = result.document
@@ -537,7 +539,7 @@ else:
 
 # Analyze block-level confidence
 blocks_with_confidence = [
-    block for block in blocks 
+    block for block in blocks
     if hasattr(block, 'confidence') and block.confidence is not None
 ]
 
@@ -549,7 +551,7 @@ if blocks_with_confidence:
         avg_confidence = sum(confidences) / len(confidences)
         min_confidence = min(confidences)
         max_confidence = max(confidences)
-        
+
         print(f"  - Average confidence: {avg_confidence:.3f}")
         print(f"  - Min confidence: {min_confidence:.3f}")
         print(f"  - Max confidence: {max_confidence:.3f}")

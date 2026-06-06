@@ -1,8 +1,10 @@
 ---
-title: "The Powerful COPY Command in DuckDB / MotherDuck: A Quick Reference Guide"
-description: "The COPY command in DuckDB and MotherDuck is a versatile tool for importing and exporting data. This guide provides a concise overview of how to use COPY both from the DuckDB CLI (SQL only) and from Python, including workflows with Ibis and pandas. Use this as a quick..."
+title: 'The Powerful COPY Command in DuckDB / MotherDuck: A Quick Reference Guide'
+description: 'The COPY command in DuckDB and MotherDuck is a versatile tool for importing and exporting data. This guide provides a concise overview of how to use COPY both from the DuckDB CLI (SQL only) and from Python, including workflows with Ibis and pandas. Use this as a quick...'
 pubDate: 2025-07-08
-categories: ["Data Science", "Python", "SQL"]
+heroImage: '/images/2025/07/COPY_Command_Logo.png'
+heroImageAlt: 'COPY Command Logo'
+categories: ['Data Science', 'Python', 'SQL']
 tags: []
 toc: true
 ---
@@ -133,7 +135,7 @@ con.register('my_df_view', df)
 # Execute a query and fetch the result as a pandas DataFrame
 result_df = con.execute('SELECT * FROM my_df_view').fetchdf()
 print(type(result_df))
-# 
+#
 ```
 
 ### Practical Workflows

@@ -1,8 +1,10 @@
 ---
-title: "How to Setup an Azure Virtual Machine for Python Development"
-description: "As part of the Data Science course I’m currently studying in Tec de Monterrey, I learned how to do remote python development using Github Codespaces for free. I found this to be an eye-opener as it meant I could use Visual Studio Code for coding Python apps directly on a..."
+title: 'How to Setup an Azure Virtual Machine for Python Development'
+description: 'As part of the Data Science course I’m currently studying in Tec de Monterrey, I learned how to do remote python development using Github Codespaces for free. I found this to be an eye-opener as it meant I could use Visual Studio Code for coding Python apps directly on a...'
 pubDate: 2022-12-09
-categories: ["Cloud"]
+heroImage: '/images/2023/08/azurevm.png'
+heroImageAlt: 'azurevm'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -35,13 +37,13 @@ As part of the Data Science course I’m currently studying in Tec de Monterrey,
 
 I chose Azure because I really like the control I have of all resources through “Resource Groups”, and this allows me to rapidly see how much these resources are costing me. I tried to do the same with AWS and Google Cloud Platform and I found the organization and cost of resources to be less clear.
 
-I settled with the “B2S” machine which costs about 4 cents per hour and it has 2 CPUs and 4GB of RAM memory, and a standard SSD of 30GB. I found that it runs very smoothly compared to the VM from Github Codespaces, it feels like I’m working on my own laptop. 
+I settled with the “B2S” machine which costs about 4 cents per hour and it has 2 CPUs and 4GB of RAM memory, and a standard SSD of 30GB. I found that it runs very smoothly compared to the VM from Github Codespaces, it feels like I’m working on my own laptop.
 
 ![](/images/2023/08/azure_vms.jpg)
 
 ## Setup the SSH Key
 
-I selected the option of connecting to the VM with an “SSH public key”, and when we are about to create the VM, Azure prompts us to download the .pem file with the key. 
+I selected the option of connecting to the VM with an “SSH public key”, and when we are about to create the VM, Azure prompts us to download the .pem file with the key.
 
 This .pem key needs to have read-only access which we can do with the CHMOD command:
 
@@ -73,7 +75,7 @@ icacls.exe $path /inheritance:r
 
 ## Setup Remote SSH with Visual Studio Code
 
-Now is time to connect to the virtual machine via Visual Studio Code. Click on “Remote Explorer” from the vertical bar on the left of the screen, and then on the ‘+’ sign on the “Remote Explorer” window and finally type the IP address of the VM preceded by the username and the “@” symbol 
+Now is time to connect to the virtual machine via Visual Studio Code. Click on “Remote Explorer” from the vertical bar on the left of the screen, and then on the ‘+’ sign on the “Remote Explorer” window and finally type the IP address of the VM preceded by the username and the “@” symbol
 
 ![](/images/2023/08/vscodessh.jpg)
 
@@ -93,7 +95,7 @@ From the web page of [Anaconda](https://www.anaconda.com/products/distribution),
 
 ![](/images/2023/08/anaconda1.jpg)
 
- Then open a new terminal in the VM from VSCode and type the following command:
+Then open a new terminal in the VM from VSCode and type the following command:
 
 ```bash
  wget -O aconda.sh https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
@@ -120,7 +122,7 @@ git config --global user.email "hector@sanchezmx.com"
 
 ## Install Python dependencies
 
-Build-essential is a tool that installs a lot of packages that are required to create a Debian package (deb), and among these packages, is GCC (GNU Compiler Collection), which is a tool needed for compiling C and C++ programs. 
+Build-essential is a tool that installs a lot of packages that are required to create a Debian package (deb), and among these packages, is GCC (GNU Compiler Collection), which is a tool needed for compiling C and C++ programs.
 
 ```bash
 sudo apt update
@@ -135,7 +137,7 @@ sudo apt install build-essential
 ```
 
 ```bash
-sudo apt install libssl-dev libnss3-dev libgdbm-dev libffi-dev libncurses5-dev zlib1g zlib1g-dev libreadline-dev libbz2-dev libsqlite3-dev make gcc wget liblzma-dev 
+sudo apt install libssl-dev libnss3-dev libgdbm-dev libffi-dev libncurses5-dev zlib1g zlib1g-dev libreadline-dev libbz2-dev libsqlite3-dev make gcc wget liblzma-dev
 ```
 
 ## Install asdf Version Manager

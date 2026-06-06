@@ -1,8 +1,10 @@
 ---
-title: "Deploying MCPO with Dockerfile on Coolify"
-description: "MCPO (Model Context Protocol OpenAPI Proxy) is a tool that exposes MCP server tools as OpenAPI endpoints, making them easy to integrate with platforms like Open WebUI. I previously wrote a detailed post on manual MCPO installation and configuration: 🚀 Installing and..."
+title: 'Deploying MCPO with Dockerfile on Coolify'
+description: 'MCPO (Model Context Protocol OpenAPI Proxy) is a tool that exposes MCP server tools as OpenAPI endpoints, making them easy to integrate with platforms like Open WebUI. I previously wrote a detailed post on manual MCPO installation and configuration: 🚀 Installing and...'
 pubDate: 2025-11-05
-categories: ["AI"]
+heroImage: '/images/2025/11/mcpo_coolify.png'
+heroImageAlt: 'mcpo coolify'
+categories: ['AI']
 tags: []
 toc: true
 ---

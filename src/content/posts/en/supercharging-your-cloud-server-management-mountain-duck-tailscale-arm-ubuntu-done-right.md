@@ -1,8 +1,10 @@
 ---
-title: "Supercharging Your Cloud Server Management: Mountain Duck + Tailscale + ARM Ubuntu Done Right!"
-description: "Managing files on a remote server can sometimes feel like navigating a maze. Public IPs, firewalls, SSH keys – it’s a lot to keep track of. But what if I told you there’s a “super cool” way to get seamless, secure file access, even to your Oracle ARM Ubuntu server, all..."
+title: 'Supercharging Your Cloud Server Management: Mountain Duck + Tailscale + ARM Ubuntu Done Right!'
+description: 'Managing files on a remote server can sometimes feel like navigating a maze. Public IPs, firewalls, SSH keys – it’s a lot to keep track of. But what if I told you there’s a “super cool” way to get seamless, secure file access, even to your Oracle ARM Ubuntu server, all...'
 pubDate: 2025-06-20
-categories: ["Linux"]
+heroImage: '/images/2025/06/mountainduck_logo.png'
+heroImageAlt: 'mountainduck logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---

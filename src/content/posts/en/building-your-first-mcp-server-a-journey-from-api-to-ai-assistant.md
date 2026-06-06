@@ -1,13 +1,15 @@
 ---
-title: "Building Your First MCP Server: A Journey from API to AI Assistant"
-description: "How I built a production-ready MCP server for Mexican economic data and what I learned along the way"
+title: 'Building Your First MCP Server: A Journey from API to AI Assistant'
+description: 'How I built a production-ready MCP server for Mexican economic data and what I learned along the way'
 pubDate: 2025-08-17
-categories: ["AI"]
+heroImage: '/images/2025/08/mcp.jpg'
+heroImageAlt: 'mcp'
+categories: ['AI']
 tags: []
 toc: true
 ---
 
-*How I built a production-ready MCP server for Mexican economic data and what I learned along the way*
+_How I built a production-ready MCP server for Mexican economic data and what I learned along the way_
 
 As someone who works at the intersection of data science and finance, I’m always looking for ways to make economic data more accessible. When I discovered the Model Context Protocol (MCP), I saw an opportunity to bridge the gap between financial APIs and AI assistants. This post chronicles my journey building a comprehensive MCP server for the Bank of Mexico’s (Banxico) API, and the lessons learned that you can apply to any API.
 
@@ -120,7 +122,7 @@ async def make_banxico_request(endpoint: str, token: str) -> dict[str, Any] | No
     url = f"{BANXICO_API_BASE}/{endpoint}"
     headers = {"User-Agent": "banxico-mcp/1.0"}
     params = {"token": token}
-    
+
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(url, headers=headers, params=params, timeout=30.0)
@@ -192,23 +194,23 @@ Each tool follows a consistent pattern:
 async def get_inflation_data(inflation_type: str = "monthly", limit: Optional[int] = 12) -> str:
     """
     Get inflation data from Banxico.
-    
+
     Args:
         inflation_type: Type of inflation data ('monthly', 'accumulated', 'annual')
         limit: Maximum number of recent data points (default: 12)
     """
     if not BANXICO_TOKEN:
         return "Error: BANXICO_API_TOKEN environment variable not set. Please configure your API token."
-    
+
     series_map = {
         "monthly": "SP30577",
-        "accumulated": "SP30579", 
+        "accumulated": "SP30579",
         "annual": "SP30578"
     }
-    
+
     if inflation_type not in series_map:
         return f"Invalid inflation type: {inflation_type}. Available: {list(series_map.keys())}"
-    
+
     # ... rest of implementation
 ```
 
@@ -225,11 +227,7 @@ I discovered that [uvx](https://docs.astral.sh/uv/) can run Python packages di
   "mcpServers": {
     "banxico": {
       "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/cfocoder/banxico_mcp",
-        "banxico-mcp-server"
-      ],
+      "args": ["--from", "git+https://github.com/cfocoder/banxico_mcp", "banxico-mcp-server"],
       "env": {
         "BANXICO_API_TOKEN": "your_token_here"
       }
@@ -364,7 +362,7 @@ Users will encounter authentication issues, network problems, and invalid parame
 # Bad
 return "Error: Failed to get data"
 
-# Good  
+# Good
 return "Error: BANXICO_API_TOKEN environment variable not set. Get your token from https://www.banxico.org.mx/SieAPIRest/service/v1/token"
 ```
 
@@ -478,7 +476,7 @@ More importantly, the patterns and practices developed for this server are reusa
 
 The future of data access is conversational, and MCP servers are the bridge between structured APIs and natural language interfaces. If you’re working with valuable datasets that could benefit the AI community, I encourage you to build your own MCP server. The tools are mature, the patterns are established, and the impact on user experience is transformational.
 
-*What APIs would you like to see wrapped as MCP servers? Let me know in the comments or reach out on [GitHub](https://github.com/cfocoder). I’m always interested in collaborating on financial and economic data integrations.*
+_What APIs would you like to see wrapped as MCP servers? Let me know in the comments or reach out on [GitHub](https://github.com/cfocoder). I’m always interested in collaborating on financial and economic data integrations._
 
 ## Technical Appendix
 
@@ -495,11 +493,7 @@ Want to try the Banxico MCP server? Here’s the fastest path:
   "mcpServers": {
     "banxico": {
       "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/cfocoder/banxico_mcp",
-        "banxico-mcp-server"
-      ],
+      "args": ["--from", "git+https://github.com/cfocoder/banxico_mcp", "banxico-mcp-server"],
       "env": {
         "BANXICO_API_TOKEN": "your_token_here"
       }
@@ -532,4 +526,4 @@ Based on production usage:
 
 The server includes basic logging, but production deployments may want enhanced observability.
 
-*This post represents my personal experience building MCP servers and shouldn’t be considered official guidance from any organization. Always follow your organization’s security and development policies when integrating external APIs.*
+_This post represents my personal experience building MCP servers and shouldn’t be considered official guidance from any organization. Always follow your organization’s security and development policies when integrating external APIs._

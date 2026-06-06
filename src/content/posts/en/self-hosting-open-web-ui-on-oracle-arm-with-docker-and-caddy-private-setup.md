@@ -1,8 +1,10 @@
 ---
-title: "Self-Hosting Open Web UI on Oracle ARM with Docker and Caddy (Private Setup)"
-description: "Running your own Large Language Model (LLM) interface offers fantastic benefits like privacy, customization, and potentially lower costs compared to hosted services. Open Web UI is a popular, user-friendly interface for interacting with local LLMs managed by Ollama."
+title: 'Self-Hosting Open Web UI on Oracle ARM with Docker and Caddy (Private Setup)'
+description: 'Running your own Large Language Model (LLM) interface offers fantastic benefits like privacy, customization, and potentially lower costs compared to hosted services. Open Web UI is a popular, user-friendly interface for interacting with local LLMs managed by Ollama.'
 pubDate: 2025-04-08
-categories: ["Linux"]
+heroImage: '/images/2025/04/openwebui_logo.png'
+heroImageAlt: 'openwebui logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -117,7 +119,7 @@ services:
     image: ghcr.io/open-webui/open-webui:main # Multi-arch image, supports arm64
     container_name: open-webui
     ports:
-      - "3001:8080" # Map container port 8080 to host port 3001
+      - '3001:8080' # Map container port 8080 to host port 3001
     environment:
       # Connect to ollama service within the private docker network
       - OLLAMA_BASE_URL=http://ollama:11434

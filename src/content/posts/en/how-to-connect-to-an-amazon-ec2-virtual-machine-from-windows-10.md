@@ -1,8 +1,10 @@
 ---
-title: "How to Connect to an Amazon EC2 Virtual Machine from Windows 10"
-description: "Connecting to Amazon’s EC2 Virtual Machine from Linux is easy, as all we have to do is download the PEM key file into the project folder, change the permissions with the CHMOD command as in the example below, and then connect to the virtual machine from the terminal..."
+title: 'How to Connect to an Amazon EC2 Virtual Machine from Windows 10'
+description: 'Connecting to Amazon’s EC2 Virtual Machine from Linux is easy, as all we have to do is download the PEM key file into the project folder, change the permissions with the CHMOD command as in the example below, and then connect to the virtual machine from the terminal...'
 pubDate: 2022-10-21
-categories: ["Cloud"]
+heroImage: '/images/2023/08/amazon_ec2_logo.jpg'
+heroImageAlt: 'amazon ec2 logo'
+categories: ['Cloud']
 tags: []
 toc: true
 ---

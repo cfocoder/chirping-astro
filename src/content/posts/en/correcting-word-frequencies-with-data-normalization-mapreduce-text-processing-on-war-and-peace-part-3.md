@@ -1,8 +1,10 @@
 ---
-title: "Correcting Word Frequencies with Data Normalization: MapReduce Text Processing on War and Peace — Part 3"
-description: "In Part 1 of this series, we installed Hadoop 3.3.6 natively on Ubuntu and configured HDFS for distributed storage. In Part 2, we configured YARN, wrote our first MapReduce program (WordCount), and executed it against the full text of War and Peace."
+title: 'Correcting Word Frequencies with Data Normalization: MapReduce Text Processing on War and Peace — Part 3'
+description: 'In Part 1 of this series, we installed Hadoop 3.3.6 natively on Ubuntu and configured HDFS for distributed storage. In Part 2, we configured YARN, wrote our first MapReduce program (WordCount), and executed it against the full text of War and Peace.'
 pubDate: 2026-03-08
-categories: ["Hadoop"]
+heroImage: '/images/2026/03/war_and_peace_normalized_hadoop.png'
+heroImageAlt: 'war and peace normalized hadoop'
+categories: ['Hadoop']
 tags: []
 toc: true
 ---
@@ -43,14 +45,14 @@ while (itr.hasMoreTokens()) {
 
 **The consequences:**
 
-| Original Tokens | Normalized Token | Should Count As |
-|---|---|---|
-| war | war | Same word |
-| war. | war | Same word |
-| war, | war | Same word |
-| "war" | war | Same word |
-| War | war | Same word |
-| War's | war | Part of same word |
+| Original Tokens | Normalized Token | Should Count As   |
+| --------------- | ---------------- | ----------------- |
+| war             | war              | Same word         |
+| war.            | war              | Same word         |
+| war,            | war              | Same word         |
+| "war"           | war              | Same word         |
+| War             | war              | Same word         |
+| War's           | war              | Part of same word |
 
 Without normalization, the Part 2 results showed **41,621 unique words**. Many of these are duplicate entries differing only in case or attached punctuation. The true vocabulary size is much smaller once normalization is applied.
 
@@ -72,16 +74,16 @@ For an academic analysis, this matters significantly.
 
 All steps in this tutorial assume:
 
-| Component | Version / Value |
-|---|---|
-| OS | Ubuntu 24.04 LTS |
-| Java | OpenJDK 21.0.10 |
-| Hadoop | 3.3.6 |
-| Hadoop home | ~/hadoop-3.3.6 |
-| HDFS | Already running (from Part 2) |
-| YARN | Already running (from Part 2) |
-| Input file | /user/hectorsa/input/warandpeace.txt (HDFS) |
-| Shell | Zsh or Bash |
+| Component   | Version / Value                             |
+| ----------- | ------------------------------------------- |
+| OS          | Ubuntu 24.04 LTS                            |
+| Java        | OpenJDK 21.0.10                             |
+| Hadoop      | 3.3.6                                       |
+| Hadoop home | ~/hadoop-3.3.6                              |
+| HDFS        | Already running (from Part 2)               |
+| YARN        | Already running (from Part 2)               |
+| Input file  | /user/hectorsa/input/warandpeace.txt (HDFS) |
+| Shell       | Zsh or Bash                                 |
 
 **Prerequisite:** Part 2 must be complete—you should have:
 
@@ -546,13 +548,13 @@ Counters: 22 counters
 
 **Key metrics from output:**
 
-| Metric | Value |
-|---|---|
-| Input file size | 3.2 MB (562,488 words total) |
-| Mapper output | 562,488 (one per word token) |
-| After Combiner | 41,621 (unique words with variants) |
-| Final output | 41,621 lines (unique word-count pairs) |
-| Execution time | ~30 seconds |
+| Metric          | Value                                  |
+| --------------- | -------------------------------------- |
+| Input file size | 3.2 MB (562,488 words total)           |
+| Mapper output   | 562,488 (one per word token)           |
+| After Combiner  | 41,621 (unique words with variants)    |
+| Final output    | 41,621 lines (unique word-count pairs) |
+| Execution time  | ~30 seconds                            |
 
 ✅ The job completed successfully. Notice the Combiner reduced 562,488 Mapper outputs to 41,621 before the shuffle phase—this is efficient local pre-aggregation.
 
@@ -611,14 +613,14 @@ Counters: 22 counters
 
 **Key metrics:**
 
-| Metric | Value |
-|---|---|
-| Input file size | 3.2 MB (same as before) |
-| Mapper output | 562,488 (same as before) |
-| After Combiner | 20,020 (unique normalized words) |
-| Final output | 20,020 lines |
-| Execution time | ~22 seconds |
-| Output size | 221,601 bytes (vs 462,958 for original) |
+| Metric          | Value                                   |
+| --------------- | --------------------------------------- |
+| Input file size | 3.2 MB (same as before)                 |
+| Mapper output   | 562,488 (same as before)                |
+| After Combiner  | 20,020 (unique normalized words)        |
+| Final output    | 20,020 lines                            |
+| Execution time  | ~22 seconds                             |
+| Output size     | 221,601 bytes (vs 462,958 for original) |
 
 ✅ **Critical observation:** After normalization, unique words dropped from **41,621 to 20,020**—a reduction of 52%! This confirms that roughly half of the “unique” words in the original version were actually duplicates with different cases or punctuation.
 
@@ -1107,17 +1109,17 @@ Let’s create a summary table comparing the two approaches:
 
 ### Comparison Table
 
-| Aspect | Original (StringTokenizer) | Normalized (with Cleansing) |
-|---|---|---|
-| Unique words | 41,621 | 20,020 |
-| Case sensitive? | Yes | No |
-| Punctuation separate? | Yes (e.g., “war.” ≠ “war”) | No |
-| Numbers included? | Yes | No (stripped) |
-| Reduction | — | -51.9% |
-| Top word frequency | — | “the”: 34,396 |
-| Job execution time | ~30 seconds | ~22 seconds |
-| Output file size | 462,958 bytes | 221,601 bytes |
-| Suitable for analysis? | Limited | ✅ Yes |
+| Aspect                 | Original (StringTokenizer) | Normalized (with Cleansing) |
+| ---------------------- | -------------------------- | --------------------------- |
+| Unique words           | 41,621                     | 20,020                      |
+| Case sensitive?        | Yes                        | No                          |
+| Punctuation separate?  | Yes (e.g., “war.” ≠ “war”) | No                          |
+| Numbers included?      | Yes                        | No (stripped)               |
+| Reduction              | —                          | -51.9%                      |
+| Top word frequency     | —                          | “the”: 34,396               |
+| Job execution time     | ~30 seconds                | ~22 seconds                 |
+| Output file size       | 462,958 bytes              | 221,601 bytes               |
+| Suitable for analysis? | Limited                    | ✅ Yes                      |
 
 ### Key Takeaways
 
@@ -1172,7 +1174,7 @@ If missing, re-run `python generate_wordcloud.py`
 **Cause:** Check Hadoop logs for detailed error:
 
 ```bash
-yarn logs -applicationId 
+yarn logs -applicationId
 ```
 
 Replace `` with the ID shown in job output. Common causes:
@@ -1305,14 +1307,14 @@ wordcloud = WordCloud(
 
 **Key Parameters:**
 
-| Parameter | Value | Effect |
-|---|---|---|
-| width | 1200 | Canvas width (pixels) |
-| height | 800 | Canvas height (pixels) |
-| colormap | ‘viridis’ | Color scheme: low frequency (blue) → high frequency (yellow) |
-| relative_scaling | 0.5 | Balance between frequency-based sizing and randomness |
-| min_font_size | 10 | Smallest word must be readable |
-| background_color | ‘white’ | Canvas background |
+| Parameter        | Value     | Effect                                                       |
+| ---------------- | --------- | ------------------------------------------------------------ |
+| width            | 1200      | Canvas width (pixels)                                        |
+| height           | 800       | Canvas height (pixels)                                       |
+| colormap         | ‘viridis’ | Color scheme: low frequency (blue) → high frequency (yellow) |
+| relative_scaling | 0.5       | Balance between frequency-based sizing and randomness        |
+| min_font_size    | 10        | Smallest word must be readable                               |
+| background_color | ‘white’   | Canvas background                                            |
 
 **Step 4: Render and Save**
 
@@ -1437,12 +1439,12 @@ Hadoop provides several web-based monitoring interfaces accessible from your loc
 
 ### Available Interfaces
 
-| Interface | URL | Port | Purpose |
-|---|---|---|---|
+| Interface               | URL                   | Port | Purpose                                             |
+| ----------------------- | --------------------- | ---- | --------------------------------------------------- |
 | NameNode (HDFS Browser) | http://localhost:9870 | 9870 | View files, directory structure, block distribution |
-| ResourceManager (YARN) | http://localhost:8088 | 8088 | Monitor MapReduce jobs, logs, cluster status |
-| DataNode | http://localhost:9864 | 9864 | View node status, local block inventory |
-| SecondaryNameNode | http://localhost:9868 | 9868 | View checkpoint status, namespace information |
+| ResourceManager (YARN)  | http://localhost:8088 | 8088 | Monitor MapReduce jobs, logs, cluster status        |
+| DataNode                | http://localhost:9864 | 9864 | View node status, local block inventory             |
+| SecondaryNameNode       | http://localhost:9868 | 9868 | View checkpoint status, namespace information       |
 
 ### NameNode Web Interface (HDFS Browser)
 

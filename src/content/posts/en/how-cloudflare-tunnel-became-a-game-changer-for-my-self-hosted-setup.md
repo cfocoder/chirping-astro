@@ -1,8 +1,10 @@
 ---
-title: "How Cloudflare Tunnel Became a Game Changer for My Self-Hosted Setup"
-description: "The Problem: ISP Restrictions and Port Blocking"
+title: 'How Cloudflare Tunnel Became a Game Changer for My Self-Hosted Setup'
+description: 'The Problem: ISP Restrictions and Port Blocking'
 pubDate: 2025-12-15
-categories: ["Cloud"]
+heroImage: '/images/2025/12/cloudflare_tunnels_blog.png'
+heroImageAlt: 'cloudflare tunnels blog'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -249,7 +251,7 @@ ingress:
   # Your service
   - hostname: myservice.yourdomain.com
     service: http://10.0.2.2:8080
-  
+
   # Catch-all (required, always at the end)
   - service: http_status:404
 ```
@@ -264,15 +266,15 @@ ingress:
   # MinIO Console (UI)
   - hostname: minio.yourdomain.com
     service: http://10.0.2.2:9001
-  
+
   # MinIO API (S3)
   - hostname: minioapi.yourdomain.com
     service: http://10.0.2.2:9000
-  
+
   # OpenWebUI
   - hostname: openwebui.yourdomain.com
     service: http://10.0.3.3:8080
-  
+
   # Catch-all rule (always at the end)
   - service: http_status:404
 ```
@@ -350,7 +352,7 @@ sudo systemctl status cloudflared
    Main PID: 1234
       Tasks: 8
      Memory: 45.2M
-     
+
 Dec 15 10:00:01 macmini cloudflared[1234]: INF Registered tunnel connection
 Dec 15 10:00:01 macmini cloudflared[1234]: INF Registered tunnel connection
 Dec 15 10:00:01 macmini cloudflared[1234]: INF Registered tunnel connection
@@ -423,7 +425,7 @@ If you configure URLs in both places, you’ll get redirect loops!
 You must always include a catch-all rule at the end of your ingress list:
 
 ```yaml
-  - service: http_status:404
+- service: http_status:404
 ```
 
 Without this, `cloudflared` won’t start.
@@ -432,7 +434,7 @@ Without this, `cloudflared` won’t start.
 
 One of the best parts about this setup is how easy it is to add new services:
 
-- Get the service IP:docker inspect  | jq '.[0].NetworkSettings.Networks'
+- Get the service IP:docker inspect | jq '.[0].NetworkSettings.Networks'
 
 - Edit the config:sudo nano /etc/cloudflared/config.yml Add before the catch-all: - hostname: newservice.yourdomain.com service: http://10.0.X.X:PORT
 
@@ -454,7 +456,7 @@ Done! Your new service is now publicly accessible with HTTPS.
 
 ```bash
 # Verify service is running
-docker ps | grep 
+docker ps | grep
 
 # Check if IP changed
 docker inspect  | jq '.[0].NetworkSettings.Networks'
@@ -559,12 +561,12 @@ Example: Protect admin interfaces but allow public API access.
 
 Let’s break down the cost comparison:
 
-| Solution | Monthly Cost | SSL | DDoS Protection | Setup Complexity |
-|---|---|---|---|---|
-| Cloudflare Tunnel | \$0 | ✅ Auto | ✅ Yes | Low |
-| VPS Reverse Proxy | \$5-10 | Manual | Limited | High |
-| ngrok | \$8-25 | ✅ Auto | ❌ No | Low |
-| Port Forwarding | \$0 | Manual | ❌ No | Medium |
+| Solution          | Monthly Cost | SSL     | DDoS Protection | Setup Complexity |
+| ----------------- | ------------ | ------- | --------------- | ---------------- |
+| Cloudflare Tunnel | \$0          | ✅ Auto | ✅ Yes          | Low              |
+| VPS Reverse Proxy | \$5-10       | Manual  | Limited         | High             |
+| ngrok             | \$8-25       | ✅ Auto | ❌ No           | Low              |
+| Port Forwarding   | \$0          | Manual  | ❌ No           | Medium           |
 
 Cloudflare Tunnel gives you enterprise-grade features completely free. This is why it’s a game changer.
 

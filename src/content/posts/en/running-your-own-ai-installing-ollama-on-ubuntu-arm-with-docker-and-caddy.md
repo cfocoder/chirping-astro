@@ -1,8 +1,10 @@
 ---
-title: "Running Your Own AI: Installing Ollama on Ubuntu 24.04 ARM with Docker and Caddy"
-description: "Self-hosting Large Language Models (LLMs) is becoming increasingly accessible, offering benefits like privacy, cost savings, and customization. Ollama makes it incredibly simple to run open-source models like Llama 3, Phi-3, Mistral, and more, right on your own hardware."
+title: 'Running Your Own AI: Installing Ollama on Ubuntu 24.04 ARM with Docker and Caddy'
+description: 'Self-hosting Large Language Models (LLMs) is becoming increasingly accessible, offering benefits like privacy, cost savings, and customization. Ollama makes it incredibly simple to run open-source models like Llama 3, Phi-3, Mistral, and more, right on your own hardware.'
 pubDate: 2025-03-27
-categories: ["Linux"]
+heroImage: '/images/2025/03/ollama_logo.png'
+heroImageAlt: 'ollama logo'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -97,7 +99,7 @@ services:
     ports:
       # IMPORTANT: Map Ollama port ONLY to the host's localhost interface.
       # Caddy will access it via 127.0.0.1:11434, keeping it private.
-      - "127.0.0.1:11434:11434"
+      - '127.0.0.1:11434:11434'
     volumes:
       # Mount the data directory from your block volume
       - /var/www/html/ollama_data:/root/.ollama

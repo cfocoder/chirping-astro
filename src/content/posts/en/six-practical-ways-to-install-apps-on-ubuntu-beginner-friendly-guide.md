@@ -1,8 +1,10 @@
 ---
-title: "Six Practical Ways to Install Apps on Ubuntu (Beginner-Friendly Guide)"
-description: "Ubuntu offers several ways to install applications. Understanding each method helps you pick the right tool, avoid duplicates, and maintain a clean system. This guide covers six installation methods, includes Windows, iOS App Store, and Android Play Store analogies, plus..."
+title: 'Six Practical Ways to Install Apps on Ubuntu (Beginner-Friendly Guide)'
+description: 'Ubuntu offers several ways to install applications. Understanding each method helps you pick the right tool, avoid duplicates, and maintain a clean system. This guide covers six installation methods, includes Windows, iOS App Store, and Android Play Store analogies, plus...'
 pubDate: 2025-11-16
-categories: ["Linux"]
+heroImage: '/images/2025/11/ubuntu_apps3.png'
+heroImageAlt: 'ubuntu apps3'
+categories: ['Linux']
 tags: []
 toc: true
 ---
@@ -204,10 +206,10 @@ Installing from the official App Store/Play Store via command line (if that were
 sudo apt update
 
 # Install a package
-sudo apt install 
+sudo apt install
 
 # Search for packages
-apt search 
+apt search
 ```
 
 **Upgrading:**
@@ -217,7 +219,7 @@ apt search
 sudo apt update
 
 # Upgrade a specific package
-sudo apt install --only-upgrade 
+sudo apt install --only-upgrade
 
 # Upgrade all installed packages
 sudo apt upgrade
@@ -230,10 +232,10 @@ sudo apt full-upgrade
 
 ```bash
 # Remove package but keep configuration files
-sudo apt remove 
+sudo apt remove
 
 # Remove package and configuration files
-sudo apt purge 
+sudo apt purge
 
 # Remove unused dependencies
 sudo apt autoremove
@@ -321,13 +323,13 @@ Some DEB packages add repositories during installation, enabling auto-updates vi
 
 ```bash
 # Find the exact package name
-dpkg -l | grep 
+dpkg -l | grep
 
 # Remove the package
-sudo apt remove 
+sudo apt remove
 
 # Or remove with configuration files
-sudo apt purge 
+sudo apt purge
 ```
 
 You can also uninstall via the App Center GUI.
@@ -375,14 +377,14 @@ Similar to how iOS/Android install apps with bundled dependencies, ensuring cons
 **Installing:**
 
 ```text
-sudo snap install 
+sudo snap install
 ```
 
 **Upgrading:**
 
 ```text
 # Snaps auto-update by default, but you can manually update
-sudo snap refresh 
+sudo snap refresh
 
 # Update all snaps
 sudo snap refresh
@@ -394,10 +396,10 @@ snap refresh --list
 **Uninstalling:**
 
 ```text
-sudo snap remove 
+sudo snap remove
 
 # Remove a snap and its saved data
-sudo snap remove --purge 
+sudo snap remove --purge
 ```
 
 **Listing installed:**
@@ -465,7 +467,7 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 flatpak install flathub md.obsidian.Obsidian
 
 # Search for apps
-flatpak search 
+flatpak search
 ```
 
 **Upgrading:**
@@ -559,7 +561,7 @@ Users often move them to custom folders like:
 
 ### Should you delete the AppImage?
 
-No. The file *is* the app.
+No. The file _is_ the app.
 
 ### Integrating AppImages into your app menu
 
@@ -613,11 +615,11 @@ Note: The `~/Applications` folder is created automatically the first time you in
 
 If you prefer not to install system-wide, try **AppImageLauncher Lite**, which is an AppImage itself and doesn’t require root access:
 
-- Download appimagelauncher-lite*.AppImage from the releases page
+- Download appimagelauncher-lite\*.AppImage from the releases page
 
-- Make it executable: chmod +x appimagelauncher-lite*.AppImage
+- Make it executable: chmod +x appimagelauncher-lite\*.AppImage
 
-- Run: ./appimagelauncher-lite*.AppImage install
+- Run: ./appimagelauncher-lite\*.AppImage install
 
 ### Important: Installing FUSE (Required for AppImages)
 
@@ -682,14 +684,14 @@ If you used AppImageLauncher, right-click the app in your menu and select “Rem
 
 ## Summary Table
 
-| Method | Ubuntu Concept | Windows Analogy | iOS/Android Analogy | Best For |
-|---|---|---|---|---|
-| App Center | Storefront | Microsoft Store | App Store / Play Store | Beginners, GUI users |
-| APT | System package manager | winget | Official store CLI | System tools, CLI users |
-| DEB (manual) | Native installer | EXE installer | APK sideload | Developer downloads |
-| Snap | Modern sandboxed apps | MSIX | Standard mobile app | Auto-updating apps |
-| Flatpak | Universal sandboxed apps | External MSIX | F-Droid / external repos | Latest versions |
-| AppImage | Portable executable | Portable ZIP + EXE | No real equivalent | Portable apps, testing |
+| Method       | Ubuntu Concept           | Windows Analogy    | iOS/Android Analogy      | Best For                |
+| ------------ | ------------------------ | ------------------ | ------------------------ | ----------------------- |
+| App Center   | Storefront               | Microsoft Store    | App Store / Play Store   | Beginners, GUI users    |
+| APT          | System package manager   | winget             | Official store CLI       | System tools, CLI users |
+| DEB (manual) | Native installer         | EXE installer      | APK sideload             | Developer downloads     |
+| Snap         | Modern sandboxed apps    | MSIX               | Standard mobile app      | Auto-updating apps      |
+| Flatpak      | Universal sandboxed apps | External MSIX      | F-Droid / external repos | Latest versions         |
+| AppImage     | Portable executable      | Portable ZIP + EXE | No real equivalent       | Portable apps, testing  |
 
 ## Practical Recommendations
 
@@ -745,7 +747,7 @@ You can have the same app installed multiple ways simultaneously (e.g., Firefox 
 
 ```bash
 # List APT packages
-dpkg -l | grep 
+dpkg -l | grep
 
 # List Snaps
 snap list

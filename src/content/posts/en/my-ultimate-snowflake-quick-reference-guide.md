@@ -1,8 +1,10 @@
 ---
-title: "My Ultimate Snowflake Quick Reference Guide"
-description: "In today’s data-driven world, the ability to effectively store, process, and analyze vast amounts of information isn’t just an advantage – it’s a necessity. For years, organizations grappled with legacy data warehousing solutions that were often rigid, expensive, and..."
+title: 'My Ultimate Snowflake Quick Reference Guide'
+description: 'In today’s data-driven world, the ability to effectively store, process, and analyze vast amounts of information isn’t just an advantage – it’s a necessity. For years, organizations grappled with legacy data warehousing solutions that were often rigid, expensive, and...'
 pubDate: 2025-05-07
-categories: ["Cloud"]
+heroImage: '/images/2025/05/snowflake_logo.png'
+heroImageAlt: 'snowflake logo'
+categories: ['Cloud']
 tags: []
 toc: true
 ---
@@ -97,9 +99,9 @@ This **decoupling of storage and compute** is a fundamental differentiator. It
 
 ### What is a Datawarehouse?
 
-A **data warehouse** is a centralized repository designed to store large volumes of historical data from various disparate sources, optimized for querying, reporting, and business intelligence rather than transactional processing. 
+A **data warehouse** is a centralized repository designed to store large volumes of historical data from various disparate sources, optimized for querying, reporting, and business intelligence rather than transactional processing.
 
-The **ETL (Extract, Transform, Load) process** is the traditional method used to populate a data warehouse: 
+The **ETL (Extract, Transform, Load) process** is the traditional method used to populate a data warehouse:
 
 - Data is extracted from operational systems (like databases, CRMs, ERPs), transformed (cleaned, standardized, aggregated, joined) into a consistent and usable format, and then loaded into the warehouse. 
 
@@ -356,7 +358,7 @@ In Snowflake, a **stage** is a named location where data files are stored (or 
 
 There are two main types of stages:
 
-- Internal Stages: These are storage locations managed directly by Snowflake within your Snowflake account. They are convenient for temporary storage, ad-hoc loading, or when you don’t want to manage external cloud storage accounts. Snowflake encrypts data in internal stages by default. There are three kinds of internal stages: 
+- Internal Stages: These are storage locations managed directly by Snowflake within your Snowflake account. They are convenient for temporary storage, ad-hoc loading, or when you don’t want to manage external cloud storage accounts. Snowflake encrypts data in internal stages by default. There are three kinds of internal stages:
 
 User stages (private to each user, @~),
 
@@ -366,7 +368,7 @@ User stages (private to each user, @~),
 
 - External Stages: These point to data files stored in your own cloud storage locations outside of Snowflake, such as Amazon S3 buckets, Google Cloud Storage buckets, or Microsoft Azure Blob storage containers (and S3-compatible services like MinIO). External stages are ideal when your data already resides in cloud storage, or when you need to share data with other applications or processes outside Snowflake. You define the URL and necessary credentials (or a storage integration) for Snowflake to access these external locations.
 
-The primary use of stages is with the **COPY INTO** **** command to load data from staged files into Snowflake tables, and the **COPY INTO @stage** command to unload data from Snowflake tables into files in a stage. They facilitate efficient, parallelized data movement between Snowflake and file-based storage.
+The primary use of stages is with the **COPY INTO** \***\* command to load data from staged files into Snowflake tables, and the **COPY INTO @stage\*\* command to unload data from Snowflake tables into files in a stage. They facilitate efficient, parallelized data movement between Snowflake and file-based storage.
 
 Here are some common operations for managing stages in Snowflake:
 

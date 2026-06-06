@@ -1,8 +1,10 @@
 ---
-title: "Cypher Quick Reference Guide"
-description: "A comprehensive quick reference for Cypher, the query language for graph databases. This guide focuses on Cypher syntax and patterns that work across Neo4j, Kuzu, and other graph databases supporting Cypher."
+title: 'Cypher Quick Reference Guide'
+description: 'A comprehensive quick reference for Cypher, the query language for graph databases. This guide focuses on Cypher syntax and patterns that work across Neo4j, Kuzu, and other graph databases supporting Cypher.'
 pubDate: 2025-12-28
-categories: ["Data Science"]
+heroImage: '/images/2025/12/cypher2.png'
+heroImageAlt: 'cypher2'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
@@ -91,7 +93,7 @@ Think of Cypher as SQL for graphs, where you describe the shape of the data you 
 
 - Strings: 'single quotes' or "double quotes"
 
-- Comments: // single line or /* multi-line */
+- Comments: // single line or /_ multi-line _/
 
 - Variables: case-sensitive, start with letter or underscore
 
@@ -132,12 +134,12 @@ Think of Cypher as SQL for graphs, where you describe the shape of the data you 
 CREATE (n:Person {name: 'Alice', age: 30})
 
 // Create multiple nodes
-CREATE 
+CREATE
   (p1:Person {name: 'Alice'}),
   (p2:Person {name: 'Bob'})
 
 // Create nodes and relationship
-CREATE 
+CREATE
   (a:Person {name: 'Alice'}),
   (b:Person {name: 'Bob'}),
   (a)-[:KNOWS {since: 2020}]->(b)
@@ -321,7 +323,7 @@ RETURN a.name, b.name, length(p) AS pathLength
 
 // Extract from path
 MATCH p = (a:Person)-[:KNOWS]->(b:Person)-[:WORKS_AT]->(c:Company)
-RETURN a.name, b.name, c.name, 
+RETURN a.name, b.name, c.name,
        [node in nodes(p) | node.name] AS nodeNames
 ```
 
@@ -421,7 +423,7 @@ RETURN p.name, count(DISTINCT friend) AS uniqueFriends
 
 // Sum, avg, min, max
 MATCH (p:Person)
-RETURN sum(p.age) AS totalAge, 
+RETURN sum(p.age) AS totalAge,
        avg(p.age) AS averageAge,
        min(p.age) AS youngest,
        max(p.age) AS oldest
@@ -432,7 +434,7 @@ RETURN p.name, collect(friend.name) AS friends
 
 // Aggregation with conditions
 MATCH (p:Person)
-RETURN 
+RETURN
   count(CASE WHEN p.age = 30 THEN 1 END) AS mature
 ```
 

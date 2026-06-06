@@ -1,8 +1,10 @@
 ---
-title: "PersonaPlex: Mastering Conversational English with NVIDIA and RunPod"
-description: "PersonaPlex: Mastering Conversational English with NVIDIA and RunPod"
+title: 'PersonaPlex: Mastering Conversational English with NVIDIA and RunPod'
+description: 'PersonaPlex: Mastering Conversational English with NVIDIA and RunPod'
 pubDate: 2026-02-15
-categories: ["AI"]
+heroImage: '/images/2026/02/runpod1.jpg'
+heroImageAlt: 'runpod1'
+categories: ['AI']
 tags: []
 toc: true
 ---
@@ -38,7 +40,7 @@ Connect via Web Terminal and run the following commands:
 ```bash
 cd /workspace
 apt-get update && apt-get install -y git-lfs ffmpeg && git-lfs install
-git clone 
+git clone
 cd personaplex/moshi
 pip install -e .
 # Authenticate with Hugging Face (Required for Gated Models)
@@ -81,4 +83,4 @@ For a quick 30-minute practice session, you will spend less than \$0.50 USD usin
 
 The era of static, text-only AI is over. With models like NVIDIA PersonaPlex and platforms like RunPod, the barriers to high-level conversational practice have vanished. Whether you are preparing for a job interview, a technical presentation, or just want to gain confidence in your daily speech, this setup gives you a private, non-judgmental environment to improve at your own pace.
 
-*Don’t just take my word for it—experience it yourself! Head over to [**RunPod**](https://runpod.io), spin up an L40S, and start your journey toward English fluency today. Your future self will thank you for the extra practice.*
+_Don’t just take my word for it—experience it yourself! Head over to [**RunPod**](https://runpod.io), spin up an L40S, and start your journey toward English fluency today. Your future self will thank you for the extra practice._

@@ -1,8 +1,10 @@
 ---
-title: "Running Local Notebooks on Databricks Using VS Code"
-description: "Execute Jupyter notebooks locally in VS Code while leveraging Databricks compute infrastructure. Your code runs on Databricks’ serverless compute, but you edit and manage files locally—giving you the best of both worlds: local development experience with cloud compute power."
+title: 'Running Local Notebooks on Databricks Using VS Code'
+description: 'Execute Jupyter notebooks locally in VS Code while leveraging Databricks compute infrastructure. Your code runs on Databricks’ serverless compute, but you edit and manage files locally—giving you the best of both worlds: local development experience with cloud compute power.'
 pubDate: 2025-11-11
-categories: ["Data Science"]
+heroImage: '/images/2025/11/databricks_vscode.png'
+heroImageAlt: 'databricks vscode'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
@@ -488,6 +490,6 @@ With this setup, you get:
 
 ## Video Tutorial
 
-I found this video tutorial very helpful and very well explained about the general process of installing the Databricks extension in VS Code, although some of the details differ from my experience above, but even with that, it gives a good idea about how to install and use the extension. 
+I found this video tutorial very helpful and very well explained about the general process of installing the Databricks extension in VS Code, although some of the details differ from my experience above, but even with that, it gives a good idea about how to install and use the extension.
 
 That’s it. Happy coding with Databricks from VS Code! 🚀

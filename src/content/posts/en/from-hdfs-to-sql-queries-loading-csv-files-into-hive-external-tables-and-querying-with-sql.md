@@ -1,8 +1,10 @@
 ---
-title: "From HDFS to SQL Queries: Loading CSV Files into Hive External Tables and Querying with SQL"
-description: "Part 5 in the Hadoop and Hive Tutorial Series"
+title: 'From HDFS to SQL Queries: Loading CSV Files into Hive External Tables and Querying with SQL'
+description: 'Part 5 in the Hadoop and Hive Tutorial Series'
 pubDate: 2026-03-18
-categories: ["Hadoop"]
+heroImage: '/images/2026/03/hive_sql_queries.png'
+heroImageAlt: 'hive sql queries'
+categories: ['Hadoop']
 tags: []
 toc: true
 ---
@@ -203,14 +205,14 @@ TBLPROPERTIES ("skip.header.line.count"="1");
 
 **Explanation of key elements:**
 
-| Element | Purpose |
-|---|---|
-| EXTERNAL | Hive doesn’t own the data; it’s just metadata |
-| ROW FORMAT DELIMITED | Rows are separated by newlines |
-| FIELDS TERMINATED BY ',' | Columns are separated by commas |
-| STORED AS TEXTFILE | Raw text format (not Parquet or ORC) |
-| LOCATION | Path to HDFS directory with data |
-| TBLPROPERTIES ("skip.header.line.count"="1") | Skip the CSV header row |
+| Element                                      | Purpose                                       |
+| -------------------------------------------- | --------------------------------------------- |
+| EXTERNAL                                     | Hive doesn’t own the data; it’s just metadata |
+| ROW FORMAT DELIMITED                         | Rows are separated by newlines                |
+| FIELDS TERMINATED BY ','                     | Columns are separated by commas               |
+| STORED AS TEXTFILE                           | Raw text format (not Parquet or ORC)          |
+| LOCATION                                     | Path to HDFS directory with data              |
+| TBLPROPERTIES ("skip.header.line.count"="1") | Skip the CSV header row                       |
 
 **Expected Output:**
 

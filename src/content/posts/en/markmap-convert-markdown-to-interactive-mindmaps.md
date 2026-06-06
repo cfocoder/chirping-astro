@@ -1,8 +1,10 @@
 ---
-title: "Markmap: Convert Markdown to Interactive Mindmaps"
-description: "Markmap is a simple yet powerful tool that transforms markdown files into interactive, visual mindmaps. It eliminates the need for complex mindmapping software—just write markdown, and Markmap handles the rest. The result is a beautiful, interactive HTML visualization..."
+title: 'Markmap: Convert Markdown to Interactive Mindmaps'
+description: 'Markmap is a simple yet powerful tool that transforms markdown files into interactive, visual mindmaps. It eliminates the need for complex mindmapping software—just write markdown, and Markmap handles the rest. The result is a beautiful, interactive HTML visualization...'
 pubDate: 2025-11-09
-categories: ["Data Science"]
+heroImage: '/images/2025/11/MarkMap.png'
+heroImageAlt: 'MarkMap'
+categories: ['Data Science']
 tags: []
 toc: true
 ---

@@ -1,13 +1,15 @@
 ---
-title: "LaTeX on Ubuntu ARM: Quick Setup & Reference Guide"
-description: "A streamlined guide to setting up LaTeX on Ubuntu ARM servers and using it with VS Code"
+title: 'LaTeX on Ubuntu ARM: Quick Setup & Reference Guide'
+description: 'A streamlined guide to setting up LaTeX on Ubuntu ARM servers and using it with VS Code'
 pubDate: 2025-10-12
-categories: ["Data Science"]
+heroImage: '/images/2025/10/LatEx.png'
+heroImageAlt: 'LatEx'
+categories: ['Data Science']
 tags: []
 toc: true
 ---
 
-*A streamlined guide to setting up LaTeX on Ubuntu ARM servers and using it with VS Code*
+_A streamlined guide to setting up LaTeX on Ubuntu ARM servers and using it with VS Code_
 
 ## What is LaTeX?
 
@@ -180,7 +182,7 @@ Create `.vscode/settings.json` in your project root:
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.latex.outDir": "./build",
   "latex-workshop.latex.autoClean.run": "onBuilt",
-  
+
   // === CRITICAL: Force custom recipes ===
   "latex-workshop.latex.recipe.default": "lastUsed",
   "latex-workshop.latex.recipes": [
@@ -245,11 +247,11 @@ Create `.vscode/settings.json` in your project root:
 
   // === PDF Viewer ===
   "latex-workshop.view.pdf.viewer": "tab",
-  
+
   // === Formatting ===
   "latex-workshop.formatting.latex": "latexindent",
   "latex-workshop.linting.chktex.enabled": true,
-  
+
   // === IntelliSense ===
   "latex-workshop.intellisense.package.enabled": true,
   "latex-workshop.intellisense.citation.backend": "bibtex"
@@ -497,7 +499,7 @@ x^2  x_i  \leq \geq \neq \approx \infty
 
 ### Code Listings
 
-```python
+````python
 % Inline code
 Use \texttt{print("Hello")} for output.
 
@@ -530,7 +532,7 @@ def hello():
 \begin{lstlisting}
 def fibonacci(n):
     """Calculate Fibonacci number"""
-    if n 
+    if n
 
 ## Emoji Support
 
@@ -552,7 +554,7 @@ Regular text with emoji: \emoji{😀 💖 🎉 ✅ 🚀}
 Math and emoji: The result is correct \emoji{✅} and \$E=mc^2\$
 
 \end{document}
-```
+````
 
 ### Multi-File Projects with Emoji
 
@@ -595,14 +597,14 @@ Use emoji directly: \emoji{🌟}
 
 ## Essential Keyboard Shortcuts
 
-| Action | Shortcut | Description |
-|---|---|---|
-| Build Document | Ctrl+Alt+B | Compile LaTeX file |
-| View PDF | Ctrl+Alt+V | Open PDF preview |
-| Build & View | Ctrl+Alt+J | Compile and show PDF |
-| Clean Files | Ctrl+Alt+C | Remove auxiliary files |
-| Kill Process | Ctrl+Alt+K | Stop compilation |
-| SyncTeX Forward | Ctrl+Alt+J | Jump from source to PDF |
+| Action           | Shortcut          | Description             |
+| ---------------- | ----------------- | ----------------------- |
+| Build Document   | Ctrl+Alt+B        | Compile LaTeX file      |
+| View PDF         | Ctrl+Alt+V        | Open PDF preview        |
+| Build & View     | Ctrl+Alt+J        | Compile and show PDF    |
+| Clean Files      | Ctrl+Alt+C        | Remove auxiliary files  |
+| Kill Process     | Ctrl+Alt+K        | Stop compilation        |
+| SyncTeX Forward  | Ctrl+Alt+J        | Jump from source to PDF |
 | SyncTeX Backward | Ctrl+Click in PDF | Jump from PDF to source |
 
 ## Common Issues & Solutions
@@ -884,4 +886,4 @@ Build with `Ctrl+Alt+B` or save to auto-build.
 
 - Stack Exchange: TeX.SE
 
-*Last updated: October 2025 | For Ubuntu ARM with TeX Live*
+_Last updated: October 2025 | For Ubuntu ARM with TeX Live_
