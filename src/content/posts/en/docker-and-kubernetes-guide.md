@@ -9,50 +9,6 @@ tags: []
 toc: true
 ---
 
-## Table of Contents
-
-- What is Docker?
-
-- How to Build a Docker Image
-
-- How to Run a Docker Container
-
-Additional parameters to run a container
-
-- Images and Containers
-
-- Docker Commands
-
-- Volumes and Bind Mounts
-
-.dockerignore file
-
-- ARGuments and ENVironment Variables
-
-- Networks
-
-Connecting the Container to the Internet
-
-- Connecting the Container to the Local Host
-
-- Connecting the Container to Another Container
-
-- Docker-Compose file
-
-Alternative to Building an Image
-
-- Overriding Dockerfile commands from docker-compose.yaml file
-
-- Docker Compose Commands
-
-- Utility Containers
-
-- Deploying a Docker Image to an Amazon EC2 Virtual Machine
-
-- Deploying a Docker Image to an Azure App Service (Web App)
-
-- Deploying a Docker Image to an Azure Virtual Machine
-
 ## What is Docker?
 
 [Docker](https://www.docker.com/) is a tool for creating and managing containers. A container is an isolated standardized unit of software, which means it has the code and all the dependencies needed to run the code.

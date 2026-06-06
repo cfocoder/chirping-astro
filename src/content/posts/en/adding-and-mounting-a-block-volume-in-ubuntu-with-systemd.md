@@ -25,34 +25,6 @@ This guide explains how to add a new block storage volume (like an additional ha
 
 **WARNING:** This process involves formatting a disk, which *will erase all data* on the target device. Be *absolutely certain* you’ve identified the correct device before proceeding. Double-check everything! Backups are essential.
 
-## Table of Contents
-
-- 1. Identify the Block Device:
-
-- 2. Create a Partition (Recommended):
-
-- 3. Verify the New Partition:
-
-- 4. Format the Partition:
-
-- 5. Create a Mount Point:
-
-- 6. Mount the Partition (Temporary):
-
-- 7. Verify the Mount:
-
-- 8. Make the Mount Permanent (Edit /etc/fstab):
-
-- 9. Reload systemd and Remount:
-
-- 10. Verify Again:
-
-- 11. Set Permissions:
-
-- 12. Test with a Reboot (Recommended):
-
-- 13. Accessing the Volume
-
 ## 1. Identify the Block Device:
 
 Use the lsblk command to list all block devices:`lsblk`

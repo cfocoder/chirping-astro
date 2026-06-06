@@ -27,34 +27,6 @@ This guide walks through installing WordPress on the main domain (yourdomain.com
 
 Let’s get started!
 
-## Table of Contents
-
-- Step 1: Initial System Setup
-
-- Step 2: Prepare Storage (Using Existing Mount)
-
-- Step 3: Configure Cloudflare DNS & SSL
-
-- Step 4: Install Caddy Web Server
-
-- Step 5: Install MariaDB (Database Server)
-
-- Step 6: Install PHP-FPM
-
-- Step 7: Install WordPress
-
-- Step 8: Configure Caddy (Caddyfile)
-
-- Step 9: Configure Firewalls
-
-- Step 10: Final WordPress Setup (Web UI)
-
-- Step 11: Check Logging and Visitor IPs
-
-Adding Future Subdomain Apps
-
-- Conclusion
-
 ## Step 1: Initial System Setup
 
 First, log in to your VM via SSH and update the system packages:
@@ -217,9 +189,7 @@ define( 'DB_COLLATE', '' );
 
 3. Save and close the file (Ctrl+X, Y, Enter).
 
--
-
-**Set Correct File Permissions:** This is crucial for WordPress updates, uploads, and security. Caddy runs as caddy, PHP-FPM often as www-data.
+- **Set Correct File Permissions:** This is crucial for WordPress updates, uploads, and security. Caddy runs as caddy, PHP-FPM often as www-data.
 
 ```bash
 # Set ownership to the PHP user/group

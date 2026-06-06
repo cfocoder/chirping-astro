@@ -11,46 +11,6 @@ toc: true
 
 The `COPY` command in DuckDB and MotherDuck is a versatile tool for importing and exporting data. This guide provides a concise overview of how to use `COPY` both from the DuckDB CLI (SQL only) and from Python, including workflows with Ibis and pandas. Use this as a quick reference for your data engineering tasks!
 
-## Table of Contents
-
-- Section 1: Using COPY in DuckDB CLI (SQL Only)
-
-Working with CSV Files
-
-- Working with Parquet Files
-
-- Section 2: Using COPY with the DuckDB Python Library
-
-Basic COPY Operations
-
-Working with Parquet Files
-
-- Working with CSV Files
-
-- Core Concepts
-
-Understanding register()
-
-- Understanding fetchdf()
-
-- Practical Workflows
-
-Workflow: Ingesting a pandas DataFrame
-
-- Workflow: Moving Data from Snowflake (via Ibis) to DuckDB
-
-- Section 3: MotherDuck-Specific Operations
-
-Connecting to MotherDuck
-
-- Using COPY with MotherDuck Tables
-
-- Cloning a Database with COPY DATABASE
-
-- Tips
-
-- References
-
 ## Section 1: Using COPY in DuckDB CLI (SQL Only)
 
 The `COPY` command allows you to efficiently move data between DuckDB tables and files in various formats (CSV, Parquet, JSON, etc.).

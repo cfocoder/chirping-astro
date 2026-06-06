@@ -29,22 +29,6 @@ This guide assumes you have:
 
 Let’s get Docker installed and configured!
 
-## Table of Contents
-
-- Step 1: Prepare Your Ubuntu 24.04 System
-
-- Step 2: Add Docker’s Official GPG Key
-
-- Step 3: Set Up the Docker Repository
-
-- Step 4: Install Docker Engine and Plugins
-
-- Step 5: Configure Docker to Use Your Block Volume (/mnt/myvolume) & Grant User Access
-
-- Step 6: Verify Docker Installation and Configuration
-
-- Step 7: Test Docker Without sudo
-
 ## Step 1: Prepare Your Ubuntu 24.04 System
 
 First, update your package list and install prerequisite packages needed for adding repositories securely over HTTPS:

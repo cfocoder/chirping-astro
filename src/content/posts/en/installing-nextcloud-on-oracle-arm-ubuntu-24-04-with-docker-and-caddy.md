@@ -49,22 +49,6 @@ Before you begin, ensure you have the following:
 
 - Basic Linux Command Line Skills.
 
-## Table of Contents
-
-- Phase 1: Preparation
-
-- Phase 2: Docker Compose Configuration
-
-- Phase 3: Caddy Configuration
-
-- Phase 4: Launch and Initial Setup
-
-- Phase 5: Post-Installation Steps
-
-- Troubleshooting Notes
-
-- Conclusion
-
 ## Phase 1: Preparation
 
 We’ll use the popular and well-maintained LinuxServer.io Nextcloud Docker image, which bundles Nextcloud with Nginx and PHP-FPM internally, simplifying our Caddy configuration significantly compared to using the official FPM-only image directly.

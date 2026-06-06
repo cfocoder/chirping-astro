@@ -213,23 +213,3 @@ From any other device logged into your Tailscale network:
 ## Conclusion
 
 You now have a robust, private S3-compatible object store running on your Mac Mini, reliably using an external drive, and securely accessible from anywhere via your Tailscale network. By understanding the nuances of Docker volume mounting on macOS and leveraging the direct mount method confirmed by docker run, we achieved a stable setup using Docker Compose. Enjoy your private cloud storage!
-
-## Table of Contents
-
-- Step 1: Grant Docker Full Disk Access
-
-- Step 2: The Challenge – Docker Compose and External Drives on macOS
-
-- Step 3: The Breakthrough – Direct Mounts & docker run
-
-- Step 4: The Working Docker Compose File
-
-- Step 5: Launch MinIO
-
-- Step 6: Tailscale Integration
-
-- Step 7: Accessing MinIO via Tailscale
-
-- Troubleshooting
-
-- Conclusion

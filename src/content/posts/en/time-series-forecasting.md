@@ -13,12 +13,6 @@ Time Series is a topic that I’m very passionate about, because for many years 
 
 I’m a strong believer in the use of Time Series for streamlining the preparation and forecasts and budgets, so this blog post is a short guide that I did for me so I can remember easily how to implement them in my work in Finance and Accounting.
 
-## Table of Contents
-
-- What are Time Series?
-
-- The Basics
-
 ## What are Time Series?
 
 Time Series Data is any data that keeps track how things change over time, from oldest to newest. Especially in business and finance, the data we manage is recorded in regular intervals or cycles, which can be weekly, monthly, quarterly and yearly, and the fact that data can be presented in cycles, allows us to discover patterns and make comparisons to track how well we are doing.

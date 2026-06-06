@@ -45,26 +45,6 @@ This guide walks you through installing Ollama on an Oracle Cloud ARM Ampere VM 
 
 **Let’s Get Started!**
 
-## Table of Contents
-
-- Step 1: Prepare Directories
-
-- Step 2: Create the Docker Compose File
-
-- Step 3: Configure Caddy Reverse Proxy
-
-- Step 4: Cloudflare DNS and SSL Check
-
-- Step 5: Apply Caddy Configuration
-
-- Step 6: Launch the Ollama Container
-
-- Step 7: Verify Access
-
-- Step 8: Download and Use a Model
-
-- Conclusion
-
 ## Step 1: Prepare Directories
 
 We need a place for our Docker Compose configuration and a dedicated directory on our block volume for Ollama’s model data.

@@ -11,28 +11,6 @@ toc: true
 
 MCPO (Model Context Protocol OpenAPI Proxy) is a tool that exposes MCP server tools as OpenAPI endpoints, making them easy to integrate with platforms like Open WebUI. I previously wrote a detailed post on manual MCPO installation and configuration: [🚀 Installing and Configuring MCPO for Open WebUI – A Complete Guide](https://cfocoder.com/%f0%9f%9a%80-installing-and-configuring-mcpo-for-open-webui-a-complete-guide/). However, deploying MCPO with Coolify is much easier to implement and maintain, thanks to automated builds, environment management, and a streamlined workflow.
 
-## Table of Contents
-
-- What is Coolify?
-
-Why use Coolify instead of manual deployment with uvx?
-
-- Prerequisites
-
-- Step 1: Prepare Your Dockerfile
-
-- Step 2: Add Your Configuration
-
-- Step 3: Push to GitHub
-
-- Step 4: Deploy on Coolify
-
-- Step 5: Access Your App
-
-- Step 6: Project’s Github Repo
-
-- Deploying Any App with a Dockerfile in Coolify
-
 ## What is Coolify?
 
 Coolify is an open-source self-hosted platform for deploying and managing web applications, databases, and services. It provides a user-friendly interface for automated deployments from Git repositories, supports Dockerfile-based builds, and handles networking, SSL, and environment variables out of the box.

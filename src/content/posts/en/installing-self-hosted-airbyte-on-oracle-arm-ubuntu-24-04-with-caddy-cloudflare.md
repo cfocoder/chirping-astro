@@ -67,26 +67,6 @@ sudo systemctl status caddy
 
 - SSH Access: Terminal access to your VM.
 
-## Table of Contents
-
-- Step 1: SSH into your VM
-
-- Step 2: Install abctl
-
-- Step 3: Install Airbyte using abctl (Handling Port Conflicts)
-
-- Step 4: Configure Caddy Reverse Proxy
-
-- Step 5: Configure Cloudflare DNS
-
-- Step 6: Retrieve Default Airbyte Credentials
-
-- Step 7: Access Airbyte!
-
-- Step 8: Maintenance and Updates
-
-- Conclusion:
-
 ## Step 1: SSH into your VM
 
 Connect to your Oracle Cloud instance using your SSH key.

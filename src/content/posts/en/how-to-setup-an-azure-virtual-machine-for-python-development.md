@@ -11,28 +11,6 @@ toc: true
 
 As part of the Data Science course I’m currently studying in Tec de Monterrey, I learned how to do remote python development using [Github Codespaces](https://github.com/codespaces) for free. I found this to be an eye-opener as it meant I could use Visual Studio Code for coding Python apps directly on a Linux remote server for free. The issue was that I quickly run out of free credits to finish my school projects, so I decided to replicate Github Codespaces on a cheap Azure Virtual Machine which only costs just a few cents per hour and I have a lot more flexibility for scaling the VM up or down if I want.
 
-## Table of Contents
-
-- Setup the Azure Virtual Machine
-
-- Setup the SSH Key
-
-- Setup Remote SSH with Visual Studio Code
-
-- Install Anaconda
-
-- Setup GitHub
-
-- Install Python dependencies
-
-- Install asdf Version Manager
-
-- Install Pipenv
-
-- Install NetStat
-
-- Limit SSH access to Port 22
-
 ## Setup the Azure Virtual Machine
 
 I chose Azure because I really like the control I have of all resources through “Resource Groups”, and this allows me to rapidly see how much these resources are costing me. I tried to do the same with AWS and Google Cloud Platform and I found the organization and cost of resources to be less clear.

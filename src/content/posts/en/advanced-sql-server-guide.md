@@ -11,60 +11,6 @@ toc: true
 
 This is a short quick guide on advanced SQL Server topics, that I recently learned in this course from [Udemy](https://www.udemy.com/course/advanced-sql-server-masterclass-for-data-analysis/). The examples run in this post, use the [AdventureWorks2019 sample database](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms) provided by Microsoft.
 
-## Table of Contents
-
-- Window Functions
-
-OVER() Function
-
-- Ranking of rows
-
-- LEAD() and LAG()
-
-- Correlated SubQueries
-
-Subqueries in the SELECT statement
-
-- Subqueries in the WHERE statement (WHERE EXISTS)
-
-- PIVOT and UNPIVOT
-
-Example of Pivot
-
-- Example of Unpivot
-
-- Common Table Expressions
-
-Basic CTEs
-
-- Recursive Common Table Expressions
-
-- Temporary Tables
-
-Create Temporary Tables with SELECT – INTO
-
-- Create Temporary Tables with CREATE – INSERT INTO
-
-- Update Tables with a conditional CASE statement
-
-- Update certain records of Table (UPDATE – SET – WHERE)
-
-- Update Tables based on values on another table (UPDATE – SET – FROM-JOIN)
-
-- Table Indexes
-
-- SQL Programming
-
-Variables
-
-- Functions
-
-- Stored Procedures
-
-- Control Flow: IF – ELSE Statements
-
-- Dynamic SQL
-
 ## Window Functions
 
 ### OVER() Function

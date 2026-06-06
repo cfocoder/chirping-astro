@@ -107,22 +107,6 @@ This API-focused approach is primarily aimed at developers and technically profi
 
 - Power Users: Individuals comfortable with APIs and scripting who want fine-grained control over their data access.
 
-## Table of Contents
-
-- Step 1: Prepare Persistent Storage Directory
-
-- Step 2: Clone the OpenBB Platform Repository
-
-- Step 3: Build the OpenBB Docker Image
-
-- Step 4: Configure Caddy Reverse Proxy
-
-- Step 5: Run OpenBB Interactively with Tmux
-
-- Step 6: Verify Access
-
-- Conclusion:
-
 ## Step 1: Prepare Persistent Storage Directory
 
 Even if Docker’s main data is on a block volume, we need a specific, easily accessible location *on that volume* to store the OpenBB configuration (like your tokens) that we’ll mount into the container.

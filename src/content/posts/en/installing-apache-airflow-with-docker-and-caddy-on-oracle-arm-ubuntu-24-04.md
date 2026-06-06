@@ -45,24 +45,6 @@ Before you begin, ensure you have the following set up:
 
 - (Optional) Cloudflare: Configured for your domain (yourdomain.com).
 
-## Table of Contents
-
-- Step 1: Prepare Directory Structure on Block Volume
-
-- Step 2: Create the Docker Compose File
-
-- Step 3: Initialize the Airflow Database
-
-- Step 4: Configure Caddy Reverse Proxy
-
-- Step 5: Start Airflow Services
-
-- Step 6: Verify Installation
-
-- Step 7: Security & Next Steps
-
-- Conclusion
-
 ## Step 1: Prepare Directory Structure on Block Volume
 
 We need dedicated directories for Airflow’s persistent data on the block volume.

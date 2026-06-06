@@ -35,26 +35,6 @@ This guide will walk you through installing Flowise on its own secured subdomain
 
 **Our Goal:** Install Flowise on https://flowise.yourdomain.com, with data stored on the block volume, and secured with a token.
 
-## Table of Contents
-
-- Step 1: DNS Configuration (Cloudflare)
-
-- Step 2: Prepare Data Directory on Block Volume
-
-- Step 3: Generate Security Credentials
-
-- Step 4: Create Docker Compose File for Flowise
-
-- Step 5: Configure Caddy
-
-- Step 6: Start Flowise and Initial Verification
-
-- Step 7: Final Verification & Access
-
-- Troubleshooting & Tips
-
-- Conclusion
-
 ## Step 1: DNS Configuration (Cloudflare)
 
 - Log in to your Cloudflare dashboard.

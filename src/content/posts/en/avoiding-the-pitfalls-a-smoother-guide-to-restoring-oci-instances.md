@@ -27,24 +27,6 @@ I recently went through this exact process while trying to restore an Ubuntu VM 
 
 We’ll focus on creating a **New Instance** from your backup, as this is generally cleaner than trying an in-place restore.
 
-## Table of Contents
-
-- Step 1: Create the New Instance
-
-- Step 2: Handle the IP Address (Pitfall #1)
-
-- Step 3: Verify Network Security (Pitfall #2)
-
-- Step 4: Attach Block Volumes (The Right Way)
-
-- Step 5: First SSH Connection Attempt (Pitfall #3)
-
-- Step 6: Handle Block Volume Inside the OS (Pitfall #4 & #5)
-
-- Step 7: Post-Restoration Checks
-
-- Step 8: Clean Up
-
 ## Step 1: Create the New Instance
 
 - Locate Backup: Find your Custom Image (Compute -> Custom Images) or Boot Volume Backup (Storage -> Boot Volume Backups).

@@ -49,26 +49,6 @@ We’ll use a subdomain (odoo.yourdomain.com) and leverage Docker Compose for ma
 
 - (Optional) A block volume mounted (e.g., at /mnt/myvolume) if you want to store config/addons separately from the root filesystem.
 
-## Table of Contents
-
-- Step 1: Create Project Directories
-
-- Step 2: Create the docker-compose.yml File
-
-- Step 3: Understanding the docker-compose.yml and Named Volumes
-
-- Step 4: (Optional) Create Custom Odoo Configuration
-
-- Step 5: Configure Caddy Reverse Proxy
-
-- Step 6: Launch Odoo!
-
-- Step 7: Monitor and Initial Setup
-
-- Step 8: Troubleshooting Common Issues
-
-- Conclusion:
-
 ## Step 1: Create Project Directories
 
 We’ll organize our Odoo configuration files. While the main Odoo data will live in Docker named volumes, we might still want host access for custom configuration or addons.

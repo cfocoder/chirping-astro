@@ -11,48 +11,6 @@ toc: true
 
 As a developer, I prefer to use GitLab for my private projects and repositories due to its generous free tier for private repos, while using GitHub for public open-source projects where the community and visibility are unmatched. This dual-platform approach means I need seamless SSH authentication for both services. Recently, I needed to set up SSH authentication for my Git repositories on both GitLab and GitHub from my Ubuntu development server. Here’s the complete process I followed, including troubleshooting steps and best practices.
 
-## Table of Contents
-
-- The Problem
-
-- Step 1: Generate SSH Key with Meaningful Name
-
-- Step 2: Add Public Key to GitLab
-
-- Step 3: Test GitLab SSH Connection
-
-- Step 4: Configure SSH for Automatic Key Selection
-
-- Step 5: Fix Git Remote URL
-
-- Step 6: Start SSH Agent and Add Key
-
-- Step 7: Test Git Operations
-
-- Step 8: Configure VS Code to Use SSH
-
-- Step 9: Add Same Key to GitHub
-
-- Step 10: Update SSH Config for Both Services
-
-- Step 11: Test Both Services
-
-- Final File Structure
-
-- Key Troubleshooting Steps
-
-Problem: VS Code Using Mixed Authentication
-
-- Problem: Permission Denied with SSH
-
-- Problem: SSH Agent Connection Failed
-
-- Best Practices Learned
-
-- Security Notes
-
-- Commands for Future Reference
-
 ## The Problem
 
 I was getting authentication errors when trying to push commits from VS Code to my GitLab repository. The error messages included:

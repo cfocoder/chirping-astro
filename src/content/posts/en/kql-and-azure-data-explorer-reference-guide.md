@@ -15,34 +15,6 @@ The KQL language is used mainly to analyze information coming from logs, which i
 
 This is a reference guide that I did for myself so I can remember how the main operators and functions work
 
-## Table of Contents
-
-- Basic Operators
-
-- Basic Functions
-
-- Management Commands
-
-- Visualization
-
-Types of charts
-
-- Properties
-
-- Example1
-
-- Example2
-
-- Time Series Analysis
-
-Time Series Functions
-
-- Plugins
-
-- Geospatial Analysis
-
-- References
-
 ## Basic Operators
 
 | Operator               | Explanation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Example                                                                                                                                                     |

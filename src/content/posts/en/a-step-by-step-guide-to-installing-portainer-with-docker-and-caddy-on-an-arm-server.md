@@ -35,26 +35,6 @@ Before you begin, you should have the following setup:
 
 - (Recommended) An attached block volume for persistent data, mounted at a location like /path/to/your/block-volume.
 
-## Table of Contents
-
-- Step 1: Configure Your DNS in Cloudflare
-
-- Step 2: Prepare the Portainer Data Directory
-
-- Step 3: Check for Port Conflicts (A Crucial Pro-Tip!)
-
-- Step 4: Create the Docker Compose File
-
-- Step 5: Launch Portainer
-
-- Step 6: Configure the Caddy Reverse Proxy
-
-- Step 7: Final Setup and Securing Your Account
-
-- How to Update Your Applications
-
-- Conclusion and Basic Maintenance
-
 ## Step 1: Configure Your DNS in Cloudflare
 
 Caddy needs to know that the subdomain portainer.your-domain.com points to our server before it can issue an SSL certificate.

@@ -11,40 +11,6 @@ toc: true
 
 I recently met with a group of colleagues from the accounting firm (KPMG), where I worked many years ago, and I found it hard to explain to them, what I do in the field of Data Science and what Artificial Intelligence is and is not, so after giving it a lot of thought, I wrote this blog post that explains how I see and understand all the topics around these fields based in my personal experience.
 
-## Table of Contents
-
-- 1.- Data Science
-
-- 2.- Artificial Intelligence (AI)
-
-- 3.- Machine Learning (ML)
-
-- 4.- Neural Networks
-
-- 5.- Deep Learning
-
-- 6.- Foundational Layers
-
-  6.1 Data Engineering
-
-- 6.2 Mathematical Optimization
-
-- 6.3 Analytics Engineering
-
-- 7.- The 4 types of Analysis
-
-- 8.- Types of Data Professionals and their Skills
-
-1. Data Engineer
-
-- 2. ML Engineer
-
-- 3. Data Scientist
-
-- 4. Data Analyst
-
-![](/images/2024/09/Data-Science_AI-3.png)
-
 ## 1.- Data Science
 
 First off, for me, Data Science is the broadest level of the AI world. At the broadest level, Data Science is an interdisciplinary field that uses scientific methods, processes, algorithms, and systems to extract knowledge and insights from structured and unstructured data. It encompasses various techniques from statistics, computer science, and domain expertise to analyze and interpret complex data.

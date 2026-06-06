@@ -15,26 +15,6 @@ This blog post is my personal endeavor to create a comprehensive, yet quick-refe
 
 So, whether you’re new to Snowflake, considering it for your organization, or, like me, just want a handy refresher on its powerful capabilities, let’s dive in!
 
-## Table of Contents
-
-- Introduction
-
-What is Snowflake? The Data Cloud Explained
-
-- How Does Snowflake Work? A Look Under the Hood
-
-- What is a Datawarehouse?
-
-- How Snowflake Can Benefit a Finance Organization
-
-- Scaling Policy
-
-- Basic SQL Operation Examples
-
-- Loading Data
-
-Stages
-
 ## Introduction
 
 ### What is Snowflake? The Data Cloud Explained

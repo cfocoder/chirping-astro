@@ -47,26 +47,6 @@ Before you start, ensure you have the following:
 
 - Basic Linux Command Line Knowledge.
 
-## Table of Contents
-
-- Step 1: Prepare Directories on Block Volume
-
-- Step 2: Create the Docker Compose File
-
-- Step 3: Configure Caddy Reverse Proxy
-
-- Step 4: Configure Cloudflare DNS
-
-- Step 5: Launch Open Web UI
-
-- Step 6: Access and Configure Open Web UI
-
-Managing Users (With Signups Disabled)
-
-- Exploring Advanced Features: Connections and Functions
-
-- Conclusion
-
 ## Step 1: Prepare Directories on Block Volume
 
 To keep things organized and prevent filling up the boot drive, we’ll store configuration and persistent data on the attached block volume.

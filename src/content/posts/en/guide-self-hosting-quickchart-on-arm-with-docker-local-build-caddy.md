@@ -31,22 +31,6 @@ We will build the Docker image locally from the official source code. This appro
 
 - Access to your domain’s DNS settings (e.g., Cloudflare).
 
-## Table of Contents
-
-- Step 1: Get the QuickChart Source Code
-
-- Step 2: Configure Docker Compose for Local Build
-
-- Step 3: Build and Run the Container
-
-- Step 4: Configure Caddy Reverse Proxy
-
-- Step 5: Configure DNS (Cloudflare Example)
-
-- Step 6: Test Your Self-Hosted QuickChart
-
-- Conclusion
-
 ## Step 1: Get the QuickChart Source Code
 
 Clone the official QuickChart repository to obtain the Dockerfile needed for the build. Choose a suitable location, like /mnt/myvolume if you have a separate volume, or /opt.

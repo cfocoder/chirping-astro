@@ -37,22 +37,6 @@ Boot Volume: ~46GB
 
 **Goal:** Install Supabase on https://supabase.yourdomain.com using Docker Compose, with data on /mnt/myvolume, and secure it properly.
 
-## Table of Contents
-
-- Phase 1: Preparation & DNS
-
-- Phase 2: Supabase Setup with Docker Compose
-
-- Phase 3: Caddy Configuration
-
-- Phase 4: Final Verification
-
-- Phase 5: Important Next Steps & Considerations
-
-- Troubleshooting Notes from Our Install:
-
-- Conclusion:
-
 ## Phase 1: Preparation & DNS
 
 - Cloudflare DNS Configuration:Before anything else, we need to tell the world where supabase.yourdomain.com lives.

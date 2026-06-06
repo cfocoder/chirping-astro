@@ -13,64 +13,6 @@ toc: true
 
 As a data scientist and developer, I rely on advanced LLMs (Large Language Models) like Claude Opus, Sonnet, GPT-4.1, and GPT-4o for both architectural planning and daily coding. But I quickly learned that **the same model behaves differently depending on the platform**—and that maximizing value is about more than just picking the “best” model. It’s about using each tool where it truly shines, while avoiding unnecessary costs and hitting usage thresholds.
 
-## Table of Contents
-
-- Context: Why Model and Platform Matter
-
-- Key Insight: Platform ≠ Model
-
-- Two Types of Work, Two Strategies
-
-1. Architecture & Planning
-
-- 2. Coding, Writing, and Execution
-
-- Model & Platform Evaluation
-
-Claude Opus
-
-- Claude Sonnet
-
-- GPT-4.1 / GPT-4o (Copilot)
-
-- Claude Haiku
-
-- Mimo (OpenRouter)
-
-- Tooling: What I Keep and Why
-
-- My Workflow: Where Each Tool Wins
-
-- Cost-Optimized Workflow for Planning Tasks
-
-Phase 1 — Heavy Architecture & Planning
-
-- Phase 2 — Full Draft
-
-- Phase 3 — Efficient Review & Editing
-
-- Phase 4 — Final Validation
-
-- Economic Rule
-
-- Coding Workflow: Task-Based Strategy
-
-Code Architecture (High-Level)
-
-- Concrete Implementation (Daily Work)
-
-- Refactoring and Cleanup
-
-- Real Debugging (Specific Errors)
-
-- Validation and Security
-
-- What NOT to Do (Common Mistakes)
-
-- The Central Lesson
-
-- Conclusion
-
 ## Key Insight: Platform ≠ Model
 
 Even if you use the same LLM (e.g., Claude Opus), the experience varies dramatically across platforms:

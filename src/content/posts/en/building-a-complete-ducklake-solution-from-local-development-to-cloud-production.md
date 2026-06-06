@@ -15,66 +15,6 @@ DuckLake is revolutionizing the lakehouse architecture by combining the simplici
 
 This tutorial demonstrates a real-world data pipeline that transforms transactional data through bronze, silver, and gold layers, showcasing the power and flexibility of the DuckLake ecosystem.
 
-## Table of Contents
-
-- Introduction
-
-- Architecture Overview
-
-Technology Stack Comparison
-
-- Part 1: Local DuckLake Implementation
-
-Step 1: Setting Up the Data Warehouse with SQLite
-
-- Step 2: Creating the Silver Layer with DuckDB
-
-- Step 3: Creating the DuckLake
-
-- Querying the Local DuckLake
-
-- Part 2: Cloud-Based DuckLake with MotherDuck, R2, and Supabase
-
-Prerequisites: Setting Up DuckDB Secrets
-
-- Step 1: Creating the Cloud Data Warehouse in MotherDuck
-
-- Step 2: Creating the Transactions Table
-
-- Step 3: Inserting Sample Data
-
-- Step 4: Data Transformation with Ibis Framework
-
-- Step 5: Exporting to Cloudflare R2
-
-- Step 6: Creating the Cloud DuckLake in Supabase
-
-- Step 7: Attaching to the DuckLake
-
-- Step 8: Loading Data into the Cloud DuckLake
-
-- Querying the Cloud DuckLake
-
-- Lessons Learned
-
-- Key Benefits and Learnings
-
-  1. Seamless Integration
-
-- 2. Cost-Effective Storage
-
-- 3. Flexible Metadata Management
-
-- 4. Framework Flexibility
-
-- 5. Performance at Scale
-
-- Conclusion
-
-- References
-
-- Next Steps
-
 ## Architecture Overview
 
 Our solution implements a modern lakehouse architecture with:

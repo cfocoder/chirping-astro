@@ -43,40 +43,6 @@ If you’re coming from a SQL background, you’ll find Cypher surprisingly fami
 
 Think of Cypher as SQL for graphs, where you describe the shape of the data you want rather than how to join tables.
 
-## Table of Contents
-
-- Basic Concepts
-
-- Node Patterns
-
-- Relationship Patterns
-
-- CREATE
-
-- MATCH
-
-- MERGE
-
-- WHERE
-
-- RETURN
-
-- WITH
-
-- PATHS
-
-- CALL and Procedures
-
-- DELETE and DETACH
-
-- Aggregations
-
-- Indexes and Constraints
-
-- Common Patterns
-
-- Kuzu vs Neo4j Notes
-
 ## Basic Concepts
 
 ### Graph Structure

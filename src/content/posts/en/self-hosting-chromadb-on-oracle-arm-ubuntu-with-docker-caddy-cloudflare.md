@@ -45,30 +45,6 @@ This guide details how to install and run ChromaDB on its own subdomain (chromad
 
 Let’s dive in!
 
-## Table of Contents
-
-- Step 1: Preparation (Token & Directories)
-
-- Step 2: Docker Compose Configuration
-
-- Step 3: Launch ChromaDB
-
-- Step 4: Initial Verification (Local)
-
-- Step 5: Cloudflare DNS Setup
-
-- Step 6: Caddy Reverse Proxy Configuration
-
-- Step 7: Public Verification
-
-- Step 8: Python Client Usage Example
-
-- Step 9: Using the V2 API Directly (curl Examples)
-
-- Troubleshooting Tips
-
-- Conclusion
-
 ## Step 1: Preparation (Token & Directories)
 
 First, we need a secure token for ChromaDB’s API authentication and directories to store its configuration and persistent data.

@@ -45,24 +45,6 @@ This setup specifically addresses challenges when running behind Cloudflare’s 
 
 - SSH access and sudo privileges on your server.
 
-## Table of Contents
-
-- Step 1: Prepare Directories
-
-- Step 2: Create the Docker Compose File
-
-- Step 3: Configure Caddy
-
-- Step 4: Apply Caddy Configuration
-
-- Step 5: Start Qdrant
-
-- Step 6: Verification and Testing
-
-- Step 7: Example of loading a Collection from a Snapshot
-
-- Conclusion
-
 ## Step 1: Prepare Directories
 
 We need directories to store the Qdrant configuration (docker-compose.yml) and its persistent data on the block volume.

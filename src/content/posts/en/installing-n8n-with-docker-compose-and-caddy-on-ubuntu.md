@@ -41,24 +41,6 @@ This guide walks through installing n8n on its own subdomain (e.g., https://n8n
 
 - (Optional) Cloudflare managing your DNS for easy setup and potential performance/security benefits.
 
-## Table of Contents
-
-- Step 1: DNS Configuration
-
-- Step 2: Prepare Directories on Persistent Storage
-
-- Step 3: Create the Docker Compose File
-
-- Step 4: Configure Caddy Reverse Proxy
-
-- Step 5: Start the n8n Container
-
-- Step 6: Verify and Access n8n
-
-- Step 7: Initial n8n Setup
-
-- Conclusion
-
 ## Step 1: DNS Configuration
 
 First, we need to tell the internet where n8n.yourdomain.com lives.

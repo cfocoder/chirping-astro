@@ -15,28 +15,6 @@ Before we jump in, it’s worth noting that this post is a high-level tour to ge
 
 I was so fascinated by its power that I decided to put together this quick guide. Think of it as a cheat sheet for getting started with SymPy, so you can spend less time scribbling algebra on paper and more time coding.
 
-## Table of Contents
-
-- What is SymPy?
-
-- Getting Started: The Basics
-
-- Core Functions: Your Mathematical Toolkit
-
-1. Algebraic Manipulation: expand(), factor(), and simplify()
-
-- 2. Substitution: subs()
-
-- 3. Calculus: The Data Scientist’s Bread and Butter
-
-- 4. Solving Equations: solveset()
-
-- The Visual Magic: Plotting with SymPy
-
-- The Plot Function
-
-- Why This Matters for Data Science
-
 ## What is SymPy?
 
 Most Python libraries for math, like NumPy, are *numerical*. They work with numbers (like 3.14159). SymPy is different. It’s a library for **symbolic mathematics**. It works with symbols and expressions, just like you would in an algebra or calculus class. This means it can give you the exact, analytical answer, not just a numerical approximation.

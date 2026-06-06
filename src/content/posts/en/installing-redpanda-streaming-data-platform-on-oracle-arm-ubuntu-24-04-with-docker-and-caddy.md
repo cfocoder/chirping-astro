@@ -52,28 +52,6 @@ An A record (or CNAME) for redpanda.yourdomain.com pointing to your VM’s p
 
 We’ll install RedPanda (broker) and Redpanda Console (web UI) using Docker Compose, storing configuration and data on the block volume, securing the broker with SASL, and proxying the Console via Caddy.
 
-## Table of Contents
-
-- Step 1: Prepare Directories on Block Volume
-
-- Step 2: Create the Docker Compose File
-
-- Step 3: Start RedPanda Broker (First Time)
-
-- Step 4: Create the SASL User
-
-- Step 5: Start Redpanda Console
-
-- Step 6: Configure Caddy Reverse Proxy
-
-- Step 7: Reload Caddy
-
-- Step 8: Verify Cloudflare and Access
-
-- Step 9: Managing Your Installation
-
-- Conclusion
-
 ## Step 1: Prepare Directories on Block Volume
 
 We need directories for the Docker Compose configuration and RedPanda’s data.

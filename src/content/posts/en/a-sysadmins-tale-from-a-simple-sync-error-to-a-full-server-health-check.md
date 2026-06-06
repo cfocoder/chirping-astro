@@ -1,119 +1,19 @@
 ---
-title: "A SysAdmin’s Complete Guide: From Crisis to Clean Server – The Ultimate Disk Space Recovery Playbook"
-description: "Updated with advanced techniques and lessons learned from multiple real-world storage crises"
+title: 'A SysAdmin’s Complete Guide: From Crisis to Clean Server – The Ultimate Disk Space Recovery Playbook'
+description: 'Updated with advanced techniques and lessons learned from multiple real-world storage crises'
 pubDate: 2025-07-03
-categories: ["Linux"]
+categories: ['Linux']
 tags: []
 toc: true
 ---
 
-*Updated with advanced techniques and lessons learned from multiple real-world storage crises*
+_Updated with advanced techniques and lessons learned from multiple real-world storage crises_
 
 This is the comprehensive story of how I’ve evolved from reactive firefighting to proactive server management. What started as a “simple” file sync issue revealed a server at 93% disk capacity, leading to a systematic methodology that later saved me during an even more critical 95% storage crisis. Join me as I share the exact commands, tools, and preventive measures that have kept my Oracle ARM Ubuntu server healthy through multiple storage emergencies.
 
 It all started with a seemingly minor issue. I use Mountain Duck to mount a remote drive from my ARM Oracle Cloud server, making it easy to drag and drop files. One day, some files just wouldn’t sync. My first thought? “It must be a permissions issue.”
 
 I was right, but I had no idea this small clue would unravel a series of deeper issues, leading me on a journey from a simple file sync problem to developing a complete server health management system.
-
-## Table of Contents
-
-- Chapter 1: The First Clue – Permission Denied
-
-The Initial Investigation
-
-- The Wrong Fix That Started Everything
-
-- Chapter 2: The Alarms Go Off – A Cascade of Failures
-
-The Immediate Disaster
-
-- Chapter 3: The Recovery – Restoring Order
-
-The Emergency Recovery Plan
-
-- Chapter 4: The Real Problem – The Disk Space Crisis
-
-My Essential Toolkit for Disk Investigation
-
-1. The Overview (df -h)
-
-- 2. The Ultimate Analyzer (ncdu)
-
-- 3. The Docker Space Breakdown
-
-- Chapter 5: The Great Cleanup – Reclaiming Gigabytes
-
-1. Uninstall Unused Apps
-
-- 2. Hunt Down Runaway Logs
-
-- 3. Fix Broken Services
-
-- Chapter 6: The Advanced Crisis – Lessons from a 95% Emergency
-
-Advanced Disk Analysis Techniques
-
-User Home Directory Deep Dive
-
-- System-Wide Cache Hunters
-
-- The Nuclear Cache Cleanup Arsenal
-
-Python UV Package Manager (Major Space Hog)
-
-- NPM Cache Cleanup
-
-- VS Code Server Cache
-
-- DuckDB Extensions
-
-- System Log Management
-
-Immediate Log Cleanup
-
-- Journal Log Management
-
-- Permanent Journal Size Limits
-
-- Docker Deep Cleaning
-
-Comprehensive Docker Cleanup
-
-- Application-Specific Removal
-
-- System Package Cleanup
-
-APT Package Management
-
-- Chapter 7: Proactive Monitoring and Prevention
-
-Automated Monitoring Setup
-
-Disk Space Alerts
-
-- Cron Job for Regular Cleanup
-
-- Log Rotation Best Practices
-
-Docker Compose Global Logging
-
-- Logrotate Configuration
-
-- The Emergency Response Playbook
-
-- Chapter 8: Results and Lessons Learned
-
-The Numbers Don’t Lie
-
-- Key Insights
-
-- The Complete Monitoring Workflow
-
-- Epilogue: Building Anti-Fragile Systems
-
-Essential Takeaways
-
-- Emergency Commands Quick Reference
 
 ## Chapter 1: The First Clue – Permission Denied
 
@@ -239,7 +139,7 @@ The earlier chaos had left a few services in a “Restarting” loop. A quick lo
 
 ## Chapter 6: The Advanced Crisis – Lessons from a 95% Emergency
 
-*This section incorporates lessons learned from subsequent storage crises*
+_This section incorporates lessons learned from subsequent storage crises_
 
 Months later, I faced an even more severe crisis: both drives hitting critical levels (95% main drive, 91% mounted volume). This emergency taught me advanced techniques that every sysadmin should know:
 
@@ -338,7 +238,7 @@ sudo journalctl --vacuum-time=7d
 
 Create a permanent configuration to prevent journal bloat:
 
-```bash
+````bash
 # Create config directory
 sudo mkdir -p /etc/systemd/journald.conf.d
 
@@ -359,7 +259,7 @@ services:
       options:
         max-size: "20m"
         max-file: "3"
-```
+````
 
 #### Logrotate Configuration
 

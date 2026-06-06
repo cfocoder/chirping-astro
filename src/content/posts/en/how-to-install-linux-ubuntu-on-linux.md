@@ -11,22 +11,6 @@ toc: true
 
 I recently learned how to install Ubuntu on my Windows 10 laptop, not as a virtual machine, but as part of my normal Windows installation, so I have the advantage of not wasting resources dedicated to Ubuntu on a virtual machine.
 
-## Table of Contents
-
-- Install Windows Subsystem for Linux (WSL)
-
-- Install “Windows Terminal” from the Microsoft Store
-
-- Install the Linux Kernel
-
-- Set WSL 2 as the default version
-
-- Install Ubuntu from the Microsoft Store
-
-- Install ZSH
-
-- Source
-
 ## Install Windows Subsystem for Linux (WSL)
 
 First, you must activate some features of Windows, from the “Control Panel”, which are:

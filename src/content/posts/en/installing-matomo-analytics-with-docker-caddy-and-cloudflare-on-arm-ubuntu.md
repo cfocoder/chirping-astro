@@ -27,32 +27,6 @@ This setup assumes you have:
 
 Our goal is to install Matomo on https://matomo.yourdomain.com.
 
-## Table of Contents
-
-- Step 1: Prepare Directories on the Block Volume
-
-- Step 2:  Create the Docker Compose File
-
-- Step 3: Configure Caddy Reverse Proxy
-
-- Step 4: Cloudflare DNS Setting (Temporary)
-
-- Step 5: Launch the Matomo Stack
-
-- Step 6:  Matomo Web Installation
-
-- Step 7: Matomo Post-Installation Configuration
-
-- Step 8:  Re-enable Cloudflare Proxy
-
-- Step 9: Add Tracking Code to Your Site(s)
-
-- Step 10: Troubleshooting Common Issues
-
-- Step 11: Maintenance (Updates)
-
-- Conclusion
-
 ## Step 1: Prepare Directories on the Block Volume
 
 We’ll store Matomo’s application data and its database on the persistent block volume to avoid filling up the boot volume and make backups easier.

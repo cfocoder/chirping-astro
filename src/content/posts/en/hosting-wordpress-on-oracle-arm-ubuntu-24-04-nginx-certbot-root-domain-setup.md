@@ -31,24 +31,6 @@ This guide walks you through the exact steps I took to get a fresh WordPress ins
 
 Let’s dive in!
 
-## Table of Contents
-
-- Phase 1: Install the Essentials – Nginx, PHP, MariaDB
-
-- Phase 2: Prepare the Database and WordPress Files
-
-- Phase 3: Configure Nginx for Your WordPress Site
-
-- Phase 4: Edit php.ini to increase upload file size
-
-- Phase 5: WordPress Web Installation
-
-- Phase 6: Secure Your Site with HTTPS (Certbot/Let’s Encrypt)
-
-- Phase 7: Ready for Subdomains
-
-- Phase 8: Troubleshooting
-
 ## Phase 1: Install the Essentials – Nginx, PHP, MariaDB
 
 First, we need the core components: the web server (Nginx), the PHP processor (PHP-FPM), and the database server (MariaDB).

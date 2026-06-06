@@ -39,24 +39,6 @@ Before starting, ensure you have the following set up:
 
 - Block Volume: A block volume attached and mounted, for persistent data storage (e.g., at /mnt/myvolume).
 
-## Table of Contents
-
-- Step 1: Install PHP 8.2 & Prerequisites
-
-- Step 2: Configure PHP-FPM
-
-- Step 3: Set up MariaDB Database (Docker)
-
-- Step 4: Install Mautic (Composer)
-
-- Step 5: Configure Caddy
-
-- Step 6: Run Mautic Web Installer
-
-- Step 7: Configure Cron Jobs
-
-- Conclusion
-
 ## Step 1: Install PHP 8.2 & Prerequisites
 
 Mautic 6 requires PHP 8.2+. Ubuntu 24.04 ships with 8.3, so we’ll use Ondřej Surý’s PPA for a specific version and install necessary extensions, plus Composer.
