@@ -30,8 +30,7 @@ pnpm-debug.log*
 Thumbs.db
 
 # bun
-bun.lock
-bun.lockb
+# Keep lockfiles trackable so CI/CD picks the intended package manager.
 .bun-cache/
 
 # pagefind cache
