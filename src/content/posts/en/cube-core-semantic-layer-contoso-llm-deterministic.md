@@ -36,7 +36,9 @@ Business question
 
 In my lab I used this architecture:
 
-```mermaid
+```ashtml
+<figure class="not-prose my-8 rounded-2xl border border-base-content/10 bg-base-200/50 p-4 shadow-sm">
+  <pre class="mermaid">
 flowchart LR
     A[Contoso Parquet files in MinIO] --> B[Local DuckDB]
     B --> C[Cube Core]
@@ -45,6 +47,11 @@ flowchart LR
     E --> F[Python helper]
     F --> G[Jupyter Notebook]
     G --> H[Didactic explanation / LLM]
+  </pre>
+  <figcaption class="mt-3 text-center text-sm italic text-base-content/60">
+    The lab architecture: Contoso data flows into DuckDB, Cube Core applies the semantic model, and the notebook or LLM consumes governed results.
+  </figcaption>
+</figure>
 ```
 
 The physical source ended up being a local DuckDB database:
@@ -334,12 +341,19 @@ joins:
 
 Visually, the model looks like this:
 
-```mermaid
+```ashtml
+<figure class="not-prose my-8 rounded-2xl border border-base-content/10 bg-base-200/50 p-4 shadow-sm">
+  <pre class="mermaid">
 erDiagram
     FactSales }o--|| DimDate : DateKey
     FactSales }o--|| DimProduct : ProductKey
     DimProduct }o--|| DimProductSubcategory : ProductSubcategoryKey
     DimProductSubcategory }o--|| DimProductCategory : ProductCategoryKey
+  </pre>
+  <figcaption class="mt-3 text-center text-sm italic text-base-content/60">
+    The semantic graph: the fact table connects to date and product dimensions, and Cube can traverse from product to category.
+  </figcaption>
+</figure>
 ```
 
 This was one of the most revealing parts: the YAML does not only define metrics, it also defines the path to reach dimensions.
@@ -583,7 +597,9 @@ The important thing is not only that the results match. The important thing is t
 
 This is how the pieces connect:
 
-```mermaid
+```ashtml
+<figure class="not-prose my-8 rounded-2xl border border-base-content/10 bg-base-200/50 p-4 shadow-sm">
+  <pre class="mermaid">
 flowchart TD
     A[Physical data: Contoso in DuckDB] --> B[Tables: FactSales, DimDate, DimProduct]
     B --> C[Cube YAML semantic model]
@@ -597,11 +613,18 @@ flowchart TD
     E --> F[Python helper: cube_meta, cube_load]
     F --> G[Jupyter Notebook]
     G --> H[LLM explains the result]
+  </pre>
+  <figcaption class="mt-3 text-center text-sm italic text-base-content/60">
+    The complete puzzle: physical data, YAML semantics, Cube Core, helper functions, notebook, and LLM explanation.
+  </figcaption>
+</figure>
 ```
 
 Another way to see it:
 
-```mermaid
+```ashtml
+<figure class="not-prose my-8 rounded-2xl border border-base-content/10 bg-base-200/50 p-4 shadow-sm">
+  <pre class="mermaid">
 sequenceDiagram
     participant U as User
     participant L as LLM
@@ -622,6 +645,11 @@ sequenceDiagram
     C-->>H: JSON with data
     H-->>L: DataFrame / dict
     L-->>U: Explanation in natural language
+  </pre>
+  <figcaption class="mt-3 text-center text-sm italic text-base-content/60">
+    Runtime flow: the LLM asks through a helper, Cube applies the YAML model, DuckDB computes, and the LLM explains the returned result.
+  </figcaption>
+</figure>
 ```
 
 ## 11. Where does the LLM skill fit in?
@@ -711,7 +739,9 @@ For my thesis project, the idea is to prove that an LLM can reduce numerical err
 
 The experimental design can be compared like this:
 
-```mermaid
+```ashtml
+<figure class="not-prose my-8 rounded-2xl border border-base-content/10 bg-base-200/50 p-4 shadow-sm">
+  <pre class="mermaid">
 flowchart LR
     Q[Analytical question] --> A[LLM with no tools]
     Q --> B[LLM with free SQL]
@@ -720,6 +750,11 @@ flowchart LR
     A --> A1[Probable but unverifiable answer]
     B --> B1[May be correct, but may fail joins/rules]
     C --> C1[Result governed by model metrics]
+  </pre>
+  <figcaption class="mt-3 text-center text-sm italic text-base-content/60">
+    Experimental framing for the thesis: compare an LLM without tools, an LLM with free SQL, and an LLM constrained to the semantic layer.
+  </figcaption>
+</figure>
 ```
 
 Three useful scenarios:
@@ -817,3 +852,15 @@ The most important idea I want to remember is:
 > Cube computes. The model governs. The helper queries. The skill guides. The LLM explains.
 
 If I keep that separation, the thesis architecture becomes much clearer.
+
+```ashtml
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'loose',
+    theme: document.documentElement.dataset.theme === 'chirpy-dark' ? 'dark' : 'default',
+    flowchart: { curve: 'basis' }
+  });
+</script>
+```
