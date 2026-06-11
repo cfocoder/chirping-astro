@@ -169,13 +169,16 @@ This creates a structured data object that can be queried and displayed in table
 
 Once you have tagged pages and items, you can query them dynamically. This is where SilverBullet becomes more than a note-taking app.
 
+> [!NOTE]
+> In SilverBullet queries (based on Lua), you use `==` for equality comparisons, not `=` like in SQL. This is important when writing query conditions.
+
 ### Basic queries
 
 Use the `query` command to find tagged items:
 
 ```markdown
 ```query
-page where tags = "todo"
+page where tags == "todo"
 ````
 
 ````
@@ -196,7 +199,7 @@ Then query them:
 
 ````markdown
 ```query
-item where tags = "statistics" and tags = "week-02"
+item where tags == "statistics" and tags == "week-02"
 ```
 ````
 
@@ -469,6 +472,78 @@ notas-maestria/
 └── index.md (Dashboard)
 ````
 
+## 12. Code Snippets and Executable Programming
+
+As a data science student, you will document algorithms in code and automate calculations in your notes. SilverBullet offers static syntax highlighting and dynamic scripting environments (**Space Lua** and **Space Script**).
+
+### Static Code Snippets
+
+Use standard code blocks with the language specified for syntax highlighting:
+
+**Python (Scikit-Learn Training):**
+
+```python
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# Fit logistic regression
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Evaluate performance
+predictions = model.predict(X_test)
+acc = accuracy_score(y_test, predictions)
+print(f"Accuracy: {acc:.4f}")
+```
+
+**SQL (Analytical Query):**
+
+```sql
+SELECT
+    course_name,
+    COUNT(student_id) AS total_students,
+    AVG(final_grade) AS average_grade
+FROM master_grades
+GROUP BY course_name
+HAVING AVG(final_grade) >= 8.5;
+```
+
+### Space Lua
+
+Space Lua is the ideal environment for creating mathematical functions or formatting utilities that you can invoke anywhere in your notes. Write your code in a `space-lua` block and it loads automatically:
+
+````markdown
+```space-lua
+-- Lua function to calculate F1-Score in your notes
+function F1Score(precision, recall)
+  if (precision + recall) == 0 then return 0 end
+  return 2 * (precision * recall) / (precision + recall)
+end
+```
+````
+
+````
+
+To use this function anywhere in your notes, invoke it with the expression syntax `${...}`:
+
+- **Usage:** The resulting F1-Score for the evaluated model is **${F1Score(0.85, 0.78)}** (computed on the fly).
+
+### Space Script
+
+If you prefer JavaScript for registering advanced editor commands or macros, use the `space-script` block:
+
+```markdown
+```space-script
+silverbullet.registerFunction({name: "studentGreeting"}, (name) => {
+  return `Hello, ${name}! Good luck with your study session today.`;
+})
+````
+
+```
+
+> [!TIP]
+> Remember to run the **`System: Reload`** command (`Ctrl+Alt+R` or via `Ctrl+K` / `Cmd+K`) every time you make changes to your `space-script` or `space-lua` blocks to update their references in the editor.
+
 ## Final Tips
 
 - **Start simple**: Do not try to build a perfect system on day one. Start with basic pages and outlines, then add tagging and queries as needed.
@@ -489,7 +564,4 @@ notas-maestria/
 ---
 
 This guide is a living document. As I use SilverBullet more during my master's program, I will update it with new tips and workflows. If you have questions, feel free to reach out.
-
-```
-
 ```
