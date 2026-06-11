@@ -161,8 +161,6 @@ office: 'Building A, Room 302'
 ```
 ````
 
-````
-
 This creates a structured data object that can be queried and displayed in tables.
 
 ## 6. Querying Your Notes
@@ -176,12 +174,9 @@ Once you have tagged pages and items, you can query them dynamically. This is wh
 
 Use the `query` command to find tagged items:
 
-```markdown
 ```query
 page where tags == "todo"
-````
-
-````
+```
 
 This will show all pages tagged with `#todo`.
 
@@ -193,17 +188,13 @@ For coursework, I track tasks with a simple system:
 - [ ] Read chapter 3 #statistics #week-02
 - [ ] Complete problem set 2 #statistics #week-02
 - [ ] Email professor about office hours #admin
-````
+```
 
 Then query them:
 
-````markdown
 ```query
 item where tags == "statistics" and tags == "week-02"
 ```
-````
-
-````
 
 ### Live templates
 
@@ -223,7 +214,7 @@ Pasted images are saved as files in your space and embedded as Markdown:
 
 ```markdown
 ![[MCD-2026-Spring/Statistics/Week-03-diagram.png]]
-````
+```
 
 ### Important: If you use Cloudflare Access
 
@@ -303,8 +294,6 @@ Create reusable templates for recurring structures:
 ```
 ````
 
-````
-
 ### Federation
 
 SilverBullet can **federate** with other SilverBullet instances. This means you can link to notes on other people's servers, creating a distributed knowledge network.
@@ -328,7 +317,7 @@ For data science coursework, mathematical notation is essential. Enable the **Ka
 
 $$\mathcal{L}(\theta) = -\frac{1}{N} \sum_{i=1}^N \left[ y_i \log(\hat{y}_i) + (1-y_i) \log(1-\hat{y}_i) \right]$$
 
-  - Example (Multivariate Normal Distribution):
+- Example (Multivariate Normal Distribution):
 
 $$f(\mathbf{x}) = \frac{1}{\sqrt{(2\pi)^k |\boldsymbol{\Sigma}|}} \exp\left( -\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu}) \right)$$
 
@@ -350,7 +339,7 @@ graph TD
     E --> H{Meets Business Metrics?}
     H -->|Yes| I[Deploy to API / Cloud]
     H -->|No| D
-````
+```
 
 #### Neural Network Architecture
 
@@ -415,15 +404,13 @@ order by year desc
 ```
 ````
 
-````
-
 ### Dynamic Counters with LIQ
 
 Use inline query expressions to display live counts in your text:
 
 ```markdown
 Currently I have **${query[[from page where type == "paper" and status == "pending"]]:length}** research papers pending for my projects.
-````
+```
 
 ### Task Management for Coursework
 
@@ -447,8 +434,6 @@ order by deadline asc
 ```
 ````
 
-````
-
 ### Proposed Workspace Structure
 
 For a data science master's program, organize your space like this:
@@ -470,7 +455,7 @@ notas-maestria/
 │   ├── class_template.md
 │   └── paper_template.md
 └── index.md (Dashboard)
-````
+```
 
 ## 12. Code Snippets and Executable Programming
 
@@ -512,7 +497,6 @@ HAVING AVG(final_grade) >= 8.5;
 
 Space Lua is the ideal environment for creating mathematical functions or formatting utilities that you can invoke anywhere in your notes. Write your code in a `space-lua` block and it loads automatically:
 
-````markdown
 ```space-lua
 -- Lua function to calculate F1-Score in your notes
 function F1Score(precision, recall)
@@ -520,9 +504,6 @@ function F1Score(precision, recall)
   return 2 * (precision * recall) / (precision + recall)
 end
 ```
-````
-
-````
 
 To use this function anywhere in your notes, invoke it with the expression syntax `${...}`:
 
@@ -532,13 +513,10 @@ To use this function anywhere in your notes, invoke it with the expression synta
 
 If you prefer JavaScript for registering advanced editor commands or macros, use the `space-script` block:
 
-```markdown
 ```space-script
 silverbullet.registerFunction({name: "studentGreeting"}, (name) => {
   return `Hello, ${name}! Good luck with your study session today.`;
 })
-````
-
 ```
 
 > [!TIP]
@@ -564,4 +542,3 @@ silverbullet.registerFunction({name: "studentGreeting"}, (name) => {
 ---
 
 This guide is a living document. As I use SilverBullet more during my master's program, I will update it with new tips and workflows. If you have questions, feel free to reach out.
-```
