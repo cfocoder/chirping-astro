@@ -300,7 +300,7 @@ Create reusable templates for recurring structures:
 ```
 ````
 
-```
+````
 
 ### Federation
 
@@ -310,6 +310,165 @@ SilverBullet can **federate** with other SilverBullet instances. This means you 
 
 You can customize the appearance with **Space Styles**. Add custom CSS blocks to change fonts, colors, or layout.
 
+## 11. Data Science Specific Workflow (Advanced)
+
+The following sections are specifically tailored for **Data Science master's students** and complement the basic workflow above with advanced features for mathematical notation, scientific diagrams, and research paper management.
+
+### Mathematical Notation with LaTeX
+
+For data science coursework, mathematical notation is essential. Enable the **KaTeX** or `silverbullet-math` plugin for elegant math rendering:
+
+- **Inline formulas**: Wrap with single dollar signs `$`
+  - Example: The gradient descent algorithm is defined as $\theta_{t+1} = \theta_t - \eta \nabla_\theta J(\theta)$
+- **Block equations**: Wrap with double dollar signs `$$`
+  - Example (Binary Cross-Entropy Loss):
+
+$$\mathcal{L}(\theta) = -\frac{1}{N} \sum_{i=1}^N \left[ y_i \log(\hat{y}_i) + (1-y_i) \log(1-\hat{y}_i) \right]$$
+
+  - Example (Multivariate Normal Distribution):
+
+$$f(\mathbf{x}) = \frac{1}{\sqrt{(2\pi)^k |\boldsymbol{\Sigma}|}} \exp\left( -\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu}) \right)$$
+
+### Scientific Diagrams with Mermaid
+
+Install the `silverbullet-mermaid` plugin to draw architecture diagrams directly in your notes:
+
+#### ML Pipeline Flow
+
+```mermaid
+graph TD
+    A[Raw Data Sources] --> B(ETL / Cleaning Process)
+    B --> C{Data Split}
+    C -->|80% Training| D[Feature Engineering]
+    C -->|20% Test| E[Model Evaluation]
+    D --> F[Model Training]
+    F --> G[Model Serialization .pkl]
+    G --> E
+    E --> H{Meets Business Metrics?}
+    H -->|Yes| I[Deploy to API / Cloud]
+    H -->|No| D
+````
+
+#### Neural Network Architecture
+
+```mermaid
+graph LR
+    subgraph Input Layer
+        X1(x1)
+        X2(x2)
+    end
+    subgraph Hidden Layer
+        H1((h1))
+        H2((h2))
+        H3((h3))
+    end
+    subgraph Output Layer
+        Y((y_hat))
+    end
+    X1 --> H1
+    X1 --> H2
+    X1 --> H3
+    X2 --> H1
+    X2 --> H2
+    X2 --> H3
+    H1 --> Y
+    H2 --> Y
+    H3 --> Y
+```
+
+### Research Paper Management
+
+For tracking academic papers during your master's program:
+
+1. **Create a note per paper** with frontmatter:
+
+```yaml
+---
+type: paper
+course: 'Machine Learning'
+semester: 2
+tags: [machine-learning, clustering, unsupervised]
+status: pending
+year: 2024
+---
+```
+
+2. **Link the PDF** directly:
+
+```markdown
+Read the full PDF of [Attention Is All You Need (PDF)](papers/pdfs/attention_is_all_you_need.pdf)
+```
+
+3. **Query pending papers** dynamically:
+
+````markdown
+### Papers in Review
+
+```query
+from page
+where type == "paper" and status == "pending"
+select name, course, year
+order by year desc
+```
+````
+
+````
+
+### Dynamic Counters with LIQ
+
+Use inline query expressions to display live counts in your text:
+
+```markdown
+Currently I have **${query[[from page where type == "paper" and status == "pending"]]:length}** research papers pending for my projects.
+````
+
+### Task Management for Coursework
+
+SilverBullet indexes task checkboxes automatically. Use metadata-rich tasks:
+
+```markdown
+- [ ] Solve Logistic Regression Practice [deadline: 2026-06-15] #prioritario
+- [x] Submit Final Project Progress #completed
+```
+
+Query all pending tasks across your entire space:
+
+````markdown
+### Pending Master's Tasks
+
+```query
+from index.tag "task"
+where completed == false
+select name, page, deadline
+order by deadline asc
+```
+````
+
+````
+
+### Proposed Workspace Structure
+
+For a data science master's program, organize your space like this:
+
+```text
+notas-maestria/
+├── clases/
+│   ├── Machine_Learning.md
+│   └── Multivariate_Statistics.md
+├── proyectos/
+│   └── Anomaly_Detection/
+│       ├── research.md
+│       └── pipeline_architecture.md
+├── papers/
+│   ├── Vaswani2017_Transformer.md
+│   └── pdfs/
+│       └── Vaswani2017_Transformer.pdf
+├── templates/
+│   ├── class_template.md
+│   └── paper_template.md
+└── index.md (Dashboard)
+````
+
 ## Final Tips
 
 - **Start simple**: Do not try to build a perfect system on day one. Start with basic pages and outlines, then add tagging and queries as needed.
@@ -317,6 +476,8 @@ You can customize the appearance with **Space Styles**. Add custom CSS blocks to
 - **Link aggressively**: Every time you mention a concept, link it. Your future self will thank you.
 - **Review backlinks**: Check the "Linked Mentions" section at the bottom of pages. It often reveals connections you did not notice.
 - **Backup your space**: Since everything is plain files, you can back up the entire `/space` directory with `rsync`, Git, or any backup tool.
+- **Keep plugins updated**: Press `Ctrl+K` and type `Plugs: Update` to stay current with extensions.
+- **Use Space Lua for automation**: Create custom functions for repetitive tasks like formatting citations or generating report summaries.
 
 ## Resources
 
@@ -328,4 +489,7 @@ You can customize the appearance with **Space Styles**. Add custom CSS blocks to
 ---
 
 This guide is a living document. As I use SilverBullet more during my master's program, I will update it with new tips and workflows. If you have questions, feel free to reach out.
+
+```
+
 ```
