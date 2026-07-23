@@ -248,16 +248,50 @@ For most coursework assignments, your laptop handles the prototyping fine. Modal
 | `make_classification` ValueError | `n_classes * n_clusters_per_class <= 2**n_informative` | Set `n_informative`, `n_redundant` explicitly |
 | Container idle billing (Jupyter in cloud) | Costs keep climbing | Ctrl+C `modal launch jupyter` when done |
 
-## When to Use Modal vs. Alternatives
+## Where Modal Fits in the Data & ML Ecosystem
 
-| Scenario | Use |
-|----------|-----|
-| Bursty data science work (notebooks, experiments) | **Modal** — pay per second |
-| 24/7 inference API with steady traffic | RunPod or Lambda Labs — cheaper hourly |
-| Running open-source LLMs for chat | Your existing LLM provider (OpenRouter, Together, etc.) |
-| Quick prototyping with zero infrastructure | **Modal** — one decorator, no YAML |
+Modal is one piece in a larger landscape. Here's how the major tools relate to each other:
 
-For my master's in Data Science, Modal hits the sweet spot: I explore data locally with pandas, then offload the heavy lifting to a cloud GPU with a single line of code. The \$30/month free credit covers more than I need, and when I'm not running anything, I pay exactly zero.
+```mermaid
+graph TD
+    A["Does your data fit in RAM?"] -->|Yes| B["Need GPU?"]
+    A -->|No| C["What kind of work?"]
+
+    B -->|Yes| MODAL["🟣 Modal<br/>Serverless GPU<br/>$30/month free"]
+    B -->|No| LAPTOP["💻 Your Laptop<br/>or Modal CPU"]
+
+    C -->|"ETL / Pandas"| DASK["🟠 Dask / Coiled<br/>Parallel pandas/NumPy"]
+    C -->|"SQL / BI"| SPARK["🔵 Spark / Databricks<br/>Distributed SQL engine"]
+    C -->|"ML / Deep Learning"| RAY["🔴 Ray / Anyscale<br/>ML-native distributed OS"]
+```
+
+| Tool | What it is | Best for | Complexity |
+|------|-----------|----------|------------|
+| **Modal** | Serverless GPU, 1 node | Burst GPU tasks, notebooks, fine-tuning | ⭐ Minimal |
+| **Dask / Coiled** | Parallel pandas/NumPy | Bigger-than-RAM DataFrames, ETL | ⭐⭐ Medium |
+| **Spark / Databricks** | Distributed SQL engine | Data lakes, petabyte-scale ETL, BI | ⭐⭐⭐ High |
+| **Ray / Anyscale** | ML-native distributed OS | Multi-node training, LLM serving, RL | ⭐⭐⭐ High |
+
+### The golden rule
+
+```
+Your data fits in RAM and you just need GPU?
+    → Modal
+
+Your pandas pipeline ran out of memory?
+    → Dask / Coiled
+
+You have a data lake and need SQL at scale?
+    → Spark / Databricks
+
+You're training LLMs across 64 GPUs with distributed strategies?
+    → Ray / Anyscale
+
+It all fits on your laptop?
+    → Don't over-engineer it.
+```
+
+For my Data Science master's, Modal covers the GPU side and my laptop handles everything else. The \$30/month free credit covers all my experiments, and when I'm not running anything, I pay exactly zero. If I ever hit a dataset that doesn't fit in RAM (50GB+), Dask is the natural next step. Ray and Spark are for when you're building production ML platforms — they're overkill for coursework.
 
 ## Resources
 
