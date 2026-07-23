@@ -252,17 +252,25 @@ For most coursework assignments, your laptop handles the prototyping fine. Modal
 
 Modal is one piece in a larger landscape. Here's how the major tools relate to each other:
 
-```mermaid
-graph TD
-    A["Does your data fit in RAM?"] -->|Yes| B["Need GPU?"]
-    A -->|No| C["What kind of work?"]
-
-    B -->|Yes| MODAL["🟣 Modal<br/>Serverless GPU<br/>$30/month free"]
-    B -->|No| LAPTOP["💻 Your Laptop<br/>or Modal CPU"]
-
-    C -->|"ETL / Pandas"| DASK["🟠 Dask / Coiled<br/>Parallel pandas/NumPy"]
-    C -->|"SQL / BI"| SPARK["🔵 Spark / Databricks<br/>Distributed SQL engine"]
-    C -->|"ML / Deep Learning"| RAY["🔴 Ray / Anyscale<br/>ML-native distributed OS"]
+```
+         ┌──────────────────────────────────────────┐
+         │     DOES YOUR DATA FIT IN RAM?           │
+         └──────────────┬───────────────┬───────────┘
+                      Yes              No
+                       │                │
+                ┌──────▼──────┐   ┌─────▼───────────────────────┐
+                │ Need GPU?   │   │ WHAT KIND OF WORK?           │
+                └──┬──────┬───┘   └──────┬──────────┬─────────┬──┘
+                 Yes    No             ETL/       SQL/      ML/
+                                        Pandas     BI       DL
+                   │      │               │         │         │
+              ┌────▼──┐ ┌─▼──────┐ ┌─────▼────┐ ┌──▼────┐ ┌──▼──────┐
+              │ Modal │ │ Laptop │ │  Dask /  │ │Spark/ │ │  Ray /  │
+              │  GPU  │ │ or     │ │  Coiled  │ │Data-  │ │Anyscale │
+              │       │ │Modal   │ │          │ │bricks │ │         │
+              │ $30/  │ │CPU     │ │          │ │       │ │         │
+              │ month │ │        │ │          │ │       │ │         │
+              └───────┘ └────────┘ └──────────┘ └───────┘ └─────────┘
 ```
 
 | Tool | What it is | Best for | Complexity |
