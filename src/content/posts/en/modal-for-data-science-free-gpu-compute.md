@@ -267,7 +267,10 @@ Modal is one piece in a larger landscape. Here's how the major tools relate to e
 Your data fits in RAM and you just need GPU?
     → Modal
 
-Your pandas pipeline ran out of memory?
+Your pandas pipeline ran out of memory but you just need SQL?
+    → DuckDB (yes, it's really that fast)
+
+Your pandas pipeline ran out of memory and you need pandas API?
     → Dask / Coiled
 
 You have a data lake and need SQL at scale?
@@ -279,6 +282,8 @@ You're training LLMs across 64 GPUs with distributed strategies?
 It all fits on your laptop?
     → Don't over-engineer it.
 ```
+
+> **🦆 Why DuckDB?** DuckDB is an in-process analytical database that spills to disk automatically when data doesn't fit in RAM. You query it with standard SQL, it runs columnar-vectorized (think: faster than pandas for aggregations), and it installs with a single `pip install duckdb`. For datasets up to a few hundred gigabytes, it often outperforms Spark on a single machine. It doesn't do GPUs — that's Modal's job — but for CPU-bound analysis on bigger-than-memory tabular data, DuckDB is the simplest tool that works.
 
 For my Data Science master's, Modal covers the GPU side and my laptop handles everything else. The \$30/month free credit covers all my experiments, and when I'm not running anything, I pay exactly zero. If I ever hit a dataset that doesn't fit in RAM (50GB+), Dask is the natural next step. Ray and Spark are for when you're building production ML platforms — they're overkill for coursework.
 
