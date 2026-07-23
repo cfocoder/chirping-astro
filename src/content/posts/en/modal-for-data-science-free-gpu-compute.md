@@ -252,26 +252,7 @@ For most coursework assignments, your laptop handles the prototyping fine. Modal
 
 Modal is one piece in a larger landscape. Here's how the major tools relate to each other:
 
-```
-         ┌──────────────────────────────────────────┐
-         │     DOES YOUR DATA FIT IN RAM?           │
-         └──────────────┬───────────────┬───────────┘
-                      Yes              No
-                       │                │
-                ┌──────▼──────┐   ┌─────▼───────────────────────┐
-                │ Need GPU?   │   │ WHAT KIND OF WORK?           │
-                └──┬──────┬───┘   └──────┬──────────┬─────────┬──┘
-                 Yes    No             ETL/       SQL/      ML/
-                                        Pandas     BI       DL
-                   │      │               │         │         │
-              ┌────▼──┐ ┌─▼──────┐ ┌─────▼────┐ ┌──▼────┐ ┌──▼──────┐
-              │ Modal │ │ Laptop │ │  Dask /  │ │Spark/ │ │  Ray /  │
-              │  GPU  │ │ or     │ │  Coiled  │ │Data-  │ │Anyscale │
-              │       │ │Modal   │ │          │ │bricks │ │         │
-              │ $30/  │ │CPU     │ │          │ │       │ │         │
-              │ month │ │        │ │          │ │       │ │         │
-              └───────┘ └────────┘ └──────────┘ └───────┘ └─────────┘
-```
+![Modal ecosystem flowchart — Does your dataset fit in RAM?](/images/2026/07/modal-ecosystem-diagram.jpg)
 
 | Tool | What it is | Best for | Complexity |
 |------|-----------|----------|------------|
