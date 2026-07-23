@@ -11,7 +11,7 @@ toc: true
 
 If you've ever waited 45 minutes for `scikit-learn` to finish a grid search on your laptop, you know the pain. The M2 MacBook Air is great for browsing, but when your master's assignment involves training a neural network on 50,000 rows, you start fantasizing about GPUs you don't own.
 
-Enter **Modal**: a serverless GPU cloud that gives you **$30/month in free credits** — no credit card, no commitment — and lets you run Python functions on NVIDIA GPUs with a single decorator.
+Enter **Modal**: a serverless GPU cloud that gives you **\$30/month in free credits** — no credit card, no commitment — and lets you run Python functions on NVIDIA GPUs with a single decorator.
 
 ## What is Modal?
 
@@ -36,20 +36,20 @@ def main():
     print(result)
 ```
 
-## The Free Tier: $30/month, Actually Free
+## The Free Tier: \$30/month, Actually Free
 
-Modal's Starter plan gives you $30 of compute credits every month. Here's what that buys you:
+Modal's Starter plan gives you \$30 of compute credits every month. Here's what that buys you:
 
 | GPU | VRAM | Cost per hour | Hours of free compute/month |
 |-----|------|--------------|---------------------------|
-| T4 | 16 GB | $0.59 | ~50 hours |
-| L4 | 24 GB | $0.80 | ~37 hours |
-| L40S | 48 GB | $1.95 | ~15 hours |
-| A100 (40GB) | 40 GB | $2.10 | ~14 hours |
-| A100 (80GB) | 80 GB | $2.50 | ~12 hours |
-| H100 | 80 GB | $3.95 | ~7 hours |
+| T4 | 16 GB | \$0.59 | ~50 hours |
+| L4 | 24 GB | \$0.80 | ~37 hours |
+| L40S | 48 GB | \$1.95 | ~15 hours |
+| A100 (40GB) | 40 GB | \$2.10 | ~14 hours |
+| A100 (80GB) | 80 GB | \$2.50 | ~12 hours |
+| H100 | 80 GB | \$3.95 | ~7 hours |
 
-For graduate students, there's also the **Modal for Academics** program offering up to **$10,000** in additional credits. Apply at [modal.com/academics](https://modal.com/academics).
+For graduate students, there's also the **Modal for Academics** program offering up to **\$10,000** in additional credits. Apply at [modal.com/academics](https://modal.com/academics).
 
 ## Setup with uv
 
@@ -159,10 +159,10 @@ plt.show()
 
 | Your workload | Recommended GPU | Why |
 |--------------|----------------|-----|
-| Prototyping, small models (< 1M params) | **T4** ($0.59/hr) | Cheapest, 16 GB VRAM |
-| Inference, medium models (1M–7B params) | **L40S** ($1.95/hr) | Best cost/performance, 48 GB |
-| Fine-tuning, large models (7B–70B) | **A100-80GB** ($2.50/hr) | 80 GB VRAM, fast training |
-| Heavy training, largest models | **H100** ($3.95/hr) | Fastest available, FP8 support |
+| Prototyping, small models (< 1M params) | **T4** (\$0.59/hr) | Cheapest, 16 GB VRAM |
+| Inference, medium models (1M–7B params) | **L40S** (\$1.95/hr) | Best cost/performance, 48 GB |
+| Fine-tuning, large models (7B–70B) | **A100-80GB** (\$2.50/hr) | 80 GB VRAM, fast training |
+| Heavy training, largest models | **H100** (\$3.95/hr) | Fastest available, FP8 support |
 
 For most data science coursework (scikit-learn, XGBoost, small neural nets), a **T4 or L40S** is more than enough.
 
@@ -172,10 +172,10 @@ Modal charges per **second of active compute**, not for idle time:
 
 - **GPU billed:** Only while your function is executing.
 - **CPU/RAM billed:** Same — per second, only during execution.
-- **Storage (Volumes):** $0.09/GiB/month, but the first **1 TiB is free**.
-- **Idle:** $0. Scale-to-zero is the default.
+- **Storage (Volumes):** \$0.09/GiB/month, but the first **1 TiB is free**.
+- **Idle:** \$0. Scale-to-zero is the default.
 
-A typical data science notebook that trains a model for 5 seconds on a T4 costs about **$0.0008**. With $30/month, you can run that ~37,000 times.
+A typical data science notebook that trains a model for 5 seconds on a T4 costs about **\$0.0008**. With \$30/month, you can run that ~37,000 times.
 
 > **💡 Always use the default preemptible tier.** The 3× non-preemptible multiplier is for production APIs that can't tolerate interruptions — your batch jobs and notebooks don't need it.
 
@@ -199,7 +199,7 @@ A typical data science notebook that trains a model for 5 seconds on a T4 costs 
 | Running open-source LLMs for chat | Your existing LLM provider (OpenRouter, Together, etc.) |
 | Quick prototyping with zero infrastructure | **Modal** — one decorator, no YAML |
 
-For my master's in Data Science, Modal hits the sweet spot: I explore data locally with pandas, then offload the heavy lifting to a cloud GPU with a single line of code. The $30/month free credit covers more than I need, and when I'm not running anything, I pay exactly zero.
+For my master's in Data Science, Modal hits the sweet spot: I explore data locally with pandas, then offload the heavy lifting to a cloud GPU with a single line of code. The \$30/month free credit covers more than I need, and when I'm not running anything, I pay exactly zero.
 
 ## Resources
 
