@@ -75,6 +75,32 @@ uv run modal setup
 
 > **⚠️ Important:** Modal currently supports Python 3.10–3.12 only. If your system has Python 3.13, you must pin 3.12 or you'll get `InvalidError: Unsupported Python version: '3.13'`.
 
+### Choosing a Base Image
+
+Modal gives you four ways to define your container environment, all chainable with build methods like `.pip_install()`, `.apt_install()`, and `.run_commands()`.
+
+| Builder | When to use it | Example |
+|---------|---------------|---------|
+| **`.debian_slim()`** | The default — covers 95% of data science needs. | `modal.Image.debian_slim(python_version="3.12").pip_install("torch")` |
+| **`.from_registry()`** | Pull a pre-built image from Docker Hub, NVIDIA NGC, or any public registry. | `modal.Image.from_registry("nvidia/cuda:12.1.0-devel-ubuntu22.04", add_python="3.12")` |
+| **`.from_dockerfile()`** | You already have a Dockerfile. | `modal.Image.from_dockerfile("./Dockerfile")` |
+| **`.micromamba()`** | You need conda/mamba packages (e.g., bioinformatics tools from conda-forge). | `modal.Image.micromamba().conda_install("bioconda::samtools")` |
+| **`.from_name()`** | Reuse an image you previously built and published. | `modal.Image.from_name("my-ml-image:v1")` |
+
+All of these support the same chainable build methods:
+
+```python
+image = (
+    modal.Image.debian_slim(python_version="3.12")
+    .apt_install("git", "ffmpeg")           # system packages
+    .pip_install("torch", "transformers")    # Python packages
+    .run_commands("echo 'build complete!'")  # arbitrary shell commands
+    .env({"HF_HOME": "/cache"})              # environment variables
+)
+```
+
+For data science coursework, `.debian_slim()` with `.pip_install()` is all you need. Switch to `.from_registry()` when you need a specific CUDA version, or `.micromamba()` when a package only exists on conda-forge.
+
 ## Two Ways to Use Modal
 
 ### Option 1: Script Mode (`modal run`)
