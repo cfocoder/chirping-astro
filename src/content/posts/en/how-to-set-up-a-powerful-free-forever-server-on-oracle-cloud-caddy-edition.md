@@ -9,6 +9,8 @@ tags: ['Caddy', 'Reverse Proxy']
 toc: true
 ---
 
+> **Update — August 2026:** This guide documents Oracle Cloud's previous Always Free configuration. Oracle has reduced the Ampere A1 allocation from **4 OCPUs and 24 GB RAM** to **2 OCPUs and 12 GB RAM total**. The 200 GB Always Free block-storage allocation remains, but capacity can also be unavailable in a home region. Before following the steps below, confirm the current limits in [Oracle's Always Free documentation](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm).
+
 Earlier in 2025, I signed up for [Oracle’s “Free Forever” cloud offer](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm). It was, and still is, one of the most generous free tiers available, especially for developers and hobbyists. I wrote a [blog post to document my setup,](https://cfocoder.com/free-forever-oracle-virtual-private-server-vps/) and today I’m updating it with a more modern, simpler stack and more tips for anyone starting out.
 
 The goal remains the same: **to combine all the “Always Free” resources into a single, powerful virtual private server (VPS)** that you can use for your projects without ever paying a dime. This guide is my personal reference for setting it up again, and I hope it helps you too.

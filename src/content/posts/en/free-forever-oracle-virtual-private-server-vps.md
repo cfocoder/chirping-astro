@@ -9,6 +9,8 @@ tags: ['Linux', 'Self-Hosting']
 toc: true
 ---
 
+> **Update — August 2026:** This guide documents Oracle Cloud's previous Always Free configuration. Oracle has reduced the Ampere A1 allocation from **4 OCPUs and 24 GB RAM** to **2 OCPUs and 12 GB RAM total**. The 200 GB Always Free block-storage allocation remains, but capacity can also be unavailable in a home region. Before following the steps below, confirm the current limits in [Oracle's Always Free documentation](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm).
+
 I recently discovered a [super cool offer from Oracle](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm), to setup a free-forever Virtual Machine instance with an ARM processor, 4 OCPUs, 24 GB of RAM memory and 200 GB of storage. So this guide is to remind myself what settings I have to use to create a virtual machine with Oracle. I intend to use this virtual machine for personal and data science projects.
 
 ## 1.- Create a Virtual Machine
