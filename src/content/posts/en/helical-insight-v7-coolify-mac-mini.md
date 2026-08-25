@@ -2,7 +2,7 @@
 title: 'Helical Insight v7.0 on a Mac mini: why it caught my attention and how I deployed it with Coolify'
 description: 'A hands-on, independent look at deploying Helical Insight v7.0 with Docker Compose and Coolify on a private Mac mini.'
 pubDate: 2026-08-24
-heroImage: '/images/2026/08/helical-insight-coolify-macmini-featured-v2.png'
+heroImage: '/images/2026/08/helical-insight-coolify-macmini-featured-v3.png'
 heroImageAlt: 'Helical Insight v7.0 deployed on a Mac mini with Coolify'
 categories: ['Business Intelligence', 'Self-Hosting']
 tags:
