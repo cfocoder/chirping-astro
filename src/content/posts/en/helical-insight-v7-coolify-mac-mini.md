@@ -75,7 +75,7 @@ Helical’s official guide provides installation resources, and the repository i
 
 ### 1. Verify the Host Before Creating the Resource
 
-Before copying a Compose file, I would confirm four things:
+Before copying a Compose file, verify the host and Docker prerequisites:
 
 ```bash
 ssh macmini
@@ -86,7 +86,7 @@ docker version
 docker compose version
 ```
 
-My host was `x86_64` and had sufficient space for images, the official package, and persistent storage. I would not assume an ARM machine has exactly the same compatibility; checking the architecture first prevents wasting time on a deployment that cannot start.
+For this deployment, the host was `x86_64` and had sufficient space for images, the official package, and persistent storage. Do not assume an ARM machine has exactly the same compatibility; checking the architecture first prevents wasting time on a deployment that cannot start.
 
 ### 2. Create Helical-Specific Persistent Paths
 
@@ -118,6 +118,8 @@ The Compose file I used includes a one-time `bootstrap` service. On its first st
 
 Pinning the version prevents a redeploy from changing the software implicitly. It also makes it possible to distinguish between an infrastructure problem and a change introduced by an update.
 
+For future reuse, I keep a sanitized, copy-paste-ready [docker-compose.example.yml](/downloads/helical-insight-coolify/docker-compose.example.yml) and its companion [env.example](/downloads/helical-insight-coolify/env.example). They include the full one-time `bootstrap` service, bind mounts, health checks, and resource limits, while using placeholders for passwords, host names, and Tailscale addresses.
+
 ### 4. Define the Compose Services
 
 The stack has four services:
@@ -127,7 +129,7 @@ The stack has four services:
 - `hiee` runs the Helical Insight web application on Tomcat.
 - `instantbi` runs the Python service behind the conversational layer.
 
-The essential parts of the Compose file are as follows:
+The following excerpt focuses on the long-running services. The downloadable Compose example above contains the complete `bootstrap` definition and the remaining mounts and health checks needed for a copy-paste deployment.
 
 ```yaml
 services:
@@ -219,7 +221,7 @@ I also limited the Java heap:
 CATALINA_OPTS=-Xms256m -Xmx768m
 ```
 
-There is no universal number: limits should grow only after measuring usage, OOMs, restarts, and actual report load. In my most recent check, Helical was using about 929 MiB of its 1.5 GiB limit, while PostgreSQL and Instant BI were well below their caps.
+There is no universal number: limits should grow only after measuring usage, OOMs, restarts, and actual report load. In the validation snapshot captured on August 24, 2026, Helical was using about 929 MiB of its 1.5 GiB limit, while PostgreSQL and Instant BI were well below their caps.
 
 ## The Problems I Encountered — and How I Solved Them
 
@@ -238,10 +240,12 @@ Another error came from trying to run `rm -rf /data/hi` on a mount point. Docker
 **Fix:** retain the directory that functions as the mount point and delete only its contents:
 
 ```bash
-find "$dir" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+for dir in /data/hi /data/config /data/instantbi; do
+  find "$dir" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+done
 ```
 
-That makes it possible to rebuild bootstrap artifacts without destroying the persistent path.
+Run this only inside the `bootstrap` container, where those paths are controlled bind mounts—not arbitrary host paths. That makes it possible to rebuild bootstrap artifacts without destroying the persistent mount points.
 
 ### The ZIP File Contained More Than One `docker-compose.yml`
 
@@ -253,7 +257,7 @@ The initial extraction could not assume that the ZIP root was the root of the de
 
 Coolify showed a resource as stopped, but an older container was still holding the private port. The new `hiee` could not start.
 
-**Fix:** identify the actual port owner with Docker, stop the previous stack without deleting containers or volumes, and start the new deployment again. I did not use `docker compose down -v`.
+**Fix:** identify the actual port owner with Docker, stop the obsolete deployment, preserve the persistent bind mounts and volumes, and start the new deployment again. I did not use `docker compose down -v`.
 
 ### Compatibility Between Instant BI and Current LangChain Dependencies
 
@@ -270,7 +274,7 @@ After the redeploy, I did not stop at Coolify showing a green icon. I verified f
 sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
 
 # Health check and restart status
-sudo docker inspect <contenedor-hiee> \
+sudo docker inspect <hiee-container> \
   --format 'health={{.State.Health.Status}} restarts={{.RestartCount}}'
 
 # Application endpoint over the private route
@@ -280,7 +284,7 @@ curl -fsS http://macmini:18085/hi-ee/applicationSettings
 sudo docker stats --no-stream
 ```
 
-The current check produced:
+The validation snapshot captured on August 24, 2026 produced:
 
 ```text
 hiee       healthy, 0 restarts

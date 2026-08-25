@@ -1,0 +1,189 @@
+# Sanitized reusable example for Helical Insight Community Edition v7.0.0.
+# Copy this file and env.example into a private directory before deployment.
+# Replace every placeholder in env.example; never commit or publish the resulting .env.
+# This example deliberately preserves the version pin, private bind mounts,
+# bootstrap behavior, resource limits, and health checks from the validated deployment.
+
+configs:
+  hiee-entrypoint:
+    content: |
+      #!/bin/bash
+      set -e
+      mkdir -p "/usr/local/tomcat/webapps/hi-ee"
+      cp -f "/host-hi/hi-ee.war" "/usr/local/tomcat/webapps/hi-ee.war"
+      cp -a "/host-config/tomcat/conf/." "/usr/local/tomcat/conf/"
+      rm -f "/usr/local/Helical Insight/hi/hi-repository/hi.lock"
+      exec /bin/bash "/host-config/entry/entrypoint.sh" "$@"
+
+# Helical Insight Community Edition v7.0.0
+# Coolify deployment: direct private access through MacMini host port 18085.
+# The bootstrap service downloads the official Docker package once into /mnt/ducklake/helicalinsight.
+
+services:
+  bootstrap:
+    image: alpine:3.20
+    restart: "no"
+    environment:
+      HELICAL_VERSION: "v7.0.0"
+      HELICAL_PACKAGE_URL: "https://github.com/helicalinsight/helicalinsight/releases/download/v7.0.0/helicalinsight-docker.zip"
+    volumes:
+      - /mnt/ducklake/helicalinsight/hi:/data/hi
+      - /mnt/ducklake/helicalinsight/config:/data/config
+      - /mnt/ducklake/helicalinsight/instantbi:/data/instantbi
+      - /mnt/ducklake/helicalinsight/.bootstrap:/data/bootstrap
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        apk add --no-cache ca-certificates wget unzip
+        if [ -f /data/bootstrap/$${HELICAL_VERSION}.complete ]; then
+          echo "Helical package $${HELICAL_VERSION} already bootstrapped"
+          exit 0
+        fi
+        rm -rf /tmp/helical /tmp/helical.zip
+        for dir in /data/hi /data/config /data/instantbi; do
+          find "$${dir}" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+        done
+        mkdir -p /tmp/helical /data/hi /data/config /data/instantbi /data/bootstrap
+        echo "Downloading Helical Insight $${HELICAL_VERSION} Docker package..."
+        wget -q --show-progress -O /tmp/helical.zip "$${HELICAL_PACKAGE_URL}"
+        unzip -q /tmp/helical.zip -d /tmp/helical
+        echo "Archive extracted; top-level files:"
+        find /tmp/helical -maxdepth 4 -type f | head -n 80
+        WAR_PATH="$(find /tmp/helical -type f -path '*/hi/hi-ee.war' | head -n 1)"
+        ROOT="$(dirname "$(dirname "$${WAR_PATH}")")"
+        echo "Detected package root: [$${ROOT}]"
+        test -n "$${WAR_PATH}" || { echo "ERROR: hi-ee.war not found"; exit 1; }
+        for required in hi/hi-ee.war config/entry/entrypoint.sh instantbi/helicalbi/app.py; do
+          if [ -f "$${ROOT}/$${required}" ]; then
+            echo "OK: $${required}"
+          else
+            echo "ERROR: missing $${ROOT}/$${required}"
+            exit 1
+          fi
+        done
+        cp -a "$${ROOT}/hi/." /data/hi/
+        cp -a "$${ROOT}/config/." /data/config/
+        cp -a "$${ROOT}/instantbi/." /data/instantbi/
+        # v7.0.0 imports ChatOllama from the old namespace; current LangChain uses langchain-ollama.
+        sed -i 's|from langchain_community\.chat_models import ChatOllama|from langchain_ollama import ChatOllama|' /data/instantbi/helicalbi/helicalbi/integration/ollama/OllamaFactory.py
+        grep -qxF 'langchain-ollama' /data/instantbi/helicalbi/requirements.txt || echo 'langchain-ollama' >> /data/instantbi/helicalbi/requirements.txt
+        chmod +x /data/config/entry/entrypoint.sh
+        # Direct Tailscale access is HTTP on the mapped private port.
+        # Keep this package-level compatibility note in sync with INSTALL.md.
+        sed -i 's|https://|http://|g' /data/config/entry/entrypoint.sh
+        touch /data/bootstrap/$${HELICAL_VERSION}.complete
+        echo "Helical package $${HELICAL_VERSION} installed in persistent bind mounts"
+
+  postgres:
+    image: postgres:15.8-alpine3.20
+    restart: unless-stopped
+    # Internal metadata/scheduling database; keep bounded on the 16 GiB MacMini.
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+        reservations:
+          memory: 192M
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - /mnt/ducklake/helicalinsight/postgres:/var/lib/postgresql/data
+      - /mnt/ducklake/helicalinsight/config/init-scripts:/docker-entrypoint-initdb.d:ro
+    networks:
+      - hinet
+
+  hiee:
+    image: hiee/helicalinsight:nitrogen-j25t11
+    restart: unless-stopped
+    # JVM heap + Tomcat/native overhead fit below this cgroup ceiling.
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
+        reservations:
+          memory: 768M
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+    environment:
+      HOST_IP: ${HOST_IP}
+      INSTALL_CHROME: ${INSTALL_CHROME:-false}
+      # 768 MiB JVM heap keeps the Java process below the 1.25 GiB container limit.
+      CATALINA_OPTS: "-Xms256m -Xmx768m -Djdk.internal.httpclient.disableHostnameVerification=true"
+    entrypoint: ["/bin/bash", "/entrypoint-coolify.sh"]
+    command: ["/usr/local/tomcat/bin/catalina.sh", "run"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/hi-ee/applicationSettings || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 8
+      start_period: 90s
+    volumes:
+      - /mnt/ducklake/helicalinsight/hi/db:/usr/local/Helical Insight/hi/db
+      - /mnt/ducklake/helicalinsight/hi/hi-repository:/usr/local/Helical Insight/hi/hi-repository
+      - /mnt/ducklake/helicalinsight/hi:/host-hi:ro
+      - /mnt/ducklake/helicalinsight/config:/host-config:ro
+      - /mnt/ducklake/helicalinsight/hirepo-root:/root
+      - /mnt/ducklake/helicalinsight/tomcat-temp:/usr/local/tomcat/temp
+      - /mnt/ducklake/helicalinsight/logs:/usr/local/tomcat/logs
+    configs:
+      - source: hiee-entrypoint
+        target: /entrypoint-coolify.sh
+    ports:
+      - "${TAILSCALE_IP}:${HELICAL_HOST_PORT}:8080"
+    networks:
+      - hinet
+
+  instantbi:
+    image: python:3.13-slim
+    restart: unless-stopped
+    # Python API is idle most of the time; retain room for requests and imports.
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+    environment:
+      HELICALBI_LLM_MODE: ${HELICALBI_LLM_MODE:-stub}
+    volumes:
+      - /mnt/ducklake/helicalinsight/instantbi/helicalbi:/app
+    working_dir: /app
+    command:
+      - /bin/bash
+      - -ec
+      - |
+        sed -i 's|from langchain_community.chat_models import ChatOllama|from langchain_ollama import ChatOllama|' /app/helicalbi/integration/ollama/OllamaFactory.py
+        grep -qxF 'langchain-ollama' requirements.txt || echo 'langchain-ollama' >> requirements.txt
+        pip install --no-cache-dir -r requirements.txt
+        exec python app.py
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/')\""]
+      interval: 30s
+      timeout: 10s
+      retries: 8
+      start_period: 180s
+    expose:
+      - "8000"
+    networks:
+      - hinet
+
+networks:
+  hinet:
+    driver: bridge
