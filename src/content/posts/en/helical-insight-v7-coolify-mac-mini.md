@@ -50,19 +50,6 @@ None of this proves on its own that it is the right solution for every organizat
 
 I did not need to publish a BI portal to the internet. I wanted a private, reproducible, and sufficiently realistic environment for experimenting with synthetic data, Metadata, Semantic Model, reports, and Instant BI without exposing databases or AI provider keys.
 
-```text
-Authorized browser on Tailscale
-              │
-              ▼
-      Mac mini / private port
-              │
-              ▼
-Helical Insight (Tomcat / hi-ee)
-       │                  │
-       ▼                  ▼
-Internal PostgreSQL    Internal Instant BI
-```
-
 ![Deployment architecture: private Tailscale access to Helical Insight, with PostgreSQL and Instant BI kept inside the Docker network.](/images/2026/08/helical-deployment-architecture.png)
 
 Coolify manages the Docker Compose lifecycle, but access to the application does not go through a public domain or Traefik. The application is published only on a Tailscale address and a private port. PostgreSQL and Instant BI remain inside the Docker network.
@@ -127,17 +114,6 @@ PostgreSQL metadata, the Helical repository, extracted configuration, Instant BI
 
 The Compose file I used includes a one-time `bootstrap` service. On its first startup, it downloads the official Docker package for version `v7.0.0`, extracts the necessary files, and leaves a completion marker in the persistent directory.
 
-```text
-bootstrap
-  ├─ downloads an explicit version
-  ├─ verifies the WAR, configuration, and Instant BI
-  ├─ copies contents into persistent bind mounts
-  └─ creates a completion marker
-
-postgres, hiee, and instantbi
-  └─ start only after bootstrap completes successfully
-```
-
 ![Reproducible deployment flow from persistent storage and a pinned package to a verified endpoint and safe operation.](/images/2026/08/helical-deployment-flow.png)
 
 Pinning the version prevents a redeploy from changing the software implicitly. It also makes it possible to distinguish between an infrastructure problem and a change introduced by an update.
@@ -146,12 +122,10 @@ Pinning the version prevents a redeploy from changing the software implicitly. I
 
 The stack has four services:
 
-```text
-bootstrap  → descarga y prepara los artefactos del paquete oficial
-postgres   → base de datos interna de Helical y scheduling
-hiee       → aplicación web Helical Insight sobre Tomcat
-instantbi  → servicio Python para la capa conversacional
-```
+- `bootstrap` downloads and prepares the official package artifacts.
+- `postgres` stores Helical metadata and scheduling data.
+- `hiee` runs the Helical Insight web application on Tomcat.
+- `instantbi` runs the Python service behind the conversational layer.
 
 The essential parts of the Compose file are as follows:
 
