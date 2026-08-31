@@ -17,6 +17,7 @@ tags:
   ]
 toc: true
 comments: true
+mermaid: true
 ---
 
 > **Editorial disclosure.** This is the second post in an independent, hands-on evaluation of Helical Insight. The project’s founder contacted me after I discovered the product, but this series is neither sponsored nor subject to editorial approval. Product documentation is cited where relevant; the results below are observations from my own controlled environment.
@@ -29,20 +30,28 @@ That distinction guided this second Helical Insight experiment. Instead of loadi
 
 The outcome was deliberately narrow: one query, one report, and one dashboard. But it was enough to test a complete path:
 
-```text
-Independent Contoso provenance
-        ↓
-Oracle Autonomous AI Database
-        ↓  JDBC Thin + mTLS wallet + read-only account
-Helical Data Source
-        ↓
-Metadata + Query View
-        ↓
-Ranked report
-        ↓
-Private dashboard
-        ↓
-Comparison with an independent gold ledger
+```ashtml
+<figure class="not-prose my-8 rounded-2xl border border-base-content/10 bg-base-200/50 p-4 shadow-sm">
+  <pre class="mermaid">
+flowchart TD
+    A[Independent Contoso provenance] --> B[Oracle Autonomous AI Database]
+    B -->|JDBC Thin + mTLS wallet + read-only account| C[Helical Data Source]
+    C --> D[Metadata + Query View]
+    D --> E[Ranked report]
+    E --> F[Private dashboard]
+    F --> G[Comparison with an independent gold ledger]
+
+    classDef source fill:#172554,stroke:#38bdf8,color:#fff;
+    classDef platform fill:#0f766e,stroke:#5eead4,color:#fff;
+    classDef evidence fill:#7c2d12,stroke:#fbbf24,color:#fff;
+    class A,B source;
+    class C,D,E,F platform;
+    class G evidence;
+  </pre>
+  <figcaption class="mt-3 text-center text-sm italic text-base-content/60">
+    The provenance chain used in this control: Oracle remains the business-data source, while the independent gold ledger is the numerical check.
+  </figcaption>
+</figure>
 ```
 
 The result was not a generic dashboard tour. It was a reproducible control: the top five online-sales brands by net sales for each calendar year from 2007 through 2009.

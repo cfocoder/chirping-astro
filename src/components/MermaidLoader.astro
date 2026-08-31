@@ -1,0 +1,17 @@
+---
+/**
+ * Client-side Mermaid loader. Render this component only from posts that opt
+ * in through `mermaid: true` in their frontmatter.
+ */
+---
+
+<script is:inline type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'loose',
+    theme: document.documentElement.dataset.theme === 'chirpy-dark' ? 'dark' : 'default',
+    flowchart: { curve: 'basis' },
+  });
+</script>
