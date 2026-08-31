@@ -1,8 +1,12 @@
-# Sanitized reusable example for Helical Insight Community Edition v7.0.0.
-# Copy this file and env.example into a private directory before deployment.
-# Replace every placeholder in env.example; never commit or publish the resulting .env.
-# This example deliberately preserves the version pin, private bind mounts,
-# bootstrap behavior, resource limits, and health checks from the validated deployment.
+# Sanitized, version-pinned example for Helical Insight Community Edition v7.0.0.
+# Copy this file and env.example into a private directory, then create the paths
+# beneath DATA_ROOT before deploying it through Coolify or Docker Compose.
+# Do not commit a real .env, an Oracle wallet, or downloaded JDBC artifacts.
+#
+# Important PostgreSQL contract: v7.0.0 embeds the hiuser/hiee datasource in the
+# packaged application. On a fresh PostgreSQL volume, POSTGRES_PASSWORD must be
+# the private value compatible with that package contract; an arbitrary password
+# causes hi-ee to fail authentication. Do not publish that value.
 
 configs:
   hiee-entrypoint:
@@ -13,11 +17,15 @@ configs:
       cp -f "/host-hi/hi-ee.war" "/usr/local/tomcat/webapps/hi-ee.war"
       cp -a "/host-config/tomcat/conf/." "/usr/local/tomcat/conf/"
       rm -f "/usr/local/Helical Insight/hi/hi-repository/hi.lock"
+      # Oracle JDBC JARs are prepared by oracle-jdbc-bootstrap in a persistent bind mount.
+      # Copy into Tomcat's top-level lib directory; mounting over that directory would hide Tomcat's own JARs.
+      find /host-oracle-jdbc -maxdepth 1 -type f -name '*.jar' -exec cp -f {} /usr/local/tomcat/lib/ \;
+      test -s /usr/local/tomcat/lib/ojdbc11-23.4.0.24.05.jar || { echo "ERROR: Oracle JDBC bootstrap artifacts are missing"; exit 1; }
       exec /bin/bash "/host-config/entry/entrypoint.sh" "$@"
 
 # Helical Insight Community Edition v7.0.0
-# Coolify deployment: direct private access through MacMini host port 18085.
-# The bootstrap service downloads the official Docker package once into /mnt/ducklake/helicalinsight.
+# Private-access deployment. PostgreSQL and Instant BI do not publish host ports.
+# The bootstrap service downloads the official Docker package once into DATA_ROOT.
 
 services:
   bootstrap:
@@ -27,10 +35,10 @@ services:
       HELICAL_VERSION: "v7.0.0"
       HELICAL_PACKAGE_URL: "https://github.com/helicalinsight/helicalinsight/releases/download/v7.0.0/helicalinsight-docker.zip"
     volumes:
-      - /mnt/ducklake/helicalinsight/hi:/data/hi
-      - /mnt/ducklake/helicalinsight/config:/data/config
-      - /mnt/ducklake/helicalinsight/instantbi:/data/instantbi
-      - /mnt/ducklake/helicalinsight/.bootstrap:/data/bootstrap
+      - ${DATA_ROOT:?set_DATA_ROOT}/hi:/data/hi
+      - ${DATA_ROOT:?set_DATA_ROOT}/config:/data/config
+      - ${DATA_ROOT:?set_DATA_ROOT}/instantbi:/data/instantbi
+      - ${DATA_ROOT:?set_DATA_ROOT}/.bootstrap:/data/bootstrap
     command:
       - /bin/sh
       - -ec
@@ -75,10 +83,59 @@ services:
         touch /data/bootstrap/$${HELICAL_VERSION}.complete
         echo "Helical package $${HELICAL_VERSION} installed in persistent bind mounts"
 
+  oracle-jdbc-bootstrap:
+    image: alpine:3.20
+    restart: "no"
+    environment:
+      ORACLE_JDBC_VERSION: "23.4.0.24.05"
+      MAVEN_REPOSITORY: "https://repo.maven.apache.org/maven2"
+    volumes:
+      - ${DATA_ROOT:?set_DATA_ROOT}/oracle-jdbc:/data/oracle-jdbc
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        apk add --no-cache ca-certificates curl
+        # This is a Tomcat-global classpath. Keep only the Oracle JDBC mTLS set
+        # plus FAN support; optional NLS/XML modules inject providers or have
+        # unresolved companion JARs in Maven Central and can prevent the WAR
+        # from deploying.
+        marker="/data/oracle-jdbc/.oracle-jdbc-$${ORACLE_JDBC_VERSION}-mtls-core.complete"
+        required="ojdbc11 ucp11 oraclepki ons simplefan"
+        complete=true
+        for artifact in $${required}; do
+          test -s "/data/oracle-jdbc/$${artifact}-$${ORACLE_JDBC_VERSION}.jar" || complete=false
+        done
+        if [ -f "$${marker}" ] && [ "$${complete}" = true ]; then
+          echo "Oracle JDBC mTLS core $${ORACLE_JDBC_VERSION} already bootstrapped"
+          exit 0
+        fi
+        rm -f /data/oracle-jdbc/*.jar /data/oracle-jdbc/SHA256SUMS /data/oracle-jdbc/.oracle-jdbc-*.complete
+        fetch() {
+          group="$${1}"; artifact="$${2}"
+          url="$${MAVEN_REPOSITORY}/$${group}/$${artifact}/$${ORACLE_JDBC_VERSION}/$${artifact}-$${ORACLE_JDBC_VERSION}.jar"
+          echo "Downloading $${artifact}"
+          curl --fail --location --retry 3 --retry-delay 2 --output "/data/oracle-jdbc/$${artifact}-$${ORACLE_JDBC_VERSION}.jar" "$${url}"
+        }
+        fetch com/oracle/database/jdbc ojdbc11
+        fetch com/oracle/database/jdbc ucp11
+        fetch com/oracle/database/security oraclepki
+        fetch com/oracle/database/ha ons
+        fetch com/oracle/database/ha simplefan
+        test "$$(find /data/oracle-jdbc -maxdepth 1 -type f -name '*.jar' | wc -l)" -eq 5
+        sha256sum /data/oracle-jdbc/*.jar > /data/oracle-jdbc/SHA256SUMS
+        touch "$${marker}"
+        echo "Oracle JDBC mTLS core $${ORACLE_JDBC_VERSION} prepared"
+
   postgres:
     image: postgres:15.8-alpine3.20
     restart: unless-stopped
-    # Internal metadata/scheduling database; keep bounded on the 16 GiB MacMini.
+    # Internal metadata/scheduling database; it is not a copy of business data.
+    # The official v7.0.0 WAR embeds a fixed Hibernate datasource in
+    # application-context.xml (jdbc:postgresql://postgres:5432/hiee, user hiuser)
+    # with a package-specific password. On a FRESH volume the role is created
+    # from POSTGRES_* below, so POSTGRES_PASSWORD must match that private package
+    # contract. POSTGRES_USER and POSTGRES_DB are deterministic (hiuser/hiee).
     deploy:
       resources:
         limits:
@@ -89,17 +146,17 @@ services:
       bootstrap:
         condition: service_completed_successfully
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_USER: hiuser
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_DB: hiee
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 12
     volumes:
-      - /mnt/ducklake/helicalinsight/postgres:/var/lib/postgresql/data
-      - /mnt/ducklake/helicalinsight/config/init-scripts:/docker-entrypoint-initdb.d:ro
+      - ${DATA_ROOT:?set_DATA_ROOT}/postgres:/var/lib/postgresql/data
+      - ${DATA_ROOT:?set_DATA_ROOT}/config/init-scripts:/docker-entrypoint-initdb.d:ro
     networks:
       - hinet
 
@@ -116,13 +173,16 @@ services:
     depends_on:
       bootstrap:
         condition: service_completed_successfully
+      oracle-jdbc-bootstrap:
+        condition: service_completed_successfully
       postgres:
         condition: service_healthy
     environment:
       HOST_IP: ${HOST_IP}
       INSTALL_CHROME: ${INSTALL_CHROME:-false}
-      # 768 MiB JVM heap keeps the Java process below the 1.25 GiB container limit.
-      CATALINA_OPTS: "-Xms256m -Xmx768m -Djdk.internal.httpclient.disableHostnameVerification=true"
+      # 768 MiB JVM heap leaves room for Tomcat and native overhead within the 1536 MiB container limit.
+      # TNS_ADMIN points at the read-only Oracle wallet bind mount; it has no effect until an Oracle Data Source is configured.
+      CATALINA_OPTS: "-Xms256m -Xmx768m -Djdk.internal.httpclient.disableHostnameVerification=true -Doracle.net.tns_admin=/opt/oracle/wallet -Doracle.net.ssl_server_dn_match=true"
     entrypoint: ["/bin/bash", "/entrypoint-coolify.sh"]
     command: ["/usr/local/tomcat/bin/catalina.sh", "run"]
     healthcheck:
@@ -132,13 +192,15 @@ services:
       retries: 8
       start_period: 90s
     volumes:
-      - /mnt/ducklake/helicalinsight/hi/db:/usr/local/Helical Insight/hi/db
-      - /mnt/ducklake/helicalinsight/hi/hi-repository:/usr/local/Helical Insight/hi/hi-repository
-      - /mnt/ducklake/helicalinsight/hi:/host-hi:ro
-      - /mnt/ducklake/helicalinsight/config:/host-config:ro
-      - /mnt/ducklake/helicalinsight/hirepo-root:/root
-      - /mnt/ducklake/helicalinsight/tomcat-temp:/usr/local/tomcat/temp
-      - /mnt/ducklake/helicalinsight/logs:/usr/local/tomcat/logs
+      - ${DATA_ROOT:?set_DATA_ROOT}/hi/db:/usr/local/Helical Insight/hi/db
+      - ${DATA_ROOT:?set_DATA_ROOT}/hi/hi-repository:/usr/local/Helical Insight/hi/hi-repository
+      - ${DATA_ROOT:?set_DATA_ROOT}/hi:/host-hi:ro
+      - ${DATA_ROOT:?set_DATA_ROOT}/config:/host-config:ro
+      - ${DATA_ROOT:?set_DATA_ROOT}/hirepo-root:/root
+      - ${DATA_ROOT:?set_DATA_ROOT}/tomcat-temp:/usr/local/tomcat/temp
+      - ${DATA_ROOT:?set_DATA_ROOT}/logs:/usr/local/tomcat/logs
+      - ${DATA_ROOT:?set_DATA_ROOT}/oracle-jdbc:/host-oracle-jdbc:ro
+      - ${ORACLE_WALLET_DIR:?set_ORACLE_WALLET_DIR}:/opt/oracle/wallet:ro
     configs:
       - source: hiee-entrypoint
         target: /entrypoint-coolify.sh
@@ -163,7 +225,7 @@ services:
     environment:
       HELICALBI_LLM_MODE: ${HELICALBI_LLM_MODE:-stub}
     volumes:
-      - /mnt/ducklake/helicalinsight/instantbi/helicalbi:/app
+      - ${DATA_ROOT:?set_DATA_ROOT}/instantbi/helicalbi:/app
     working_dir: /app
     command:
       - /bin/bash

@@ -48,24 +48,27 @@ None of this proves on its own that it is the right solution for every organizat
 
 ## The Goal of My Deployment
 
-I did not need to publish a BI portal to the internet. I wanted a private, reproducible, and sufficiently realistic environment for experimenting with synthetic data, Metadata, Semantic Model, reports, and Instant BI without exposing databases or AI provider keys.
+I did not need to publish a BI portal to the internet. I wanted a private, reproducible environment for experimenting first with synthetic data and later with a controlled Contoso workload held in Oracle. The goal was to test Metadata, the Semantic Model, reports, and Instant BI without exposing business databases or AI provider keys.
 
 ![Deployment architecture: private Tailscale access to Helical Insight, with PostgreSQL and Instant BI kept inside the Docker network.](/images/2026/08/helical-deployment-architecture.png)
 
 Coolify manages the Docker Compose lifecycle, but access to the application does not go through a public domain or Traefik. The application is published only on a Tailscale address and a private port. PostgreSQL and Instant BI remain inside the Docker network.
 
+One distinction matters for the rest of this series: PostgreSQL is Helical's internal application database. It stores metadata, repository state, and scheduling information. The Contoso business data stays in Oracle Autonomous AI Database, which Helical reaches later through a separate read-only JDBC mTLS Data Source. Oracle is not another container in this stack, and PostgreSQL is not a copy of Contoso.
+
 ## My Test Environment
 
-| Component         | Configuration                                        |
-| ----------------- | ---------------------------------------------------- |
-| Host              | Mac mini running Ubuntu 24.04                        |
-| CPU / RAM         | 4 cores / 16 GiB RAM                                 |
-| Orchestration     | Coolify with a single Docker Compose stack           |
-| Platform          | Helical Insight Community Edition v7.0.0             |
-| Database          | Internal PostgreSQL 15                               |
-| Conversational AI | Instant BI, initially in `stub` mode                 |
-| Access            | Tailscale, without exposing PostgreSQL or Instant BI |
-| Persistence       | Dedicated bind mounts on the host                    |
+| Component                     | Configuration                                                  |
+| ----------------------------- | -------------------------------------------------------------- |
+| Host                          | Mac mini running Ubuntu 24.04                                  |
+| CPU / RAM                     | 4 cores / 16 GiB RAM                                           |
+| Orchestration                 | Coolify with a single Docker Compose stack                     |
+| Platform                      | Helical Insight Community Edition v7.0.0                       |
+| Business data source          | Oracle Autonomous AI Database through read-only JDBC mTLS      |
+| Internal application database | PostgreSQL 15 for Helical metadata, repository, and scheduling |
+| Conversational AI             | Instant BI, initially in `stub` mode                           |
+| Access                        | Tailscale, without exposing PostgreSQL or Instant BI           |
+| Persistence                   | Dedicated bind mounts on the host                              |
 
 The `stub` mode was deliberate. Before sending a single row to an external LLM, I wanted to verify that the platform, data flow, and internal components started correctly. Configuring a real AI provider will be a later test, using synthetic data and a key stored as a Coolify secret.
 
@@ -78,37 +81,50 @@ Helical’s official guide provides installation resources, and the repository i
 Before copying a Compose file, verify the host and Docker prerequisites:
 
 ```bash
-ssh macmini
-uname -m
-df -hT / /mnt/ducklake
-findmnt -T /mnt/ducklake
-docker version
-docker compose version
+PRIVATE_HOST=private-hostname
+
+ssh "$PRIVATE_HOST" '
+  DATA_MOUNT=/srv/helicalinsight
+  uname -m
+  df -hT / "$DATA_MOUNT"
+  findmnt -T "$DATA_MOUNT"
+  docker version
+  docker compose version
+'
 ```
 
 For this deployment, the host was `x86_64` and had sufficient space for images, the official package, and persistent storage. Do not assume an ARM machine has exactly the same compatibility; checking the architecture first prevents wasting time on a deployment that cannot start.
 
 ### 2. Create Helical-Specific Persistent Paths
 
-Rather than relying on ephemeral volumes managed by the resource, I separated the data under a dedicated directory:
+Rather than relying on ephemeral volumes managed by the resource, the host inventory now includes the following dedicated directory tree. For a fresh deployment, I would create the service-data paths with root ownership and `0750`, while applying stricter permissions to the wallet and secret directory because they contain credentials or mTLS material:
 
 ```bash
-sudo mkdir -p \
-  /mnt/ducklake/helicalinsight/postgres \
-  /mnt/ducklake/helicalinsight/hi/db \
-  /mnt/ducklake/helicalinsight/hi/hi-repository \
-  /mnt/ducklake/helicalinsight/config \
-  /mnt/ducklake/helicalinsight/instantbi \
-  /mnt/ducklake/helicalinsight/hirepo-root \
-  /mnt/ducklake/helicalinsight/tomcat-temp \
-  /mnt/ducklake/helicalinsight/logs \
-  /mnt/ducklake/helicalinsight/.bootstrap
+DATA_ROOT=/srv/helicalinsight
 
-sudo chown -R root:root /mnt/ducklake/helicalinsight
-sudo find /mnt/ducklake/helicalinsight -type d -exec chmod 0750 {} \;
+sudo install -d -o root -g root -m 0750 \
+  "$DATA_ROOT/postgres" \
+  "$DATA_ROOT/hi/db" \
+  "$DATA_ROOT/hi/hi-repository" \
+  "$DATA_ROOT/config" \
+  "$DATA_ROOT/instantbi" \
+  "$DATA_ROOT/hirepo-root" \
+  "$DATA_ROOT/tomcat-temp" \
+  "$DATA_ROOT/logs" \
+  "$DATA_ROOT/.bootstrap" \
+  "$DATA_ROOT/oracle-jdbc"
+
+# These are host-only credential locations. Do not commit or publish either.
+# Only the Oracle wallet is mounted, read-only, by hiee.
+sudo install -d -o root -g root -m 0700 \
+  "$DATA_ROOT/oracle-wallet" \
+  "$DATA_ROOT/.secrets"
+
+sudo find "$DATA_ROOT/oracle-wallet" -type f -exec chmod 0600 {} \;
+sudo find "$DATA_ROOT/.secrets" -type f -exec chmod 0600 {} \;
 ```
 
-PostgreSQL metadata, the Helical repository, extracted configuration, Instant BI, and logs survive a normal redeploy. I would not use `chmod 777`; if a container fails because of permissions, I would first inspect its UID/GID and logs.
+PostgreSQL metadata, the Helical repository, extracted configuration, Instant BI, logs, the bootstrap marker, and the Oracle JDBC JAR cache survive a normal redeploy. `oracle-wallet` contains mTLS connection material and `.secrets` holds local secret files; neither belongs in Git or in a screenshot. The wallet material is never a Coolify variable. In the sanitized example, `ORACLE_WALLET_DIR` represents only the private host directory used for the read-only bind mount. A required runtime password belongs in a Coolify **secret** field, not an ordinary visible variable. I would not use `chmod 777`; if a container fails because of permissions, I would first inspect its UID/GID and logs.
 
 ### 3. Use Reproducible, Version-Pinned Bootstrap
 
@@ -118,56 +134,85 @@ The Compose file I used includes a one-time `bootstrap` service. On its first st
 
 Pinning the version prevents a redeploy from changing the software implicitly. It also makes it possible to distinguish between an infrastructure problem and a change introduced by an update.
 
-For future reuse, I keep a sanitized, copy-paste-ready [docker-compose.example.yml](/downloads/helical-insight-coolify/docker-compose.example.yml) and its companion [env.example](/downloads/helical-insight-coolify/env.example). They include the full one-time `bootstrap` service, bind mounts, health checks, and resource limits, while using placeholders for passwords, host names, and Tailscale addresses.
+For future reuse, I keep a sanitized [docker-compose.example.yml](/downloads/helical-insight-coolify/docker-compose.example.yml) and its companion [env.example](/downloads/helical-insight-coolify/env.example). They are a version-pinned operational baseline, not a place to copy secrets: the downloadable files retain health checks, resource limits, Oracle runtime preparation, and all required bind mounts, while replacing host-specific paths, wallet locations, passwords, and private routes with explicit placeholders.
 
 ### 4. Define the Compose Services
 
-The stack has four services:
+The final stack has five services:
 
-- `bootstrap` downloads and prepares the official package artifacts.
-- `postgres` stores Helical metadata and scheduling data.
-- `hiee` runs the Helical Insight web application on Tomcat.
+- `bootstrap` downloads and prepares the official Helical package artifacts once.
+- `oracle-jdbc-bootstrap` downloads the five JDBC mTLS/FAN JARs into a persistent host directory.
+- `postgres` stores Helical metadata and scheduling data; it is **not** a copy of the business dataset.
+- `hiee` runs Helical Insight on Tomcat.
 - `instantbi` runs the Python service behind the conversational layer.
 
-The following excerpt focuses on the long-running services. The downloadable Compose example above contains the complete `bootstrap` definition and the remaining mounts and health checks needed for a copy-paste deployment.
+The most important update is that `hiee` waits for both preparation jobs and for PostgreSQL health before it starts. The complete downloadable file also copies the Oracle JARs into Tomcat at runtime without mounting over Tomcat’s own library directory, and mounts the wallet read-only only for the Helical container.
 
 ```yaml
 services:
+  bootstrap:
+    image: alpine:3.20
+    restart: 'no'
+    volumes:
+      - ${DATA_ROOT:?set_DATA_ROOT}/hi:/data/hi
+      - ${DATA_ROOT:?set_DATA_ROOT}/config:/data/config
+      - ${DATA_ROOT:?set_DATA_ROOT}/instantbi:/data/instantbi
+      - ${DATA_ROOT:?set_DATA_ROOT}/.bootstrap:/data/bootstrap
+
+  oracle-jdbc-bootstrap:
+    image: alpine:3.20
+    restart: 'no'
+    volumes:
+      - ${DATA_ROOT:?set_DATA_ROOT}/oracle-jdbc:/data/oracle-jdbc
+
   postgres:
     image: postgres:15.8-alpine3.20
     restart: unless-stopped
+    environment:
+      POSTGRES_USER: hiuser
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: hiee
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
     volumes:
-      - /mnt/ducklake/helicalinsight/postgres:/var/lib/postgresql/data
-    networks: [hinet]
+      - ${DATA_ROOT:?set_DATA_ROOT}/postgres:/var/lib/postgresql/data
 
   hiee:
     image: hiee/helicalinsight:nitrogen-j25t11
-    restart: unless-stopped
     depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+      oracle-jdbc-bootstrap:
+        condition: service_completed_successfully
       postgres:
         condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -f http://localhost:8080/hi-ee/applicationSettings || exit 1']
+    volumes:
+      - ${DATA_ROOT:?set_DATA_ROOT}/oracle-jdbc:/host-oracle-jdbc:ro
+      - ${ORACLE_WALLET_DIR:?set_ORACLE_WALLET_DIR}:/opt/oracle/wallet:ro
     ports:
       - '${TAILSCALE_IP}:${HELICAL_HOST_PORT}:8080'
-    networks: [hinet]
 
   instantbi:
     image: python:3.13-slim
-    restart: unless-stopped
     expose: ['8000']
-    networks: [hinet]
 ```
 
-The complete configuration also needs the product bind mounts, a Tomcat entrypoint wrapper, and the bootstrap process described above. I am not including passwords or values from my private network here; those values should live as resource variables or secrets, not in a post or public repository.
+The PostgreSQL detail is not optional. In this exact v7.0.0 package, the WAR embeds the `hiuser` / `hiee` datasource contract. On a fresh PostgreSQL volume, `POSTGRES_PASSWORD` must be the private value compatible with that packaged datasource; substituting an arbitrary secret caused `password authentication failed` at application startup. The value does not belong in the post, the downloadable example, version control, or Coolify's non-secret fields.
 
-The minimum variables I would separate are:
+The minimum variables I keep separate are:
 
 ```dotenv
-POSTGRES_USER=...
-POSTGRES_PASSWORD=...
+DATA_ROOT=/srv/helicalinsight
+POSTGRES_USER=hiuser
+POSTGRES_PASSWORD=REPLACE_WITH_PRIVATE_PACKAGE_COMPATIBLE_VALUE
 POSTGRES_DB=hiee
-HOST_IP=private-host:port
-TAILSCALE_IP=100.x.y.z
+HOST_IP=private-hostname:18085
+# Reserved documentation address. Replace with your private Tailscale address.
+TAILSCALE_IP=192.0.2.10
 HELICAL_HOST_PORT=18085
+ORACLE_WALLET_DIR=/private/path/to/oracle-wallet
 HELICALBI_LLM_MODE=stub
 INSTALL_CHROME=false
 ```
@@ -259,6 +304,14 @@ Coolify showed a resource as stopped, but an older container was still holding t
 
 **Fix:** identify the actual port owner with Docker, stop the obsolete deployment, preserve the persistent bind mounts and volumes, and start the new deployment again. I did not use `docker compose down -v`.
 
+### Internal PostgreSQL Credentials Must Match the Packaged Application Contract
+
+A later redeploy exposed a failure mode that was easy to misread: the web container was running, but the Helical application could not authenticate to its internal PostgreSQL store. The password held by the initialized database volume no longer matched the connection contract used by the packaged application.
+
+**Fix:** preserve the PostgreSQL volume, identify the effective application-to-database configuration, and align the internal role through a controlled secret-handling procedure before restarting only the affected service. Do not treat a Compose variable change as sufficient proof that an already-initialized database and packaged application agree.
+
+**Preventive practice:** treat initial PostgreSQL credentials, the initialized volume, and the application connection configuration as one contract. After any credential or redeploy change, verify `/hi-ee/applicationSettings`; a running Tomcat process is not sufficient evidence of a healthy Helical installation.
+
 ### Compatibility Between Instant BI and Current LangChain Dependencies
 
 The v7.0.0 package referenced an older namespace for `ChatOllama`. The current Python image required the `langchain-ollama` package.
@@ -278,7 +331,9 @@ sudo docker inspect <hiee-container> \
   --format 'health={{.State.Health.Status}} restarts={{.RestartCount}}'
 
 # Application endpoint over the private route
-curl -fsS http://macmini:18085/hi-ee/applicationSettings
+PRIVATE_HOST=private-hostname
+PRIVATE_PORT=18085
+curl -fsS "http://${PRIVATE_HOST}:${PRIVATE_PORT}/hi-ee/applicationSettings"
 
 # Actual resource usage
 sudo docker stats --no-stream
@@ -291,7 +346,7 @@ hiee       healthy, 0 restarts
 postgres   healthy
 instantbi  healthy
 
-http://macmini:18085/hi-ee/applicationSettings → HTTP 200
+http://<private-host>:<private-port>/hi-ee/applicationSettings → HTTP 200
 ```
 
 I was also able to access the interface from an iPhone through Tailscale. That detail matters: a healthy container does not by itself guarantee that a user can reach the product from the intended network.
@@ -307,27 +362,36 @@ These precautions prevented me from turning a configuration failure into data lo
 - Do not enable an LLM with real data before reviewing costs, data retention, region, and security controls.
 - Do not publish PostgreSQL or Instant BI merely for debugging convenience.
 
-Before experimenting with Semantic Models or upgrading versions, it is wise to take at least one backup of the persistent data:
+Before experimenting with Semantic Models or upgrading versions, I would take at least one backup of the persistent data:
 
 ```bash
-sudo tar -C /mnt/ducklake \
-  -czf /mnt/ducklake/helicalinsight-backup-$(date +%F).tar.gz \
-  helicalinsight
+DATA_ROOT=/srv/helicalinsight
+sudo tar -C "$(dirname "$DATA_ROOT")" \
+  -czf "${DATA_ROOT}-backup-$(date +%F).tar.gz" \
+  "$(basename "$DATA_ROOT")"
 ```
 
 In addition to the archive, a logical PostgreSQL dump is preferable once the system is stable. And that backup needs to end up off the same disk if it is truly intended to protect against a host failure.
 
+## Post-Deployment Extension: Oracle JDBC mTLS Is Separate and Read-Only
+
+After the base platform was healthy, I connected Helical to Oracle Autonomous AI Database for a controlled Contoso Retail test. This did not move benchmark tables into PostgreSQL. PostgreSQL remained Helical’s internal metadata and scheduling store.
+
+The extension required Oracle JDBC runtime files, a wallet mounted read-only into the container, and a dedicated database account with explicit `SELECT` grants. The wallet, its directory, and the account secret are kept outside Git, public Compose examples, and screenshots. A direct read test succeeded and a write attempt was denied.
+
+This is deliberately an extension, not a hidden prerequisite of the base deployment. A sanitized Coolify Compose example can describe bind mounts and health checks, but each operator must supply their own private wallet and database-specific connection material. The follow-up article documents the Data Source, Metadata, report, and validation path without exposing private routes or credentials.
+
 ## Evaluation Status
 
-At the time of writing this post, the installation is active and validated for the infrastructure flow:
+In the post-deployment validation recorded on 2026-08-30, the installation was active and validated for the infrastructure flow:
 
 ```text
 Docker Compose → Coolify → PostgreSQL → Helical Insight → Instant BI
 ```
 
-A synthetic sales dataset is also ready to walk through the path from a Data Source to Metadata, Semantic Model, report, and dashboard. The example’s control total is `8,350.00`, so any report built on the dataset can be checked against a known result.
+The application endpoint returns HTTP 200, and the three services remain healthy. A later Contoso Retail control also validated the next, separate path: Oracle Autonomous AI Database → read-only JDBC mTLS Data Source → Metadata → ranked report → private dashboard. The control returned 15 expected rows—five top brands for each of 2007, 2008, and 2009—and matched an independent Oracle gold ledger.
 
-I am not yet claiming that Instant BI produces reliable answers with a real LLM, nor that the Semantic Model alone solves business-semantics problems. That requires a separate, reproducible test with clear comparison criteria. But something important is already in place: a complete, private, self-hosted BI platform that I can inspect, break, measure, and evaluate without depending on an ephemeral demo.
+I am not yet claiming that Instant BI produces reliable answers with a real LLM, nor that the Semantic Model alone solves business-semantics problems. That requires a separate, reproducible test with clear comparison criteria. But the platform is now validated beyond startup: it can query an external database through a least-privilege connection, preserve an explicit reporting model, and render a result that has been independently checked.
 
 ## Closing Thoughts
 
