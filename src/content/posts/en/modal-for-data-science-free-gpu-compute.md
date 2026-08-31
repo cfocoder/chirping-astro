@@ -40,14 +40,14 @@ def main():
 
 Modal's Starter plan gives you \$30 of compute credits every month. Here's what that buys you:
 
-| GPU | VRAM | Cost per hour | Hours of free compute/month |
-|-----|------|--------------|---------------------------|
-| T4 | 16 GB | \$0.59 | ~50 hours |
-| L4 | 24 GB | \$0.80 | ~37 hours |
-| L40S | 48 GB | \$1.95 | ~15 hours |
-| A100 (40GB) | 40 GB | \$2.10 | ~14 hours |
-| A100 (80GB) | 80 GB | \$2.50 | ~12 hours |
-| H100 | 80 GB | \$3.95 | ~7 hours |
+| GPU         | VRAM  | Cost per hour | Hours of free compute/month |
+| ----------- | ----- | ------------- | --------------------------- |
+| T4          | 16 GB | \$0.59        | ~50 hours                   |
+| L4          | 24 GB | \$0.80        | ~37 hours                   |
+| L40S        | 48 GB | \$1.95        | ~15 hours                   |
+| A100 (40GB) | 40 GB | \$2.10        | ~14 hours                   |
+| A100 (80GB) | 80 GB | \$2.50        | ~12 hours                   |
+| H100        | 80 GB | \$3.95        | ~7 hours                    |
 
 For graduate students, there's also the **Modal for Academics** program offering up to **\$10,000** in additional credits. Apply at [modal.com/academics](https://modal.com/academics).
 
@@ -79,13 +79,13 @@ uv run modal setup
 
 Modal gives you four ways to define your container environment, all chainable with build methods like `.pip_install()`, `.apt_install()`, and `.run_commands()`.
 
-| Builder | When to use it | Example |
-|---------|---------------|---------|
-| **`.debian_slim()`** | The default — covers 95% of data science needs. | `modal.Image.debian_slim(python_version="3.12").pip_install("torch")` |
-| **`.from_registry()`** | Pull a pre-built image from Docker Hub, NVIDIA NGC, or any public registry. | `modal.Image.from_registry("nvidia/cuda:12.1.0-devel-ubuntu22.04", add_python="3.12")` |
-| **`.from_dockerfile()`** | You already have a Dockerfile. | `modal.Image.from_dockerfile("./Dockerfile")` |
-| **`.micromamba()`** | You need conda/mamba packages (e.g., bioinformatics tools from conda-forge). | `modal.Image.micromamba().conda_install("bioconda::samtools")` |
-| **`.from_name()`** | Reuse an image you previously built and published. | `modal.Image.from_name("my-ml-image:v1")` |
+| Builder                  | When to use it                                                               | Example                                                                                |
+| ------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **`.debian_slim()`**     | The default — covers 95% of data science needs.                              | `modal.Image.debian_slim(python_version="3.12").pip_install("torch")`                  |
+| **`.from_registry()`**   | Pull a pre-built image from Docker Hub, NVIDIA NGC, or any public registry.  | `modal.Image.from_registry("nvidia/cuda:12.1.0-devel-ubuntu22.04", add_python="3.12")` |
+| **`.from_dockerfile()`** | You already have a Dockerfile.                                               | `modal.Image.from_dockerfile("./Dockerfile")`                                          |
+| **`.micromamba()`**      | You need conda/mamba packages (e.g., bioinformatics tools from conda-forge). | `modal.Image.micromamba().conda_install("bioconda::samtools")`                         |
+| **`.from_name()`**       | Reuse an image you previously built and published.                           | `modal.Image.from_name("my-ml-image:v1")`                                              |
 
 All of these support the same chainable build methods:
 
@@ -129,6 +129,7 @@ def main():
 ```
 
 Run it:
+
 ```bash
 uv run modal run train.py
 ```
@@ -183,12 +184,12 @@ plt.show()
 
 ## How to Choose a GPU
 
-| Your workload | Recommended GPU | Why |
-|--------------|----------------|-----|
-| Prototyping, small models (< 1M params) | **T4** (\$0.59/hr) | Cheapest, 16 GB VRAM |
-| Inference, medium models (1M–7B params) | **L40S** (\$1.95/hr) | Best cost/performance, 48 GB |
-| Fine-tuning, large models (7B–70B) | **A100-80GB** (\$2.50/hr) | 80 GB VRAM, fast training |
-| Heavy training, largest models | **H100** (\$3.95/hr) | Fastest available, FP8 support |
+| Your workload                           | Recommended GPU           | Why                            |
+| --------------------------------------- | ------------------------- | ------------------------------ |
+| Prototyping, small models (< 1M params) | **T4** (\$0.59/hr)        | Cheapest, 16 GB VRAM           |
+| Inference, medium models (1M–7B params) | **L40S** (\$1.95/hr)      | Best cost/performance, 48 GB   |
+| Fine-tuning, large models (7B–70B)      | **A100-80GB** (\$2.50/hr) | 80 GB VRAM, fast training      |
+| Heavy training, largest models          | **H100** (\$3.95/hr)      | Fastest available, FP8 support |
 
 For most data science coursework (scikit-learn, XGBoost, small neural nets), a **T4 or L40S** is more than enough.
 
@@ -212,18 +213,18 @@ Not every workload needs a GPU. I ran the exact same neural network on my local 
 ### Small model (30 features, 10K rows, 3-layer NN)
 
 | Metric | CPU (local) | GPU (Modal T4) |
-|--------|------------|----------------|
-| Time | **0.7s** | 4.4s |
-| Cost | \$0 | ~\$0.0007 |
+| ------ | ----------- | -------------- |
+| Time   | **0.7s**    | 4.4s           |
+| Cost   | \$0         | ~\$0.0007      |
 
 **Winner: CPU.** The T4's cold start (~3 seconds) dominates the tiny compute time. For a model this small, your laptop is faster.
 
 ### Medium model (200 features, 100K rows, 5-layer NN)
 
 | Metric | CPU (local) | GPU (Modal T4, estimated) |
-|--------|------------|--------------------------|
-| Time | **70s** | ~7–14s |
-| Cost | \$0 | ~\$0.002 |
+| ------ | ----------- | ------------------------- |
+| Time   | **70s**     | ~7–14s                    |
+| Cost   | \$0         | ~\$0.002                  |
 
 **Winner: GPU by 5-10x.** Once your model has more layers and your dataset hits six figures, the GPU pulls ahead decisively.
 
@@ -239,14 +240,14 @@ For most coursework assignments, your laptop handles the prototyping fine. Modal
 
 ## Common Pitfalls (and How to Avoid Them)
 
-| Pitfall | Error message | Fix |
-|---------|--------------|-----|
-| Python 3.13 in venv | `Unsupported Python version: '3.13'` | `uv python pin 3.12 && uv sync` |
-| Python 3.13 in venv vs 3.12 image | `defined with Python 3.13, but its Image has 3.12` | Same — pin to 3.12 and recreate venv |
-| Running `python script.py` | No output at all | Use `modal run script.py` |
-| `.remote()` without `with app.run():` | `Function has not been hydrated` | Wrap in `with app.run():` |
-| `make_classification` ValueError | `n_classes * n_clusters_per_class <= 2**n_informative` | Set `n_informative`, `n_redundant` explicitly |
-| Container idle billing (Jupyter in cloud) | Costs keep climbing | Ctrl+C `modal launch jupyter` when done |
+| Pitfall                                   | Error message                                          | Fix                                           |
+| ----------------------------------------- | ------------------------------------------------------ | --------------------------------------------- |
+| Python 3.13 in venv                       | `Unsupported Python version: '3.13'`                   | `uv python pin 3.12 && uv sync`               |
+| Python 3.13 in venv vs 3.12 image         | `defined with Python 3.13, but its Image has 3.12`     | Same — pin to 3.12 and recreate venv          |
+| Running `python script.py`                | No output at all                                       | Use `modal run script.py`                     |
+| `.remote()` without `with app.run():`     | `Function has not been hydrated`                       | Wrap in `with app.run():`                     |
+| `make_classification` ValueError          | `n_classes * n_clusters_per_class <= 2**n_informative` | Set `n_informative`, `n_redundant` explicitly |
+| Container idle billing (Jupyter in cloud) | Costs keep climbing                                    | Ctrl+C `modal launch jupyter` when done       |
 
 ## Where Modal Fits in the Data & ML Ecosystem
 
@@ -254,12 +255,12 @@ Modal is one piece in a larger landscape. Here's how the major tools relate to e
 
 ![Modal ecosystem flowchart — Does your dataset fit in RAM?](/images/2026/07/modal-ecosystem-diagram.jpg)
 
-| Tool | What it is | Best for | Complexity |
-|------|-----------|----------|------------|
-| **Modal** | Serverless GPU, 1 node | Burst GPU tasks, notebooks, fine-tuning | ⭐ Minimal |
-| **Dask / Coiled** | Parallel pandas/NumPy | Bigger-than-RAM DataFrames, ETL | ⭐⭐ Medium |
-| **Spark / Databricks** | Distributed SQL engine | Data lakes, petabyte-scale ETL, BI | ⭐⭐⭐ High |
-| **Ray / Anyscale** | ML-native distributed OS | Multi-node training, LLM serving, RL | ⭐⭐⭐ High |
+| Tool                   | What it is               | Best for                                | Complexity  |
+| ---------------------- | ------------------------ | --------------------------------------- | ----------- |
+| **Modal**              | Serverless GPU, 1 node   | Burst GPU tasks, notebooks, fine-tuning | ⭐ Minimal  |
+| **Dask / Coiled**      | Parallel pandas/NumPy    | Bigger-than-RAM DataFrames, ETL         | ⭐⭐ Medium |
+| **Spark / Databricks** | Distributed SQL engine   | Data lakes, petabyte-scale ETL, BI      | ⭐⭐⭐ High |
+| **Ray / Anyscale**     | ML-native distributed OS | Multi-node training, LLM serving, RL    | ⭐⭐⭐ High |
 
 ### The golden rule
 

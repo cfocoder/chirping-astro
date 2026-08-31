@@ -33,7 +33,7 @@ const trending = tags.slice(0, 8);
     recent.length > 0 && (
       <section class="mb-8">
         <h2 class="text-base-content/70 mb-3 text-xs font-bold tracking-[0.1em] uppercase">
-          {locale === 'fr' ? 'Mises à jour récentes' : 'Recently Updated'}
+          Recently Updated
         </h2>
         <ul class="chirpy-aside-list">
           {recent.map((post) => (
@@ -52,7 +52,7 @@ const trending = tags.slice(0, 8);
     trending.length > 0 && (
       <section>
         <h2 class="text-base-content/70 mb-3 text-xs font-bold tracking-[0.1em] uppercase">
-          {locale === 'fr' ? 'Étiquettes en vogue' : 'Trending Tags'}
+          Trending Tags
         </h2>
         <div class="flex flex-wrap gap-2">
           {trending.map((tag) => (

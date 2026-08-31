@@ -4,7 +4,7 @@
  *
  * Routing rules:
  *  - EN is the default locale and serves at the URL root with NO prefix.
- *  - FR is served under `/fr/...`.
+
  *
  * Source-of-truth: `src/config.ts` -> SITE.locales / SITE.defaultLocale.
  */
@@ -38,8 +38,7 @@ export function localePrefix(locale: Locale): string {
  * Build a localized URL for the given pathname (without locale prefix).
  *
  *   localizedPath('/posts/foo', 'en') -> '/posts/foo'
- *   localizedPath('/posts/foo', 'fr') -> '/fr/posts/foo'
- *   localizedPath('/', 'fr')          -> '/fr/'
+
  *
  * The configured `base` (e.g. `/chirping-astro`) is automatically
  * prefixed when set.
@@ -53,8 +52,7 @@ export function localizedPath(path: string, locale: Locale): string {
 
 /**
  * Detect the current locale from a URL or Astro.url.pathname.
- * Anything starting with `/fr` or `/fr/` resolves to 'fr'; otherwise
- * the default locale is returned.
+
  */
 export function detectLocale(pathname: string): Locale {
   const p = stripBase(pathname);
@@ -78,9 +76,7 @@ function stripBase(pathname: string): string {
 /**
  * Strip the locale prefix from a pathname so it can be relocalized.
  *
- *   stripLocale('/fr/posts/foo')  -> '/posts/foo'
  *   stripLocale('/posts/foo')     -> '/posts/foo'
- *   stripLocale('/fr')            -> '/'
  */
 export function stripLocale(pathname: string): string {
   const p = stripBase(pathname);
@@ -96,8 +92,7 @@ export function stripLocale(pathname: string): string {
  * Translation helper. Returns the localized string for the given key,
  * falling back to the default locale, then to the key itself.
  *
- *   const t = useTranslations('fr');
- *   t('nav.home') // 'Accueil'
+
  */
 // eslint-disable-next-line no-unused-vars
 export function useTranslations(locale: Locale): (key: UIKey) => string {
@@ -118,8 +113,8 @@ export function formatDate(
   const d = typeof date === 'string' ? new Date(date) : date;
   if (Number.isNaN(d.getTime())) return '';
   if (SITE.isoDates) return d.toISOString().slice(0, 10);
-  const lang = locale === 'fr' ? 'fr-FR' : 'en-US';
-  return new Intl.DateTimeFormat(lang, options).format(d);
+  const languageTag = locale === 'en' ? 'en-US' : locale;
+  return new Intl.DateTimeFormat(languageTag, options).format(d);
 }
 
 /** Short ISO 8601 date used for <time datetime="..."> attributes. */
@@ -167,22 +162,10 @@ export function canonicalUrl(pathname: string): string {
 
 /** Pretty label for the language switcher. */
 export function localeLabel(locale: Locale): string {
-  switch (locale) {
-    case 'fr':
-      return 'Français';
-    case 'en':
-    default:
-      return 'English';
-  }
+  return locale === 'en' ? 'English' : locale;
 }
 
 /** ISO BCP 47 language tag for `<html lang>` and date formatters. */
 export function htmlLang(locale: Locale): string {
-  switch (locale) {
-    case 'fr':
-      return 'fr-FR';
-    case 'en':
-    default:
-      return 'en-US';
-  }
+  return locale === 'en' ? 'en-US' : locale;
 }

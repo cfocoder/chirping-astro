@@ -1,6 +1,6 @@
 ---
 title: Privacy
-description: "Privacy information for CFOCoder, a static personal blog hosted on Cloudflare Pages."
+description: 'Privacy information for CFOCoder, a static personal blog hosted on Cloudflare Pages.'
 translationKey: privacy
 showInNav: false
 ---

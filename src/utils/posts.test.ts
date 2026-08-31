@@ -1,4 +1,6 @@
 import { describe, expect, test } from 'bun:test';
+import { locales } from '../config';
+import { messages } from '../i18n/ui';
 import { slugify } from './slugify';
 
 describe('slugify', () => {
@@ -40,5 +42,11 @@ describe('slugify', () => {
 
   test('Empty string after processing returns empty', () => {
     expect(slugify('!!!')).toBe('');
+  });
+});
+
+describe('i18n configuration', () => {
+  test('ships UI dictionaries only for configured locales', () => {
+    expect(Object.keys(messages).sort()).toEqual([...locales].sort());
   });
 });
