@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Netdata to Microsoft Fabric target architecture</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f5f5f5;
+        --ink: #2d3142;
+        --muted: #4f5d75;
+        --soft: #7a8399;
+        --rule: rgba(45, 49, 66, 0.12);
+        --accent: #eb6c36;
+        --accentTint: rgba(235, 108, 54, 0.08);
+        --link: #2e5aa8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 32px;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <svg
+      viewBox="0 0 1400 760"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-labelledby="netdata-fabric-architecture-title netdata-fabric-architecture-desc"
+    >
+      <title id="netdata-fabric-architecture-title">
+        Netdata to Microsoft Fabric target architecture
+      </title>
+      <desc id="netdata-fabric-architecture-desc">
+        An Ubuntu host collects Netdata telemetry, buffers it locally, and sends it to Microsoft
+        Fabric Eventstream, Eventhouse and KQL, materialized views, and a real-time dashboard
+        available in a browser or on an iPhone.
+      </desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0,8 3,0 6" fill="#4f5d75" />
+        </marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0,8 3,0 6" fill="#eb6c36" />
+        </marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0,8 3,0 6" fill="#2e5aa8" />
+        </marker>
+      </defs>
+
+      <rect width="1400" height="760" fill="#f5f5f5" />
+      <text
+        x="72"
+        y="72"
+        fill="#4f5d75"
+        font-family="Geist Mono, monospace"
+        font-size="12"
+        font-weight="500"
+        letter-spacing="2"
+      >
+        TARGET ARCHITECTURE
+      </text>
+      <text
+        x="72"
+        y="120"
+        fill="#2d3142"
+        font-family="Instrument Serif, Georgia, serif"
+        font-size="44"
+      >
+        A bounded telemetry path, from host to dashboard
+      </text>
+      <text x="72" y="152" fill="#4f5d75" font-family="Geist, Arial, sans-serif" font-size="18">
+        The Mac mini performs collection and resilient delivery. Fabric performs ingestion,
+        aggregation, and visualization.
+      </text>
+
+      <rect
+        x="64"
+        y="208"
+        width="492"
+        height="360"
+        rx="8"
+        fill="rgba(45,49,66,.02)"
+        stroke="rgba(45,49,66,.18)"
+        stroke-width="1"
+      />
+      <rect x="88" y="196" width="128" height="24" rx="4" fill="#f5f5f5" />
+      <text
+        x="104"
+        y="212"
+        fill="#7a8399"
+        font-family="Geist Mono, monospace"
+        font-size="12"
+        font-weight="500"
+        letter-spacing="1.6"
+      >
+        UBUNTU HOST
+      </text>
+
+      <rect
+        x="600"
+        y="208"
+        width="676"
+        height="360"
+        rx="8"
+        fill="rgba(45,49,66,.02)"
+        stroke="rgba(45,49,66,.18)"
+        stroke-width="1"
+      />
+      <rect x="624" y="196" width="304" height="24" rx="4" fill="#f5f5f5" />
+      <text
+        x="640"
+        y="212"
+        fill="#7a8399"
+        font-family="Geist Mono, monospace"
+        font-size="12"
+        font-weight="500"
+        letter-spacing="1.6"
+      >
+        MICROSOFT FABRIC REAL-TIME INTELLIGENCE
+      </text>
+
+      <!-- connectors, before nodes -->
+      <line
+        x1="236"
+        y1="352"
+        x2="280"
+        y2="352"
+        stroke="#4f5d75"
+        stroke-width="2"
+        marker-end="url(#arrow)"
+      />
+      <path
+        d="M 420 312 H 460 Q 468 312 468 320 V 344 Q 468 352 476 352 H 600"
+        fill="none"
+        stroke="#2e5aa8"
+        stroke-width="2"
+        marker-end="url(#arrow-link)"
+      />
+      <path
+        d="M 352 392 V 424 Q 352 432 360 432 H 424 Q 432 432 432 424 V 392"
+        fill="none"
+        stroke="#4f5d75"
+        stroke-width="1.5"
+        stroke-dasharray="5,4"
+        marker-end="url(#arrow)"
+      />
+      <line
+        x1="760"
+        y1="352"
+        x2="800"
+        y2="352"
+        stroke="#4f5d75"
+        stroke-width="2"
+        marker-end="url(#arrow)"
+      />
+      <line
+        x1="960"
+        y1="352"
+        x2="1000"
+        y2="352"
+        stroke="#4f5d75"
+        stroke-width="2"
+        marker-end="url(#arrow)"
+      />
+      <line
+        x1="1160"
+        y1="352"
+        x2="1200"
+        y2="352"
+        stroke="#eb6c36"
+        stroke-width="2"
+        marker-end="url(#arrow-accent)"
+      />
+      <path
+        d="M 1240 392 V 456 Q 1240 464 1248 464 H 1304 Q 1312 464 1312 472 V 496"
+        fill="none"
+        stroke="#4f5d75"
+        stroke-width="2"
+        marker-end="url(#arrow)"
+      />
+
+      <rect x="236" y="332" width="52" height="20" rx="4" fill="#f5f5f5" />
+      <text
+        x="262"
+        y="346"
+        text-anchor="middle"
+        fill="#7a8399"
+        font-family="Geist Mono, monospace"
+        font-size="10"
+        letter-spacing=".8"
+      >
+        READ
+      </text>
+      <rect x="472" y="324" width="92" height="20" rx="4" fill="#f5f5f5" />
+      <text
+        x="518"
+        y="338"
+        text-anchor="middle"
+        fill="#2e5aa8"
+        font-family="Geist Mono, monospace"
+        font-size="10"
+        letter-spacing=".6"
+      >
+        AMQP EVENTS
+      </text>
+      <rect x="784" y="332" width="52" height="20" rx="4" fill="#f5f5f5" />
+      <text
+        x="810"
+        y="346"
+        text-anchor="middle"
+        fill="#7a8399"
+        font-family="Geist Mono, monospace"
+        font-size="10"
+        letter-spacing=".6"
+      >
+        ROUTE
+      </text>
+      <rect x="980" y="332" width="76" height="20" rx="4" fill="#f5f5f5" />
+      <text
+        x="1018"
+        y="346"
+        text-anchor="middle"
+        fill="#7a8399"
+        font-family="Geist Mono, monospace"
+        font-size="10"
+        letter-spacing=".6"
+      >
+        AGGREGATE
+      </text>
+      <rect x="1168" y="332" width="64" height="20" rx="4" fill="#f5f5f5" />
+      <text
+        x="1200"
+        y="346"
+        text-anchor="middle"
+        fill="#eb6c36"
+        font-family="Geist Mono, monospace"
+        font-size="10"
+        letter-spacing=".6"
+      >
+        QUERY
+      </text>
+      <rect x="1260" y="444" width="68" height="20" rx="4" fill="#f5f5f5" />
+      <text
+        x="1294"
+        y="458"
+        text-anchor="middle"
+        fill="#7a8399"
+        font-family="Geist Mono, monospace"
+        font-size="10"
+        letter-spacing=".6"
+      >
+        VIEW LIVE
+      </text>
+
+      <!-- nodes -->
+      <g>
+        <rect x="96" y="288" width="140" height="104" rx="6" fill="#f5f5f5" />
+        <rect
+          x="96"
+          y="288"
+          width="140"
+          height="104"
+          rx="6"
+          fill="#ffffff"
+          stroke="#2d3142"
+          stroke-width="1.2"
+        />
+        <rect
+          x="108"
+          y="300"
+          width="52"
+          height="20"
+          rx="4"
+          fill="transparent"
+          stroke="rgba(45,49,66,.4)"
+          stroke-width=".8"
+        />
+        <text
+          x="134"
+          y="314"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="10"
+          letter-spacing="1"
+        >
+          SOURCE
+        </text>
+        <text
+          x="166"
+          y="346"
+          text-anchor="middle"
+          fill="#2d3142"
+          font-family="Geist, Arial, sans-serif"
+          font-size="18"
+          font-weight="600"
+        >
+          Netdata
+        </text>
+        <text
+          x="166"
+          y="372"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="12"
+        >
+          local metrics · ~1 s
+        </text>
+      </g>
+      <g>
+        <rect x="280" y="288" width="140" height="104" rx="6" fill="#f5f5f5" />
+        <rect
+          x="280"
+          y="288"
+          width="140"
+          height="104"
+          rx="6"
+          fill="#ffffff"
+          stroke="#2d3142"
+          stroke-width="1.2"
+        />
+        <rect
+          x="292"
+          y="300"
+          width="76"
+          height="20"
+          rx="4"
+          fill="transparent"
+          stroke="rgba(45,49,66,.4)"
+          stroke-width=".8"
+        />
+        <text
+          x="330"
+          y="314"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="10"
+          letter-spacing="1"
+        >
+          CONTROL
+        </text>
+        <text
+          x="350"
+          y="346"
+          text-anchor="middle"
+          fill="#2d3142"
+          font-family="Geist, Arial, sans-serif"
+          font-size="18"
+          font-weight="600"
+        >
+          Collector
+        </text>
+        <text
+          x="350"
+          y="372"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="12"
+        >
+          Python · 10 s / 60 s
+        </text>
+      </g>
+      <g>
+        <rect x="280" y="456" width="152" height="80" rx="6" fill="#f5f5f5" />
+        <rect
+          x="280"
+          y="456"
+          width="152"
+          height="80"
+          rx="6"
+          fill="rgba(45,49,66,.05)"
+          stroke="#4f5d75"
+          stroke-width="1.2"
+        />
+        <rect
+          x="292"
+          y="468"
+          width="60"
+          height="20"
+          rx="4"
+          fill="transparent"
+          stroke="rgba(79,93,117,.5)"
+          stroke-width=".8"
+        />
+        <text
+          x="322"
+          y="482"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="10"
+          letter-spacing="1"
+        >
+          BUFFER
+        </text>
+        <text
+          x="356"
+          y="512"
+          text-anchor="middle"
+          fill="#2d3142"
+          font-family="Geist, Arial, sans-serif"
+          font-size="18"
+          font-weight="600"
+        >
+          SQLite spool
+        </text>
+        <text
+          x="356"
+          y="528"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="12"
+        >
+          durable retry queue
+        </text>
+      </g>
+      <g>
+        <rect x="600" y="288" width="160" height="104" rx="6" fill="#f5f5f5" />
+        <rect
+          x="600"
+          y="288"
+          width="160"
+          height="104"
+          rx="6"
+          fill="#ffffff"
+          stroke="#2e5aa8"
+          stroke-width="1.2"
+        />
+        <rect
+          x="612"
+          y="300"
+          width="76"
+          height="20"
+          rx="4"
+          fill="transparent"
+          stroke="rgba(46,90,168,.5)"
+          stroke-width=".8"
+        />
+        <text
+          x="650"
+          y="314"
+          text-anchor="middle"
+          fill="#2e5aa8"
+          font-family="Geist Mono, monospace"
+          font-size="10"
+          letter-spacing="1"
+        >
+          INGEST
+        </text>
+        <text
+          x="680"
+          y="346"
+          text-anchor="middle"
+          fill="#2d3142"
+          font-family="Geist, Arial, sans-serif"
+          font-size="18"
+          font-weight="600"
+        >
+          Eventstream
+        </text>
+        <text
+          x="680"
+          y="372"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="12"
+        >
+          Custom Endpoint
+        </text>
+      </g>
+      <g>
+        <rect x="800" y="288" width="160" height="104" rx="6" fill="#f5f5f5" />
+        <rect
+          x="800"
+          y="288"
+          width="160"
+          height="104"
+          rx="6"
+          fill="rgba(45,49,66,.05)"
+          stroke="#4f5d75"
+          stroke-width="1.2"
+        />
+        <rect
+          x="812"
+          y="300"
+          width="76"
+          height="20"
+          rx="4"
+          fill="transparent"
+          stroke="rgba(79,93,117,.5)"
+          stroke-width=".8"
+        />
+        <text
+          x="850"
+          y="314"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="10"
+          letter-spacing="1"
+        >
+          STORE
+        </text>
+        <text
+          x="880"
+          y="342"
+          text-anchor="middle"
+          fill="#2d3142"
+          font-family="Geist, Arial, sans-serif"
+          font-size="18"
+          font-weight="600"
+        >
+          Eventhouse + KQL
+        </text>
+        <text
+          x="880"
+          y="366"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="12"
+        >
+          RawNetdata table
+        </text>
+      </g>
+      <g>
+        <rect x="1000" y="288" width="160" height="104" rx="6" fill="#f5f5f5" />
+        <rect
+          x="1000"
+          y="288"
+          width="160"
+          height="104"
+          rx="6"
+          fill="#ffffff"
+          stroke="#2d3142"
+          stroke-width="1.2"
+        />
+        <rect
+          x="1012"
+          y="300"
+          width="76"
+          height="20"
+          rx="4"
+          fill="transparent"
+          stroke="rgba(45,49,66,.4)"
+          stroke-width=".8"
+        />
+        <text
+          x="1050"
+          y="314"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="10"
+          letter-spacing="1"
+        >
+          SERVE
+        </text>
+        <text
+          x="1080"
+          y="342"
+          text-anchor="middle"
+          fill="#2d3142"
+          font-family="Geist, Arial, sans-serif"
+          font-size="18"
+          font-weight="600"
+        >
+          Materialized views
+        </text>
+        <text
+          x="1080"
+          y="366"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="12"
+        >
+          1-minute · 15-minute
+        </text>
+      </g>
+      <g>
+        <rect x="1200" y="288" width="152" height="104" rx="6" fill="#f5f5f5" />
+        <rect
+          x="1200"
+          y="288"
+          width="152"
+          height="104"
+          rx="6"
+          fill="rgba(235,108,54,.08)"
+          stroke="#eb6c36"
+          stroke-width="1.6"
+        />
+        <rect
+          x="1212"
+          y="300"
+          width="68"
+          height="20"
+          rx="4"
+          fill="transparent"
+          stroke="rgba(235,108,54,.6)"
+          stroke-width=".8"
+        />
+        <text
+          x="1246"
+          y="314"
+          text-anchor="middle"
+          fill="#eb6c36"
+          font-family="Geist Mono, monospace"
+          font-size="10"
+          letter-spacing="1"
+        >
+          OPERATE
+        </text>
+        <text
+          x="1276"
+          y="342"
+          text-anchor="middle"
+          fill="#2d3142"
+          font-family="Geist, Arial, sans-serif"
+          font-size="18"
+          font-weight="600"
+        >
+          Real-Time Dashboard
+        </text>
+        <text
+          x="1276"
+          y="366"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="12"
+        >
+          live KQL visuals
+        </text>
+      </g>
+      <g>
+        <rect x="1200" y="496" width="152" height="80" rx="6" fill="#f5f5f5" />
+        <rect
+          x="1200"
+          y="496"
+          width="152"
+          height="80"
+          rx="6"
+          fill="rgba(79,93,117,.10)"
+          stroke="#7a8399"
+          stroke-width="1.2"
+        />
+        <rect
+          x="1212"
+          y="508"
+          width="60"
+          height="20"
+          rx="4"
+          fill="transparent"
+          stroke="rgba(122,131,153,.6)"
+          stroke-width=".8"
+        />
+        <text
+          x="1242"
+          y="522"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="10"
+          letter-spacing="1"
+        >
+          READER
+        </text>
+        <text
+          x="1276"
+          y="552"
+          text-anchor="middle"
+          fill="#2d3142"
+          font-family="Geist, Arial, sans-serif"
+          font-size="18"
+          font-weight="600"
+        >
+          Browser / iPhone
+        </text>
+        <text
+          x="1276"
+          y="568"
+          text-anchor="middle"
+          fill="#4f5d75"
+          font-family="Geist Mono, monospace"
+          font-size="12"
+        >
+          self-service visibility
+        </text>
+      </g>
+
+      <line x1="72" y1="640" x2="1328" y2="640" stroke="rgba(45,49,66,.18)" stroke-width="1" />
+      <text
+        x="72"
+        y="680"
+        fill="#4f5d75"
+        font-family="Geist Mono, monospace"
+        font-size="12"
+        font-weight="500"
+        letter-spacing="1.4"
+      >
+        DESIGN INTENT
+      </text>
+      <text x="72" y="716" fill="#2d3142" font-family="Geist, Arial, sans-serif" font-size="18">
+        The collector controls selection, cadence, deduplication, and durable retries. Fabric owns
+        real-time ingestion, aggregation, retention, and visualization.
+      </text>
+    </svg>
+  </body>
+</html>

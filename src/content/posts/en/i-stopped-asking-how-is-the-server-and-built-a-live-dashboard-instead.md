@@ -50,36 +50,16 @@ This post explains how I built it, why I made particular trade-offs, what failed
 Here is the full shape of the system:
 
 ```ashtml
-<pre class="mermaid">
-flowchart LR
-    subgraph Host[Ubuntu host]
-        ND[Netdata\nlocal collection ~1 s]
-        C[Python collector\nbase metrics every 10 s\nTop apps every 60 s]
-        S[(SQLite spool\npersistent queue)]
-        U[systemd user service]
-        ND --> C
-        C &lt;--> S
-        U --> C
-    end
-
-    subgraph Fabric[Microsoft Fabric Real-Time Intelligence]
-        ES[Eventstream\nCustom Endpoint]
-        EH[Eventhouse]
-        DB[(KQL Database)]
-        RAW[Raw telemetry table]
-        MV1[1-minute materialized view]
-        MV15[15-minute materialized view]
-        RTD[Real-Time Dashboard]
-        ES --> EH --> DB --> RAW
-        RAW --> MV1
-        RAW --> MV15
-        MV1 --> RTD
-        MV15 --> RTD
-    end
-
-    C -->|AMQP / Event Hubs SDK| ES
-    RTD --> Reader[Browser or iPhone]
-</pre>
+<figure>
+  <img
+    src="/images/2026/08/netdata-fabric-target-architecture.png"
+    alt="Architecture diagram showing a Netdata source and local collector with SQLite spool on an Ubuntu host feeding Fabric Eventstream, Eventhouse and KQL, materialized views, and a Real-Time Dashboard for a browser or iPhone."
+    loading="lazy"
+  />
+  <figcaption>
+    The host selects and buffers telemetry; Fabric ingests, aggregates, retains, and visualizes it.
+  </figcaption>
+</figure>
 ```
 
 The key idea is that the host does **only** the work that must happen locally: reading Netdata, selecting a bounded set of metrics, serializing small events, and buffering failed sends. KQL queries, aggregation, retention, and rendering happen in Fabric.
